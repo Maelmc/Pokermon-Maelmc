@@ -3,7 +3,7 @@ local glimmet={
   name = "glimmet",
   poke_custom_prefix = "maelmc",
   pos = {x = 4, y = 5},
-  config = {extra = {hazard_ratio = 10, chips = 4, hazard_triggered = 0, increase_every = 20, hazard_per_ratio = 2}, evo_rqmt = 15}, -- mult = hazard_triggered, mult_mod = increase_every, Xmult = hazard_per_ratio, Xmult_mod = evo_cond
+  config = {extra = {hazard_ratio = 10, chips = 4, hazard_triggered = 0, hazard_per_ratio = 2}, evo_rqmt = 15},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -21,7 +21,7 @@ local glimmet={
       end
       to_add = math.floor(count / abbr.hazard_ratio)
     end
-    return {vars = {to_add * abbr.hazard_per_ratio, abbr.hazard_ratio, abbr.chips, math.max(0, self.config.evo_rqmt - abbr.hazard_triggered), abbr.hazard_per_ratio, abbr.increase_every, abbr.increase_every - abbr.hazard_triggered, abbr.hazard_triggered}}
+    return {vars = {to_add * abbr.hazard_per_ratio, abbr.hazard_ratio, abbr.chips, math.max(0, self.config.evo_rqmt - abbr.hazard_triggered), abbr.hazard_per_ratio}}
   end,
   rarity = 1,
   cost = 4,
@@ -60,7 +60,7 @@ local glimmora={
   name = "glimmora",
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 5},
-  config = {extra = {hazard_ratio = 10, chips = 8, hazard_triggered = 0, increase_every = 15, hazard_per_ratio = 2}}, -- mult = hazard_triggered, mult_mod = increase_every, Xmult = hazard_per_ratio
+  config = {extra = {hazard_ratio = 10, chips = 8, hazard_triggered = 0, decrease_every = 20, hazard_per_ratio = 2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -78,7 +78,7 @@ local glimmora={
       end
       to_add = math.floor(count / abbr.hazard_ratio)
     end
-    return {vars = {to_add * abbr.hazard_per_ratio , abbr.hazard_ratio, abbr.chips, abbr.hazard_per_ratio, abbr.increase_every, abbr.increase_every - abbr.hazard_triggered }}
+    return {vars = {to_add * abbr.hazard_per_ratio , abbr.hazard_ratio, abbr.chips, abbr.hazard_per_ratio, abbr.decrease_every, abbr.decrease_every - abbr.hazard_triggered }}
   end,
   rarity = 2,
   cost = 5,
@@ -102,9 +102,9 @@ local glimmora={
       else
           if not context.blueprint then
             card.ability.extra.hazard_triggered = card.ability.extra.hazard_triggered + 1
-            if card.ability.extra.hazard_triggered >= card.ability.extra.increase_every then
-              card.ability.extra.hazard_triggered = card.ability.extra.hazard_triggered - card.ability.extra.increase_every
-              card.ability.extra.hazard_per_ratio = card.ability.extra.hazard_per_ratio + 1
+            if card.ability.extra.hazard_triggered >= card.ability.extra.decrease_every then
+              card.ability.extra.hazard_triggered = card.ability.extra.hazard_triggered - card.ability.extra.decrease_every
+              card.ability.extra.hazard_ratio = math.max(card.ability.extra.hazard_per_ratio,card.ability.extra.hazard_ratio - 1)
             end
           end
           return {

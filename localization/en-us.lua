@@ -35,8 +35,10 @@ return {
                 name = "Glimmora",
                 text = {
                     "{C:purple}+#1# Hazards {C:inactive}(#4# per #2# cards)",
-                    "Increases by 5 after triggering {C:purple}#5# Hazard Cards{}",
-                    "{C:inactive,s:0.8}(Increases in {C:attention,s:0.8}#6#{C:inactive,s:0.8} triggers)",
+                    "Decreases cards required by 1",
+                    "after triggering {C:purple}#5# Hazard Cards{}",
+                    "{C:inactive,s:0.8}(Decreases in {C:attention,s:0.8}#6#{C:inactive,s:0.8} triggers)",
+                    "{C:inactive,s:0.8}(Caps at #4# per #4# cards)",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
                     "gives {C:chips}+#3#{} Chips"
