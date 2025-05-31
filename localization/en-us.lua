@@ -44,6 +44,52 @@ return {
                     "gives {C:chips}+#3#{} Chips"
                 }
             },
+            j_maelmc_cufant = {
+                name = "Cufant",
+                text = {
+                    "{C:purple}+#1# Hazards {C:inactive}(1 per #2# cards)",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Turns {C:purple}#3# Hazard{} in hand",
+                    "into {C:attention}Steel",
+                    "at the end of round",
+                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#4#{C:inactive,s:0.8} rounds)"
+                }
+            },
+            j_maelmc_copperajah = {
+                name = "Copperajah",
+                text = {
+                    "{C:purple}+#1# Hazards {C:inactive}(1 per #2# cards)",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Turns {C:purple}#3# Hazard{} in hand",
+                    "into {C:attention}Steel",
+                    "at the end of round"
+                }
+            },
+            j_maelmc_gmax_copperajah = {
+                name = "Gigantamax Copperajah",
+                text = {
+                    "{C:purple}+#1# Hazards {C:inactive}(1 per #2# cards)",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Turns {C:purple}#3# Hazard{} in hand",
+                    "into {C:attention}Steel",
+                    "at the end of round",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "{X:red,C:white}X#4#{} Mult for every {C:attention}Steel{} card",
+                    "in your full deck",
+                    "{C:inactive}(Currently {X:red,C:white}X#5#{C:inactive} Mult)",
+                }
+            },
+        },
+        misc = {
+            achievement_names = {
+
+            },
+            achievement_descriptions = {
+            
+            },
+            challenge_names = {
+                c_maelmc_cufant_test = "Cufant Test",
+            },
         }
     }
 }

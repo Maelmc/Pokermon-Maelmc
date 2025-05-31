@@ -9,6 +9,20 @@ SMODS.Atlas({
 }):register()
 
 SMODS.Atlas({
+   key = "Pokedex8-Maelmc",
+   path = "Pokedex8.png",
+   px = 71,
+   py = 95
+ }):register()
+
+ SMODS.Atlas({
+   key = "shiny_Pokedex8-Maelmc",
+   path = "Shinydex8.png",
+   px = 71,
+   py = 95
+ }):register()
+
+SMODS.Atlas({
    key = "Pokedex9-Maelmc",
    path = "Pokedex9.png",
    px = 71,
@@ -23,6 +37,20 @@ SMODS.Atlas({
  }):register()
 
  SMODS.Atlas({
+   key = "Gmax-Maelmc",
+   path = "Gmax.png",
+   px = 71,
+   py = 95
+ }):register()
+
+ SMODS.Atlas({
+   key = "shiny_Gmax-Maelmc",
+   path = "ShinyGmax.png",
+   px = 71,
+   py = 95
+ }):register()
+
+ SMODS.Atlas({
     key = "pokedeck-Maelmc",
     path = "pokedeck.png",
     px = 71,
@@ -31,6 +59,7 @@ SMODS.Atlas({
 
 --Required by the pokemon family function (right click on a pokemon joker)
 table.insert(family, {"glimmet", "glimmora"})
+table.insert(family, {"cufant","copperajah","gmax_copperajah"})
 
 maelmc_config = SMODS.current_mod.config
 -- Get mod path and load other files
@@ -118,3 +147,20 @@ if (SMODS.Mods["Pokermon"] or {}).can_load and SMODS.Mods["Pokermon"] and not po
     end
   end
 end
+
+--Load challenges file
+local pchallenges = NFS.getDirectoryItems(mod_dir.."challenges")
+
+for _, file in ipairs(pchallenges) do
+  local challenge, load_error = SMODS.load_file("challenges/"..file)
+  if load_error then
+    sendDebugMessage ("The error is: "..load_error)
+  else
+    local curr_challenge = challenge()
+    if curr_challenge.init then curr_challenge:init() end
+    
+    for i, item in ipairs(curr_challenge.list) do
+      SMODS.Challenge(item)
+    end
+  end
+end 
