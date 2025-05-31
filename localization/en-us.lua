@@ -2,12 +2,21 @@ return {
     descriptions = {
         Back = {
             b_maelmc_hazardtest = {
-                name = "Hazard Stack (Glimmora Test)",
+                name = "Hazard Test",
                 text = {
                     "Starts with {C:item,T:j_poke_jynx}Jynx{},",
                     "{C:item,T:j_maelmc_glimmet}Glimmet{},",
                     "{C:item,T:j_maelmc_glimmora}Glimmora{},",
-                    "and 2 {C:item,T:j_poke_gigalith}Gigalith{}"
+                    "{C:item,T:j_poke_gigalith}Gigalith{} and",
+                    "{C:item,T:j_poke_golurk}Golurk{}"
+                }
+            },
+            b_maelmc_hazardstack = {
+                name = "Hazard Stack",
+                text = {
+                    "Starts with {C:item,T:j_maelmc_glimmet}Glimmet{}.",
+                    "At the star of blind,",
+                    "add {C:purple,T:m_poke_hazard}1 Hazard{} per #2# cards"
                 }
             },
         },
