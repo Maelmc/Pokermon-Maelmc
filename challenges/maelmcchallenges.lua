@@ -1,18 +1,31 @@
-local cufant_test = {
+local glimmora_test = {
     object_type = "Challenge",
-    key = "cufant_test",
+    key = "glimmora_test",
     jokers = {
-        {id = "j_maelmc_cufant"},
-        {id = "j_poke_gyarados"},
-        {id = "j_poke_gyarados"},
-        {id = "j_poke_gyarados"},
-        {id = "j_poke_gyarados"},
+        {id = "j_poke_jynx"},
+        {id = "j_poke_jirachi_copy"},
+        {id = "j_maelmc_glimmora"},
+        {id = "j_poke_gigalith"},
+        {id = "j_poke_golurk"},
+    },
+}
+
+local copperajah_test = {
+    object_type = "Challenge",
+    key = "copperajah_test",
+    jokers = {
+        {id = "j_poke_jynx"},
+        {id = "j_maelmc_copperajah"},
+        {id = "j_poke_magnezone"},
+        {id = "j_poke_aggron"},
+        {id = "j_poke_hitmonchan"},
     },
     consumeables = {
-        {id = "c_poke_megastone"}
+        {id = "c_poke_megastone"},
+        {id = "c_poke_metalcoat"},
     },
 }
 
 return {name = "Challenges", 
-        list = {cufant_test}
+        list = {glimmora_test, copperajah_test}
 }

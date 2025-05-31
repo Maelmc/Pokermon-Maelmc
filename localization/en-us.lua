@@ -1,20 +1,11 @@
 return {
     descriptions = {
         Back = {
-            b_maelmc_hazardtest = {
-                name = "Hazard Test",
-                text = {
-                    "Starts with {C:item,T:j_poke_jynx}Jynx{},",
-                    "{C:item,T:j_maelmc_glimmet}Glimmet{},",
-                    "{C:item,T:j_maelmc_glimmora}Glimmora{},",
-                    "{C:item,T:j_poke_gigalith}Gigalith{} and",
-                    "{C:item,T:j_poke_golurk}Golurk{}"
-                }
-            },
             b_maelmc_hazardstack = {
                 name = "Hazard Stack",
                 text = {
-                    "Starts with {C:item,T:j_maelmc_glimmet}Glimmet{}.",
+                    "Starts with",
+                    "{C:item,T:j_maelmc_glimmet}Glimmet{} and {C:item,T:j_maelmc_cufant}Cufant{}.",
                     "At the star of blind,",
                     "add {C:purple,T:m_poke_hazard}1 Hazard{} per #2# cards"
                 }
@@ -49,8 +40,8 @@ return {
                 text = {
                     "{C:purple}+#1# Hazards {C:inactive}(1 per #2# cards)",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Turns {C:purple}#3# Hazard{} in hand",
-                    "into {C:attention}Steel",
+                    "Turns {C:purple}#3# Hazard{} card in hand",
+                    "into a {C:attention}Steel card",
                     "at the end of round",
                     "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#4#{C:inactive,s:0.8} rounds)"
                 }
@@ -60,9 +51,13 @@ return {
                 text = {
                     "{C:purple}+#1# Hazards {C:inactive}(1 per #2# cards)",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Turns {C:purple}#3# Hazard{} in hand",
-                    "into {C:attention}Steel",
-                    "at the end of round"
+                    "Turns {C:purple}#3# Hazards{} cards in hand",
+                    "into {C:attention}Steel cards",
+                    "at the end of round",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "{C:red}+#4#{} Mult for every {C:attention}Steel{} card",
+                    "in your full deck",
+                    "{C:inactive}(Currently {C:red}+#5#{C:inactive} Mult)",
                 }
             },
             j_maelmc_gmax_copperajah = {
@@ -70,26 +65,25 @@ return {
                 text = {
                     "{C:purple}+#1# Hazards {C:inactive}(1 per #2# cards)",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Turns {C:purple}#3# Hazard{} in hand",
-                    "into {C:attention}Steel",
+                    "Turns {C:purple}#3# Hazards{} cards in hand",
+                    "into {C:attention}Steel cards",
                     "at the end of round",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "{X:red,C:white}X#4#{} Mult for every {C:attention}Steel{} card",
+                    "{C:red}+#6#{} and {X:red,C:white}X#4#{} Mult for every {C:attention}Steel{} card",
                     "in your full deck",
-                    "{C:inactive}(Currently {X:red,C:white}X#5#{C:inactive} Mult)",
+                    "{C:inactive}(Currently {C:red}+#7#{C:inactive} and {X:red,C:white}X#5#{C:inactive} Mult)",
                 }
             },
         },
-        misc = {
-            achievement_names = {
-
-            },
-            achievement_descriptions = {
-            
-            },
-            challenge_names = {
-                c_maelmc_cufant_test = "Cufant Test",
-            },
+    },
+    misc = {
+        challenge_names = {
+            c_maelmc_glimmora_test = "Glimmora Test",
+            c_maelmc_copperajah_test = "Copperajah Test",
+        },
+        dictionary = {
+            maelmc_steel = "Steel!",
+            maelmc_gmax_steelsurge = "G-Max Steelsurge!",
         }
     }
 }

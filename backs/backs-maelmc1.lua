@@ -15,25 +15,12 @@ init = function()
   end
 end
 
-local hazardtest = {
-	name = "hazardtest",
-	key = "hazardtest",
-  unlocked = true,
-  discovered = true,
-	config = {vouchers = { "v_poke_goodrod"}, consumables = {'c_poke_earth_energy'}, jokers = {'j_poke_jynx','j_maelmc_glimmet','j_maelmc_glimmora','j_poke_gigalith','j_poke_golurk'}},
-  loc_vars = function(self, info_queue, center)
-    return {vars = {self.config.vouchers, self.config.consumables, self.config.jokers}}
-  end,
-	pos = { x = 0, y = 0 },
-	atlas = "pokedeck-Maelmc",
-}
-
 local hazardstack = {
 	name = "hazardstack",
 	key = "hazardstack",
   unlocked = true,
   discovered = true,
-	config = {jokers = {'j_maelmc_glimmet'}, extra = {hazard_ratio = 10}},
+	config = {jokers = {'j_maelmc_glimmet', 'j_maelmc_cufant'}, extra = {hazard_ratio = 10}},
   loc_vars = function(self, info_queue, center)
     return {vars = {self.config.jokers, self.config.extra.hazard_ratio}}
   end,
@@ -46,7 +33,7 @@ local hazardstack = {
   end
 }
 
-local dList = {hazardtest, hazardstack}
+local dList = {hazardstack}
 
 --[[if pokermon_config.pokeballs then
   table.insert(dList, 1, pokemondeck)
