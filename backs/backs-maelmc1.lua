@@ -21,21 +21,21 @@ local mydeck = {
 	order = 17,
   unlocked = true,
   discovered = true,
-	config = {vouchers = { "v_poke_goodrod"}, consumables = {'c_poke_earth_energy'}, jokers = {'j_poke_jynx','j_poke_glimmet','j_poke_glimmora','j_poke_gigalith','j_poke_gigalith'}},
+	config = {vouchers = { "v_poke_goodrod"}, consumables = {'c_poke_earth_energy'}, jokers = {'j_poke_jynx','j_maelmc_glimmet','j_maelmc_glimmora','j_poke_gigalith','j_poke_gigalith'}},
   loc_vars = function(self, info_queue, center)
     return {vars = {localize("goodrod_variable"), localize("pokeball_variable")}}
   end,
 	pos = { x = 0, y = 0 },
-	atlas = "pokedeck",
+	atlas = "pokedeck-Maelmc",
 }
 
 local dList = {mydeck}
 
-if pokermon_config.pokeballs then
+--[[if pokermon_config.pokeballs then
   table.insert(dList, 1, pokemondeck)
-end
+end]]
 
-return {name = "Maelmctest",
+return {name = "Back",
         init = init,
         list = dList
 }

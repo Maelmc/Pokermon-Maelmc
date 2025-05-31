@@ -1,7 +1,7 @@
 -- Glimmora 969
 local glimmet={
   name = "glimmet",
-  poke_custom_prefix = "poke_maelmc",
+  poke_custom_prefix = "maelmc",
   pos = {x = 4, y = 5},
   config = {extra = {hazard_ratio = 10, chips = 4, hazard_triggered = 0, increase_every = 20, hazard_per_ratio = 2}, evo_rqmt = 15}, -- mult = hazard_triggered, mult_mod = increase_every, Xmult = hazard_per_ratio, Xmult_mod = evo_cond
   loc_vars = function(self, info_queue, card)
@@ -51,14 +51,14 @@ local glimmet={
           }
       end
     end
-    return scaling_evo(self, card, context, "j_poke_maelmc_glimmora", card.ability.extra.hazard_triggered, self.config.evo_rqmt)
+    return scaling_evo(self, card, context, "j_maelmc_glimmora", card.ability.extra.hazard_triggered, self.config.evo_rqmt)
   end,
 }
 
 -- Glimmora 970
 local glimmora={
   name = "glimmora",
-  poke_custom_prefix = "poke_maelmc",
+  poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 5},
   config = {extra = {hazard_ratio = 10, chips = 8, hazard_triggered = 0, increase_every = 15, hazard_per_ratio = 2}}, -- mult = hazard_triggered, mult_mod = increase_every, Xmult = hazard_per_ratio
   loc_vars = function(self, info_queue, card)

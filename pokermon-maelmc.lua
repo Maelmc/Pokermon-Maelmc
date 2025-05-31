@@ -1,20 +1,42 @@
-default_poke_custom_prefix = "poke_maelmc"
+default_poke_custom_prefix = "maelmc"
+
+--Load Sprites file
+SMODS.Atlas({
+    key = "modicon",
+    path = "icon.png",
+    px = 32,
+    py = 32
+}):register()
+
+SMODS.Atlas({
+   key = "Pokedex9-Maelmc",
+   path = "Pokedex9.png",
+   px = 71,
+   py = 95
+ }):register()
+
+ SMODS.Atlas({
+   key = "shiny_Pokedex9-Maelmc",
+   path = "Shinydex9.png",
+   px = 71,
+   py = 95
+ }):register()
+
+ SMODS.Atlas({
+    key = "pokedeck-Maelmc",
+    path = "pokedeck.png",
+    px = 71,
+    py = 95,
+}):register()
 
 --Required by the pokemon family function (right click on a pokemon joker)
 table.insert(family, {"glimmet", "glimmora"})
 
+maelmc_config = SMODS.current_mod.config
 -- Get mod path and load other files
 mod_dir = ''..SMODS.current_mod.path
 if (SMODS.Mods["Pokermon"] or {}).can_load then
     pokermon_config = SMODS.Mods["Pokermon"].config
-end
-
---Load Sprites file
-local sprite, load_error = SMODS.load_file("pokesprites.lua")
-if load_error then
-  sendDebugMessage ("The error is: "..load_error)
-else
-  sprite()
 end
 
 --Load pokemon file
@@ -68,7 +90,7 @@ for _, file in ipairs(pfiles) do
           if pokermon_config.jokers_only and item.rarity == "poke_safari" then
             item.rarity = 3
           end
-          item.poke_custom_prefix = default_poke_custom_prefix
+          --item.poke_custom_prefix = default_poke_custom_prefix
           item.discovered = not pokermon_config.pokemon_discovery 
           SMODS.Joker(item)
         end
@@ -78,19 +100,21 @@ for _, file in ipairs(pfiles) do
 end
 
 --Load backs
-local backs = NFS.getDirectoryItems(mod_dir.."backs")
+if (SMODS.Mods["Pokermon"] or {}).can_load and SMODS.Mods["Pokermon"] and not pokermon_config.jokers_only then
+  local backs = NFS.getDirectoryItems(mod_dir.."backs")
 
-for _, file in ipairs(backs) do
-  sendDebugMessage ("The file is: "..file)
-  local back, load_error = SMODS.load_file("backs/"..file)
-  if load_error then
-    sendDebugMessage ("The error is: "..load_error)
-  else
-    local curr_back = back()
-    if curr_back.init then curr_back:init() end
-    
-    for i, item in ipairs(curr_back.list) do
-      SMODS.Back(item)
+  for _, file in ipairs(backs) do
+    sendDebugMessage ("The file is: "..file)
+    local back, load_error = SMODS.load_file("backs/"..file)
+    if load_error then
+      sendDebugMessage ("The error is: "..load_error)
+    else
+      local curr_back = back()
+      if curr_back.init then curr_back:init() end
+      
+      for i, item in ipairs(curr_back.list) do
+        SMODS.Back(item)
+      end
     end
   end
 end

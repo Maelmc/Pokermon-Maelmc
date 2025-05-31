@@ -1,7 +1,15 @@
 return {
     description = {
+        Back = {
+            b_maelmc_mydeck = {
+                name = "My Deck",
+                text = {
+                    "Funny testing",
+                }
+            },
+        },
         Joker = {
-            j_poke_maelmc_glimmet = {
+            j_maelmc_glimmet = {
               name = "Glimmet",
                 text = {
                     "{C:purple}+#1# Hazards {C:inactive}(#5# per #2# cards)",
@@ -11,7 +19,7 @@ return {
                     "{C:inactive,s:0.8}(Evolves after triggering Hazard Cards {C:attention,s:0.8}#4#{C:inactive,s:0.8} times)",
                 }
             },
-            j_poke_maelmc_glimmora = {
+            j_maelmc_glimmora = {
                 name = "Glimmora",
                 text = {
                     "{C:purple}+#1# Hazards {C:inactive}(#4# per #2# cards)",
