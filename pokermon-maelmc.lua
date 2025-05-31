@@ -1,4 +1,4 @@
-default_poke_custom_prefix = "maelmc"
+--default_poke_custom_prefix = "maelmc"
 
 --Load Sprites file
 SMODS.Atlas({
