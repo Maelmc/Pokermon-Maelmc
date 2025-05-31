@@ -1,0 +1,21 @@
+{
+	"id": "Pokermon-Maelmc",
+	"name": "Pokermon-Maelmc",
+	"author": ["Maelmc"],
+	"description": "Maelmc's silly Pokermon extension",
+	"prefix": "poke_maelmc",
+	"main_file": "pokermon-maelmc.lua",
+	"priority": 21,
+	"badge_colour": "ED533C",
+	"badge_text_colour": "FFFFFF",
+  "display_name": "Pokermon-Maelmc",
+	"version": "1.0.0",
+	"dependencies": [
+			"Steamodded (>=1.0.0~ALPHA-1423h)",
+      "Lovely (>=0.6)",
+	  "Pokermon (>=2.7.0)"
+	],
+  "conflicts": [],
+	"provides": [],
+	"dump_loc": false 
+}
