@@ -74,12 +74,24 @@ return {
                     "{C:inactive}(Currently {C:red}+#7#{C:inactive} and {X:red,C:white}X#5#{C:inactive} Mult)",
                 }
             },
+            j_maelmc_spiritomb = {
+                name = "Spiritomb",
+                text = {
+                    "{C:chips}+#1#{} Chips",
+                    "{C:red}+#2#{} Mult",
+                    "{C:attention}-#3#{} hand size",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Gains {C:dark_edition}Negative{}",
+                    "if you have at least {C:attention}108{} cards",
+                } 
+            },
         },
     },
     misc = {
         challenge_names = {
-            c_maelmc_glimmora_test = "Glimmora Test",
-            c_maelmc_copperajah_test = "Copperajah Test",
+            c_maelmc_glimmora_test = "Glimmora's Hazard Flood",
+            c_maelmc_copperajah_test = "Copperajah's Steelized Hazard",
+            c_maelmc_spiritomb_test = "Spiritomb's Short Yet Strong Hand"
         },
         dictionary = {
             maelmc_steel = "Steel!",

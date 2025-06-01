@@ -19,6 +19,12 @@ Glimmet and Glimmora's signature ability sets Toxic Spikes whenever they get hit
 
 Gmax Copperajah's MAX move sets a unit entry hazard, Steelsurge, which is basically Stealth Rock but Steel type. So I figured, turning hazards into Steel cards for this family fits. Each stage turns 2 more Hazard into Steel, and gives more Mult based on the amount of Steel cards you have. Since it keeps increasing the size of your deck, it synergizes well with anything that want a large deck. It also generates Steel cards to work with stuff like Magnezone or Aggron.
 
+| Joker | Effect |
+| ------ | ------ |
+| Spiritomb | +108 Chips, +108 Mult, -4 Hand Size<br/>Becomes Negative if you have 108+ cards |
+
+Spiritomb is connected to the number 108 a lot, but 108 of anything in this game is a lot. I figured a Stuntman that also gives mult in exchange for much less hand size can make for an interesting joker. Having 108 cards in the deck feels improbable, but you can try to abuse hazards for example as once it's negative it won't lose it.
+
 ## Decks
 
 | Name | Effect |
@@ -33,5 +39,6 @@ They are not challenges in the sense that they are not challenging. It's just a 
 
 | Name | Starting jokers | Starting consumables |
 | ------ | ------ | ------ |
-| Glimmora Test | Jynx, Jirachi (Copy), Glimmora, Gigalith, Golurk | N/A |
-| Copperajah Test | Jynx, Copperajah, Magnezone, Aggron, Hitmonchan | Mega Stone, Metal Coat |
+| Glimmora's Hazard Flood | Jynx, Jirachi (Copy), Glimmora, Gigalith, Golurk | N/A |
+| Copperajah's Steelized Hazard | Jynx, Copperajah, Magnezone, Aggron, Hitmonchan | Mega Stone, Metal Coat |
+| Spiritomb's Short Yet Strong Hand | Spiritomb, Golem, Jynx, Muk, Hitmonchan | N/A |

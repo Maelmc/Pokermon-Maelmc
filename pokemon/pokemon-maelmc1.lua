@@ -440,6 +440,50 @@ local gmax_copperajah = {
   end,
 }
 
+-- Spiritomb 442
+local spiritomb={
+  name = "spiritomb",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 13, y = 3},
+  config = {extra = {chips = 108, mult = 108, h_size = 4, to_negative = 108}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    if not card.edition or (card.edition and not card.edition.negative) then
+      info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+    end
+    return {vars = {abbr.chips, abbr.mult, abbr.h_size, abbr.to_negative}}
+  end,
+  rarity = 3,
+  cost = 7,
+  stage = "Basic",
+  ptype = "Psychic",
+  atlas = "Pokedex4-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    if context.playing_card_added and not card.getting_sliced and #G.playing_cards >= card.ability.extra.to_negative and not (card.edition and card.edition.negative) then
+      local edition = {negative = true}
+      card:set_edition(edition, true)
+    end
+    if context.cardarea == G.jokers and context.scoring_hand then
+      if context.joker_main then
+        return {
+          mult = card.ability.extra.mult,
+          chips = card.ability.extra.chips,
+          card = card
+        }
+      end
+    end
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    G.hand:change_size(-card.ability.extra.h_size)
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.hand:change_size(card.ability.extra.h_size)
+  end
+}
+
 return {name = "Maelmc's Jokers 1", 
-        list = {glimmet, glimmora, cufant, copperajah, gmax_copperajah},
+        list = {glimmet, glimmora, cufant, copperajah, gmax_copperajah, spiritomb},
 }
