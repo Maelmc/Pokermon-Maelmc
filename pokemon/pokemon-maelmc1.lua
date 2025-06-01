@@ -1,3 +1,13 @@
+-- https://stackoverflow.com/questions/2282444/how-to-check-if-a-table-contains-an-element-in-lua
+function table.contains(table, element)
+  for _, value in pairs(table) do
+    if value == element then
+      return true
+    end
+  end
+  return false
+end
+
 -- Glimmora 969
 local glimmet={
   name = "glimmet",
@@ -121,7 +131,7 @@ local cufant = {
   name = "cufant",
   poke_custom_prefix = "maelmc",
   pos = {x = 4, y = 5},
-  config = {extra = {hazard_ratio = 10, to_steel = 1, reset_steel = 1, rounds = 5}},
+  config = {extra = {hazard_ratio = 10, to_steel = 1, reset_steel = 1, rounds = 5, all_hazard = {}, hazard_to_steel = {}}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -150,15 +160,59 @@ local cufant = {
   calculate = function(self, card, context)
     if context.setting_blind then
       poke_add_hazards(card.ability.extra.hazard_ratio)
-      card.ability.extra.to_steel = card.ability.extra.reset_steel
+      card.ability.extra.hazard_to_steel = {}
+      card.ability.extra.all_hazard = {}
+      --print("in all hazard blind: "..#card.ability.extra.all_hazard)
+      --print("in three hazard blind: "..#card.ability.extra.hazard_to_steel)
     end
-    if context.individual and not context.blueprint and context.end_of_round and context.cardarea == G.hand and SMODS.has_enhancement(context.other_card, "m_poke_hazard") and card.ability.extra.to_steel > 0 then
-      context.other_card:set_ability(G.P_CENTERS.m_steel,nil,true)
-      card.ability.extra.to_steel = card.ability.extra.to_steel - 1
-      return {
-        message = localize("maelmc_steel"),
-        colour = G.C.GREY
-      }
+    
+    -- this is not super clean code, there are probably better ways to do this
+    if context.end_of_round and context.cardarea == G.hand then
+      --print("here")
+      if #card.ability.extra.all_hazard == 0 and #card.ability.extra.hazard_to_steel == 0 then
+        -- find all hazard cards in hand
+        card.ability.extra.hazard_to_steel = {}
+        card.ability.extra.all_hazard = {}
+        
+        --print("in three hazard preloop: "..#card.ability.extra.hazard_to_steel)
+        local count = 0
+        for _, v in pairs(G.hand.cards) do
+          count = count + 1
+          --print(count)
+          if SMODS.has_enhancement(v, "m_poke_hazard") then
+            --print("hazard!")
+            table.insert(card.ability.extra.all_hazard,v)
+          end
+        end
+
+        --print("in all hazard: "..#card.ability.extra.all_hazard)
+        --print("in three hazard start: "..#card.ability.extra.hazard_to_steel)
+
+        -- get 3 of them
+        if #card.ability.extra.all_hazard <= card.ability.extra.reset_steel then
+          --print("3 or less")
+          card.ability.extra.hazard_to_steel = card.ability.extra.all_hazard
+        else 
+          for i = 1,card.ability.extra.reset_steel do
+            -- get one to hazard_to_steel and remove it from pos
+            local tmp_hazard = math.random(#card.ability.extra.all_hazard)
+            --print(tmp_hazard.." "..#card.ability.extra.all_hazard)
+            card.ability.extra.hazard_to_steel[#card.ability.extra.hazard_to_steel+1]=card.ability.extra.all_hazard[tmp_hazard]
+            table.remove(card.ability.extra.all_hazard,tmp_hazard)
+            --print("in three hazard mid: "..#card.ability.extra.hazard_to_steel)
+          end
+        end
+        --print("in three hazard end: "..#card.ability.extra.hazard_to_steel)
+      end
+
+      -- turn them into steel
+      if context.individual and not context.blueprint and table.contains(card.ability.extra.hazard_to_steel,context.other_card) then
+        context.other_card:set_ability(G.P_CENTERS.m_steel,nil,true)
+        return {
+          message = localize("maelmc_steel"),
+          colour = G.C.GREY
+        }
+      end
     end
     return level_evo(self, card, context, "j_maelmc_copperajah")
   end,
@@ -169,7 +223,7 @@ local copperajah = {
   name = "copperajah",
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 5},
-  config = {extra = {hazard_ratio = 10, to_steel = 3, reset_steel = 3, mult = 3}},
+  config = {extra = {hazard_ratio = 10, reset_steel = 3, mult = 3, all_hazard = {}, hazard_to_steel = {}}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -203,16 +257,61 @@ local copperajah = {
   calculate = function(self, card, context)
     if context.setting_blind then
       poke_add_hazards(card.ability.extra.hazard_ratio)
-      card.ability.extra.to_steel = card.ability.extra.reset_steel
+      card.ability.extra.hazard_to_steel = {}
+      card.ability.extra.all_hazard = {}
+      --print("in all hazard blind: "..#card.ability.extra.all_hazard)
+      --print("in three hazard blind: "..#card.ability.extra.hazard_to_steel)
     end
-    if context.individual and not context.blueprint and context.end_of_round and context.cardarea == G.hand and SMODS.has_enhancement(context.other_card, "m_poke_hazard") and card.ability.extra.to_steel > 0 then
-      context.other_card:set_ability(G.P_CENTERS.m_steel,nil,true)
-      card.ability.extra.to_steel = card.ability.extra.to_steel - 1
-      return {
-        message = localize("maelmc_steel"),
-        colour = G.C.GREY
-      }
+    
+    -- this is not super clean code, there are probably better ways to do this
+    if context.end_of_round and context.cardarea == G.hand then
+      --print("here")
+      if #card.ability.extra.all_hazard == 0 and #card.ability.extra.hazard_to_steel == 0 then
+        -- find all hazard cards in hand
+        card.ability.extra.hazard_to_steel = {}
+        card.ability.extra.all_hazard = {}
+        
+        --print("in three hazard preloop: "..#card.ability.extra.hazard_to_steel)
+        local count = 0
+        for _, v in pairs(G.hand.cards) do
+          count = count + 1
+          --print(count)
+          if SMODS.has_enhancement(v, "m_poke_hazard") then
+            --print("hazard!")
+            table.insert(card.ability.extra.all_hazard,v)
+          end
+        end
+
+        --print("in all hazard: "..#card.ability.extra.all_hazard)
+        --print("in three hazard start: "..#card.ability.extra.hazard_to_steel)
+
+        -- get 3 of them
+        if #card.ability.extra.all_hazard <= card.ability.extra.reset_steel then
+          --print("3 or less")
+          card.ability.extra.hazard_to_steel = card.ability.extra.all_hazard
+        else 
+          for i = 1,card.ability.extra.reset_steel do
+            -- get one to hazard_to_steel and remove it from pos
+            local tmp_hazard = math.random(#card.ability.extra.all_hazard)
+            --print(tmp_hazard.." "..#card.ability.extra.all_hazard)
+            card.ability.extra.hazard_to_steel[#card.ability.extra.hazard_to_steel+1]=card.ability.extra.all_hazard[tmp_hazard]
+            table.remove(card.ability.extra.all_hazard,tmp_hazard)
+            --print("in three hazard mid: "..#card.ability.extra.hazard_to_steel)
+          end
+        end
+        --print("in three hazard end: "..#card.ability.extra.hazard_to_steel)
+      end
+
+      -- turn them into steel
+      if context.individual and not context.blueprint and table.contains(card.ability.extra.hazard_to_steel,context.other_card) then
+        context.other_card:set_ability(G.P_CENTERS.m_steel,nil,true)
+        return {
+          message = localize("maelmc_steel"),
+          colour = G.C.GREY
+        }
+      end
     end
+    
     if context.joker_main then
         local steel_count = 0
         for _, v in pairs(G.playing_cards) do
@@ -236,7 +335,7 @@ local gmax_copperajah = {
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 2},
   soul_pos = { x = 5, y = 5 },
-  config = {extra = {hazard_ratio = 10, to_steel = 5, reset_steel = 5, Xmult = 0.1, mult = 6}},
+  config = {extra = {hazard_ratio = 10, to_steel = 5, reset_steel = 5, Xmult = 0.1, mult = 6, all_hazard = {}, hazard_to_steel = {}}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -269,15 +368,59 @@ local gmax_copperajah = {
   calculate = function(self, card, context)
     if context.setting_blind then
       poke_add_hazards(card.ability.extra.hazard_ratio)
-      card.ability.extra.to_steel = card.ability.extra.reset_steel
+      card.ability.extra.hazard_to_steel = {}
+      card.ability.extra.all_hazard = {}
+      --print("in all hazard blind: "..#card.ability.extra.all_hazard)
+      --print("in three hazard blind: "..#card.ability.extra.hazard_to_steel)
     end
-    if context.individual and not context.blueprint and context.end_of_round and context.cardarea == G.hand and SMODS.has_enhancement(context.other_card, "m_poke_hazard") and card.ability.extra.to_steel > 0 then
-      context.other_card:set_ability(G.P_CENTERS.m_steel,nil,true)
-      card.ability.extra.to_steel = card.ability.extra.to_steel - 1
-      return {
-        message = localize("maelmc_gmax_steelsurge"),
-        colour = G.C.GREY
-      }
+    
+    -- this is not super clean code, there are probably better ways to do this
+    if context.end_of_round and context.cardarea == G.hand then
+      --print("here")
+      if #card.ability.extra.all_hazard == 0 and #card.ability.extra.hazard_to_steel == 0 then
+        -- find all hazard cards in hand
+        card.ability.extra.hazard_to_steel = {}
+        card.ability.extra.all_hazard = {}
+        
+        --print("in three hazard preloop: "..#card.ability.extra.hazard_to_steel)
+        local count = 0
+        for _, v in pairs(G.hand.cards) do
+          count = count + 1
+          --print(count)
+          if SMODS.has_enhancement(v, "m_poke_hazard") then
+            --print("hazard!")
+            table.insert(card.ability.extra.all_hazard,v)
+          end
+        end
+
+        --print("in all hazard: "..#card.ability.extra.all_hazard)
+        --print("in three hazard start: "..#card.ability.extra.hazard_to_steel)
+
+        -- get 3 of them
+        if #card.ability.extra.all_hazard <= card.ability.extra.reset_steel then
+          --print("3 or less")
+          card.ability.extra.hazard_to_steel = card.ability.extra.all_hazard
+        else 
+          for i = 1,card.ability.extra.reset_steel do
+            -- get one to hazard_to_steel and remove it from pos
+            local tmp_hazard = math.random(#card.ability.extra.all_hazard)
+            --print(tmp_hazard.." "..#card.ability.extra.all_hazard)
+            card.ability.extra.hazard_to_steel[#card.ability.extra.hazard_to_steel+1]=card.ability.extra.all_hazard[tmp_hazard]
+            table.remove(card.ability.extra.all_hazard,tmp_hazard)
+            --print("in three hazard mid: "..#card.ability.extra.hazard_to_steel)
+          end
+        end
+        --print("in three hazard end: "..#card.ability.extra.hazard_to_steel)
+      end
+
+      -- turn them into steel
+      if context.individual and not context.blueprint and table.contains(card.ability.extra.hazard_to_steel,context.other_card) then
+        context.other_card:set_ability(G.P_CENTERS.m_steel,nil,true)
+        return {
+          message = localize("maelmc_gmax_steelsurge"),
+          colour = G.C.GREY
+        }
+      end
     end
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main then
