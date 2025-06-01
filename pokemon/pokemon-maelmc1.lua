@@ -3,7 +3,7 @@ local glimmet={
   name = "glimmet",
   poke_custom_prefix = "maelmc",
   pos = {x = 4, y = 5},
-  config = {extra = {hazard_ratio = 10, chips = 4, hazard_triggered = 0, hazard_per_ratio = 2}, evo_rqmt = 15},
+  config = {extra = {hazard_ratio = 10, chips = 4, hazard_triggered = 0, hazard_per_ratio = 2}, evo_rqmt = 25},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -169,7 +169,7 @@ local copperajah = {
   name = "copperajah",
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 5},
-  config = {extra = {hazard_ratio = 10, to_steel = 3, reset_steel = 3, mult = 4}},
+  config = {extra = {hazard_ratio = 10, to_steel = 3, reset_steel = 3, mult = 3}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
