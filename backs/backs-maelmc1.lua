@@ -15,9 +15,9 @@ init = function()
   end
 end
 
-local hazardstack = {
-	name = "hazardstack",
-	key = "hazardstack",
+local hazarddeck = {
+	name = "hazarddeck",
+	key = "hazarddeck",
   unlocked = true,
   discovered = true,
 	config = {jokers = {'j_maelmc_glimmet', 'j_maelmc_cufant'}, extra = {hazard_ratio = 10}},
@@ -33,7 +33,7 @@ local hazardstack = {
   end
 }
 
-local dList = {hazardstack}
+local dList = {hazarddeck}
 
 --[[if pokermon_config.pokeballs then
   table.insert(dList, 1, pokemondeck)

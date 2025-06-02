@@ -1,8 +1,8 @@
 return {
     descriptions = {
         Back = {
-            b_maelmc_hazardstack = {
-                name = "Hazard Stack",
+            b_maelmc_hazarddeck = {
+                name = "Hazard Deck",
                 text = {
                     "Starts with",
                     "{C:item,T:j_maelmc_glimmet}Glimmet{} and {C:item,T:j_maelmc_cufant}Cufant{}.",
@@ -40,8 +40,8 @@ return {
                 text = {
                     "{C:purple}+#1# Hazards {C:inactive}(1 per #2# cards)",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Turns {C:purple}#3# Hazard{} card in hand",
-                    "into a {C:attention}Steel card",
+                    "Enhance {C:purple}#3# Hazard{} card in hand",
+                    "into a {C:attention}Steel{} card",
                     "at the end of round",
                     "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#4#{C:inactive,s:0.8} rounds)"
                 }
@@ -51,8 +51,8 @@ return {
                 text = {
                     "{C:purple}+#1# Hazards {C:inactive}(1 per #2# cards)",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Turns {C:purple}#3# Hazards{} cards in hand",
-                    "into {C:attention}Steel cards",
+                    "Enhance {C:purple}#3# Hazards{} cards in hand",
+                    "into {C:attention}Steel{} cards",
                     "at the end of round",
                     "{br:3}ERROR - CONTACT STEAK",
                     "{C:red}+#4#{} Mult for every {C:attention}Steel{} card",
@@ -65,8 +65,8 @@ return {
                 text = {
                     "{C:purple}+#1# Hazards {C:inactive}(1 per #2# cards)",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Turns {C:purple}#3# Hazards{} cards in hand",
-                    "into {C:attention}Steel cards",
+                    "Enhance {C:purple}#3# Hazards{} cards in hand",
+                    "into {C:attention}Steel{} cards",
                     "at the end of round",
                     "{br:3}ERROR - CONTACT STEAK",
                     "{C:red}+#6#{} and {X:red,C:white}X#4#{} Mult for every {C:attention}Steel{} card",
@@ -83,6 +83,7 @@ return {
                     "{br:3}ERROR - CONTACT STEAK",
                     "Gains {C:dark_edition}Negative{}",
                     "if you have at least {C:attention}108{} cards",
+                    "in your full deck",
                 } 
             },
         },

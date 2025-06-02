@@ -30,9 +30,9 @@ local spiritomb_test = {
     object_type = "Challenge",
     key = "spiritomb_test",
     jokers = {
-        {id = "j_maelmc_spiritomb"},
+        {id = "j_poke_dragonite"},
         {id = "j_poke_golem"},
-        {id = "j_poke_jynx"},
+        {id = "j_maelmc_spiritomb"},
         {id = "j_poke_muk"},
         {id = "j_poke_hitmonchan"},
     },
