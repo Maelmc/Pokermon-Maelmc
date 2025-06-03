@@ -444,7 +444,7 @@ local gmax_copperajah = {
 local odd_keystone={
   name = "odd_keystone",
   poke_custom_prefix = "maelmc",
-  pos = {x = 9, y = 10},
+  pos = {x = 4, y = 0},
   config = {extra = {evolve_progress = 0, evolve_after = 108, evolve_using = "The Soul"}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -456,7 +456,7 @@ local odd_keystone={
   rarity = 3,
   cost = 8,
   stage = "Other",
-  atlas = "Pokedex4-Maelmc",
+  atlas = "Others-Maelmc",
   blueprint_compat = true,
   calculate = function(self, card, context)
     -- if using The Soul, evolve
