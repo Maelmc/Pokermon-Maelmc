@@ -1,6 +1,13 @@
 --default_poke_custom_prefix = "maelmc"
 
 --Load Sprites file
+--[[local sprite, load_error = SMODS.load_file("pokesprites.lua")
+if load_error then
+  sendDebugMessage ("The error is: "..load_error)
+else
+  sprite()
+end]]
+
 SMODS.Atlas({
     key = "modicon",
     path = "icon.png",
@@ -74,6 +81,7 @@ SMODS.Atlas({
 --Required by the pokemon family function (right click on a pokemon joker)
 table.insert(family, {"glimmet", "glimmora"})
 table.insert(family, {"cufant","copperajah","gmax_copperajah"})
+table.insert(family,{"odd_keystone","spiritomb","spiritombl"})
 
 maelmc_config = SMODS.current_mod.config
 -- Get mod path and load other files

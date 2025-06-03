@@ -55,7 +55,7 @@ return {
                     "into {C:attention}Steel{} cards",
                     "at the end of round",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "{C:red}+#4#{} Mult for every {C:attention}Steel{} card",
+                    "{C:red}+#4#{} Mult for every {C:attention}Steel card",
                     "in your full deck",
                     "{C:inactive}(Currently {C:red}+#5#{C:inactive} Mult)",
                 }
@@ -69,10 +69,19 @@ return {
                     "into {C:attention}Steel{} cards",
                     "at the end of round",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "{C:red}+#6#{} and {X:red,C:white}X#4#{} Mult for every {C:attention}Steel{} card",
+                    "{C:red}+#6#{} and {X:red,C:white}X#4#{} Mult for every {C:attention}Steel card",
                     "in your full deck",
                     "{C:inactive}(Currently {C:red}+#7#{C:inactive} and {X:red,C:white}X#5#{C:inactive} Mult)",
                 }
+            },
+            j_maelmc_odd_keystone = {
+                name = "Odd Keystone",
+                text = {
+                    "Does nothing...?",
+                    "{C:inactive,s:0.8}(Evolves after selling a joker or a consumable",
+                    "{C:inactive,s:0.8}or destroying a card {C:attention,s:0.8}#1#{C:inactive,s:0.8}/#2# times)",
+                    "{C:inactive,s:0.8}(Evolves after using and consuming {C:dark_edition,s:0.8}#3#{C:inactive,s:0.8})"
+                } 
             },
             j_maelmc_spiritomb = {
                 name = "Spiritomb",
@@ -82,7 +91,19 @@ return {
                     "{C:attention}-#3#{} hand size",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Gains {C:dark_edition}Negative{}",
-                    "if you have at least {C:attention}108{} cards",
+                    "if you have at least {C:attention}#4#{} cards",
+                    "in your full deck",
+                } 
+            },
+            j_maelmc_spiritombl = {
+                name = "Spiritomb",
+                text = {
+                    "{X:red,C:white}X#1#{} Mult for every card",
+                    "in your full deck",
+                    "{C:inactive}(Currently {X:red,C:white}X#2#{C:inactive} Mult)",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Gains {C:dark_edition}Negative{}",
+                    "if you have at least {C:attention}#3#{} cards",
                     "in your full deck",
                 } 
             },
@@ -90,13 +111,16 @@ return {
     },
     misc = {
         challenge_names = {
-            c_maelmc_glimmora_test = "Glimmora's Hazard Flood",
-            c_maelmc_copperajah_test = "Copperajah's Steelized Hazard",
-            c_maelmc_spiritomb_test = "Spiritomb's Short Yet Strong Hand"
+            c_maelmc_glimmora_test = "Glimmora",
+            c_maelmc_copperajah_test = "Copperajah",
+            --c_maelmc_spiritomb_test = "Spiritomb's Short Yet Strong Hand",
+            c_maelmc_spiritomb_test = "Odd Keystone"
         },
         dictionary = {
             maelmc_steel = "Steel!",
             maelmc_gmax_steelsurge = "G-Max Steelsurge!",
+            maelmc_consume = "Consume",
+            maelmc_soul_collected = "Soul collected",
         }
     }
 }

@@ -55,7 +55,7 @@ return {
                     "en cartes {C:attention}Acier",
                     "à la fin de la manche",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "{C:red}+#4#{} Multi. pour chaque carte {C:attention}Acier",
+                    "{C:red}+#4#{} Multi. pour chaque {C:attention}carte Acier",
                     "dans votre jeu complet",
                     "{C:inactive}(Actuellement {C:red}+#5#{C:inactive} Multi.)",
                 }
@@ -69,10 +69,19 @@ return {
                     "en cartes {C:attention}Acier",
                     "à la fin de la manche",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "{C:red}+#6#{} et {X:red,C:white}X#4#{} Multi. pour chaque carte {C:attention}Acier",
+                    "{C:red}+#6#{} et {X:red,C:white}X#4#{} Multi. pour chaque {C:attention}carte Acier",
                     "dans votre jeu complet",
                     "{C:inactive}(Actuellement {C:red}+#7#{C:inactive} et {X:red,C:white}X#5#{C:inactive} Multi.)",
                 }
+            },
+            j_maelmc_odd_keystone = {
+                name = "Odd Keystone",
+                text = {
+                    "Ne fait rien...?",
+                    "{C:inactive,s:0.8}(Évolue après avoir vendu un joker ou un consommable",
+                    "{C:inactive,s:0.8}ou avoir détruit une carte {C:attention,s:0.8}#1#{C:inactive,s:0.8}/#2# fois)",
+                    "{C:inactive,s:0.8}(Évolue après avoir utilisé et consommé {C:dark_edition,s:0.8}#3#{C:inactive,s:0.8})"
+                } 
             },
             j_maelmc_spiritomb = {
                 name = "Spiritomb",
@@ -86,17 +95,32 @@ return {
                     "dans votre jeu complet",
                 } 
             },
+            j_maelmc_spiritombl = {
+                name = "Spiritomb",
+                text = {
+                    "{X:red,C:white}X#1#{} Multi. pour chaque carte",
+                    "dans votre jeu complet",
+                    "{C:inactive}(Actuellement {X:red,C:white}X#2#{C:inactive} Multi.)",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Devient {C:dark_edition}Négatif{}",
+                    "si vous avez au moins {C:attention}108{} cartes",
+                    "dans votre jeu complet",
+                } 
+            },
         },
     },
     misc = {
         challenge_names = {
-            c_maelmc_glimmora_test = "Tas de pièges de Floréclat",
-            c_maelmc_copperajah_test = "Pièges métalliques de Pachyradjah",
-            c_maelmc_spiritomb_test = "Main petite mais costaud de Spiritomb"
+            c_maelmc_glimmora_test = "Floréclat",
+            c_maelmc_copperajah_test = "Pachyradjah",
+            --c_maelmc_spiritomb_test = "Main petite mais costaud de Spiritomb"
+            c_maelmc_spiritomb_test = "Clé de Voûte"
         },
         dictionary = {
             maelmc_steel = "Acier!",
             maelmc_gmax_steelsurge = "Percée G-Max!",
+            maelmc_consume = "Consomme",
+            maelmc_soul_collected = "Âme collectée",
         }
     }
 }

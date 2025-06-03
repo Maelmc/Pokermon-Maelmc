@@ -26,7 +26,7 @@ local copperajah_test = {
     },
 }
 
-local spiritomb_test = {
+--[[local spiritomb_test = {
     object_type = "Challenge",
     key = "spiritomb_test",
     jokers = {
@@ -50,6 +50,21 @@ local spiritomb_test = {
         },
       type = 'Challenge Deck',
     },]]
+--}]]
+
+local spiritomb_test = {
+    object_type = "Challenge",
+    key = "spiritomb_test",
+    jokers = {
+        {id = "j_maelmc_odd_keystone"},
+        {id = "j_poke_persian"},
+        {id = "j_poke_magmortar"},
+        {id = "j_poke_tall_grass"},
+    },
+    consumeables = {
+        {id = "c_soul"},
+        {id = "c_hermit"},
+    },
 }
 
 return {name = "Challenges", 

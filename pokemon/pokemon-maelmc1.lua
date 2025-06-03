@@ -34,7 +34,7 @@ local glimmet={
     return {vars = {to_add * abbr.hazard_per_ratio, abbr.hazard_ratio, abbr.chips, math.max(0, self.config.evo_rqmt - abbr.hazard_triggered), abbr.hazard_per_ratio}}
   end,
   rarity = 1,
-  cost = 4,
+  cost = 5,
   stage = "Basic",
   ptype = "Earth",
   atlas = "Pokedex9-Maelmc",
@@ -90,8 +90,8 @@ local glimmora={
     end
     return {vars = {to_add * abbr.hazard_per_ratio , abbr.hazard_ratio, abbr.chips, abbr.hazard_per_ratio, abbr.decrease_every, abbr.decrease_every - abbr.hazard_triggered }}
   end,
-  rarity = 2,
-  cost = 5,
+  rarity = "poke_safari",
+  cost = 6,
   stage = "One",
   ptype = "Earth",
   atlas = "Pokedex9-Maelmc",
@@ -441,11 +441,94 @@ local gmax_copperajah = {
 }
 
 -- Spiritomb 442
+local odd_keystone={
+  name = "odd_keystone",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 9, y = 10},
+  config = {extra = {evolve_progress = 0, evolve_after = 108, evolve_using = "The Soul"}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    info_queue[#info_queue+1] = { set = 'Spectral', key = 'c_soul'}
+    return {vars = {abbr.evolve_progress, abbr.evolve_after, abbr.evolve_using}}
+  end,
+  rarity = 3,
+  cost = 8,
+  stage = "Other",
+  atlas = "Pokedex4-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    -- if using The Soul, evolve
+    if context.using_consumeable and context.consumeable and context.consumeable.ability.name == card.ability.extra.evolve_using then
+      
+      local nb_joker_pre_soul = #G.jokers.cards
+      local nb_consumables_pre_soul = #G.consumeables.cards
+
+      G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
+        local legendary_to_delete = G.jokers.cards[#G.jokers.cards]
+
+        -- if MissingNo, remove all the created items
+        if legendary_to_delete.ability.name == "missingno" then
+          local nb_jokers = #G.jokers.cards
+          while nb_joker_pre_soul < nb_jokers do
+            G.jokers.cards[#G.jokers.cards]:remove()
+            nb_jokers = #G.jokers.cards
+          end
+          local nb_consumables = #G.consumeables.cards
+          while nb_consumables_pre_soul < nb_consumables do
+            G.consumeables.cards[#G.consumeables.cards]:remove()
+            nb_consumables = #G.consumeables.cards
+          end
+        else
+          -- remove the legendary that is not missingno
+          legendary_to_delete:remove()
+        end
+
+        attention_text({
+          text = localize('maelmc_consume'),
+          scale = 1.3, 
+          hold = 1.4,
+          major = card,
+          backdrop_colour = G.C.SECONDARY_SET.Tarot,
+          align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and 'tm' or 'cm',
+          offset = {x = 0, y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and -0.2 or 0},
+          silent = true
+        })
+        return true end})
+      )
+      return {
+        message = poke_evolve(card, "j_maelmc_spiritombl"),
+      }
+    end
+
+    if context.remove_playing_cards and not context.blueprint then
+      for _, _ in ipairs(context.removed) do
+        card.ability.extra.evolve_progress = card.ability.extra.evolve_progress + 1
+        G.E_MANAGER:add_event(Event({
+          func = function() card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_soul_collected')}); return true
+          end
+        }))
+      end
+    end
+
+    if context.selling_card and not context.selling_self and not context.blueprint then
+      card.ability.extra.evolve_progress = card.ability.extra.evolve_progress + 1
+      G.E_MANAGER:add_event(Event({
+        func = function() card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_soul_collected')}); return true
+        end
+      }))
+    end
+
+    return scaling_evo(self, card, context, "j_maelmc_spiritomb", card.ability.extra.evolve_progress, card.ability.extra.evolve_after)
+  end,
+}
+
 local spiritomb={
   name = "spiritomb",
   poke_custom_prefix = "maelmc",
   pos = {x = 13, y = 3},
-  config = {extra = {chips = 108, mult = 108, h_size = 4, to_negative = 108}},
+  config = {extra = {chips = 108, mult = 108, h_size = 3, to_negative = 108}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -455,8 +538,8 @@ local spiritomb={
     end
     return {vars = {abbr.chips, abbr.mult, abbr.h_size, abbr.to_negative}}
   end,
-  rarity = 3,
-  cost = 7,
+  rarity = "poke_safari",
+  cost = 10,
   stage = "Basic",
   ptype = "Psychic",
   atlas = "Pokedex4-Maelmc",
@@ -484,6 +567,47 @@ local spiritomb={
   end
 }
 
+local spiritombl={
+  name = "spiritombl",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 10, y = 10},
+  soul_pos = { x = 11, y = 10 },
+  config = {extra = {Xmult_mod = 1.08, to_negative = 108}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    if not card.edition or (card.edition and not card.edition.negative) then
+      info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+    end
+    return {vars = {abbr.Xmult_mod, math.max(abbr.Xmult_mod, (G.playing_cards and #G.playing_cards or 1) * abbr.Xmult_mod), abbr.to_negative}}
+  end,
+  rarity = 4,
+  cost = 20,
+  stage = "Legendary",
+  ptype = "Psychic",
+  atlas = "Pokedex4-Maelmc",
+  aux_poke = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    if context.cardarea == G.jokers and context.scoring_hand then
+      if context.joker_main then
+        local Xmult = card.ability.extra.Xmult * #G.playing_cards
+        if Xmult > 1 then
+          return {
+            colour = G.C.XMULT,
+            Xmult = card.ability.extra.Xmult * #G.playing_cards,
+            card = card
+          }
+        end
+      end
+    end
+  end,
+  in_pool = function(self)
+    return false
+  end
+}
+
 return {name = "Maelmc's Jokers 1", 
-        list = {glimmet, glimmora, cufant, copperajah, gmax_copperajah, spiritomb},
+        list = {glimmet, glimmora, cufant, copperajah, gmax_copperajah, odd_keystone, spiritomb, spiritombl},
 }

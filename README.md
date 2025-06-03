@@ -21,9 +21,15 @@ Gmax Copperajah's MAX move sets a unit entry hazard, Steelsurge, which is basica
 
 | Joker | Effect |
 | ------ | ------ |
-| Spiritomb | +108 Chips, +108 Mult, -4 Hand Size<br/>Becomes Negative if you have 108+ cards |
+| Odd Keystone | Does nothing<br/>Evolves after selling jokers or consumables or destroying cards 108 times<br/>Evolves after using The Soul
+| Spiritomb | +108 Chips, +108 Mult, -3 Hand Size<br/>Becomes Negative if you have 108+ cards |
+| Spiritomb | x1.08 for each card in your full deck<br/>Becomes Negative if you have 108+ cards |
 
-Spiritomb is connected to the number 108 a lot, but 108 of anything in this game is a lot. I figured a Stuntman that also gives mult in exchange for much less hand size can make for an interesting joker. Having 108 cards in the deck feels improbable, but you can try to abuse hazards for example as once it's negative it won't lose it.
+The Odd Keystone is an item that does nothing, but Spiritomb is a powerful joker that can almost solo win any run so you have to commit a lot to get it. Maybe eventually I'll give it a real effect, but I like it as is.
+
+Spiritomb is connected to the number 108 a lot, but 108 of anything in this game is a lot. I figured a Stuntman that also gives mult in exchange for even less hand size can make for an interesting joker. Having 108 cards in the deck feels improbable, but you can try to abuse hazards for example as once it's negative it won't lose it.
+
+The 2nd Spiritomb is Legendary, as it will destroy the legendary created by The Soul. That's why it has such a powerful effect, it's highly unlikely to get both Odd Keystone and The Soul in the same run. Also, it cannot appear through The Soul or Master Ball, you have to evolve the Odd Keystone to be able to get it. Maybe I'll rebalance it later, but for now I just think it's funny.
 
 ## Decks
 
@@ -39,6 +45,10 @@ They are not challenges in the sense that they are not challenging. It's just a 
 
 | Name | Starting jokers | Starting consumables |
 | ------ | ------ | ------ |
-| Glimmora's Hazard Flood | Jynx, Jirachi (Copy), Glimmora, Gigalith, Golurk | N/A |
-| Copperajah's Steelized Hazard | Jynx, Copperajah, Magnezone, Aggron, Hitmonchan | Mega Stone, Metal Coat |
-| Spiritomb's Short Yet Strong Hand | Spiritomb, Golem, Jynx, Muk, Hitmonchan | N/A |
+| Glimmora | Jynx, Jirachi (Copy), Glimmora, Gigalith, Golurk | N/A |
+| Copperajah | Jynx, Copperajah, Magnezone, Aggron, Hitmonchan | Mega Stone, Metal Coat |
+| Odd Keystone | Odd Keystone, Persian, Magmortar, Tall Grass | The Soul, The Hermit |
+
+## Localization
+
+The extension is fully translated in french. L'extension est traduite en français en son intégralité.
