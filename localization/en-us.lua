@@ -115,32 +115,32 @@ return {
                 } 
             },
         },
-    },
-    Other = {
-        gym_leader_tag_pool = {
-              name = "Tag Pool",
-              text = {
-                "{C:money}#1#",
-                "{C:money}#2#",
-                "{C:money}#3#",
-                "{C:money}#4#",
-                "{C:money}#5#",
-              }
+        Other = {
+            gym_leader_tag_pool = {
+                name = "Tag Pool",
+                text = {
+                    "{C:money}#1#",
+                    "{C:money}#2#",
+                    "{C:money}#3#",
+                    "{C:money}#4#",
+                    "{C:money}#5#",
+                }
             },
-    },
-    misc = {
-        challenge_names = {
-            c_maelmc_glimmora_test = "Glimmora",
-            c_maelmc_copperajah_test = "Copperajah",
-            --c_maelmc_spiritomb_test = "Spiritomb's Short Yet Strong Hand",
-            c_maelmc_spiritomb_test = "Odd Keystone"
         },
-        dictionary = {
-            maelmc_steel = "Steel!",
-            maelmc_gmax_steelsurge = "G-Max Steelsurge!",
-            maelmc_consume = "Consume",
-            maelmc_soul_collected = "Soul collected",
-            maelmc_gym_beaten = "Gym beaten",
+        misc = {
+            challenge_names = {
+                c_maelmc_glimmora_test = "Glimmora",
+                c_maelmc_copperajah_test = "Copperajah",
+                --c_maelmc_spiritomb_test = "Spiritomb's Short Yet Strong Hand",
+                c_maelmc_spiritomb_test = "Odd Keystone"
+            },
+            dictionary = {
+                maelmc_steel = "Steel!",
+                maelmc_gmax_steelsurge = "G-Max Steelsurge!",
+                maelmc_consume = "Consume",
+                maelmc_soul_collected = "Soul collected",
+                maelmc_gym_beaten = "Gym beaten",
+            }
         }
     }
 }
