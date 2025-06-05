@@ -115,7 +115,7 @@ return {
                 } 
             },
         },
-    },
+
     Other = {
         gym_leader_tag_pool = {
               name = "Tag Pool",
@@ -128,6 +128,7 @@ return {
               }
             },
     },
+},
     misc = {
         challenge_names = {
             c_maelmc_glimmora_test = "Glimmora",
