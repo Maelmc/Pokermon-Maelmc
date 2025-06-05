@@ -67,6 +67,16 @@ local spiritomb_test = {
     },
 }
 
+local gym_leader_test = {
+    object_type = "Challenge",
+    key = "gym_leader_test",
+    jokers = {
+        {id = "j_maelmc_gym_leader"},
+        {id = "j_maelmc_spiritomb"},
+        {id = "j_maelmc_spiritombl"},
+    },
+}
+
 return {name = "Challenges", 
-        list = {glimmora_test, copperajah_test, spiritomb_test}
+        list = {glimmora_test, copperajah_test, spiritomb_test, gym_leader_test}
 }

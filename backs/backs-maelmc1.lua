@@ -1,20 +1,3 @@
-init = function()
-  local backapply_orig = Back.apply_to_run
-  function Back.apply_to_run(self)
-    backapply_orig(self)
-    			G.E_MANAGER:add_event(Event({
-					func = function()
-            if G.GAME.modifiers.poke_force_seal then
-              for i = 1, #G.playing_cards do
-                G.playing_cards[i]:set_seal(G.GAME.modifiers.poke_force_seal, true)
-              end
-            end
-						return true
-					end,
-				}))
-  end
-end
-
 local hazarddeck = {
 	name = "hazarddeck",
 	key = "hazarddeck",
@@ -34,10 +17,6 @@ local hazarddeck = {
 }
 
 local dList = {hazarddeck}
-
---[[if pokermon_config.pokeballs then
-  table.insert(dList, 1, pokemondeck)
-end]]
 
 return {name = "Back",
         init = init,

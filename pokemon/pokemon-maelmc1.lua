@@ -447,7 +447,6 @@ local odd_keystone={
   pos = {x = 4, y = 0},
   config = {extra = {evolve_progress = 0, evolve_after = 108, evolve_using = "The Soul"}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = { set = 'Spectral', key = 'c_soul'}
@@ -592,11 +591,11 @@ local spiritombl={
   calculate = function(self, card, context)
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main then
-        local Xmult = card.ability.extra.Xmult * #G.playing_cards
+        local Xmult = card.ability.extra.Xmult_mod * #G.playing_cards
         if Xmult > 1 then
           return {
             colour = G.C.XMULT,
-            Xmult = card.ability.extra.Xmult * #G.playing_cards,
+            Xmult = card.ability.extra.Xmult_mod * #G.playing_cards,
             card = card
           }
         end
@@ -608,6 +607,79 @@ local spiritombl={
   end
 }
 
+-- Gym Leader
+local gym_leader={
+  name = "gym_leader",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 2, y = 2},
+  config = {extra = {boss = false}},
+  loc_vars = function(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    info_queue[#info_queue+1] = {set = 'Other', key = 'gym_leader_tag_pool', vars = {'Uncommon', 'Rare', 'Handy', 'Garbage', 'Investment'}}
+    return {vars = {}}
+  end,
+  rarity = 2,
+  cost = 5,
+  stage = "Other",
+  atlas = "Others-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    
+    if context.setting_blind and context.blind.boss then
+      card.ability.extra.boss = true
+    end
+
+    if context.end_of_round and card.ability.extra.boss then
+      G.E_MANAGER:add_event(Event({
+        trigger = 'before',
+        func = function() card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_gym_beaten')}); return true
+        end
+      }))
+      local tag = ''
+      local tag_choice = pseudorandom('sylveon')
+      if tag_choice < 1/6 then
+        tag = 'tag_handy'
+      elseif tag_choice < 2/6 then
+        tag = 'tag_garbage'
+      elseif tag_choice < 3/6 then
+        tag = 'tag_investment'
+      elseif tag_choice < 4/6 then
+        tag = 'tag_buffoon'
+      elseif tag_choice < 5/6 then
+        tag = 'tag_uncommon'
+      else
+        tag = 'tag_rare'
+      end
+      G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        func = (function()
+            add_tag(Tag(tag))
+            play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
+            play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
+            return true
+        end)
+      }))
+
+      if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+        G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+        G.E_MANAGER:add_event(Event({
+          trigger = 'after',
+          func = (function()
+              local card = create_card('Energy', G.consumeables, nil, nil, nil, nil, nil, 'pory')
+              card:add_to_deck()
+              G.consumeables:emplace(card)
+              G.GAME.consumeable_buffer = 0
+            return true
+        end)}))
+      end
+
+      card.ability.extra.boss = false
+      return true
+    end
+  end,
+}
+
 return {name = "Maelmc's Jokers 1", 
-        list = {glimmet, glimmora, cufant, copperajah, gmax_copperajah, odd_keystone, spiritomb, spiritombl},
+        list = {glimmet, glimmora, cufant, copperajah, gmax_copperajah, odd_keystone, spiritomb, spiritombl, gym_leader},
 }

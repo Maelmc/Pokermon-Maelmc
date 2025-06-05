@@ -107,7 +107,26 @@ return {
                     "in your full deck",
                 } 
             },
+            j_maelmc_gym_leader = {
+                name = "Gym Leader",
+                text = {
+                    "Creates a {C:attention}tag{} and an {C:pink}Energy{} card",
+                    "when Boss Blind is defeated",
+                } 
+            },
         },
+    },
+    Other = {
+        gym_leader_tag_pool = {
+              name = "Tag Pool",
+              text = {
+                "{C:money}#1#",
+                "{C:money}#2#",
+                "{C:money}#3#",
+                "{C:money}#4#",
+                "{C:money}#5#",
+              }
+            },
     },
     misc = {
         challenge_names = {
@@ -121,6 +140,7 @@ return {
             maelmc_gmax_steelsurge = "G-Max Steelsurge!",
             maelmc_consume = "Consume",
             maelmc_soul_collected = "Soul collected",
+            maelmc_gym_beaten = "Gym beaten",
         }
     }
 }
