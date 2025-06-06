@@ -31,6 +31,12 @@ Spiritomb is connected to the number 108 a lot, but 108 of anything in this game
 
 The 2nd Spiritomb is Legendary, as it will destroy the legendary created by The Soul. That's why it has such a powerful effect, it's highly unlikely to get both Odd Keystone and The Soul in the same run. Also, it cannot appear through The Soul or Master Ball, you have to evolve the Odd Keystone to be able to get it. Maybe I'll rebalance it later, but for now I just think it's funny.
 
+| Joker | Effect |
+| ------ | ------ |
+| Gym Leader | Creates a tag and an Energy card when Boss Blind is defeated |
+
+In french, Balatro tags are called badges and that's how I got the idea for this Joker. It's pretty simple but I think in the early game it can be useful, and you can sell it once you get good jokers.
+
 ## Decks
 
 | Name | Effect |

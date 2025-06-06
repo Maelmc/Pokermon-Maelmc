@@ -116,19 +116,19 @@ return {
             },
         },
 
-    Other = {
-        gym_leader_tag_pool = {
-              name = "Tag Pool",
-              text = {
-                "{C:money}#1#",
-                "{C:money}#2#",
-                "{C:money}#3#",
-                "{C:money}#4#",
-                "{C:money}#5#",
-              }
+        Other = {
+            gym_leader_tag_pool = {
+                name = "Tag Pool",
+                text = {
+                    "{C:money}#1#",
+                    "{C:money}#2#",
+                    "{C:money}#3#",
+                    "{C:money}#4#",
+                    "{C:money}#5#",
+                }
             },
+        },
     },
-},
     misc = {
         challenge_names = {
             c_maelmc_glimmora_test = "Glimmora",
