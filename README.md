@@ -37,6 +37,12 @@ The 2nd Spiritomb is Legendary, as it will destroy the legendary created by The 
 
 In french, Balatro tags are called badges and that's how I got the idea for this Joker. It's pretty simple but I think in the early game it can be useful, and you can sell it once you get good jokers.
 
+| Joker | Effect |
+| ------ | ------ |
+| Kecleon | Gains +6 Mult whenever it changes Type |
+
+Kecleon was the first Pokémon with an ability that changes type (Color Change) and the first one to have both. I think it's fitting that whatever it does, it does so when changing type. Didn't have much idea though, so I gave it +6 mult per type change.
+
 ## Decks
 
 | Name | Effect |
@@ -54,6 +60,8 @@ They are not challenges in the sense that they are not challenging. It's just a 
 | Glimmora | Jynx, Jirachi (Copy), Glimmora, Gigalith, Golurk | N/A |
 | Copperajah | Jynx, Copperajah, Magnezone, Aggron, Hitmonchan | Mega Stone, Metal Coat |
 | Odd Keystone | Odd Keystone, Persian, Magmortar, Tall Grass | The Soul, The Hermit |
+| Gym Leader | Gym Leader | N/A |
+| Kecleon | Kecleon, Treasure Eatery | Dragon Scale, Poké Ball |
 
 ## Localization
 
