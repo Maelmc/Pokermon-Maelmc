@@ -1,6 +1,6 @@
-local glimmora_test = {
+local glimmora = {
     object_type = "Challenge",
-    key = "glimmora_test",
+    key = "glimmora",
     jokers = {
         {id = "j_poke_jynx"},
         {id = "j_poke_jirachi_copy"},
@@ -10,9 +10,9 @@ local glimmora_test = {
     },
 }
 
-local copperajah_test = {
+local copperajah = {
     object_type = "Challenge",
-    key = "copperajah_test",
+    key = "copperajah",
     jokers = {
         {id = "j_poke_jynx"},
         {id = "j_maelmc_copperajah"},
@@ -26,9 +26,9 @@ local copperajah_test = {
     },
 }
 
---[[local spiritomb_test = {
+--[[local spiritomb = {
     object_type = "Challenge",
-    key = "spiritomb_test",
+    key = "spiritomb",
     jokers = {
         {id = "j_poke_dragonite"},
         {id = "j_poke_golem"},
@@ -52,9 +52,9 @@ local copperajah_test = {
     },]]
 --}]]
 
-local spiritomb_test = {
+local spiritomb = {
     object_type = "Challenge",
-    key = "spiritomb_test",
+    key = "spiritomb",
     jokers = {
         {id = "j_maelmc_odd_keystone"},
         {id = "j_poke_persian"},
@@ -67,16 +67,27 @@ local spiritomb_test = {
     },
 }
 
-local gym_leader_test = {
+local gym_leader = {
     object_type = "Challenge",
-    key = "gym_leader_test",
+    key = "gym_leader",
     jokers = {
         {id = "j_maelmc_gym_leader"},
-        {id = "j_maelmc_spiritomb"},
-        {id = "j_maelmc_spiritombl"},
+    },
+}
+
+local kecleon = {
+    object_type = "Challenge",
+    key = "kecleon",
+    jokers = {
+        {id = "j_maelmc_kecleon"},
+        {id = "j_poke_treasure_eatery"},
+    },
+    consumeables = {
+        {id = "c_poke_dragonscale"},
+        {id = "c_poke_pokeball"},
     },
 }
 
 return {name = "Challenges", 
-        list = {glimmora_test, copperajah_test, spiritomb_test, gym_leader_test}
+        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon}
 }

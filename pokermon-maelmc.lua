@@ -16,6 +16,20 @@ SMODS.Atlas({
 }):register()
 
 SMODS.Atlas({
+   key = "Pokedex3-Maelmc",
+   path = "Pokedex3.png",
+   px = 71,
+   py = 95
+ }):register()
+
+ SMODS.Atlas({
+   key = "shiny_Pokedex3-Maelmc",
+   path = "Shinydex3.png",
+   px = 71,
+   py = 95
+ }):register()
+
+SMODS.Atlas({
    key = "Pokedex4-Maelmc",
    path = "Pokedex4.png",
    px = 71,

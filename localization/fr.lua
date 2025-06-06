@@ -107,20 +107,51 @@ return {
                     "dans votre jeu complet",
                 } 
             },
+            j_maelmc_gym_leader = {
+                name = "Champion d'Arène",
+                text = {
+                    "Crée un {C:attention}badge{} et une carte {C:pink}Énergie{}",
+                    "quand la Blinde de Boss est vaincue",
+                } 
+            },
+            j_maelmc_kecleon = {
+                name = "Kecleon",
+                text = {
+                    "Gagne {C:red}+#1#{} Multi. quand",
+                    "ce Joker change de {C:attention}Type{}",
+                    "{C:inactive,s:0.8}(Actuellement {C:red}+#2#{} {C:inactive,s:0.8}Multi.)"
+                } 
+            },
+        },
+        Other = {
+            gym_leader_tag_pool = {
+                name = "Tag Pool",
+                text = {
+                    "{C:money}#1#",
+                    "{C:money}#2#",
+                    "{C:money}#3#",
+                    "{C:money}#4#",
+                    "{C:money}#5#",
+                }
+            },
         },
     },
     misc = {
         challenge_names = {
-            c_maelmc_glimmora_test = "Floréclat",
-            c_maelmc_copperajah_test = "Pachyradjah",
-            --c_maelmc_spiritomb_test = "Main petite mais costaud de Spiritomb"
-            c_maelmc_spiritomb_test = "Clé de Voûte"
+            c_maelmc_glimmora = "Floréclat",
+            c_maelmc_copperajah = "Pachyradjah",
+            --c_maelmc_spiritomb = "Main petite mais costaud de Spiritomb"
+            c_maelmc_spiritomb = "Clé de Voûte",
+            c_maelmc_gym_leader = "Champion d'Arène",
+            c_maelmc_kecleon = "Kecleon",
         },
         dictionary = {
             maelmc_steel = "Acier!",
             maelmc_gmax_steelsurge = "Percée G-Max!",
             maelmc_consume = "Consomme",
             maelmc_soul_collected = "Âme collectée",
+            maelmc_gym_beaten = "Arène battue",
+            maelmc_color_change = "Homochromie",
         }
     }
 }

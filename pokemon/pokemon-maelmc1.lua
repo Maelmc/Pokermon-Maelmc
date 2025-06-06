@@ -595,7 +595,7 @@ local spiritombl={
         if Xmult > 1 then
           return {
             colour = G.C.XMULT,
-            Xmult = card.ability.extra.Xmult_mod * #G.playing_cards,
+            Xmult = Xmult,
             card = card
           }
         end
@@ -680,6 +680,49 @@ local gym_leader={
   end,
 }
 
+-- Kecleon 352
+local kecleon={
+  name = "kecleon",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 3, y = 10},
+  config = {extra = {type_change = 0, mult_mod = 6, current_type = "Colorless"}},
+  loc_vars = function(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    return {vars = {abbr.mult_mod, abbr.mult_mod * abbr.type_change}}
+  end,
+  rarity = 1,
+  cost = 5,
+  stage = "Basic",
+  ptype = "Colorless",
+  atlas = "Pokedex3-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+
+    -- all context to be futureproof
+    local type = get_type(card)
+    if type ~= card.ability.extra.current_type then
+      card.ability.extra.current_type = type
+      card.ability.extra.type_change = card.ability.extra.type_change + 1
+      card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_color_change')})
+    end
+    
+    if context.cardarea == G.jokers and context.scoring_hand then
+      if context.joker_main then
+        local mult = card.ability.extra.mult_mod * card.ability.extra.type_change
+        if mult > 0 then
+          return {
+            colour = G.C.MULT,
+            mult = mult,
+            card = card
+          }
+        end
+      end
+    end
+
+  end,
+}
+
 return {name = "Maelmc's Jokers 1", 
-        list = {glimmet, glimmora, cufant, copperajah, gmax_copperajah, odd_keystone, spiritomb, spiritombl, gym_leader},
+        list = {glimmet, glimmora, cufant, copperajah, gmax_copperajah, odd_keystone, spiritomb, spiritombl, gym_leader, kecleon},
 }

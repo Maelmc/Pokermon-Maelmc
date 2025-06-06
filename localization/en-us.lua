@@ -114,6 +114,14 @@ return {
                     "when Boss Blind is defeated",
                 } 
             },
+            j_maelmc_kecleon = {
+                name = "Kecleon",
+                text = {
+                    "Gain {C:red}+#1#{} Mult whenever",
+                    "this Joker changes {C:attention}Type{}",
+                    "{C:inactive,s:0.8}(Currently {C:red}+#2#{} {C:inactive,s:0.8}Mult)"
+                } 
+            },
         },
 
         Other = {
@@ -131,10 +139,12 @@ return {
     },
     misc = {
         challenge_names = {
-            c_maelmc_glimmora_test = "Glimmora",
-            c_maelmc_copperajah_test = "Copperajah",
-            --c_maelmc_spiritomb_test = "Spiritomb's Short Yet Strong Hand",
-            c_maelmc_spiritomb_test = "Odd Keystone"
+            c_maelmc_glimmora = "Glimmora",
+            c_maelmc_copperajah = "Copperajah",
+            --c_maelmc_spiritomb = "Spiritomb's Short Yet Strong Hand",
+            c_maelmc_spiritomb = "Odd Keystone",
+            c_maelmc_gym_leader = "Gym Leader",
+            c_maelmc_kecleon = "Kecleon",
         },
         dictionary = {
             maelmc_steel = "Steel!",
@@ -142,6 +152,7 @@ return {
             maelmc_consume = "Consume",
             maelmc_soul_collected = "Soul collected",
             maelmc_gym_beaten = "Gym beaten",
+            maelmc_color_change = "Color Change",
         }
     }
 }
