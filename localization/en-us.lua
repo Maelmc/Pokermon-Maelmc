@@ -77,9 +77,12 @@ return {
             j_maelmc_odd_keystone = {
                 name = "Odd Keystone",
                 text = {
-                    "Does nothing...?",
-                    "{C:inactive,s:0.8}(Evolves after selling a joker or a consumable",
-                    "{C:inactive,s:0.8}or destroying a card {C:attention,s:0.8}#1#{C:inactive,s:0.8}/#2# times)",
+                    "Collects souls after selling a Joker",
+                    "or consumable or destroying cards",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "The rarer the Joker sold, the greater",
+                    "the quantity of souls collected",
+                    "{C:inactive,s:0.8}(Evolves after collecting {C:attention,s:0.8}#1#{C:inactive,s:0.8}/#2# souls)",
                     "{C:inactive,s:0.8}(Evolves after using and consuming {C:dark_edition,s:0.8}#3#{C:inactive,s:0.8})"
                 } 
             },

@@ -1,4 +1,5 @@
 -- https://stackoverflow.com/questions/2282444/how-to-check-if-a-table-contains-an-element-in-lua
+-- function to check if the table contains an element, used to search for specific hazard cards for cufant's family
 function table.contains(table, element)
   for _, value in pairs(table) do
     if value == element then
@@ -162,31 +163,21 @@ local cufant = {
       poke_add_hazards(card.ability.extra.hazard_ratio)
       card.ability.extra.hazard_to_steel = {}
       card.ability.extra.all_hazard = {}
-      --print("in all hazard blind: "..#card.ability.extra.all_hazard)
-      --print("in three hazard blind: "..#card.ability.extra.hazard_to_steel)
     end
     
     -- this is not super clean code, there are probably better ways to do this
     if context.end_of_round and context.cardarea == G.hand then
-      --print("here")
       if #card.ability.extra.all_hazard == 0 and #card.ability.extra.hazard_to_steel == 0 then
         -- find all hazard cards in hand
         card.ability.extra.hazard_to_steel = {}
         card.ability.extra.all_hazard = {}
-        
-        --print("in three hazard preloop: "..#card.ability.extra.hazard_to_steel)
         local count = 0
         for _, v in pairs(G.hand.cards) do
           count = count + 1
-          --print(count)
           if SMODS.has_enhancement(v, "m_poke_hazard") then
-            --print("hazard!")
             table.insert(card.ability.extra.all_hazard,v)
           end
         end
-
-        --print("in all hazard: "..#card.ability.extra.all_hazard)
-        --print("in three hazard start: "..#card.ability.extra.hazard_to_steel)
 
         -- get 3 of them
         if #card.ability.extra.all_hazard <= card.ability.extra.reset_steel then
@@ -196,13 +187,10 @@ local cufant = {
           for i = 1,card.ability.extra.reset_steel do
             -- get one to hazard_to_steel and remove it from pos
             local tmp_hazard = math.random(#card.ability.extra.all_hazard)
-            --print(tmp_hazard.." "..#card.ability.extra.all_hazard)
             card.ability.extra.hazard_to_steel[#card.ability.extra.hazard_to_steel+1]=card.ability.extra.all_hazard[tmp_hazard]
             table.remove(card.ability.extra.all_hazard,tmp_hazard)
-            --print("in three hazard mid: "..#card.ability.extra.hazard_to_steel)
           end
         end
-        --print("in three hazard end: "..#card.ability.extra.hazard_to_steel)
       end
 
       -- turn them into steel
@@ -259,47 +247,33 @@ local copperajah = {
       poke_add_hazards(card.ability.extra.hazard_ratio)
       card.ability.extra.hazard_to_steel = {}
       card.ability.extra.all_hazard = {}
-      --print("in all hazard blind: "..#card.ability.extra.all_hazard)
-      --print("in three hazard blind: "..#card.ability.extra.hazard_to_steel)
     end
     
     -- this is not super clean code, there are probably better ways to do this
     if context.end_of_round and context.cardarea == G.hand then
-      --print("here")
       if #card.ability.extra.all_hazard == 0 and #card.ability.extra.hazard_to_steel == 0 then
         -- find all hazard cards in hand
         card.ability.extra.hazard_to_steel = {}
         card.ability.extra.all_hazard = {}
-        
-        --print("in three hazard preloop: "..#card.ability.extra.hazard_to_steel)
         local count = 0
         for _, v in pairs(G.hand.cards) do
           count = count + 1
-          --print(count)
           if SMODS.has_enhancement(v, "m_poke_hazard") then
-            --print("hazard!")
             table.insert(card.ability.extra.all_hazard,v)
           end
         end
 
-        --print("in all hazard: "..#card.ability.extra.all_hazard)
-        --print("in three hazard start: "..#card.ability.extra.hazard_to_steel)
-
         -- get 3 of them
         if #card.ability.extra.all_hazard <= card.ability.extra.reset_steel then
-          --print("3 or less")
           card.ability.extra.hazard_to_steel = card.ability.extra.all_hazard
         else 
           for i = 1,card.ability.extra.reset_steel do
             -- get one to hazard_to_steel and remove it from pos
             local tmp_hazard = math.random(#card.ability.extra.all_hazard)
-            --print(tmp_hazard.." "..#card.ability.extra.all_hazard)
             card.ability.extra.hazard_to_steel[#card.ability.extra.hazard_to_steel+1]=card.ability.extra.all_hazard[tmp_hazard]
             table.remove(card.ability.extra.all_hazard,tmp_hazard)
-            --print("in three hazard mid: "..#card.ability.extra.hazard_to_steel)
           end
         end
-        --print("in three hazard end: "..#card.ability.extra.hazard_to_steel)
       end
 
       -- turn them into steel
@@ -370,47 +344,34 @@ local gmax_copperajah = {
       poke_add_hazards(card.ability.extra.hazard_ratio)
       card.ability.extra.hazard_to_steel = {}
       card.ability.extra.all_hazard = {}
-      --print("in all hazard blind: "..#card.ability.extra.all_hazard)
-      --print("in three hazard blind: "..#card.ability.extra.hazard_to_steel)
     end
     
     -- this is not super clean code, there are probably better ways to do this
     if context.end_of_round and context.cardarea == G.hand then
-      --print("here")
       if #card.ability.extra.all_hazard == 0 and #card.ability.extra.hazard_to_steel == 0 then
         -- find all hazard cards in hand
         card.ability.extra.hazard_to_steel = {}
         card.ability.extra.all_hazard = {}
         
-        --print("in three hazard preloop: "..#card.ability.extra.hazard_to_steel)
         local count = 0
         for _, v in pairs(G.hand.cards) do
           count = count + 1
-          --print(count)
           if SMODS.has_enhancement(v, "m_poke_hazard") then
-            --print("hazard!")
             table.insert(card.ability.extra.all_hazard,v)
           end
         end
 
-        --print("in all hazard: "..#card.ability.extra.all_hazard)
-        --print("in three hazard start: "..#card.ability.extra.hazard_to_steel)
-
         -- get 3 of them
         if #card.ability.extra.all_hazard <= card.ability.extra.reset_steel then
-          --print("3 or less")
           card.ability.extra.hazard_to_steel = card.ability.extra.all_hazard
         else 
           for i = 1,card.ability.extra.reset_steel do
             -- get one to hazard_to_steel and remove it from pos
             local tmp_hazard = math.random(#card.ability.extra.all_hazard)
-            --print(tmp_hazard.." "..#card.ability.extra.all_hazard)
             card.ability.extra.hazard_to_steel[#card.ability.extra.hazard_to_steel+1]=card.ability.extra.all_hazard[tmp_hazard]
             table.remove(card.ability.extra.all_hazard,tmp_hazard)
-            --print("in three hazard mid: "..#card.ability.extra.hazard_to_steel)
           end
         end
-        --print("in three hazard end: "..#card.ability.extra.hazard_to_steel)
       end
 
       -- turn them into steel
@@ -512,7 +473,19 @@ local odd_keystone={
     end
 
     if context.selling_card and not context.selling_self and not context.blueprint then
-      card.ability.extra.evolve_progress = card.ability.extra.evolve_progress + 1
+      if context.card.config.center.rarity then -- if it's a joker, and thus has a rarity
+        if context.card.config.center.rarity == 1 or context.card.config.center.rarity == 2 then
+          card.ability.extra.evolve_progress = card.ability.extra.evolve_progress + context.card.config.center.rarity
+
+        elseif context.card.config.center.rarity == "poke_safari" or context.card.config.center.rarity == 3 then
+          card.ability.extra.evolve_progress = card.ability.extra.evolve_progress + 5
+
+        elseif context.card.config.center.rarity == 4 then
+          card.ability.extra.evolve_progress = card.ability.extra.evolve_progress + 10
+        end
+      else -- if it's a consumeable
+        card.ability.extra.evolve_progress = card.ability.extra.evolve_progress + 1
+      end
       G.E_MANAGER:add_event(Event({
         func = function() card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_soul_collected')}); return true
         end
@@ -687,6 +660,7 @@ local kecleon={
   pos = {x = 3, y = 10},
   config = {extra = {type_change = 0, mult_mod = 6, current_type = "Colorless"}},
   loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.mult_mod, abbr.mult_mod * abbr.type_change}}
@@ -700,11 +674,13 @@ local kecleon={
   calculate = function(self, card, context)
 
     -- all context to be futureproof
-    local type = get_type(card)
-    if type ~= card.ability.extra.current_type then
-      card.ability.extra.current_type = type
-      card.ability.extra.type_change = card.ability.extra.type_change + 1
-      card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_color_change')})
+    if not context.blueprint then
+      local type = get_type(card)
+      if type ~= card.ability.extra.current_type then
+        card.ability.extra.current_type = type
+        card.ability.extra.type_change = card.ability.extra.type_change + 1
+        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_color_change')})
+      end
     end
     
     if context.cardarea == G.jokers and context.scoring_hand then
