@@ -66,6 +66,7 @@ They are not challenges in the sense that they are not challenging. It's just a 
 | Odd Keystone | Odd Keystone, Persian, Magmortar, Tall Grass | The Soul, The Hermit |
 | Gym Leader | Gym Leader | N/A |
 | Kecleon | Kecleon, Treasure Eatery | Dragon Scale, Poké Ball |
+| Lunatone & Solrock | Lunatone, Solrock, Venonat | The World, The Stars |
 
 ## Localization
 
