@@ -23,25 +23,29 @@ Gmax Copperajah's MAX move sets a unit entry hazard, Steelsurge, which is basica
 | ------ | ------ |
 | Odd Keystone | Does nothing<br/>Evolves after selling jokers or consumables or destroying cards 108 times<br/>Evolves after using The Soul
 | Spiritomb | +108 Chips, +108 Mult, -3 Hand Size<br/>Becomes Negative if you have 108+ cards |
-| Spiritomb | x1.08 for each card in your full deck<br/>Becomes Negative if you have 108+ cards |
 
 The Odd Keystone is an item that does nothing, but Spiritomb is a powerful joker that can almost solo win any run so you have to commit a lot to get it. Maybe eventually I'll give it a real effect, but I like it as is.
 
 Spiritomb is connected to the number 108 a lot, but 108 of anything in this game is a lot. I figured a Stuntman that also gives mult in exchange for even less hand size can make for an interesting joker. Having 108 cards in the deck feels improbable, but you can try to abuse hazards for example as once it's negative it won't lose it.
 
-The 2nd Spiritomb is Legendary, as it will destroy the legendary created by The Soul. That's why it has such a powerful effect, it's highly unlikely to get both Odd Keystone and The Soul in the same run. Also, it cannot appear through The Soul or Master Ball, you have to evolve the Odd Keystone to be able to get it. Maybe I'll rebalance it later, but for now I just think it's funny.
-
 | Joker | Effect |
 | ------ | ------ |
-| Gym Leader | Creates a tag and an Energy card when Boss Blind is defeated |
+| Gym Leader | Nature: Type<br/>Creates a tag and an Energy card after clearing a Boss Blind |
 
-In french, Balatro tags are called badges and that's how I got the idea for this Joker. It's pretty simple but I think in the early game it can be useful, and you can sell it once you get good jokers.
+In french, Balatro tags are called badges and that's how I got the idea for this Joker. The energy's type is determined when the Joker is created, so if you get it in the early game you can try to focus your run on this type specifically and have guaranteed energies.
 
 | Joker | Effect |
 | ------ | ------ |
 | Kecleon | Gains +6 Mult whenever it changes Type |
 
 Kecleon was the first Pokémon with an ability that changes type (Color Change) and the first one to have both. I think it's fitting that whatever it does, it does so when changing type. Didn't have much idea though, so I gave it +6 mult per type change.
+
+| Joker | Effect |
+| ------ | ------ |
+| Lunatone | 1 in 4 chance for each card in poker hand to become Clubs<br/>1 in 4 chance to upgrade level of played poker hand |
+| Solrock | 1 in 4 chance for each card in poker hand to become Hearts<br/>If a non-Hearts card didn't turn to Hearts, 1 in 4 chance to enhance it to Wild |
+
+They mimic the effects of their matching Tarot and Stone cards. Simple yet effective idea, as turning cards to a specific suit makes Flushes easier to get, and it also synergizes well with 
 
 ## Decks
 

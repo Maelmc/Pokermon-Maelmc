@@ -16,6 +16,20 @@ SMODS.Atlas({
 }):register()
 
 SMODS.Atlas({
+   key = "Custom-Maelmc",
+   path = "Custom.png",
+   px = 71,
+   py = 95
+ }):register()
+
+ SMODS.Atlas({
+   key = "shiny_Custom-Maelmc",
+   path = "ShinyCustom.png",
+   px = 71,
+   py = 95
+ }):register()
+
+SMODS.Atlas({
    key = "Pokedex3-Maelmc",
    path = "Pokedex3.png",
    px = 71,
@@ -72,20 +86,6 @@ SMODS.Atlas({
  }):register()
 
  SMODS.Atlas({
-   key = "Others-Maelmc",
-   path = "others.png",
-   px = 71,
-   py = 95
- }):register()
-
- SMODS.Atlas({
-   key = "shiny_Others-Maelmc",
-   path = "shinyothers.png",
-   px = 71,
-   py = 95
- }):register()
-
- SMODS.Atlas({
    key = "Gmax-Maelmc",
    path = "Gmax.png",
    px = 71,
@@ -109,7 +109,33 @@ SMODS.Atlas({
 --Required by the pokemon family function (right click on a pokemon joker)
 table.insert(family, {"glimmet", "glimmora"})
 table.insert(family, {"cufant","copperajah","gmax_copperajah"})
-table.insert(family,{"odd_keystone","spiritomb","spiritombl"})
+table.insert(family,{"odd_keystone","spiritomb"})
+table.insert(family,{
+  --[[{key = "gym_leader", type = "Grass", form = 1},
+  {key = "gym_leader", type = "Fire", form = 2},
+  {key = "gym_leader", type = "Water", form = 3},
+  {key = "gym_leader", type = "Lightning", form = 4},
+  {key = "gym_leader", type = "Psychic", form = 5},
+  {key = "gym_leader", type = "Fighting", form = 6},
+  {key = "gym_leader", type = "Colorless", form = 7},
+  {key = "gym_leader", type = "Darkness", form = 8},
+  {key = "gym_leader", type = "Metal", form = 9},
+  {key = "gym_leader", type = "Fairy", form = 10},
+  {key = "gym_leader", type = "Dragon", form = 11},
+  {key = "gym_leader", type = "Earth", form = 12}, ]]
+  {key = "gym_leader", form = "Grass"},
+  {key = "gym_leader", form = "Fire"},
+  {key = "gym_leader", form = "Water"},
+  {key = "gym_leader", form = "Lightning"},
+  {key = "gym_leader", form = "Psychic"},
+  {key = "gym_leader", form = "Fighting"},
+  {key = "gym_leader", form = "Colorless"},
+  {key = "gym_leader", form = "Darkness"},
+  {key = "gym_leader", form = "Metal"},
+  {key = "gym_leader", form = "Fairy"},
+  {key = "gym_leader", form = "Dragon"},
+  {key = "gym_leader", form = "Earth"},
+})
 
 maelmc_config = SMODS.current_mod.config
 -- Get mod path and load other files

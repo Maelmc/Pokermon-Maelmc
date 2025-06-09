@@ -88,6 +88,20 @@ local kecleon = {
     },
 }
 
+local lunatone_solrock = {
+    object_type = "Challenge",
+    key = "lunatone_solrock",
+    jokers = {
+        {id = "j_maelmc_lunatone"},
+        {id = "j_maelmc_solrock"},
+        {id = "j_poke_venonat"},
+    },
+    consumeables = {
+        {id = "c_world"},
+        {id = "c_star"},
+    },
+}
+
 return {name = "Challenges", 
-        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon}
+        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon, lunatone_solrock}
 }

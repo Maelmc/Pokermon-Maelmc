@@ -405,7 +405,7 @@ local gmax_copperajah = {
 local odd_keystone={
   name = "odd_keystone",
   poke_custom_prefix = "maelmc",
-  pos = {x = 4, y = 0},
+  pos = {x = 0, y = 0},
   config = {extra = {evolve_progress = 0, evolve_after = 108, evolve_using = "The Soul"}},
   loc_vars = function(self, info_queue, card)
     -- just to shorten function
@@ -416,11 +416,11 @@ local odd_keystone={
   rarity = 3,
   cost = 8,
   stage = "Other",
-  atlas = "Others-Maelmc",
+  atlas = "Custom-Maelmc",
   blueprint_compat = true,
   calculate = function(self, card, context)
     -- if using The Soul, evolve
-    if context.using_consumeable and context.consumeable and context.consumeable.ability.name == card.ability.extra.evolve_using then
+    --[[if context.using_consumeable and context.consumeable and context.consumeable.ability.name == card.ability.extra.evolve_using then
       
       local nb_joker_pre_soul = #G.jokers.cards
       local nb_consumables_pre_soul = #G.consumeables.cards
@@ -460,7 +460,7 @@ local odd_keystone={
       return {
         message = poke_evolve(card, "j_maelmc_spiritombl"),
       }
-    end
+    end]]
 
     if context.remove_playing_cards and not context.blueprint then
       for _, _ in ipairs(context.removed) do
@@ -477,12 +477,16 @@ local odd_keystone={
         if context.card.config.center.rarity == 1 or context.card.config.center.rarity == 2 then
           card.ability.extra.evolve_progress = card.ability.extra.evolve_progress + context.card.config.center.rarity
 
-        elseif context.card.config.center.rarity == "poke_safari" or context.card.config.center.rarity == 3 then
+        elseif context.card.config.center.rarity == "poke_safari" or context.card.config.center.rarity == "poke_mega" or context.card.config.center.rarity == 3 then
           card.ability.extra.evolve_progress = card.ability.extra.evolve_progress + 5
 
         elseif context.card.config.center.rarity == 4 then
           card.ability.extra.evolve_progress = card.ability.extra.evolve_progress + 10
+
+        else -- if somehow the joker isn't common, uncommon, rare, safari, legendary or mega??
+          card.ability.extra.evolve_progress = card.ability.extra.evolve_progress + 1
         end
+
       else -- if it's a consumeable
         card.ability.extra.evolve_progress = card.ability.extra.evolve_progress + 1
       end
@@ -539,7 +543,7 @@ local spiritomb={
   end
 }
 
-local spiritombl={
+--[[local spiritombl={
   name = "spiritombl",
   poke_custom_prefix = "maelmc",
   pos = {x = 10, y = 10},
@@ -578,24 +582,25 @@ local spiritombl={
   in_pool = function(self)
     return false
   end
-}
+}]]
 
 -- Gym Leader
 local gym_leader={
   name = "gym_leader",
   poke_custom_prefix = "maelmc",
-  pos = {x = 2, y = 2},
-  config = {extra = {boss = false}},
+  pos = {x = 1, y = 0},
+  config = {extra = {boss = false, form = "Earth"}},
   loc_vars = function(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
+    info_queue[#info_queue+1] = {set = 'Other', key = 'nature', vars = {"Type"}}
     info_queue[#info_queue+1] = {set = 'Other', key = 'gym_leader_tag_pool', vars = {'Uncommon', 'Rare', 'Handy', 'Garbage', 'Investment'}}
-    return {vars = {}}
+    return {vars = {abbr.form}}
   end,
   rarity = 2,
   cost = 5,
   stage = "Other",
-  atlas = "Others-Maelmc",
+  atlas = "Custom-Maelmc",
   blueprint_compat = true,
   calculate = function(self, card, context)
     
@@ -639,9 +644,10 @@ local gym_leader={
         G.E_MANAGER:add_event(Event({
           trigger = 'after',
           func = (function()
-              local card = create_card('Energy', G.consumeables, nil, nil, nil, nil, nil, 'pory')
-              card:add_to_deck()
-              G.consumeables:emplace(card)
+              local energy_name = string.lower("c_poke_"..card.ability.extra.form.."_energy")
+              local energy = create_card("Energy", G.pack_cards, nil, nil, nil, nil, energy_name, nil)
+              energy:add_to_deck()
+              G.consumeables:emplace(energy)
               G.GAME.consumeable_buffer = 0
             return true
         end)}))
@@ -650,6 +656,34 @@ local gym_leader={
       card.ability.extra.boss = false
       return true
     end
+  end,
+  set_ability = function(self, card, initial, delay_sprites)
+    if initial and G.playing_cards then
+      local poketype_list = {"Grass", "Fire", "Water", "Lightning", "Psychic", "Fighting", "Colorless", "Darkness", "Metal", "Fairy", "Dragon", "Earth"}
+      card.ability.extra.form = pseudorandom_element(poketype_list, pseudoseed("gym_leader"))
+      self:set_sprites(card)
+    end
+  end,
+  set_sprites = function(self, card, front)
+    local leader_table = {
+      Grass = {x = 1, y = 0},
+      Fire = {x = 2, y = 0},
+      Water = {x = 3, y = 0},
+      Lightning = {x = 4, y = 0},
+      Psychic = {x = 5, y = 0},
+      Fighting = {x = 6, y = 0},
+      Colorless = {x = 7, y = 0},
+      Darkness = {x = 8, y = 0},
+      Metal = {x = 9, y = 0},
+      Fairy = {x = 10, y = 0},
+      Dragon = {x = 11, y = 0},
+      Earth = {x = 12, y = 0},
+    }
+    if card.ability and card.ability.extra and leader_table[card.ability.extra.form] then
+      card.children.center:set_sprite_pos(leader_table[card.ability.extra.form])
+    else
+      card.children.center:set_sprite_pos(leader_table["Earth"])
+    end 
   end,
 }
 
@@ -678,14 +712,14 @@ local kecleon={
       local type = get_type(card)
       if type ~= card.ability.extra.current_type then
         card.ability.extra.current_type = type
-        card.ability.extra.type_change = card.ability.extra.type_change + 1
+        card.ability.extra.form_change = card.ability.extra.form_change + 1
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_color_change')})
       end
     end
     
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main then
-        local mult = card.ability.extra.mult_mod * card.ability.extra.type_change
+        local mult = card.ability.extra.mult_mod * card.ability.extra.form_change
         if mult > 0 then
           return {
             colour = G.C.MULT,
@@ -699,6 +733,109 @@ local kecleon={
   end,
 }
 
+-- Lunatone 337
+local lunatone={
+  name = "lunatone",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 5, y = 8},
+  config = {extra = {clubs_odds = 4, suit = "Clubs", level_amt = 1, level_odds = 4}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), abbr.clubs_odds, abbr.suit, abbr.level_odds}}
+  end,
+  rarity = 2,
+  cost = 6,
+  stage = "Basic",
+  ptype = "Earth",
+  atlas = "Pokedex3-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    if context.before and context.cardarea == G.jokers then
+      -- turn cards to club
+      local clubs_trigg = 0
+      for _, v in pairs(context.scoring_hand) do
+        if not (v:is_suit(card.ability.extra.suit)) and (pseudorandom('lunatone') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.clubs_odds) then
+          clubs_trigg = 1
+          local rank = v:get_id()
+          if rank > 9 then
+            if rank == 10 then rank = "T" end
+            if rank == 11 then rank = "J" end
+            if rank == 12 then rank = "Q" end
+            if rank == 13 then rank = "K" end
+            if rank == 14 then rank = "A" end
+          end
+          v:set_base(G.P_CARDS["C_"..rank])
+        end
+      end
+      if clubs_trigg == 1 then
+        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_clubs')})
+      end
+
+      if (pseudorandom('lunatone') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.level_odds) then
+        local hand = context.scoring_name
+        update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=localize(hand, 'poker_hands'), chips = G.GAME.hands[hand].chips, mult = G.GAME.hands[hand].mult, level=G.GAME.hands[hand].level})
+        level_up_hand(card, hand, nil, card.ability.extra.level_amt)
+        update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
+      end
+    end
+  end,
+}
+
+-- Solrock 338
+local solrock={
+  name = "solrock",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 6, y = 8},
+  config = {extra = {hearts_odds = 4, suit = "Hearts", wild_odds = 4}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    info_queue[#info_queue+1] = G.P_CENTERS.m_wild
+    local abbr = card.ability.extra
+    return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), abbr.hearts_odds, abbr.suit, abbr.wild_odds}}
+  end,
+  rarity = 2,
+  cost = 6,
+  stage = "Basic",
+  ptype = "Earth",
+  atlas = "Pokedex3-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    if context.before and context.cardarea == G.jokers then
+      -- turn cards to club
+      local hearts_trigg = 0
+      local wild_trigg = 0
+      for _, v in pairs(context.scoring_hand) do
+        if not (v:is_suit(card.ability.extra.suit)) then
+          if (pseudorandom('solrock') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.hearts_odds) then
+            hearts_trigg = 1
+            local rank = v:get_id()
+            if rank > 9 then
+              if rank == 10 then rank = "T" end
+              if rank == 11 then rank = "J" end
+              if rank == 12 then rank = "Q" end
+              if rank == 13 then rank = "K" end
+              if rank == 14 then rank = "A" end
+            end
+            v:set_base(G.P_CARDS["H_"..rank])
+          elseif not (SMODS.has_enhancement(v, "m_wild")) and (pseudorandom('solrock') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.wild_odds) then
+            wild_trigg = 1
+            v:set_ability(G.P_CENTERS.m_wild,nil,true)
+          end
+        end
+      end
+      if hearts_trigg == 1 then
+        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_hearts')})
+      end
+      if wild_trigg == 1 then
+        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_wild')})
+      end
+    end
+  end,
+}
+
 return {name = "Maelmc's Jokers 1", 
-        list = {glimmet, glimmora, cufant, copperajah, gmax_copperajah, odd_keystone, spiritomb, spiritombl, gym_leader, kecleon},
+        list = {kecleon, lunatone, solrock, odd_keystone, spiritomb, cufant, copperajah, gmax_copperajah, glimmet, glimmora, gym_leader}, --spiritombl
 }

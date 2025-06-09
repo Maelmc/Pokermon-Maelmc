@@ -83,7 +83,7 @@ return {
                     "The rarer the Joker sold, the greater",
                     "the quantity of souls collected",
                     "{C:inactive,s:0.8}(Evolves after collecting {C:attention,s:0.8}#1#{C:inactive,s:0.8}/#2# souls)",
-                    "{C:inactive,s:0.8}(Evolves after using and consuming {C:dark_edition,s:0.8}#3#{C:inactive,s:0.8})"
+                    --"{C:inactive,s:0.8}(Evolves after using and consuming {C:dark_edition,s:0.8}#3#{C:inactive,s:0.8})"
                 } 
             },
             j_maelmc_spiritomb = {
@@ -98,7 +98,7 @@ return {
                     "in your full deck",
                 } 
             },
-            j_maelmc_spiritombl = {
+            --[[j_maelmc_spiritombl = {
                 name = "Spiritomb",
                 text = {
                     "{X:red,C:white}X#1#{} Mult for every card",
@@ -109,12 +109,14 @@ return {
                     "if you have at least {C:attention}#3#{} cards",
                     "in your full deck",
                 } 
-            },
+            },]]
             j_maelmc_gym_leader = {
                 name = "Gym Leader",
                 text = {
+                    "{C:attention}Nature: #1#",
                     "Creates a {C:attention}tag{} and an {C:pink}Energy{} card",
-                    "when Boss Blind is defeated",
+                    "matching the {C:attention}Nature{}'s type",
+                    "after clearing a Boss Blind",
                 } 
             },
             j_maelmc_kecleon = {
@@ -123,6 +125,27 @@ return {
                     "Gain {C:red}+#1#{} Mult whenever",
                     "this Joker changes {C:attention}Type{}",
                     "{C:inactive,s:0.8}(Currently {C:red}+#2#{} {C:inactive,s:0.8}Mult)"
+                } 
+            },
+            j_maelmc_lunatone = {
+                name = "Lunatone",
+                text = {
+                    "{C:green}#1# in #2#{} chance for each",
+                    "card in poker hand to become {C:clubs}#3#",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "{C:green}#1# in #4#{} chance to upgrade",
+                    "level of played poker hand"
+                } 
+            },
+            j_maelmc_solrock = {
+                name = "Solrock",
+                text = {
+                    "{C:green}#1# in #2#{} chance for each",
+                    "card in poker hand to become {C:hearts}#3#",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "If a non-{C:hearts}Hearts{} card didn't",
+                    "become {C:hearts}Hearts{}, {C:green}#1# in #4#{} chance",
+                    "to enhance it to {C:attention}Wild"
                 } 
             },
         },
@@ -148,6 +171,7 @@ return {
             c_maelmc_spiritomb = "Odd Keystone",
             c_maelmc_gym_leader = "Gym Leader",
             c_maelmc_kecleon = "Kecleon",
+            c_maelmc_lunatone_solrock = "Lunatone & Solrock",
         },
         dictionary = {
             maelmc_steel = "Steel!",
@@ -156,6 +180,8 @@ return {
             maelmc_soul_collected = "Soul collected",
             maelmc_gym_beaten = "Gym beaten",
             maelmc_color_change = "Color Change",
+            maelmc_clubs = "Clubs",
+            maelmc_hearts = "Hearts",
         }
     }
 }

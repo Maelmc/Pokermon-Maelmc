@@ -80,7 +80,7 @@ return {
                     "Ne fait rien...?",
                     "{C:inactive,s:0.8}(Évolue après avoir vendu un joker ou un consommable",
                     "{C:inactive,s:0.8}ou avoir détruit une carte {C:attention,s:0.8}#1#{C:inactive,s:0.8}/#2# fois)",
-                    "{C:inactive,s:0.8}(Évolue après avoir utilisé et consommé {C:dark_edition,s:0.8}#3#{C:inactive,s:0.8})"
+                    --"{C:inactive,s:0.8}(Évolue après avoir utilisé et consommé {C:dark_edition,s:0.8}#3#{C:inactive,s:0.8})"
                 } 
             },
             j_maelmc_spiritomb = {
@@ -95,7 +95,7 @@ return {
                     "dans votre jeu complet",
                 } 
             },
-            j_maelmc_spiritombl = {
+            --[[j_maelmc_spiritombl = {
                 name = "Spiritomb",
                 text = {
                     "{X:red,C:white}X#1#{} Multi. pour chaque carte",
@@ -106,11 +106,12 @@ return {
                     "si vous avez au moins {C:attention}108{} cartes",
                     "dans votre jeu complet",
                 } 
-            },
+            },]]
             j_maelmc_gym_leader = {
                 name = "Champion d'Arène",
                 text = {
                     "Crée un {C:attention}badge{} et une carte {C:pink}Énergie{}",
+                    "du type de la {C:attention}Nature",
                     "quand la Blinde de Boss est vaincue",
                 } 
             },
@@ -120,6 +121,27 @@ return {
                     "Gagne {C:red}+#1#{} Multi. quand",
                     "ce Joker change de {C:attention}Type{}",
                     "{C:inactive,s:0.8}(Actuellement {C:red}+#2#{} {C:inactive,s:0.8}Multi.)"
+                } 
+            },
+            j_maelmc_lunatone = {
+                name = "Lunatone",
+                text = {
+                    "{C:green}#1# chance sur #2#{} que chaque",
+                    "carte dans la main de poker devienne {C:clubs}#3#",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "{C:green}#1# chance sur #4#{} d'augmenter",
+                    "la main de poker jouée"
+                } 
+            },
+            j_maelmc_solrock = {
+                name = "Solrock",
+                text = {
+                    "{C:green}#1# chance sur #2#{} que chaque",
+                    "carte dans la main de poker devienne {C:hearts}#3#",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Si une carte non-{C:hearts}Cœurs{} n'est",
+                    "pas devenue {C:hearts}Cœurs{}, {C:green}#1# chance sur #4#{}",
+                    "de l'améliorer en {C:attention}Carte Libre"
                 } 
             },
         },
@@ -144,6 +166,7 @@ return {
             c_maelmc_spiritomb = "Clé de Voûte",
             c_maelmc_gym_leader = "Champion d'Arène",
             c_maelmc_kecleon = "Kecleon",
+            _maelmc_lunatone_solrock = "Séléroc & Solaroc",
         },
         dictionary = {
             maelmc_steel = "Acier!",
@@ -152,6 +175,8 @@ return {
             maelmc_soul_collected = "Âme collectée",
             maelmc_gym_beaten = "Arène battue",
             maelmc_color_change = "Homochromie",
+            maelmc_clubs = "Trèfles",
+            maelmc_hearts = "Cœurs",
         }
     }
 }
