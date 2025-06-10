@@ -57,6 +57,20 @@ SMODS.Atlas({
    py = 95
  }):register()
 
+ SMODS.Atlas({
+   key = "Pokedex6-Maelmc",
+   path = "Pokedex6.png",
+   px = 71,
+   py = 95
+ }):register()
+
+ SMODS.Atlas({
+   key = "shiny_Pokedex6-Maelmc",
+   path = "Shinydex6.png",
+   px = 71,
+   py = 95
+ }):register()
+
 SMODS.Atlas({
    key = "Pokedex8-Maelmc",
    path = "Pokedex8.png",
@@ -111,18 +125,6 @@ table.insert(family, {"glimmet", "glimmora"})
 table.insert(family, {"cufant","copperajah","gmax_copperajah"})
 table.insert(family,{"odd_keystone","spiritomb"})
 table.insert(family,{
-  --[[{key = "gym_leader", type = "Grass", form = 1},
-  {key = "gym_leader", type = "Fire", form = 2},
-  {key = "gym_leader", type = "Water", form = 3},
-  {key = "gym_leader", type = "Lightning", form = 4},
-  {key = "gym_leader", type = "Psychic", form = 5},
-  {key = "gym_leader", type = "Fighting", form = 6},
-  {key = "gym_leader", type = "Colorless", form = 7},
-  {key = "gym_leader", type = "Darkness", form = 8},
-  {key = "gym_leader", type = "Metal", form = 9},
-  {key = "gym_leader", type = "Fairy", form = 10},
-  {key = "gym_leader", type = "Dragon", form = 11},
-  {key = "gym_leader", type = "Earth", form = 12}, ]]
   {key = "gym_leader", form = "Grass"},
   {key = "gym_leader", form = "Fire"},
   {key = "gym_leader", form = "Water"},
@@ -136,6 +138,7 @@ table.insert(family,{
   {key = "gym_leader", form = "Dragon"},
   {key = "gym_leader", form = "Earth"},
 })
+table.insert(family,{"inkay","malamar"})
 
 maelmc_config = SMODS.current_mod.config
 -- Get mod path and load other files

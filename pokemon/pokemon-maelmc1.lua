@@ -836,6 +836,132 @@ local solrock={
   end,
 }
 
+-- Inkay 686
+local inkay={
+  name = "inkay",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 8, y = 2},
+  config = {extra = {mult = 8, odds = 2, flipped_triggered = 0}, evo_rqmt = 20},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    return {vars = {50, abbr.mult, math.max(0, self.config.evo_rqmt - abbr.flipped_triggered)}}
+  end,
+  rarity = 2,
+  cost = 6,
+  stage = "Basic",
+  ptype = "Dark",
+  atlas = "Pokedex6-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+
+    -- flag all face down cards
+    if G.hand then
+      for i = 1, #G.hand.cards do
+        if G.hand.cards[i].facing == 'back' then
+            G.hand.cards[i].maelmc_flipped = true
+        end
+      end
+    end
+
+    -- give mult per scored face down card
+    if context.individual and context.cardarea == G.play and context.other_card.maelmc_flipped then
+      if not context.end_of_round and not context.before and not context.after and not context.other_card.debuff then
+        card.ability.extra.flipped_triggered = card.ability.extra.flipped_triggered + 1
+        return {
+          mult = card.ability.extra.mult ,
+          card = card
+        }
+      end
+    end
+
+    -- remove flag and flip back cards
+    if context.end_of_round and context.cardarea == G.jokers and not context.blueprint then
+      G.GAME.modifiers.flipped_cards = 2
+      for i = 1, #G.hand.cards do
+        if G.hand.cards[i].facing == 'back' then
+            G.hand.cards[i]:flip()
+        end
+      end
+      for _, v in pairs(G.playing_cards) do
+        if v.maelmc_flipped then
+          v.maelmc_flipped = nil
+        end
+      end
+    end
+    return scaling_evo(self, card, context, "j_maelmc_malamar", card.ability.extra.flipped_triggered, self.config.evo_rqmt)
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    G.GAME.modifiers.flipped_cards = card.ability.extra.odds
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.GAME.modifiers.flipped_cards = nil
+  end
+}
+
+-- Malamar 687
+local malamar={
+  name = "malamar",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 9, y = 2},
+  config = {extra = {Xmult = 1.5}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    return {vars = {abbr.Xmult}}
+  end,
+  rarity = "poke_safari",
+  cost = 8,
+  stage = "Stage 1",
+  ptype = "Dark",
+  atlas = "Pokedex6-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+
+    -- flag all face down cards
+    if G.hand then
+      for i = 1, #G.hand.cards do
+        if G.hand.cards[i].facing == 'back' then
+            G.hand.cards[i].maelmc_flipped = true
+        end
+      end
+    end
+
+    -- give mult per scored face down card
+    if context.individual and context.cardarea == G.play and context.other_card.maelmc_flipped then
+      if not context.end_of_round and not context.before and not context.after and not context.other_card.debuff then
+        return {
+          Xmult = card.ability.extra.Xmult ,
+          card = card
+        }
+      end
+    end
+
+    -- remove flag and flip back cards
+    if context.end_of_round and context.cardarea == G.jokers and not context.blueprint then
+      G.GAME.modifiers.flipped_cards = 1
+      for i = 1, #G.hand.cards do
+        if G.hand.cards[i].facing == 'back' then
+            G.hand.cards[i]:flip()
+        end
+      end
+      for _, v in pairs(G.playing_cards) do
+        if v.maelmc_flipped then
+          v.maelmc_flipped = nil
+        end
+      end
+    end
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    G.GAME.modifiers.flipped_cards = 1
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.GAME.modifiers.flipped_cards = nil
+  end
+}
+
 return {name = "Maelmc's Jokers 1", 
-        list = {kecleon, lunatone, solrock, odd_keystone, spiritomb, cufant, copperajah, gmax_copperajah, glimmet, glimmora, gym_leader}, --spiritombl
+        list = {kecleon, lunatone, solrock, odd_keystone, spiritomb, inkay, malamar, cufant, copperajah, gmax_copperajah, glimmet, glimmora, gym_leader}, --spiritombl
 }

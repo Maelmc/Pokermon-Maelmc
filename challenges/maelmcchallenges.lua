@@ -102,6 +102,15 @@ local lunatone_solrock = {
     },
 }
 
+local inkay = {
+    object_type = "Challenge",
+    key = "inkay",
+    jokers = {
+        {id = "j_maelmc_inkay"},
+        --{id = "j_poke_raticate"},
+    },
+}
+
 return {name = "Challenges", 
-        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon, lunatone_solrock}
+        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon, lunatone_solrock, inkay}
 }
