@@ -300,12 +300,12 @@ local copperajah = {
         }
       end
   end,
-  megas = {"gmax_copperajah"}
+  megas = {"mega_copperajah"}
 }
 
 -- Gmax Copperajah
-local gmax_copperajah = {
-  name = "gmax_copperajah",
+local mega_copperajah = {
+  name = "mega_copperajah",
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 2},
   soul_pos = { x = 5, y = 5 },
@@ -914,7 +914,7 @@ local malamar={
   end,
   rarity = "poke_safari",
   cost = 8,
-  stage = "Stage 1",
+  stage = "One",
   ptype = "Dark",
   atlas = "Pokedex6-Maelmc",
   blueprint_compat = true,
@@ -962,6 +962,131 @@ local malamar={
   end
 }
 
+-- Binacle 688
+local binacle={
+  name = "binacle",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 10, y = 2},
+  config = {extra = {value = "7", retriggers = 1, retrigger_hand = 2, retrigger_held = 2, retriggered_hand = 0, retriggered_held = 0, retriggered_held_end = 0, rounds = 4}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    return {vars = {abbr.value, abbr.retrigger_hand, abbr.retrigger_held, abbr.retriggers, abbr.rounds}}
+  end,
+  rarity = 1,
+  cost = 5,
+  stage = "Base",
+  ptype = "Earth",
+  atlas = "Pokedex6-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+
+    if context.setting_blind then
+      card.ability.extra.retriggered_held_end = 0
+    end
+    if context.before then
+      card.ability.extra.retriggered_hand = 0
+      card.ability.extra.retriggered_held = 0
+    end
+
+    if context.repetition and context.cardarea == G.play and context.other_card:get_id() == 7 and card.ability.extra.retriggered_hand < card.ability.extra.retrigger_hand then
+      card.ability.extra.retriggered_hand = card.ability.extra.retriggered_hand + 1
+      return {
+          message = localize('k_again_ex'),
+          repetitions = card.ability.extra.retriggers,
+          card = card
+      }
+    end
+
+    if context.repetition and context.cardarea == G.hand and context.other_card:get_id() == 7 then
+      if context.end_of_round then
+        if card.ability.extra.retriggered_held_end < card.ability.extra.retrigger_held then
+          card.ability.extra.retriggered_held_end = card.ability.extra.retriggered_held_end + 1
+          return {
+            message = localize('k_again_ex'),
+            repetitions = card.ability.extra.retriggers,
+            card = card
+          }
+        end
+        
+      elseif card.ability.extra.retriggered_held < card.ability.extra.retrigger_held then
+        card.ability.extra.retriggered_held = card.ability.extra.retriggered_held + 1
+        return {
+            message = localize('k_again_ex'),
+            repetitions = card.ability.extra.retriggers,
+            card = card
+        }
+      end
+    end
+
+    return level_evo(self, card, context, "j_maelmc_barbaracle")
+  end,
+}
+
+-- Barbaracle 689
+local barbaracle={
+  name = "barbaracle",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 11, y = 2},
+  config = {extra = {value = "7", retriggers = 1, retrigger_hand = 7, retrigger_held = 7, retriggered_hand = 0, retriggered_held = 0, retriggered_held_end = 0}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    return {vars = {abbr.value, abbr.retrigger_hand, abbr.retrigger_held, abbr.retriggers}}
+  end,
+  rarity = "poke_safari",
+  cost = 6,
+  stage = "One",
+  ptype = "Earth",
+  atlas = "Pokedex6-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+
+    if context.setting_blind then
+      card.ability.extra.retriggered_held_end = 0
+    end
+    if context.before then
+      card.ability.extra.retriggered_hand = 0
+      card.ability.extra.retriggered_held = 0
+    end
+
+    if context.repetition and context.cardarea == G.play and card.ability.extra.retriggered_hand < card.ability.extra.retrigger_hand then
+      if (context.other_card:get_id() == 7) then
+        card.ability.extra.retriggered_hand = card.ability.extra.retriggered_hand + 1
+        return {
+            message = localize('k_again_ex'),
+            repetitions = card.ability.extra.retriggers,
+            card = card
+        }
+      end
+    end
+
+    if context.repetition and context.cardarea == G.hand and context.other_card:get_id() == 7 then
+      if context.end_of_round then
+        if card.ability.extra.retriggered_held_end < card.ability.extra.retrigger_held then
+          card.ability.extra.retriggered_held_end = card.ability.extra.retriggered_held_end + 1
+          return {
+            message = localize('k_again_ex'),
+            repetitions = card.ability.extra.retriggers,
+            card = card
+          }
+        end
+
+      elseif card.ability.extra.retriggered_held < card.ability.extra.retrigger_held then
+        card.ability.extra.retriggered_held = card.ability.extra.retriggered_held + 1
+        return {
+            message = localize('k_again_ex'),
+            repetitions = card.ability.extra.retriggers,
+            card = card
+        }
+      end
+    end
+
+  end,
+}
+
 return {name = "Maelmc's Jokers 1", 
-        list = {kecleon, lunatone, solrock, odd_keystone, spiritomb, inkay, malamar, cufant, copperajah, gmax_copperajah, glimmet, glimmora, gym_leader}, --spiritombl
+        list = {kecleon, lunatone, solrock, odd_keystone, spiritomb, inkay, malamar, binacle, barbaracle, cufant, copperajah, mega_copperajah, glimmet, glimmora, gym_leader}, --spiritombl
 }

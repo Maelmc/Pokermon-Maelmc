@@ -36,7 +36,7 @@ local copperajah = {
         {id = "j_poke_muk"},
         {id = "j_poke_hitmonchan"},
     },
-    --[[deck = {
+    deck = {
       cards = {{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},
                 {s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},
                 {s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},
@@ -49,8 +49,8 @@ local copperajah = {
                 {s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},{s='D',r='A'},
         },
       type = 'Challenge Deck',
-    },]]
---}]]
+    },
+}]]
 
 local spiritomb = {
     object_type = "Challenge",
@@ -102,15 +102,29 @@ local lunatone_solrock = {
     },
 }
 
-local inkay = {
+--[[local inkay = {
     object_type = "Challenge",
     key = "inkay",
     jokers = {
         {id = "j_maelmc_inkay"},
         --{id = "j_poke_raticate"},
     },
+}]]
+
+local binacle = {
+    object_type = "Challenge",
+    key = "binacle",
+    jokers = {
+        {id = "j_maelmc_binacle"},
+    },
+    deck = {
+      cards = {{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},
+                {s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},
+        },
+      type = 'Challenge Deck',
+    },
 }
 
 return {name = "Challenges", 
-        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon, lunatone_solrock, inkay}
+        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon, lunatone_solrock, binacle}
 }

@@ -6,7 +6,7 @@ return {
                 text = {
                     "Starts with",
                     "{C:item,T:j_maelmc_glimmet}Glimmet{} and {C:item,T:j_maelmc_cufant}Cufant{}.",
-                    "At the star of blind,",
+                    "At the start of blind,",
                     "add {C:purple,T:m_poke_hazard}1 Hazard{} per #2# cards"
                 }
             },
@@ -60,7 +60,7 @@ return {
                     "{C:inactive}(Currently {C:red}+#5#{C:inactive} Mult)",
                 }
             },
-            j_maelmc_gmax_copperajah = {
+            j_maelmc_mega_copperajah = {
                 name = "Gigantamax Copperajah",
                 text = {
                     "{C:purple}+#1# Hazards {C:inactive}(1 per #2# cards)",
@@ -166,6 +166,27 @@ return {
                     "{br:3}ERROR - CONTACT STEAK",
                     "Played face down cards give",
                     "{X:red,C:white}X#1#{} Mult when scored",
+                } 
+            },
+            j_maelmc_binacle = {
+                name = "Binacle",
+                text = {
+                    "Retriggers {C:attention}first #2# #1#s{} scored",
+                    "{C:attention}#4#{} additional time",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Retriggers {C:attention}first #3# #1#s{} held in hand",
+                    "{C:attention}#4#{} additional time",
+                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#5#{C:inactive,s:0.8} rounds)"
+                } 
+            },
+            j_maelmc_barbaracle = {
+                name = "Barbaracle",
+                text = {
+                    "Retriggers {C:attention}first #2# #1#s{} scored",
+                    "{C:attention}#4#{} additional time",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Retriggers {C:attention}first #3# #1#s{} held in hand",
+                    "{C:attention}#4#{} additional time",
                 } 
             },
         },

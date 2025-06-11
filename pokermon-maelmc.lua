@@ -122,7 +122,7 @@ SMODS.Atlas({
 
 --Required by the pokemon family function (right click on a pokemon joker)
 table.insert(family, {"glimmet", "glimmora"})
-table.insert(family, {"cufant","copperajah","gmax_copperajah"})
+table.insert(family, {"cufant","copperajah","mega_copperajah"})
 table.insert(family,{"odd_keystone","spiritomb"})
 table.insert(family,{
   {key = "gym_leader", form = "Grass"},
@@ -139,6 +139,7 @@ table.insert(family,{
   {key = "gym_leader", form = "Earth"},
 })
 table.insert(family,{"inkay","malamar"})
+table.insert(family,{"binacle","barbaracle"})
 
 maelmc_config = SMODS.current_mod.config
 -- Get mod path and load other files

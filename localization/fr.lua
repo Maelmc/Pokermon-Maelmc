@@ -60,7 +60,7 @@ return {
                     "{C:inactive}(Actuellement {C:red}+#5#{C:inactive} Multi.)",
                 }
             },
-            j_maelmc_gmax_copperajah = {
+            j_maelmc_mega_copperajah = {
                 name = "Pachyradjah Gigamax",
                 text = {
                     "{C:purple}+#1# Pièges {C:inactive}(1 pour chaque #2# cartes)",
