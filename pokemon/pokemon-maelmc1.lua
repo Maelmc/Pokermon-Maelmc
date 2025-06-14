@@ -712,14 +712,14 @@ local kecleon={
       local type = get_type(card)
       if type ~= card.ability.extra.current_type then
         card.ability.extra.current_type = type
-        card.ability.extra.form_change = card.ability.extra.form_change + 1
+        card.ability.extra.type_change = card.ability.extra.type_change + 1
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_color_change')})
       end
     end
     
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main then
-        local mult = card.ability.extra.mult_mod * card.ability.extra.form_change
+        local mult = card.ability.extra.mult_mod * card.ability.extra.type_change
         if mult > 0 then
           return {
             colour = G.C.MULT,
