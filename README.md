@@ -47,6 +47,20 @@ Kecleon was the first Pokémon with an ability that changes type (Color Change) 
 
 They mimic the effects of their matching Tarot and Stone cards. Simple yet effective idea, as turning cards to a specific suit makes Flushes easier to get, and it also synergizes well with 
 
+| Joker | Effect |
+| ------ | ------ |
+| Inkay | 50% of cards are drawn face down<br/>Gives +8 Mult when a face down card is scored |
+| Malamar | All cards are drawn face down<br/>Gives x1.5 Mult when a face down card is scored |
+
+Inkay and Malamar are all about being upside down. I figured it'd be an interesting mechanic to draw cards face down but getting a good boost in exchance. At first I had Inkay at x1.5 and Malamar at x2 but it proved to be a bit too good, so I nerfed it to be what it is now.
+
+| Joker | Effect |
+| ------ | ------ |
+| Binacle | Retriggers the first 2 7s in poker hand and cards held in hand |
+| Barbaracle | Retriggers the first 7 7s in poker hand and cards held in hand |
+
+One thing I noticed about Pokermon is the lack of options to retrigger cards held in hand. There's Mr. Mime that retriggers the first twice, Gigalith that retriggers Hazards and that's it. So I got this idea of Binacle and Barbaracle, retriggering 7s because Barbaracle is made of 7 entities.
+
 ## Decks
 
 | Name | Effect |
@@ -67,6 +81,8 @@ They are not challenges in the sense that they are not challenging. It's just a 
 | Gym Leader | Gym Leader | N/A |
 | Kecleon | Kecleon, Treasure Eatery | Dragon Scale, Poké Ball |
 | Lunatone & Solrock | Lunatone, Solrock, Venonat | The World, The Stars |
+| Inkay | Inkay, Raticate | N/A |
+| Binacle | Binacle | N/A |
 
 ## Localization
 

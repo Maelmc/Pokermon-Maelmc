@@ -75,7 +75,7 @@ return {
                 }
             },
             j_maelmc_odd_keystone = {
-                name = "Odd Keystone",
+                name = "Clé de Voûte",
                 text = {
                     "Ne fait rien...?",
                     "{C:inactive,s:0.8}(Évolue après avoir vendu un joker ou un consommable",
@@ -124,7 +124,7 @@ return {
                 } 
             },
             j_maelmc_lunatone = {
-                name = "Lunatone",
+                name = "Séléroc",
                 text = {
                     "{C:green}#1# chance sur #2#{} que chaque",
                     "carte dans la main de poker devienne {C:clubs}#3#",
@@ -134,7 +134,7 @@ return {
                 } 
             },
             j_maelmc_solrock = {
-                name = "Solrock",
+                name = "Solaroc",
                 text = {
                     "{C:green}#1# chance sur #2#{} que chaque",
                     "carte dans la main de poker devienne {C:hearts}#3#",
@@ -144,10 +144,53 @@ return {
                     "de l'améliorer en {C:attention}Carte Libre"
                 } 
             },
+            j_maelmc_inkay = {
+                name = "Sépiatop",
+                text = {
+                    "Les cartes ont {C:green}#1#%{} de chance",
+                    "d'être piochées face cachée",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Les cartes jouées face cachée",
+                    "donnent {C:red}+#2#{} Multi. quand elles scorent",
+                    "{C:inactive,s:0.8}(Évolue après avoir déclenché {C:attention,s:0.8}#3#{C:inactive,s:0.8} cartes face cachée)"
+                } 
+            },
+            j_maelmc_malamar = {
+                name = "Sépiatroce",
+                text = {
+                    "Tous les cartes sont",
+                    "piochées face cachée",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Les cartes jouées face cachée",
+                    "donnent {X:red,C:white}X#1#{} Multi.",
+                    "quand elles marquent des points"
+                } 
+            },
+            j_maelmc_binacle = {
+                name = "Opermine",
+                text = {
+                    "Redéclenche les {C:attention}#2# premiers #1#{}",
+                    "joués {C:attention}#4#{} fois",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Redéclenche les {C:attention}#3# premiers #1#{}",
+                    "en main {C:attention}#4#{} fois",
+                    "{C:inactive,s:0.8}(Évolue après {C:attention,s:0.8}#5#{C:inactive,s:0.8} manches)"
+                } 
+            },
+            j_maelmc_barbaracle = {
+                name = "Golgopathe",
+                text = {
+                    "Redéclenche les {C:attention}#2# premiers #1#{}",
+                    "joués {C:attention}#4#{} fois",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Redéclenche les {C:attention}#3# premiers #1#{}",
+                    "en main {C:attention}#4#{} fois",
+                } 
+            },
         },
         Other = {
             gym_leader_tag_pool = {
-                name = "Tag Pool",
+                name = "Pool de badges",
                 text = {
                     "{C:money}#1#",
                     "{C:money}#2#",
@@ -167,6 +210,8 @@ return {
             c_maelmc_gym_leader = "Champion d'Arène",
             c_maelmc_kecleon = "Kecleon",
             _maelmc_lunatone_solrock = "Séléroc & Solaroc",
+            c_maelmc_inkay = "Sépiatop",
+            c_maelmc_binacle = "Opermine",
         },
         dictionary = {
             maelmc_steel = "Acier!",

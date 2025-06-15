@@ -102,14 +102,14 @@ local lunatone_solrock = {
     },
 }
 
---[[local inkay = {
+local inkay = {
     object_type = "Challenge",
     key = "inkay",
     jokers = {
         {id = "j_maelmc_inkay"},
-        --{id = "j_poke_raticate"},
+        {id = "j_poke_raticate"},
     },
-}]]
+}
 
 local binacle = {
     object_type = "Challenge",
@@ -118,13 +118,24 @@ local binacle = {
         {id = "j_maelmc_binacle"},
     },
     deck = {
-      cards = {{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},{s='D',r='7',e='m_steel'},
-                {s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},{s='D',r='7',e='m_gold'},
+      cards = {{s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
         },
       type = 'Challenge Deck',
     },
 }
 
 return {name = "Challenges", 
-        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon, lunatone_solrock, binacle}
+        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon, lunatone_solrock, inkay, binacle}
 }

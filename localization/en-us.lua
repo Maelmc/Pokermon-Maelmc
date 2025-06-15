@@ -213,6 +213,8 @@ return {
             c_maelmc_gym_leader = "Gym Leader",
             c_maelmc_kecleon = "Kecleon",
             c_maelmc_lunatone_solrock = "Lunatone & Solrock",
+            c_maelmc_inkay = "Inkay",
+            c_maelmc_binacle = "Binacle",
         },
         dictionary = {
             maelmc_steel = "Steel!",
