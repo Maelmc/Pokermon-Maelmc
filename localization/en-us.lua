@@ -189,6 +189,47 @@ return {
                     "{C:attention}#4#{} additional time",
                 } 
             },
+            j_maelmc_ralts = {
+                name = "Ralts",
+                text = {
+                    "{C:red}+#1#{} Mult per {C:attention}hand level",
+                    "above 1 {C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "When {C:attention}Blind{} is selected, create #3#",
+                    "{C:planet}Planet{} card of one of",
+                    "your lowest level poker hand",
+                    "{C:green}#4# in #5#{} chance to create a",
+                    "{C:attention}High Priestess{} card instead",
+                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#6#{C:inactive,s:0.8} rounds)",
+                } 
+            },
+            j_maelmc_kirlia = {
+                name = "Kirlia",
+                text = {
+                    "{C:red}+#1#{} Mult per {C:attention}hand level",
+                    "above 1 {C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "When {C:attention}Blind{} is selected, create #3#",
+                    "{C:dark_edition}Negative{} {C:planet}Planet{} card of one of",
+                    "your lowest level poker hand",
+                    "{C:green}#4# in #5#{} chance to create a",
+                    "{C:dark_edition}Negative {C:attention}High Priestess{} card instead",
+                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#6#{C:inactive,s:0.8} rounds)",
+                } 
+            },
+            j_maelmc_gardevoir = {
+                name = "Gardevoir",
+                text = {
+                    "{X:red,C:white}X#1#{} Mult per {C:attention}hand level",
+                    "above 1 {C:inactive}(Currently {X:red,C:white}X#2#{C:inactive} Mult)",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "When {C:attention}Blind{} is selected, create #3#",
+                    "{C:dark_edition}Negative{} {C:planet}Planet{} card of one of",
+                    "your lowest level poker hand",
+                    "{C:green}#4# in #5#{} chance to create a",
+                    "{C:dark_edition}Negative Black Hole{} card instead",
+                } 
+            },
         },
 
         Other = {
@@ -215,6 +256,7 @@ return {
             c_maelmc_lunatone_solrock = "Lunatone & Solrock",
             c_maelmc_inkay = "Inkay",
             c_maelmc_binacle = "Binacle",
+            c_maelmc_ralts = "Ralts",
         },
         dictionary = {
             maelmc_steel = "Steel!",

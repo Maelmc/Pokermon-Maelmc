@@ -115,6 +115,8 @@ local binacle = {
     object_type = "Challenge",
     key = "binacle",
     jokers = {
+        {id = "j_poke_mankey"},
+        {id = "j_poke_oddish"},
         {id = "j_maelmc_binacle"},
     },
     deck = {
@@ -136,6 +138,17 @@ local binacle = {
     },
 }
 
+local ralts = {
+    object_type = "Challenge",
+    key = "ralts",
+    jokers = {
+        {id = "j_poke_sentret"},
+        {id = "j_poke_natu"},
+        {id = "j_maelmc_ralts"},
+        {id = "j_poke_elgyem"},
+    },
+}
+
 return {name = "Challenges", 
-        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon, lunatone_solrock, inkay, binacle}
+        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon, lunatone_solrock, inkay, binacle, ralts}
 }

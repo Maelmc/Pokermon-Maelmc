@@ -991,7 +991,9 @@ local binacle={
     end
 
     if context.repetition and context.cardarea == G.play and context.other_card:get_id() == 7 and card.ability.extra.retriggered_hand < card.ability.extra.retrigger_hand then
-      card.ability.extra.retriggered_hand = card.ability.extra.retriggered_hand + 1
+      if not context.blueprint then
+        card.ability.extra.retriggered_hand = card.ability.extra.retriggered_hand + 1
+      end
       return {
           message = localize('k_again_ex'),
           repetitions = card.ability.extra.retriggers,
@@ -1002,7 +1004,9 @@ local binacle={
     if context.repetition and context.cardarea == G.hand and context.other_card:get_id() == 7 then
       if context.end_of_round then
         if card.ability.extra.retriggered_held_end < card.ability.extra.retrigger_held then
-          card.ability.extra.retriggered_held_end = card.ability.extra.retriggered_held_end + 1
+          if not context.blueprint then
+            card.ability.extra.retriggered_held_end = card.ability.extra.retriggered_held_end + 1
+          end
           return {
             message = localize('k_again_ex'),
             repetitions = card.ability.extra.retriggers,
@@ -1011,7 +1015,9 @@ local binacle={
         end
         
       elseif card.ability.extra.retriggered_held < card.ability.extra.retrigger_held then
-        card.ability.extra.retriggered_held = card.ability.extra.retriggered_held + 1
+        if not context.blueprint then
+          card.ability.extra.retriggered_held = card.ability.extra.retriggered_held + 1
+        end
         return {
             message = localize('k_again_ex'),
             repetitions = card.ability.extra.retriggers,
@@ -1054,7 +1060,9 @@ local barbaracle={
 
     if context.repetition and context.cardarea == G.play and card.ability.extra.retriggered_hand < card.ability.extra.retrigger_hand then
       if (context.other_card:get_id() == 7) then
-        card.ability.extra.retriggered_hand = card.ability.extra.retriggered_hand + 1
+        if not context.blueprint then
+          card.ability.extra.retriggered_hand = card.ability.extra.retriggered_hand + 1
+        end
         return {
             message = localize('k_again_ex'),
             repetitions = card.ability.extra.retriggers,
@@ -1066,7 +1074,9 @@ local barbaracle={
     if context.repetition and context.cardarea == G.hand and context.other_card:get_id() == 7 then
       if context.end_of_round then
         if card.ability.extra.retriggered_held_end < card.ability.extra.retrigger_held then
-          card.ability.extra.retriggered_held_end = card.ability.extra.retriggered_held_end + 1
+          if not context.blueprint then
+            card.ability.extra.retriggered_held_end = card.ability.extra.retriggered_held_end + 1
+          end
           return {
             message = localize('k_again_ex'),
             repetitions = card.ability.extra.retriggers,
@@ -1075,7 +1085,9 @@ local barbaracle={
         end
 
       elseif card.ability.extra.retriggered_held < card.ability.extra.retrigger_held then
-        card.ability.extra.retriggered_held = card.ability.extra.retriggered_held + 1
+        if not context.blueprint then
+          card.ability.extra.retriggered_held = card.ability.extra.retriggered_held + 1
+        end
         return {
             message = localize('k_again_ex'),
             repetitions = card.ability.extra.retriggers,
@@ -1087,6 +1099,289 @@ local barbaracle={
   end,
 }
 
-return {name = "Maelmc's Jokers 1", 
-        list = {kecleon, lunatone, solrock, odd_keystone, spiritomb, inkay, malamar, binacle, barbaracle, cufant, copperajah, mega_copperajah, glimmet, glimmora, gym_leader}, --spiritombl
+-- Ralts 280
+local ralts={
+  name = "ralts",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 8, y = 2},
+  config = {extra = {mult_mod = 1, planet_amount = 1, priestress_odds = 8, rounds = 4}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"Foxthor, One Punch Idiot"}}
+    local mult = 0
+    for k, v in pairs(G.GAME.hands) do
+      mult = mult + (v.level - 1) * card.ability.extra.mult_mod
+    end
+    return {vars = {card.ability.extra.mult_mod, mult, card.ability.extra.planet_amount, ''..(G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.priestress_odds, card.ability.extra.rounds}}
+  end,
+  rarity = 2,
+  cost = 6,
+  stage = "Base",
+  ptype = "Psychic",
+  atlas = "Pokedex3-Maelmc",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  calculate = function(self, card, context)
+    if context.setting_blind and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+      if (pseudorandom('ralts') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.priestress_odds) then
+        local _card = create_card("Tarot", G.consumeables, nil, nil, nil, nil, "c_high_priestess")
+        _card:add_to_deck()
+        G.consumeables:emplace(_card)
+        card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize("k_plus_tarot"), colour = G.C.PURPLE})
+      else
+        for _ = 1,card.ability.extra.planet_amount do
+          local temp_hands = {}
+          local min_level = nil
+          for k, v in pairs(G.GAME.hands) do
+            if v.visible then
+              local hand = v
+              hand.handname = k
+              if next(temp_hands) == nil then
+                table.insert(temp_hands, hand)
+                min_level = hand.level
+              elseif min_level == hand.level then
+                table.insert(temp_hands, hand)
+              elseif min_level > hand.level then
+                temp_hands = {}
+                table.insert(temp_hands, hand)
+                min_level = hand.level
+              end
+            end
+          end
+          
+          local _hand =  pseudorandom_element(temp_hands, pseudoseed('ralts'))
+          local _planet = nil
+          for x, y in pairs(G.P_CENTER_POOLS.Planet) do
+            if y.config.hand_type == _hand.handname then
+              _planet = y.key
+              break
+            end
+          end
+
+          local _card = create_card('Planet', G.consumeables, nil, nil, nil, nil, _planet)
+          _card:add_to_deck()
+          G.consumeables:emplace(_card)
+          card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
+        end
+      end
+    end
+
+    if context.cardarea == G.jokers and context.scoring_hand then
+      if context.joker_main then
+        local mult = 0
+        for _, v in pairs(G.GAME.hands) do
+          mult = mult + (v.level - 1) * card.ability.extra.mult_mod
+        end
+        if mult > 0 then
+          return {
+            colour = G.C.MULT,
+            mult = mult,
+            card = card
+          }
+        end
+      end
+    end
+
+    return level_evo(self, card, context, "j_maelmc_kirlia")
+  end,
+}
+
+-- Kirlia 281
+local kirlia={
+  name = "kirlia",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 9, y = 2},
+  config = {extra = {mult_mod = 2, planet_amount = 1, priestress_odds = 4, rounds = 4}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"Foxthor, One Punch Idiot"}}
+    local mult = 0
+    for k, v in pairs(G.GAME.hands) do
+      mult = mult + (v.level - 1) * card.ability.extra.mult_mod
+    end
+    return {vars = {card.ability.extra.mult_mod, mult, card.ability.extra.planet_amount, ''..(G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.priestress_odds, card.ability.extra.rounds}}
+  end,
+  rarity = "poke_safari",
+  cost = 8,
+  stage = "One",
+  ptype = "Psychic",
+  atlas = "Pokedex3-Maelmc",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  calculate = function(self, card, context)
+    if context.setting_blind then
+      local edition = {negative = true}
+
+      if (pseudorandom('kirlia') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.priestress_odds) then
+        local _card = create_card("Tarot", G.consumeables, nil, nil, nil, nil, "c_high_priestess")
+        _card:set_edition(edition, true)
+        _card:add_to_deck()
+        G.consumeables:emplace(_card)
+        card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize("k_plus_tarot"), colour = G.C.PURPLE})
+
+      else
+        for _ = 1,card.ability.extra.planet_amount do
+          local temp_hands = {}
+          local min_level = nil
+          for k, v in pairs(G.GAME.hands) do
+            if v.visible then
+              local hand = v
+              hand.handname = k
+              if next(temp_hands) == nil then
+                table.insert(temp_hands, hand)
+                min_level = hand.level
+              elseif min_level == hand.level then
+                table.insert(temp_hands, hand)
+              elseif min_level > hand.level then
+                temp_hands = {}
+                table.insert(temp_hands, hand)
+                min_level = hand.level
+              end
+            end
+          end
+          
+          local _hand =  pseudorandom_element(temp_hands, pseudoseed('kirlia'))
+          local _planet = nil
+          for x, y in pairs(G.P_CENTER_POOLS.Planet) do
+            if y.config.hand_type == _hand.handname then
+              _planet = y.key
+              break
+            end
+          end
+
+          local _card = create_card('Planet', G.consumeables, nil, nil, nil, nil, _planet)
+          _card:set_edition(edition, true)
+          _card:add_to_deck()
+          G.consumeables:emplace(_card)
+          card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
+        end
+      end
+    end
+
+    if context.cardarea == G.jokers and context.scoring_hand then
+      if context.joker_main then
+        local mult = 0
+        for _, v in pairs(G.GAME.hands) do
+          mult = mult + (v.level - 1) * card.ability.extra.mult_mod
+        end
+        if mult > 0 then
+          return {
+            colour = G.C.MULT,
+            mult = mult,
+            card = card
+          }
+        end
+      end
+    end
+
+    return level_evo(self, card, context, "j_maelmc_gardevoir")
+  end,
+}
+
+-- Gardevoir 282
+local gardevoir={
+  name = "gardevoir",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 0, y = 3},
+  config = {extra = {xmult_mod = 0.05, planet_amount = 2, blackhole_odds = 8}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"Foxthor, One Punch Idiot"}}
+    local xmult = 1
+    for k, v in pairs(G.GAME.hands) do
+      xmult = xmult + (v.level - 1) * card.ability.extra.xmult_mod
+    end
+    return {vars = {card.ability.extra.xmult_mod, xmult, card.ability.extra.planet_amount, ''..(G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.blackhole_odds}}
+  end,
+  rarity = "poke_safari",
+  cost = 10,
+  stage = "Two",
+  ptype = "Psychic",
+  atlas = "Pokedex3-Maelmc",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  calculate = function(self, card, context)
+    if context.setting_blind then
+      local edition = {negative = true}
+
+      if (pseudorandom('gardevoir') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.blackhole_odds) then
+        local _card = create_card("Spectral", G.consumeables, nil, nil, nil, nil, "c_black_hole")
+        _card:set_edition(edition, true)
+        _card:add_to_deck()
+        G.consumeables:emplace(_card)
+        card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
+
+      else
+        for _ = 1,card.ability.extra.planet_amount do
+          local temp_hands = {}
+          local min_level = nil
+          for k, v in pairs(G.GAME.hands) do
+            if v.visible then
+              local hand = v
+              hand.handname = k
+              if next(temp_hands) == nil then
+                table.insert(temp_hands, hand)
+                min_level = hand.level
+              elseif min_level == hand.level then
+                table.insert(temp_hands, hand)
+              elseif min_level > hand.level then
+                temp_hands = {}
+                table.insert(temp_hands, hand)
+                min_level = hand.level
+              end
+            end
+          end
+          
+          local _hand =  pseudorandom_element(temp_hands, pseudoseed('kirlia'))
+          local _planet = nil
+          for x, y in pairs(G.P_CENTER_POOLS.Planet) do
+            if y.config.hand_type == _hand.handname then
+              _planet = y.key
+              break
+            end
+          end
+
+          local _card = create_card('Planet', G.consumeables, nil, nil, nil, nil, _planet)
+          _card:set_edition(edition, true)
+          _card:add_to_deck()
+          G.consumeables:emplace(_card)
+          card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
+        end      
+      end
+    end
+
+    if context.cardarea == G.jokers and context.scoring_hand then
+      if context.joker_main then
+        local xmult = 1
+        for _, v in pairs(G.GAME.hands) do
+          xmult = xmult + (v.level - 1) * card.ability.extra.xmult_mod
+        end
+        if xmult > 1 then
+          return {
+            colour = G.C.MULT,
+            xmult = xmult,
+            card = card
+          }
+        end
+      end
+    end
+  end,
+}
+
+return {
+  name = "Maelmc's Jokers 1",
+  list = {
+    ralts, kirlia, gardevoir,
+    kecleon,
+    lunatone, solrock,
+    odd_keystone, spiritomb, --spiritombl
+    inkay, malamar,
+    binacle, barbaracle,
+    cufant, copperajah, mega_copperajah,
+    glimmet, glimmora,
+    gym_leader
+  },
 }

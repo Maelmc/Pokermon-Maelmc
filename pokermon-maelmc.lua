@@ -140,6 +140,7 @@ table.insert(family,{
 })
 table.insert(family,{"inkay","malamar"})
 table.insert(family,{"binacle","barbaracle"})
+table.insert(family,{"ralts","kirlia"})
 
 maelmc_config = SMODS.current_mod.config
 -- Get mod path and load other files
