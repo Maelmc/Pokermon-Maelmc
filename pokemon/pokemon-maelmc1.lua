@@ -1107,6 +1107,7 @@ local ralts={
   config = {extra = {mult_mod = 1, planet_amount = 1, priestress_odds = 8, rounds = 4}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_high_priestess'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"Foxthor, One Punch Idiot"}}
     local mult = 0
     for k, v in pairs(G.GAME.hands) do
@@ -1195,6 +1196,7 @@ local kirlia={
   config = {extra = {mult_mod = 2, planet_amount = 1, priestress_odds = 4, rounds = 4}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_black_hole'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"Foxthor, One Punch Idiot"}}
     local mult = 0
     for k, v in pairs(G.GAME.hands) do
@@ -1288,6 +1290,7 @@ local gardevoir={
   config = {extra = {xmult_mod = 0.05, planet_amount = 2, blackhole_odds = 8}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_black_hole'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"Foxthor, One Punch Idiot"}}
     local xmult = 1
     for k, v in pairs(G.GAME.hands) do
@@ -1369,12 +1372,52 @@ local gardevoir={
       end
     end
   end,
+  megas = {"mega_gardevoir"}
+}
+
+local mega_gardevoir={
+  name = "mega_gardevoir",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 3, y = 3},
+  soul_pos = { x = 4, y = 3 },
+  config = {extra = {blackhole_amount = 2}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return {vars = {card.ability.extra.blackhole_amount}}
+  end,
+  rarity = "poke_mega",
+  cost = 12,
+  stage = "Mega",
+  ptype = "Psychic",
+  atlas = "Megas-Maelmc",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  calculate = function(self, card, context)
+    --[[if context.setting_blind then
+      return {
+        message = poke_evolve(card, "j_maelmc_gardevoir"),
+      }
+    end]]
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    if not from_debuff then
+      for _ = 1,card.ability.extra.blackhole_amount do
+        local _card = create_card("Spectral", G.consumeables, nil, nil, nil, nil, "c_black_hole")
+        local edition = {negative = true}
+        _card:set_edition(edition, true)
+        _card:add_to_deck()
+        G.consumeables:emplace(_card)
+        card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
+      end
+    end
+  end,
 }
 
 return {
   name = "Maelmc's Jokers 1",
   list = {
-    ralts, kirlia, gardevoir,
+    ralts, kirlia, gardevoir, mega_gardevoir,
     kecleon,
     lunatone, solrock,
     odd_keystone, spiritomb, --spiritombl

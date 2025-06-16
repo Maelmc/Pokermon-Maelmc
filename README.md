@@ -82,7 +82,7 @@ They are not challenges in the sense that they are not challenging. It's just a 
 | Kecleon | Kecleon, Treasure Eatery | Dragon Scale, Poké Ball |
 | Lunatone & Solrock | Lunatone, Solrock, Venonat | The World, The Stars |
 | Inkay | Inkay, Raticate | N/A |
-| Binacle | Binacle | N/A |
+| Binacle | Mankey, Oddish, Binacle | N/A |
 
 ## Localization
 

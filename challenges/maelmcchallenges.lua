@@ -146,6 +146,10 @@ local ralts = {
         {id = "j_poke_natu"},
         {id = "j_maelmc_ralts"},
         {id = "j_poke_elgyem"},
+        {id = "j_maelmc_gardevoir"},
+    },
+    consumeables = {
+        {id = "c_poke_megastone"},
     },
 }
 

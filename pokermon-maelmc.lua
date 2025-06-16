@@ -8,6 +8,28 @@ else
   sprite()
 end]]
 
+--Required by the pokemon family function (right click on a pokemon joker)
+table.insert(family, {"glimmet", "glimmora"})
+table.insert(family, {"cufant","copperajah","mega_copperajah"})
+table.insert(family,{"odd_keystone","spiritomb"})
+table.insert(family,{
+  {key = "gym_leader", form = "Grass"},
+  {key = "gym_leader", form = "Fire"},
+  {key = "gym_leader", form = "Water"},
+  {key = "gym_leader", form = "Lightning"},
+  {key = "gym_leader", form = "Psychic"},
+  {key = "gym_leader", form = "Fighting"},
+  {key = "gym_leader", form = "Colorless"},
+  {key = "gym_leader", form = "Darkness"},
+  {key = "gym_leader", form = "Metal"},
+  {key = "gym_leader", form = "Fairy"},
+  {key = "gym_leader", form = "Dragon"},
+  {key = "gym_leader", form = "Earth"},
+})
+table.insert(family,{"inkay","malamar"})
+table.insert(family,{"binacle","barbaracle"})
+table.insert(family,{"ralts","kirlia","gardevoir","mega_gardevoir"})
+
 SMODS.Atlas({
     key = "modicon",
     path = "icon.png",
@@ -114,33 +136,25 @@ SMODS.Atlas({
  }):register()
 
  SMODS.Atlas({
+   key = "Megas-Maelmc",
+   path = "Megas.png",
+   px = 71,
+   py = 95
+ }):register()
+
+ SMODS.Atlas({
+   key = "shiny_Megas-Maelmc",
+   path = "ShinyMegas.png",
+   px = 71,
+   py = 95
+ }):register()
+
+ SMODS.Atlas({
     key = "pokedeck-Maelmc",
     path = "pokedeck.png",
     px = 71,
     py = 95,
 }):register()
-
---Required by the pokemon family function (right click on a pokemon joker)
-table.insert(family, {"glimmet", "glimmora"})
-table.insert(family, {"cufant","copperajah","mega_copperajah"})
-table.insert(family,{"odd_keystone","spiritomb"})
-table.insert(family,{
-  {key = "gym_leader", form = "Grass"},
-  {key = "gym_leader", form = "Fire"},
-  {key = "gym_leader", form = "Water"},
-  {key = "gym_leader", form = "Lightning"},
-  {key = "gym_leader", form = "Psychic"},
-  {key = "gym_leader", form = "Fighting"},
-  {key = "gym_leader", form = "Colorless"},
-  {key = "gym_leader", form = "Darkness"},
-  {key = "gym_leader", form = "Metal"},
-  {key = "gym_leader", form = "Fairy"},
-  {key = "gym_leader", form = "Dragon"},
-  {key = "gym_leader", form = "Earth"},
-})
-table.insert(family,{"inkay","malamar"})
-table.insert(family,{"binacle","barbaracle"})
-table.insert(family,{"ralts","kirlia"})
 
 maelmc_config = SMODS.current_mod.config
 -- Get mod path and load other files

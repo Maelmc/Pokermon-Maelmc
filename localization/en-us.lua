@@ -230,6 +230,15 @@ return {
                     "{C:dark_edition}Negative Black Hole{} card instead",
                 } 
             },
+            j_maelmc_mega_gardevoir = {
+                name = "Mega Gardevoir",
+                text = {
+                    "{C:attention}Holding 2{} {C:spectral}Negative Black Hole{}",
+                    "{C:inactive,s:0.8}Devolve and evolve again to get more",
+                    --"{br:3}ERROR - CONTACT STEAK",
+                    --"{C:attention}Devolves{} when {C:attention}Blind{} is selected",
+                } 
+            },
         },
 
         Other = {
