@@ -5,7 +5,7 @@ return {
                 name = "Hazard Deck",
                 text = {
                     "Start run with",
-                    "{C:item,T:j_maelmc_glimmet}Glimmet{} and {C:item,T:j_maelmc_cufant}Cufant{}.",
+                    "{C:item,T:j_maelmc_glimmet}Glimmet{}.",
                     "At the start of blind,",
                     "add {C:purple,T:m_poke_hazard}1 Hazard{} per #2# cards"
                 }
@@ -322,6 +322,7 @@ return {
             c_maelmc_inkay = "Inkay",
             c_maelmc_binacle = "Binacle",
             c_maelmc_ralts = "Ralts",
+            c_maelmc_gible = "Gible",
         },
         dictionary = {
             maelmc_steel = "Steel!",

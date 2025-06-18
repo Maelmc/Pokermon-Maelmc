@@ -138,6 +138,20 @@ local binacle = {
     },
 }
 
+local ralts = {
+    object_type = "Challenge",
+    key = "ralts",
+    jokers = {
+        {id = "j_poke_sentret"},
+        {id = "j_poke_natu"},
+        {id = "j_maelmc_ralts"},
+        {id = "j_poke_elgyem"},
+    },
+    consumeables = {
+        {id = "c_poke_megastone"},
+    },
+}
+
 local gible = {
     object_type = "Challenge",
     key = "gible",
@@ -160,17 +174,6 @@ local gible = {
                 {s='S',r='8'},{s='H',r='8'},{s='C',r='8'},{s='D',r='8'},
         },
       type = 'Challenge Deck',
-    },
-}
-
-local ralts = {
-    object_type = "Challenge",
-    key = "ralts",
-    jokers = {
-        {id = "j_poke_sentret"},
-        {id = "j_poke_natu"},
-        {id = "j_maelmc_ralts"},
-        {id = "j_poke_elgyem"},
     },
     consumeables = {
         {id = "c_poke_megastone"},

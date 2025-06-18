@@ -61,17 +61,35 @@ Inkay and Malamar are all about being upside down. I figured it'd be an interest
 
 One thing I noticed about Pokermon is the lack of options to retrigger cards held in hand. There's Mr. Mime that retriggers the first twice, Gigalith that retriggers Hazards and that's it. So I got this idea of Binacle and Barbaracle, retriggering 7s because Barbaracle is made of 7 entities.
 
+| Joker | Effect |
+| ------ | ------ |
+| Ralts | +1 Mult per hand level above 1<br/>When Blind is selected, creates a Planet card of your lowest level hand.<br/>1 in 8 chance to create a High Priestess card instead |
+| Kirlia | +2 Mult per hand level above 1<br/>When Blind is selected, creates a Negative Planet card of your lowest level hand.<br/>1 in 4 chance to create a Negative High Priestess card instead |
+| Gardevoir | X0.05 Mult per hand level above 1<br/>When Blind is selected, creates 2 Negative Planet cards of your lowest level hand.<br/>1 in 8 chance to create a Negative Black Hole card instead |
+| Mega Gardevoir | Holding 2 Negative Black Hole |
+
+A family of Joker that encourages raising all hand levels. It also generates a bunch of negative consumables for cards that scale base on that. Specifically, Mega Gardevoir generates 2 Black Hole for each time you Mega it, so the idea is to mega, unmega, mega again etc etc to scale Gardevoir itself very quickly as long as you don't require the Mult Gardevoir is giving.
+
+| Joker | Effect |
+| ------ | ------ |
+| Gible | If played hand is a Pair, retriggers all cards held in hand of the same rank as the Pair and they give +1 Mult each |
+| Gabit | +1 hand size<br/>If played hand is a Pair, retriggers all cards held in hand and they give +2 Mult each<br/>Cards held in hand of the same rank as the Pair have a 1 in 4 chance to retrigger twice instead |
+| Garchomp | +2 hand size<br/>If played hand is a Pair, retriggers all cards held in hand and they give +4 Mult each<br/>Cards held in hand of the same rank as the Pair retrigger twice instead |
+| Mega Garchomp | +4 hand size<br/>If played hand is a Pair, retriggers all cards held in hand of the same rank as the Pair and they give X1.5 Mult each|
+
+All pseudo legendaries are based on a specific hand. On the Pokermon Discord server, I found a cool idea with the Garchomp line retriggering cards held in hand if hand played is a pair, so that's what I based this family on, with some adjustements compared to the original idea.
+
 ## Decks
 
 | Name | Effect |
 | ------ | ------ |
-| Hazard Stack | Starts with Glimmet and Cufant<br/>Adds +1 Hazard per 10 cards in deck at the start of blind |
+| Hazard Stack | Starts with Glimmet<br/>Adds +1 Hazard per 10 cards in deck at the start of blind |
 
 Hazard Stack is an hazard-focused deck that would get more hazards in general than any other deck. Of course, it starts with Glimmet and Cufant so you get to try them a bit. You can also just sell one of the two at the start if you want to try one specifically.
 
 ## Challenges
 
-They are not challenges in the sense that they are not challenging. It's just a way to test the different jokers I created.
+They are not challenges in the sense that they are not challenging. It's just a way to test the different jokers I created. Some might be a bit weird since I use challenges to test the Jokers.
 
 | Name | Starting jokers | Starting consumables |
 | ------ | ------ | ------ |
@@ -83,7 +101,9 @@ They are not challenges in the sense that they are not challenging. It's just a 
 | Lunatone & Solrock | Lunatone, Solrock, Venonat | The World, The Stars |
 | Inkay | Inkay, Raticate | N/A |
 | Binacle | Mankey, Oddish, Binacle | N/A |
+| Ralts | Sentret, Natu, Ralts, Elgyem | Mega Stone |
+| Gible | Gible | Mega Stone |
 
 ## Localization
 
-The extension is fully translated in french. L'extension est traduite en français en son intégralité.
+The extension is partially translated in french. L'extension est partiellement traduite en français.
