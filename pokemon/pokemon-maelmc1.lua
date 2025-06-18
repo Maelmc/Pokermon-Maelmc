@@ -604,18 +604,13 @@ local gym_leader={
   blueprint_compat = true,
   calculate = function(self, card, context)
     
-    if context.setting_blind and context.blind.boss then
+    if context.setting_blind and context.blind.boss and not context.blueprint then
       card.ability.extra.boss = true
     end
 
     if context.end_of_round and card.ability.extra.boss then
-      G.E_MANAGER:add_event(Event({
-        trigger = 'before',
-        func = function() card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_gym_beaten')}); return true
-        end
-      }))
       local tag = ''
-      local tag_choice = pseudorandom('sylveon')
+      local tag_choice = pseudorandom('gymleader')
       if tag_choice < 1/6 then
         tag = 'tag_handy'
       elseif tag_choice < 2/6 then
@@ -629,32 +624,25 @@ local gym_leader={
       else
         tag = 'tag_rare'
       end
-      G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        func = (function()
-            add_tag(Tag(tag))
-            play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
-            play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
-            return true
-        end)
-      }))
+      add_tag(Tag(tag))
+      play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
+      play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
 
       if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-        G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-        G.E_MANAGER:add_event(Event({
-          trigger = 'after',
-          func = (function()
-              local energy_name = string.lower("c_poke_"..card.ability.extra.form.."_energy")
-              local energy = create_card("Energy", G.pack_cards, nil, nil, nil, nil, energy_name, nil)
-              energy:add_to_deck()
-              G.consumeables:emplace(energy)
-              G.GAME.consumeable_buffer = 0
-            return true
-        end)}))
+        local energy_name = string.lower("c_poke_"..card.ability.extra.form.."_energy")
+        local energy = create_card("Energy", G.pack_cards, nil, nil, nil, nil, energy_name, nil)
+        energy:add_to_deck()
+        G.consumeables:emplace(energy)
+        card_eval_status_text(energy, 'extra', nil, nil, nil, {message = localize("poke_plus_energy"), colour = G.ARGS.LOC_COLOURS["pink"]})
       end
 
-      card.ability.extra.boss = false
-      return true
+      if not context.blueprint then
+        card.ability.extra.boss = false
+      end
+
+      return {
+        message = localize('maelmc_gym_beaten')
+      }
     end
   end,
   set_ability = function(self, card, initial, delay_sprites)
