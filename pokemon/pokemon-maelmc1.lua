@@ -729,7 +729,9 @@ local kecleon={
         end
       end
     end
-
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    card.ability.extra.current_type = get_type(card)
   end,
 }
 
@@ -1287,16 +1289,16 @@ local gardevoir={
   name = "gardevoir",
   poke_custom_prefix = "maelmc",
   pos = {x = 0, y = 3},
-  config = {extra = {xmult_mod = 0.05, planet_amount = 2, blackhole_odds = 8}},
+  config = {extra = {Xmult_mod = 0.05, planet_amount = 2, blackhole_odds = 8}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_black_hole'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"Foxthor, One Punch Idiot"}}
     local xmult = 1
     for k, v in pairs(G.GAME.hands) do
-      xmult = xmult + (v.level - 1) * card.ability.extra.xmult_mod
+      xmult = xmult + (v.level - 1) * card.ability.extra.Xmult_mod
     end
-    return {vars = {card.ability.extra.xmult_mod, xmult, card.ability.extra.planet_amount, ''..(G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.blackhole_odds}}
+    return {vars = {card.ability.extra.Xmult_mod, xmult, card.ability.extra.planet_amount, ''..(G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.blackhole_odds}}
   end,
   rarity = "poke_safari",
   cost = 10,
@@ -1360,7 +1362,7 @@ local gardevoir={
       if context.joker_main then
         local xmult = 1
         for _, v in pairs(G.GAME.hands) do
-          xmult = xmult + (v.level - 1) * card.ability.extra.xmult_mod
+          xmult = xmult + (v.level - 1) * card.ability.extra.Xmult_mod
         end
         if xmult > 1 then
           return {
@@ -1414,6 +1416,252 @@ local mega_gardevoir={
   end,
 }
 
+-- Gible 443
+local gible={
+  name = "gible",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 0, y = 4},
+  config = {extra = {retriggers = 1, mult = 1, retriggered = 0}, evo_rqmt = 16},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    return {vars = {abbr.retriggers, abbr.mult, math.max(0, self.config.evo_rqmt - abbr.retriggered)}}
+  end,
+  rarity = 2,
+  cost = 6,
+  stage = "Base",
+  ptype = "Dragon",
+  atlas = "Pokedex4-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+
+    if context.individual and context.cardarea == G.hand and context.scoring_name == "Pair" then
+      local pair_of = nil
+      for _, v in pairs(context.scoring_hand) do
+        if not SMODS.has_enhancement(v, "m_stone") then
+          pair_of = v:get_id()
+        end
+      end
+
+      if context.other_card:get_id() == pair_of then
+        return {
+          colour = G.C.MULT,
+          mult = card.ability.extra.mult,
+          card = card
+        }
+      end
+    end
+
+    if context.repetition and context.cardarea == G.hand and context.scoring_name == "Pair" then
+      local pair_of = nil
+      for _, v in pairs(context.scoring_hand) do
+        if not SMODS.has_enhancement(v, "m_stone") then
+          pair_of = v:get_id()
+        end
+      end
+
+      if context.other_card:get_id() == pair_of then
+        card.ability.extra.retriggered = card.ability.extra.retriggered + card.ability.extra.retriggers
+        return {
+          message = localize('k_again_ex'),
+          repetitions = card.ability.extra.retriggers,
+          card = card
+        }
+      end
+    end
+
+    return scaling_evo(self, card, context, "j_maelmc_gabite", card.ability.extra.retriggered, self.config.evo_rqmt)
+  end,
+}
+
+-- Gabite 444
+local gabite={
+  name = "gabite",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 1, y = 4},
+  config = {extra = {retriggers = 1, retriggers_if_rank = 2, retrigger_odds = 4, mult = 2, h_size = 1, retriggered = 0}, evo_rqmt = 32},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    return {vars = {abbr.h_size, abbr.retriggers, abbr.mult, ''..(G.GAME and G.GAME.probabilities.normal or 1), abbr.retrigger_odds, abbr.retriggers_if_rank, math.max(0, self.config.evo_rqmt - abbr.retriggered)}}
+  end,
+  rarity = "poke_safari",
+  cost = 8,
+  stage = "One",
+  ptype = "Dragon",
+  atlas = "Pokedex4-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+
+    if context.individual and context.cardarea == G.hand and context.scoring_name == "Pair" then
+      return {
+        colour = G.C.MULT,
+        mult = card.ability.extra.mult,
+        card = card
+      }
+    end
+
+    if context.repetition and context.cardarea == G.hand and context.scoring_name == "Pair" then
+      local pair_of = nil
+      for _, v in pairs(context.scoring_hand) do
+        if not SMODS.has_enhancement(v, "m_stone") then
+          pair_of = v:get_id()
+        end
+      end
+
+      if context.other_card:get_id() == pair_of and (pseudorandom('gabite') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.retrigger_odds) then
+        card.ability.extra.retriggered = card.ability.extra.retriggered + card.ability.extra.retriggers_if_rank
+        return {
+          message = localize('k_again_ex'),
+          repetitions = card.ability.extra.retriggers_if_rank,
+          card = card
+        }
+      else
+        card.ability.extra.retriggered = card.ability.extra.retriggered + card.ability.extra.retriggers
+        return {
+          message = localize('k_again_ex'),
+          repetitions = card.ability.extra.retriggers,
+          card = card
+        }
+      end
+    end
+
+    return scaling_evo(self, card, context, "j_maelmc_garchomp", card.ability.extra.retriggered, self.config.evo_rqmt)
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    G.hand:change_size(card.ability.extra.h_size)
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.hand:change_size(-card.ability.extra.h_size)
+  end
+}
+
+-- Garchomp 445
+local garchomp={
+  name = "garchomp",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 2, y = 4},
+  config = {extra = {retriggers = 1, retriggers_if_rank = 2, mult = 4, h_size = 2}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    return {vars = {abbr.h_size, abbr.retriggers, abbr.mult, abbr.retriggers_if_rank}}
+  end,
+  rarity = "poke_safari",
+  cost = 10,
+  stage = "Two",
+  ptype = "Dragon",
+  atlas = "Pokedex4-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+
+    if context.individual and context.cardarea == G.hand and context.scoring_name == "Pair" then
+      return {
+        colour = G.C.MULT,
+        mult = card.ability.extra.mult,
+        card = card
+      }
+    end
+
+    if context.repetition and context.cardarea == G.hand and context.scoring_name == "Pair" then
+      local pair_of = nil
+      for _, v in pairs(context.scoring_hand) do
+        if not SMODS.has_enhancement(v, "m_stone") then
+          pair_of = v:get_id()
+        end
+      end
+
+      if context.other_card:get_id() == pair_of then
+        return {
+          message = localize('k_again_ex'),
+          repetitions = card.ability.extra.retriggers_if_rank,
+          card = card
+        }
+      else
+        return {
+          message = localize('k_again_ex'),
+          repetitions = card.ability.extra.retriggers,
+          card = card
+        }
+      end
+    end
+
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    G.hand:change_size(card.ability.extra.h_size)
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.hand:change_size(-card.ability.extra.h_size)
+  end,
+  megas = {"mega_garchomp"}
+}
+
+local mega_garchomp={
+  name = "mega_garchomp",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 4, y = 6},
+  soul_pos = {x = 5, y = 6},
+  config = {extra = {retriggers = 1, Xmult = 1.5, h_size = 4}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    return {vars = {abbr.h_size, abbr.retriggers, abbr.Xmult}}
+  end,
+  rarity = "poke_mega",
+  cost = 12,
+  stage = "Mega",
+  ptype = "Dragon",
+  atlas = "Megas-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+
+    if context.individual and context.cardarea == G.hand and context.scoring_name == "Pair" then
+      local pair_of = nil
+      for _, v in pairs(context.scoring_hand) do
+        if not SMODS.has_enhancement(v, "m_stone") then
+          pair_of = v:get_id()
+        end
+      end
+      
+      if context.other_card:get_id() == pair_of then
+        return {
+          colour = G.C.MULT,
+          xmult = card.ability.extra.Xmult,
+          card = card
+        }
+      end
+    end
+
+    if context.repetition and context.cardarea == G.hand and context.scoring_name == "Pair" then
+      local pair_of = nil
+      for _, v in pairs(context.scoring_hand) do
+        if not SMODS.has_enhancement(v, "m_stone") then
+          pair_of = v:get_id()
+        end
+      end
+
+      if context.other_card:get_id() == pair_of then
+        return {
+          message = localize('k_again_ex'),
+          repetitions = card.ability.extra.retriggers,
+          card = card
+        }
+      end
+    end
+
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    G.hand:change_size(card.ability.extra.h_size)
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.hand:change_size(-card.ability.extra.h_size)
+  end
+}
+
 return {
   name = "Maelmc's Jokers 1",
   list = {
@@ -1421,6 +1669,7 @@ return {
     kecleon,
     lunatone, solrock,
     odd_keystone, spiritomb, --spiritombl
+    gible, gabite, garchomp, mega_garchomp,
     inkay, malamar,
     binacle, barbaracle,
     cufant, copperajah, mega_copperajah,

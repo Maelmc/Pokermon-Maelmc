@@ -29,6 +29,7 @@ table.insert(family,{
 table.insert(family,{"inkay","malamar"})
 table.insert(family,{"binacle","barbaracle"})
 table.insert(family,{"ralts","kirlia","gardevoir","mega_gardevoir"})
+table.insert(family,{"gible","gabite","garchomp","mega_garchomp"})
 
 SMODS.Atlas({
     key = "modicon",

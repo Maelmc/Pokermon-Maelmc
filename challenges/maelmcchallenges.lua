@@ -138,6 +138,31 @@ local binacle = {
     },
 }
 
+local gible = {
+    object_type = "Challenge",
+    key = "gible",
+    jokers = {
+        {id = "j_maelmc_gible"},
+    },
+    deck = {
+      cards = {{s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='7'},{s='H',r='7'},{s='C',r='7'},{s='D',r='7'},
+                {s='S',r='8'},{s='H',r='8'},{s='C',r='8'},{s='D',r='8'},
+                {s='S',r='8'},{s='H',r='8'},{s='C',r='8'},{s='D',r='8'},
+                {s='S',r='8'},{s='H',r='8'},{s='C',r='8'},{s='D',r='8'},
+                {s='S',r='8'},{s='H',r='8'},{s='C',r='8'},{s='D',r='8'},
+                {s='S',r='8'},{s='H',r='8'},{s='C',r='8'},{s='D',r='8'},
+                {s='S',r='8'},{s='H',r='8'},{s='C',r='8'},{s='D',r='8'},
+        },
+      type = 'Challenge Deck',
+    },
+}
+
 local ralts = {
     object_type = "Challenge",
     key = "ralts",
@@ -146,7 +171,6 @@ local ralts = {
         {id = "j_poke_natu"},
         {id = "j_maelmc_ralts"},
         {id = "j_poke_elgyem"},
-        {id = "j_maelmc_gardevoir"},
     },
     consumeables = {
         {id = "c_poke_megastone"},
@@ -154,5 +178,5 @@ local ralts = {
 }
 
 return {name = "Challenges", 
-        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon, lunatone_solrock, inkay, binacle, ralts}
+        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon, lunatone_solrock, inkay, binacle, ralts, gible}
 }

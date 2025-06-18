@@ -4,7 +4,7 @@ return {
             b_maelmc_hazarddeck = {
                 name = "Hazard Deck",
                 text = {
-                    "Starts with",
+                    "Start run with",
                     "{C:item,T:j_maelmc_glimmet}Glimmet{} and {C:item,T:j_maelmc_cufant}Cufant{}.",
                     "At the start of blind,",
                     "add {C:purple,T:m_poke_hazard}1 Hazard{} per #2# cards"
@@ -238,6 +238,62 @@ return {
                     --"{br:3}ERROR - CONTACT STEAK",
                     --"{C:attention}Devolves{} when {C:attention}Blind{} is selected",
                 } 
+            },
+            j_maelmc_gible = {
+                name = "Gible",
+                text = {
+                    "If played hand is a {C:attention}Pair{},",
+                    "retriggers all cards held in hand",
+                    "of the same rank as the {C:attention}Pair",
+                    "{C:attention}#1#{} additional time",
+                    "and they give {C:red}+#2#{} Mult each",
+                    "{C:inactive,s:0.8}(Evolves after retriggering {C:attention,s:0.8}#3#{C:inactive,s:0.8} cards)",
+                }
+            },
+            j_maelmc_gabite = {
+                name = "Gabite",
+                text = {
+                    "{C:attention}+#1#{} hand size",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "If played hand is a {C:attention}Pair{},",
+                    "retriggers all cards held in hand",
+                    "{C:attention}#2#{} additional time",
+                    "and they give {C:red}+#3#{} Mult each",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "If a card has the same",
+                    "rank as the {C:attention}Pair{},",
+                    "{C:green}#4# in #5#{} chance to retrigger it",
+                    "{C:attention}#6#{} additional times instead",
+                    "{C:inactive,s:0.8}(Evolves after retriggering {C:attention,s:0.8}#7#{C:inactive,s:0.8} cards)",
+                }
+            },
+            j_maelmc_garchomp = {
+                name = "Garchomp",
+                text = {
+                    "{C:attention}+#1#{} hand size",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "If played hand is a {C:attention}Pair{},",
+                    "retriggers all cards held in hand",
+                    "{C:attention}#2#{} additional time",
+                    "and they give {C:red}+#3#{} Mult each",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "If a card has the same",
+                    "rank as the {C:attention}Pair{},",
+                    "retriggers it",
+                    "{C:attention}#4#{} additional times instead",
+                }
+            },
+            j_maelmc_mega_garchomp = {
+                name = "Mega Garchomp",
+                text = {
+                    "{C:attention}+#1#{} hand size",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "If played hand is a {C:attention}Pair{},",
+                    "retriggers all cards held in hand",
+                    "of the same rank as the {C:attention}Pair",
+                    "{C:attention}#2#{} additional time",
+                    "and they give {X:red,C:white}X#3#{} Mult each",
+                }
             },
         },
 
