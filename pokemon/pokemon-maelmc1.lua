@@ -1424,6 +1424,7 @@ local gible={
   config = {extra = {retriggers = 1, mult = 1, retriggered = 0}, evo_rqmt = 16},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"princessroxie"}}
     -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.retriggers, abbr.mult, math.max(0, self.config.evo_rqmt - abbr.retriggered)}}
@@ -1483,6 +1484,7 @@ local gabite={
   config = {extra = {retriggers = 1, retriggers_if_rank = 2, retrigger_odds = 4, mult = 2, h_size = 1, retriggered = 0}, evo_rqmt = 32},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"princessroxie"}}
     -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.h_size, abbr.retriggers, abbr.mult, ''..(G.GAME and G.GAME.probabilities.normal or 1), abbr.retrigger_odds, abbr.retriggers_if_rank, math.max(0, self.config.evo_rqmt - abbr.retriggered)}}
@@ -1546,6 +1548,7 @@ local garchomp={
   config = {extra = {retriggers = 1, retriggers_if_rank = 2, mult = 4, h_size = 2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"princessroxie"}}
     -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.h_size, abbr.retriggers, abbr.mult, abbr.retriggers_if_rank}}
