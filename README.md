@@ -85,7 +85,7 @@ All pseudo legendaries are based on a specific hand. On the Pokermon Discord ser
 | ------ | ------ |
 | Hazard Stack | Starts with Glimmet<br/>Adds +1 Hazard per 10 cards in deck at the start of blind |
 
-Hazard Stack is an hazard-focused deck that would get more hazards in general than any other deck. Of course, it starts with Glimmet and Cufant so you get to try them a bit. You can also just sell one of the two at the start if you want to try one specifically.
+Hazard Stack is an hazard-focused deck that would get more hazards in general than any other deck.
 
 ## Challenges
 
