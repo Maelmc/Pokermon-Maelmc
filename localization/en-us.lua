@@ -194,13 +194,13 @@ return {
                 text = {
                     "{C:red}+#1#{} Mult per {C:attention}hand level",
                     "above 1 {C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
-                    "{br:3}ERROR - CONTACT STEAK",
+                    --[["{br:3}ERROR - CONTACT STEAK",
                     "When {C:attention}Blind{} is selected, create #3#",
                     "{C:planet}Planet{} card of one of",
                     "your lowest level poker hand",
                     "{C:green}#4# in #5#{} chance to create a",
-                    "{C:attention}High Priestess{} card instead",
-                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#6#{C:inactive,s:0.8} rounds)",
+                    "{C:attention}High Priestess{} card instead",]]
+                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#3#{C:inactive,s:0.8} rounds)",
                 } 
             },
             j_maelmc_kirlia = {
@@ -208,13 +208,13 @@ return {
                 text = {
                     "{C:red}+#1#{} Mult per {C:attention}hand level",
                     "above 1 {C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
-                    "{br:3}ERROR - CONTACT STEAK",
+                    --[["{br:3}ERROR - CONTACT STEAK",
                     "When {C:attention}Blind{} is selected, create #3#",
                     "{C:dark_edition}Negative{} {C:planet}Planet{} card of one of",
                     "your lowest level poker hand",
                     "{C:green}#4# in #5#{} chance to create a",
-                    "{C:dark_edition}Negative {C:attention}High Priestess{} card instead",
-                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#6#{C:inactive,s:0.8} rounds)",
+                    "{C:dark_edition}Negative {C:attention}High Priestess{} card instead",]]
+                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#3#{C:inactive,s:0.8} rounds)",
                 } 
             },
             j_maelmc_gardevoir = {
@@ -222,12 +222,12 @@ return {
                 text = {
                     "{X:red,C:white}X#1#{} Mult per {C:attention}hand level",
                     "above 1 {C:inactive}(Currently {X:red,C:white}X#2#{C:inactive} Mult)",
-                    "{br:3}ERROR - CONTACT STEAK",
+                    --[["{br:3}ERROR - CONTACT STEAK",
                     "When {C:attention}Blind{} is selected, create #3#",
                     "{C:dark_edition}Negative{} {C:planet}Planet{} card of one of",
                     "your lowest level poker hand",
                     "{C:green}#4# in #5#{} chance to create a",
-                    "{C:dark_edition}Negative Black Hole{} card instead",
+                    "{C:dark_edition}Negative Black Hole{} card instead",]]
                 } 
             },
             j_maelmc_mega_gardevoir = {
@@ -243,28 +243,20 @@ return {
                 name = "Gible",
                 text = {
                     "If played hand is a {C:attention}Pair{},",
-                    "retriggers all cards held in hand",
-                    "of the same rank as the {C:attention}Pair",
-                    "{C:attention}#1#{} additional time",
-                    "and they give {C:red}+#2#{} Mult each",
-                    "{C:inactive,s:0.8}(Evolves after retriggering {C:attention,s:0.8}#3#{C:inactive,s:0.8} cards)",
+                    "retriggers rightmost #1# cards",
+                    "held in hand {C:attention}#2#{} additional time",
+                    "and they give {C:red}+#3#{} Mult each",
+                    "{C:inactive,s:0.8}(Evolves after retriggering {C:attention,s:0.8}#4#{C:inactive,s:0.8} cards)",
                 }
             },
             j_maelmc_gabite = {
                 name = "Gabite",
                 text = {
-                    "{C:attention}+#1#{} hand size",
-                    "{br:3}ERROR - CONTACT STEAK",
                     "If played hand is a {C:attention}Pair{},",
-                    "retriggers all cards held in hand",
-                    "{C:attention}#2#{} additional time",
+                    "retriggers rightmost #1# cards",
+                    "held in hand {C:attention}#2#{} additional time",
                     "and they give {C:red}+#3#{} Mult each",
-                    "{br:3}ERROR - CONTACT STEAK",
-                    "If a card has the same",
-                    "rank as the {C:attention}Pair{},",
-                    "{C:green}#4# in #5#{} chance to retrigger it",
-                    "{C:attention}#6#{} additional times instead",
-                    "{C:inactive,s:0.8}(Evolves after retriggering {C:attention,s:0.8}#7#{C:inactive,s:0.8} cards)",
+                    "{C:inactive,s:0.8}(Evolves after retriggering {C:attention,s:0.8}#4#{C:inactive,s:0.8} cards)",
                 }
             },
             j_maelmc_garchomp = {
@@ -276,11 +268,6 @@ return {
                     "retriggers all cards held in hand",
                     "{C:attention}#2#{} additional time",
                     "and they give {C:red}+#3#{} Mult each",
-                    "{br:3}ERROR - CONTACT STEAK",
-                    "If a card has the same",
-                    "rank as the {C:attention}Pair{},",
-                    "retriggers it",
-                    "{C:attention}#4#{} additional times instead",
                 }
             },
             j_maelmc_mega_garchomp = {
