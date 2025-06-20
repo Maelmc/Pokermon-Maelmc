@@ -164,6 +164,14 @@ if (SMODS.Mods["Pokermon"] or {}).can_load then
     pokermon_config = SMODS.Mods["Pokermon"].config
 end
 
+--Load helper function files
+local helper, load_error = SMODS.load_file("functions/maelmc-utils.lua")
+if load_error then
+  sendDebugMessage ("The error is: "..load_error)
+else
+  helper()
+end
+
 --Load pokemon file
 local pfiles = NFS.getDirectoryItems(mod_dir.."pokemon")
 
