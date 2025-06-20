@@ -29,7 +29,7 @@ local kecleon={
     end
     
     if context.cardarea == G.jokers and context.scoring_hand then
-      if context.joker_main and card.ability.extra.milt > 0 then
+      if context.joker_main and card.ability.extra.mult > 0 then
         return {
           colour = G.C.MULT,
           mult = card.ability.extra.mult,
