@@ -211,7 +211,7 @@ local copperajah = {
   name = "copperajah",
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 5},
-  config = {extra = {hazard_ratio = 10, reset_steel = 3, mult = 3, all_hazard = {}, hazard_to_steel = {}}},
+  config = {extra = {hazard_ratio = 10, reset_steel = 3, mult_mod = 3, all_hazard = {}, hazard_to_steel = {}}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -234,7 +234,7 @@ local copperajah = {
       end
       to_add = math.floor(count / abbr.hazard_ratio)
     end
-    return {vars = {to_add, abbr.hazard_ratio, abbr.reset_steel, abbr.mult, abbr.mult * steel_count}}
+    return {vars = {to_add, abbr.hazard_ratio, abbr.reset_steel, abbr.mult_mod, abbr.mult_mod * steel_count}}
   end,
   rarity = "poke_safari",
   cost = 9,
@@ -294,9 +294,9 @@ local copperajah = {
           end
         end
         return {
-          message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.mult * steel_count}},
+          message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.mult_mod * steel_count}},
           colour = G.C.MULT,
-          mult = card.ability.extra.mult * steel_count
+          mult = card.ability.extra.mult_mod * steel_count
         }
       end
   end,
@@ -309,7 +309,7 @@ local mega_copperajah = {
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 2},
   soul_pos = { x = 5, y = 5 },
-  config = {extra = {hazard_ratio = 10, to_steel = 5, reset_steel = 5, Xmult = 0.1, mult = 6, all_hazard = {}, hazard_to_steel = {}}},
+  config = {extra = {hazard_ratio = 10, to_steel = 5, reset_steel = 5, Xmult_mod = 0.1, mult_mod = 6, all_hazard = {}, hazard_to_steel = {}}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -331,7 +331,7 @@ local mega_copperajah = {
       end
       to_add = math.floor(count / abbr.hazard_ratio)
     end
-    return {vars = {to_add, abbr.hazard_ratio, abbr.reset_steel, abbr.Xmult, 1 + abbr.Xmult * steel_count, abbr.mult, abbr.mult * steel_count }}
+    return {vars = {to_add, abbr.hazard_ratio, abbr.reset_steel, abbr.Xmult_mod, 1 + abbr.Xmult_mod * steel_count, abbr.mult_mod, abbr.mult_mod * steel_count }}
   end,
   rarity = "poke_mega",
   cost = 12,
@@ -393,8 +393,8 @@ local mega_copperajah = {
         end
         return {
           colour = G.C.XMULT,
-          mult = card.ability.extra.mult * steel_count,
-          Xmult = 1 + card.ability.extra.Xmult * steel_count
+          mult = card.ability.extra.mult_mod * steel_count,
+          Xmult = 1 + card.ability.extra.Xmult_mod * steel_count
         }
       end
     end
@@ -680,12 +680,12 @@ local kecleon={
   name = "kecleon",
   poke_custom_prefix = "maelmc",
   pos = {x = 3, y = 10},
-  config = {extra = {type_change = 0, mult_mod = 6, current_type = "Colorless"}},
+  config = {extra = {mult = 0, mult_mod = 6, current_type = "Colorless"}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    return {vars = {abbr.mult_mod, abbr.mult_mod * abbr.type_change}}
+    return {vars = {abbr.mult_mod, abbr.mult}}
   end,
   rarity = 1,
   cost = 5,
@@ -700,21 +700,18 @@ local kecleon={
       local type = get_type(card)
       if type ~= card.ability.extra.current_type then
         card.ability.extra.current_type = type
-        card.ability.extra.type_change = card.ability.extra.type_change + 1
+        card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_color_change')})
       end
     end
     
     if context.cardarea == G.jokers and context.scoring_hand then
-      if context.joker_main then
-        local mult = card.ability.extra.mult_mod * card.ability.extra.type_change
-        if mult > 0 then
-          return {
-            colour = G.C.MULT,
-            mult = mult,
-            card = card
-          }
-        end
+      if context.joker_main and card.ability.extra.milt > 0 then
+        return {
+          colour = G.C.MULT,
+          mult = card.ability.extra.mult,
+          card = card
+        }
       end
     end
   end,
@@ -1576,12 +1573,12 @@ local mega_garchomp={
   poke_custom_prefix = "maelmc",
   pos = {x = 4, y = 6},
   soul_pos = {x = 5, y = 6},
-  config = {extra = {retriggers = 1, Xmult = 1.5, h_size = 2}},
+  config = {extra = {retriggers = 1, Xmult_multi = 1.5, h_size = 2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    return {vars = {abbr.h_size, abbr.retriggers, abbr.Xmult}}
+    return {vars = {abbr.h_size, abbr.retriggers, abbr.Xmult_multi}}
   end,
   rarity = "poke_mega",
   cost = 12,
@@ -1602,7 +1599,7 @@ local mega_garchomp={
       if context.other_card:get_id() == pair_of then
         return {
           colour = G.C.MULT,
-          xmult = card.ability.extra.Xmult,
+          xmult = card.ability.extra.Xmult_multi,
           card = card
         }
       end
