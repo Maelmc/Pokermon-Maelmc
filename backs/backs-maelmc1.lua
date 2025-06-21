@@ -3,7 +3,7 @@ local hazarddeck = {
 	key = "hazarddeck",
   unlocked = true,
   discovered = true,
-	config = {jokers = {'j_maelmc_glimmet'}, extra = {hazard_ratio = 10}},
+	config = {extra = {hazard_ratio = 10}},
   loc_vars = function(self, info_queue, center)
     return {vars = {self.config.jokers, self.config.extra.hazard_ratio}}
   end,

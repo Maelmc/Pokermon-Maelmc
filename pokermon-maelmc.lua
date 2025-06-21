@@ -30,6 +30,7 @@ table.insert(family,{"inkay","malamar"})
 table.insert(family,{"binacle","barbaracle"})
 table.insert(family,{"ralts","kirlia","gardevoir","mega_gardevoir"})
 table.insert(family,{"gible","gabite","garchomp","mega_garchomp"})
+table.insert(family,{"ogerpon","ogerpon_wellspring","ogerpon_hearthflame","ogerpon_cornerstone"})
 
 SMODS.Atlas({
     key = "modicon",
@@ -41,6 +42,13 @@ SMODS.Atlas({
 SMODS.Atlas({
    key = "Custom-Maelmc",
    path = "Custom.png",
+   px = 71,
+   py = 95
+ }):register()
+
+ SMODS.Atlas({
+   key = "Mart-Maelmc",
+   path = "Mart.png",
    px = 71,
    py = 95
  }):register()
@@ -157,6 +165,16 @@ SMODS.Atlas({
     py = 95,
 }):register()
 
+--[[SMODS.Rank {
+    key = 'Ogerpon',
+    card_key = 'O',
+    pos = { x = 0 },
+    nominal = 0,
+    in_pool = function(self)
+      return false
+    end,
+}]]
+
 maelmc_config = SMODS.current_mod.config
 -- Get mod path and load other files
 mod_dir = ''..SMODS.current_mod.path
@@ -238,6 +256,27 @@ for _, file in ipairs(pfiles) do
           end
         end
         SMODS.Joker(item)
+      end
+    end
+  end
+end
+
+--Load consumables
+local pconsumables = NFS.getDirectoryItems(mod_dir.."consumables")
+
+for _, file in ipairs(pconsumables) do
+  sendDebugMessage ("The file is: "..file)
+  local consumable, load_error = SMODS.load_file("consumables/"..file)
+  if load_error then
+    sendDebugMessage ("The error is: "..load_error)
+  else
+    local curr_consumable = consumable()
+    if curr_consumable.init then curr_consumable:init() end
+    
+    for i, item in ipairs(curr_consumable.list) do
+      if not (item.pokeball and not pokermon_config.pokeballs) then
+        item.discovered = not pokermon_config.pokemon_discovery
+        SMODS.Consumable(item)
       end
     end
   end

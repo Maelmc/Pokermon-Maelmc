@@ -4,11 +4,44 @@ return {
             b_maelmc_hazarddeck = {
                 name = "Hazard Deck",
                 text = {
-                    "Start run with",
-                    "{C:item,T:j_maelmc_glimmet}Glimmet{}.",
                     "At the start of blind,",
-                    "add {C:purple,T:m_poke_hazard}1 Hazard{} per #2# cards"
+                    "add {C:purple,T:m_poke_hazard}1 Hazard{} per #2# cards",
+                    "in full deck"
                 }
+            },
+        },
+        Item = {
+            c_maelmc_tealmask = {
+                name = "Teal Mask",
+                text = {
+                    "Enhance {C:attention}#1#",
+                    "selected cards to",
+                    "{C:attention}Lucky Cards"
+                },
+            },
+            c_maelmc_wellspringmask = {
+                name = "Wellspring Mask",
+                text = {
+                    "Enhance {C:attention}#1#",
+                    "selected cards to",
+                    "{C:attention}Bonus Cards"
+                },
+            },
+            c_maelmc_hearthflamemask = {
+                name = "Hearthflame Mask",
+                text = {
+                    "Enhance {C:attention}#1#",
+                    "selected cards to",
+                    "{C:attention}Mult Cards"
+                },
+            },
+            c_maelmc_cornerstonemask = {
+                name = "Cornerstone Mask",
+                text = {
+                    "Enhance {C:attention}#1#",
+                    "selected cards to",
+                    "{C:attention}Stone Cards"
+                },
             },
         },
         Joker = {
@@ -282,6 +315,34 @@ return {
                     "and they give {X:red,C:white}X#3#{} Mult each",
                 }
             },
+            j_maelmc_ogerpon = {
+                name = "Ogerpon",
+                text = {
+                    "Teal Ogerpon",
+                    "{C:inactive,s:0.8}(Changes form using a {C:attention}Mask{})",
+                }
+            },
+            j_maelmc_ogerpon_wellspring = {
+                name = "Ogerpon",
+                text = {
+                    "Wellspring Ogerpon",
+                    "{C:inactive,s:0.8}(Changes form using a {C:attention}Mask{})",
+                }
+            },
+            j_maelmc_ogerpon_hearthflame = {
+                name = "Ogerpon",
+                text = {
+                    "Hearthflame Ogerpon",
+                    "{C:inactive,s:0.8}(Changes form using a {C:attention}Mask{})",
+                }
+            },
+            j_maelmc_ogerpon_cornerstone = {
+                name = "Ogerpon",
+                text = {
+                    "{C:attention}Stone{} cards count as their own rank",
+                    "{C:inactive,s:0.8}(Change sform using a {C:attention}Mask{})",
+                }
+            },
         },
 
         Other = {
@@ -295,6 +356,14 @@ return {
                     "{C:money}#5#",
                 }
             },
+            fitem = {
+                name = "Form-chane Item",
+                text = {
+                    "When consumed, changes form of leftmost",
+                    "or selected {C:attention}eligible{} Joker",
+                    "at end of next round",
+                }
+            }
         },
     },
     misc = {

@@ -116,9 +116,115 @@ local glimmora={
   end,
 }
 
+local ogerpon={
+  name = "ogerpon", 
+  poke_custom_prefix = "maelmc",
+  pos = {x = 0, y = 12},
+  soul_pos = {x = 1, y = 12},
+  config = {extra = {}},
+  loc_vars = function(self, info_queue, center)
+    type_tooltip(self, info_queue, center)
+  end,
+  rarity = 4, 
+  cost = 20,
+  stage = "Basic",
+  ptype = "Grass",
+  atlas = "Pokedex9-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+  set_ability = function(self, card, initial, delay_sprites)
+    apply_type_sticker(card, "Grass")
+  end,
+}
+
+local ogerpon_wellspring={
+  name = "ogerpon_wellspring", 
+  poke_custom_prefix = "maelmc",
+  pos = {x = 0, y = 12},
+  soul_pos = {x = 2, y = 12},
+  config = {extra = {}},
+  loc_vars = function(self, info_queue, center)
+    type_tooltip(self, info_queue, center)
+  end,
+  rarity = 4, 
+  cost = 20,
+  stage = "Basic",
+  ptype = "Water",
+  atlas = "Pokedex9-Maelmc",
+  aux_poke = true,
+  no_collection = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+  in_pool = function(self)
+    return false
+  end,
+  set_ability = function(self, card, initial, delay_sprites)
+    apply_type_sticker(card, "Water")
+  end
+}
+
+local ogerpon_hearthflame={
+  name = "ogerpon_hearthflame", 
+  poke_custom_prefix = "maelmc",
+  pos = {x = 0, y = 12},
+  soul_pos = {x = 3, y = 12},
+  config = {extra = {}},
+  loc_vars = function(self, info_queue, center)
+    type_tooltip(self, info_queue, center)
+  end,
+  rarity = 4, 
+  cost = 20,
+  stage = "Basic",
+  ptype = "Fire",
+  atlas = "Pokedex9-Maelmc",
+  aux_poke = true,
+  no_collection = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+  in_pool = function(self)
+    return false
+  end,
+  set_ability = function(self, card, initial, delay_sprites)
+    apply_type_sticker(card, "Fire")
+  end
+}
+
+local ogerpon_cornerstone={
+  name = "ogerpon_cornerstone", 
+  poke_custom_prefix = "maelmc",
+  pos = {x = 0, y = 12},
+  soul_pos = {x = 4, y = 12},
+  config = {extra = {}},
+  loc_vars = function(self, info_queue, center)
+    type_tooltip(self, info_queue, center)
+  end,
+  rarity = 4, 
+  cost = 20,
+  stage = "Basic",
+  ptype = "Earth",
+  atlas = "Pokedex9-Maelmc",
+  aux_poke = true,
+  no_collection = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    -- stone cards as their own rank in the lovely patch
+
+  end,
+  in_pool = function(self)
+    return false
+  end,
+  set_ability = function(self, card, initial, delay_sprites)
+    apply_type_sticker(card, "Earth")
+  end
+}
+
 return {
   name = "Maelmc's Jokers Gen 9",
   list = {
     glimmet, glimmora,
+    --ogerpon, ogerpon_wellspring, ogerpon_hearthflame, ogerpon_cornerstone,
   },
 }

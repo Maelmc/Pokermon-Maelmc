@@ -180,6 +180,46 @@ local gible = {
     },
 }
 
-return {name = "Challenges", 
-        list = {glimmora, copperajah, spiritomb, gym_leader, kecleon, lunatone_solrock, inkay, binacle, ralts, gible}
+local ogerpon = {
+    object_type = "Challenge",
+    key = "ogerpon",
+    jokers = {
+        {id = "j_maelmc_ogerpon"},
+        {id = "j_maelmc_ogerpon_wellspring"},
+        {id = "j_maelmc_ogerpon_hearthflame"},
+        {id = "j_maelmc_ogerpon_cornerstone"},
+    },
+    deck = {
+      cards = {{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+        },
+      type = 'Challenge Deck',
+    },
+}
+
+return {name = "Challenges",
+        list = {
+            glimmora,
+            copperajah,
+            spiritomb,
+            gym_leader,
+            kecleon,
+            lunatone_solrock,
+            inkay,
+            binacle,
+            ralts,
+            gible,
+            --ogerpon,
+        }
 }
