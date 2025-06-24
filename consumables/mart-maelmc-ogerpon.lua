@@ -268,6 +268,6 @@ local cornerstonemask = {
 
 return {name = "Ogerpon's Masks",
       list = {
-        --tealmask, wellspringmask, hearthflamemask, cornerstonemask
+        tealmask, wellspringmask, hearthflamemask, cornerstonemask
       }
 }

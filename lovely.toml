@@ -1,0 +1,19 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = "function Card:get_id()"
+position = 'after'
+match_indent = true
+payload = '''
+    local ogerpons_cornerstone = find_joker('ogerpon_cornerstone')
+    if #ogerpons_cornerstone > 0 and self.ability.effect == 'Stone Card' then
+        return SMODS.Ranks["maelmc_Ogerpon"].id
+    end
+
+'''
+

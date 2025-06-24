@@ -180,7 +180,7 @@ local gible = {
     },
 }
 
-local ogerpon = {
+--[[local ogerpon = {
     object_type = "Challenge",
     key = "ogerpon",
     jokers = {
@@ -190,21 +190,62 @@ local ogerpon = {
         {id = "j_maelmc_ogerpon_cornerstone"},
     },
     deck = {
-      cards = {{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
-            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
-            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
-            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
-            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
-            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
-            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
-            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
-            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
-            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
-            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
-            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
-            {s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},{s='S',r='7',e='m_stone'},
+      cards = {{s='S',r='2',e='m_stone'},{s='H',r='2',e='m_mult'},{s='C',r='2',e='m_bonus'},{s='D',r='2',e='m_lucky'},
+            {s='S',r='3',e='m_mult'},{s='H',r='3',e='m_bonus'},{s='C',r='3',e='m_lucky'},{s='D',r='3',e='m_stone'},
+            {s='S',r='4',e='m_bonus'},{s='H',r='4',e='m_lucky'},{s='C',r='4',e='m_stone'},{s='D',r='4',e='m_mult'},
+            {s='S',r='5',e='m_lucky'},{s='H',r='5',e='m_stone'},{s='C',r='5',e='m_mult'},{s='D',r='5',e='m_bonus'},
+            {s='S',r='6',e='m_stone'},{s='H',r='6',e='m_mult'},{s='C',r='6',e='m_bonus'},{s='D',r='6',e='m_lucky'},
+            {s='S',r='7',e='m_mult'},{s='H',r='7',e='m_bonus'},{s='C',r='7',e='m_lucky'},{s='D',r='7',e='m_stone'},
+            {s='S',r='8',e='m_bonus'},{s='H',r='8',e='m_lucky'},{s='C',r='8',e='m_stone'},{s='D',r='8',e='m_mult'},
+            {s='S',r='9',e='m_lucky'},{s='H',r='9',e='m_stone'},{s='C',r='9',e='m_mult'},{s='D',r='9',e='m_bonus'},
+            {s='S',r='T',e='m_stone'},{s='H',r='T',e='m_mult'},{s='C',r='T',e='m_bonus'},{s='D',r='T',e='m_lucky'},
+            {s='S',r='J',e='m_mult'},{s='H',r='J',e='m_bonus'},{s='C',r='J',e='m_lucky'},{s='D',r='J',e='m_stone'},
+            {s='S',r='Q',e='m_bonus'},{s='H',r='Q',e='m_lucky'},{s='C',r='Q',e='m_stone'},{s='D',r='Q',e='m_mult'},
+            {s='S',r='K',e='m_lucky'},{s='H',r='K',e='m_stone'},{s='C',r='K',e='m_mult'},{s='D',r='K',e='m_bonus'},
+            {s='S',r='A',e='m_stone'},{s='H',r='A',e='m_mult'},{s='C',r='A',e='m_bonus'},{s='D',r='A',e='m_lucky'},
         },
       type = 'Challenge Deck',
+    },
+}]]
+
+local teal = {
+    object_type = "Challenge",
+    key = "teal",
+    jokers = {
+        {id = "j_maelmc_ogerpon"},
+    }
+}
+
+local wellspring = {
+    object_type = "Challenge",
+    key = "wellspring",
+    jokers = {
+        {id = "j_maelmc_ogerpon_wellspring"},
+    },
+    consumeables = {
+        {id = "c_maelmc_wellspringmask"},
+    },
+}
+
+local hearthflame = {
+    object_type = "Challenge",
+    key = "hearthflame",
+    jokers = {
+        {id = "j_maelmc_ogerpon_hearthflame"},
+    },
+    consumeables = {
+        {id = "c_maelmc_hearthflamemask"},
+    },
+}
+
+local cornerstone = {
+    object_type = "Challenge",
+    key = "cornerstone",
+    jokers = {
+        {id = "j_maelmc_ogerpon_cornerstone"},
+    },
+    consumeables = {
+        {id = "c_maelmc_cornerstonemask"},
     },
 }
 
@@ -221,5 +262,6 @@ return {name = "Challenges",
             ralts,
             gible,
             --ogerpon,
+            teal, wellspring, hearthflame, cornerstone,
         }
 }

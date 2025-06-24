@@ -318,29 +318,57 @@ return {
             j_maelmc_ogerpon = {
                 name = "Ogerpon",
                 text = {
-                    "Teal Ogerpon",
-                    "{C:inactive,s:0.8}(Changes form using a {C:attention}Mask{})",
+                    --"This Joker cannot change {C:attention}Type",
+                    "Holding {C:dark_edition}Negative {C:attention}Leaf Stone",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Increases earned money at",
+                    "end of round by {C:money}$#1#{} for each",
+                    "{C:attention}Lucky{} card that triggered",
+                    "{C:inactive}(Currently {C:money}$#2#{C:inactive})",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Retriggers all {C:attention}Lucky{} cards",
+                    "{C:attention}#3#{} additional time",
+                    "{C:inactive,s:0.8}(Changes form using a {C:attention,s:0.8}Mask{C:inactive,s:0.8})",
                 }
             },
             j_maelmc_ogerpon_wellspring = {
                 name = "Ogerpon",
                 text = {
-                    "Wellspring Ogerpon",
-                    "{C:inactive,s:0.8}(Changes form using a {C:attention}Mask{})",
+                    --"This Joker cannot change {C:attention}Type",
+                    "Holding {C:dark_edition}Negative {C:attention}Water Stone",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Played {C:attention}Bonus{} cards give",
+                    "{X:chips,C:white}X#1#{} their total chips then",
+                    "permanently gain {C:chips}+#2#{} Chips when scored",
+                    "{C:inactive,s:0.8}(Changes form using a {C:attention,s:0.8}Mask{C:inactive,s:0.8})",
+                    --[["{br:3}ERROR - CONTACT STEAK",
+                    "Gives {X:red,C:white}X{} Mult equal to the",
+                    "{C:attention}cube root{} of total {C:chips}Chips",]]
                 }
             },
             j_maelmc_ogerpon_hearthflame = {
                 name = "Ogerpon",
                 text = {
-                    "Hearthflame Ogerpon",
-                    "{C:inactive,s:0.8}(Changes form using a {C:attention}Mask{})",
+                    --"This Joker cannot change {C:attention}Type",
+                    "Holding {C:dark_edition}Negative {C:attention}Fire Stone",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Each played {C:attention}Mult #1#{} of {V:1}#2#",
+                    "gives {X:red,C:white}X#3#{} Mult when scored",
+                    "{s:0.8}Card changes every round",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "If {C:attention}first played hand{} has exactly {C:attention}1{} card,",
+                    "{C:attention}destroy #4#{} random non-{C:attention}Mult{} card held in hand",
+                    "{C:inactive,s:0.8}(Changes form using a {C:attention,s:0.8}Mask{C:inactive,s:0.8})",
                 }
             },
             j_maelmc_ogerpon_cornerstone = {
                 name = "Ogerpon",
                 text = {
+                    --"This Joker cannot change {C:attention}Type",
+                    "Holding {C:dark_edition}Negative {C:attention}Hard Stone",
+                    "{br:3}ERROR - CONTACT STEAK",
                     "{C:attention}Stone{} cards count as their own rank",
-                    "{C:inactive,s:0.8}(Change sform using a {C:attention}Mask{})",
+                    "{C:inactive,s:0.8}(Changes form using a {C:attention,s:0.8}Mask{C:inactive,s:0.8})",
                 }
             },
         },
@@ -379,6 +407,10 @@ return {
             c_maelmc_binacle = "Binacle",
             c_maelmc_ralts = "Ralts",
             c_maelmc_gible = "Gible",
+            c_maelmc_teal = "Teal Mask",
+            c_maelmc_wellspring = "Wellspring Mask",
+            c_maelmc_hearthflame = "Hearthflame Mask",
+            c_maelmc_cornerstone = "Cornerstone Mask",
         },
         dictionary = {
             maelmc_steel = "Steel!",
@@ -389,6 +421,7 @@ return {
             maelmc_color_change = "Color Change",
             maelmc_clubs = "Clubs",
             maelmc_hearts = "Hearts",
+            maelmc_ivy_cudgle = "Ivy Cudgle!",
         }
     }
 }

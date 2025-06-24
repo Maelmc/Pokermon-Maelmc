@@ -3,7 +3,7 @@ local ralts={
   name = "ralts",
   poke_custom_prefix = "maelmc",
   pos = {x = 8, y = 2},
-  config = {extra = {mult_mod = 2, rounds = 4}},
+  config = {extra = {mult_mod = 1, rounds = 4}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     --info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_high_priestess'}
@@ -14,7 +14,7 @@ local ralts={
     end
     return {vars = {card.ability.extra.mult_mod, mult, card.ability.extra.rounds}}
   end,
-  rarity = 1,
+  rarity = 2,
   cost = 6,
   stage = "Base",
   ptype = "Psychic",
@@ -92,7 +92,7 @@ local kirlia={
   name = "kirlia",
   poke_custom_prefix = "maelmc",
   pos = {x = 9, y = 2},
-  config = {extra = {mult_mod = 5, rounds = 5}},
+  config = {extra = {mult_mod = 2, rounds = 5}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     --info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_black_hole'}
@@ -103,8 +103,8 @@ local kirlia={
     end
     return {vars = {card.ability.extra.mult_mod, mult, card.ability.extra.rounds}}
   end,
-  rarity = 2,
-  cost = 8,
+  rarity = "poke_safari",
+  cost = 7,
   stage = "One",
   ptype = "Psychic",
   atlas = "Pokedex3-Maelmc",
@@ -186,7 +186,7 @@ local gardevoir={
   name = "gardevoir",
   poke_custom_prefix = "maelmc",
   pos = {x = 0, y = 3},
-  config = {extra = {Xmult_mod = 0.05}},
+  config = {extra = {Xmult_mod = 0.1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     --info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_black_hole'}
@@ -282,6 +282,7 @@ local mega_gardevoir={
   config = {extra = {blackhole_amount = 2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Black Hole"}}
     return {vars = {card.ability.extra.blackhole_amount}}
   end,
   rarity = "poke_mega",

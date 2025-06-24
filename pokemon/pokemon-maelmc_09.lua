@@ -30,10 +30,13 @@ local glimmet={
   atlas = "Pokedex9-Maelmc",
   blueprint_compat = true,
   calculate = function(self, card, context)
+    -- adding hazards
     if context.setting_blind then
       poke_add_hazards(card.ability.extra.hazard_ratio)
       poke_add_hazards(card.ability.extra.hazard_ratio)
     end
+
+    -- scoring hazards
     if context.individual and not context.end_of_round and context.cardarea == G.hand and SMODS.has_enhancement(context.other_card, "m_poke_hazard") then
       if context.other_card.debuff then
           return {
@@ -87,11 +90,14 @@ local glimmora={
   atlas = "Pokedex9-Maelmc",
   blueprint_compat = true,
   calculate = function(self, card, context)
+    -- adding hazards
     if context.setting_blind then
       for i = 1,card.ability.extra.hazard_per_ratio do
         poke_add_hazards(card.ability.extra.hazard_ratio)
       end
     end
+
+    -- scoring hazards
     if context.individual and not context.end_of_round and context.cardarea == G.hand and SMODS.has_enhancement(context.other_card, "m_poke_hazard") then
       if context.other_card.debuff then
           return {
@@ -121,9 +127,12 @@ local ogerpon={
   poke_custom_prefix = "maelmc",
   pos = {x = 0, y = 12},
   soul_pos = {x = 1, y = 12},
-  config = {extra = {}},
-  loc_vars = function(self, info_queue, center)
-    type_tooltip(self, info_queue, center)
+  config = {extra = {money = 0, money_mod = 2, retriggers = 1}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Leaf Stone"}}
+    info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
+    return {vars = {card.ability.extra.money_mod, card.ability.extra.money, card.ability.extra.retriggers}}
   end,
   rarity = 4, 
   cost = 20,
@@ -132,9 +141,51 @@ local ogerpon={
   atlas = "Pokedex9-Maelmc",
   blueprint_compat = true,
   calculate = function(self, card, context)
+    -- cannot change type
+    --[[if not context.blueprint then
+      local type = get_type(card)
+      if type ~= self.ptype then
+        apply_type_sticker(card, card.ability.extra.type)
+      end
+    end]]
+
+    -- increase money earned when lucky trigger
+    if context.individual and context.cardarea == G.play and context.other_card.lucky_trigger and not context.blueprint then
+      card.ability.extra.money = card.ability.extra.money  + card.ability.extra.money_mod
+      return {
+          message = localize("maelmc_ivy_cudgle"),
+          colour = G.C.MONEY,
+          card = card
+        }
+    end
+
+    -- retrigger lucky
+    if context.repetition and context.cardarea == G.play and SMODS.has_enhancement(context.other_card,"m_lucky") then
+      return {
+        message = localize('k_again_ex'),
+        repetitions = card.ability.extra.retriggers,
+        card = card
+      }
+    end
+
   end,
+  calc_dollar_bonus = function(self, card)
+    if card.ability.extra.money > 0 then
+      return ease_poke_dollars(card, "ogerpon", card.ability.extra.money, true)
+    end
+	end,
   set_ability = function(self, card, initial, delay_sprites)
     apply_type_sticker(card, "Grass")
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    if not from_debuff then
+      local _card = create_card("Item", G.consumeables, nil, nil, nil, nil, "c_poke_leafstone")
+      local edition = {negative = true}
+      _card:set_edition(edition, true)
+      _card:add_to_deck()
+      G.consumeables:emplace(_card)
+      card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('poke_plus_pokeitem'), colour = G.C.FILTER})
+    end
   end,
 }
 
@@ -143,9 +194,12 @@ local ogerpon_wellspring={
   poke_custom_prefix = "maelmc",
   pos = {x = 0, y = 12},
   soul_pos = {x = 2, y = 12},
-  config = {extra = {}},
-  loc_vars = function(self, info_queue, center)
-    type_tooltip(self, info_queue, center)
+  config = {extra = {Xchips_multi = 3, chips = 30}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Water Stone"}}
+    info_queue[#info_queue+1] = G.P_CENTERS.m_bonus
+    return {vars = {card.ability.extra.Xchips_multi, card.ability.extra.chips}}
   end,
   rarity = 4, 
   cost = 20,
@@ -156,13 +210,59 @@ local ogerpon_wellspring={
   no_collection = true,
   blueprint_compat = true,
   calculate = function(self, card, context)
+    -- cannot change type
+    --[[if not context.blueprint then
+      local type = get_type(card)
+      if type ~= self.ptype then
+        apply_type_sticker(card, card.ability.extra.type)
+      end
+    end]]
+
+    -- bonus cards give x3 their total chips on top of their chips, like Wigglytuff
+    if context.individual and context.cardarea == G.play and SMODS.has_enhancement(context.other_card, "m_bonus") then
+      if not context.end_of_round and not context.before and not context.after and not context.other_card.debuff then
+        local total_chips = poke_total_chips(context.other_card)
+        context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus or 0
+        context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + card.ability.extra.chips
+        return {
+          message = localize("maelmc_ivy_cudgle"),
+          colour = G.C.CHIPS,
+          chips = total_chips*card.ability.extra.Xchips_multi,
+          card = card
+        }
+      end
+    end
+
+    --[[
+    -- give fourth root of current chips as xmult
+    if context.cardarea == G.jokers and context.scoring_hand and context.joker_main then
+      -- _G.hand_chips for current total chips
+      -- _G.mult for current total mult
+      local current_chips = _G.hand_chips
+      return {
+        colour = G.C.MULT,
+        xmult = (current_chips)^(1/4),
+        card = card
+      }
+    end]]
+
   end,
   in_pool = function(self)
     return false
   end,
   set_ability = function(self, card, initial, delay_sprites)
     apply_type_sticker(card, "Water")
-  end
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    if not from_debuff then
+      local _card = create_card("Item", G.consumeables, nil, nil, nil, nil, "c_poke_waterstone")
+      local edition = {negative = true}
+      _card:set_edition(edition, true)
+      _card:add_to_deck()
+      G.consumeables:emplace(_card)
+      card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('poke_plus_pokeitem'), colour = G.C.FILTER})
+    end
+  end,
 }
 
 local ogerpon_hearthflame={
@@ -170,9 +270,14 @@ local ogerpon_hearthflame={
   poke_custom_prefix = "maelmc",
   pos = {x = 0, y = 12},
   soul_pos = {x = 3, y = 12},
-  config = {extra = {}},
-  loc_vars = function(self, info_queue, center)
-    type_tooltip(self, info_queue, center)
+  config = {extra = {Xmult_multi = 3, delete = 2}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Fire Stone"}}
+    info_queue[#info_queue+1] = G.P_CENTERS.m_mult
+    info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"One Punch Idiot, Gem"}}
+    local hearthflame_card = G.GAME.current_round.maelmc_hearthflame_card or {rank = "Ace", suit = "Spades"}
+    return {vars = {localize(hearthflame_card.rank, "ranks"), localize(hearthflame_card.suit, "suits_plural"), card.ability.extra.Xmult_multi, card.ability.extra.delete, colours = {G.C.SUITS[hearthflame_card.suit]}}}
   end,
   rarity = 4, 
   cost = 20,
@@ -183,13 +288,69 @@ local ogerpon_hearthflame={
   no_collection = true,
   blueprint_compat = true,
   calculate = function(self, card, context)
+    -- cannot change type
+    --[[if not context.blueprint then
+      local type = get_type(card)
+      if type ~= self.ptype then
+        apply_type_sticker(card, card.ability.extra.type)
+      end
+    end]]
+
+    -- delete n non-mult cards held in hand when 1st hand played has 1 card
+    if context.before and G.GAME.current_round.hands_played == 0 and context.full_hand and #context.full_hand == 1 then
+      local deleted = nil
+      for _ = 1,card.ability.extra.delete do
+        local non_mult_card = {}
+        for _, v in pairs(G.hand.cards) do
+          if not SMODS.has_enhancement(v, "m_mult") then
+            non_mult_card[#non_mult_card+1] = v
+          end
+        end
+        local to_delete = pseudorandom_element(non_mult_card, 'maelmc_ogerpon_hearthflame')
+        if to_delete then
+          deleted = 1
+          poke_remove_card(to_delete, card)
+        end
+      end
+      if deleted then
+        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("maelmc_ivy_cudgle"), colour = G.C.MULT})
+      end
+    end
+
+    -- scoring
+    if context.individual and context.cardarea == G.play and
+      context.other_card:get_id() == G.GAME.current_round.maelmc_hearthflame_card.id and
+      context.other_card:is_suit(G.GAME.current_round.maelmc_hearthflame_card.suit) and
+      SMODS.has_enhancement(context.other_card,"m_mult") then
+        return {
+            colour = G.C.MULT,
+            xmult = card.ability.extra.Xmult_multi
+        }
+    end
+
+    -- juice until 1st hand played
+    if context.first_hand_drawn and not context.blueprint then
+      local eval = function() return (G.GAME.current_round.hands_played == 0) and not G.RESET_JIGGLES end
+      juice_card_until(card, eval, true)
+    end
+
   end,
   in_pool = function(self)
     return false
   end,
   set_ability = function(self, card, initial, delay_sprites)
     apply_type_sticker(card, "Fire")
-  end
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    if not from_debuff then
+      local _card = create_card("Item", G.consumeables, nil, nil, nil, nil, "c_poke_firestone")
+      local edition = {negative = true}
+      _card:set_edition(edition, true)
+      _card:add_to_deck()
+      G.consumeables:emplace(_card)
+      card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('poke_plus_pokeitem'), colour = G.C.FILTER})
+    end
+  end,
 }
 
 local ogerpon_cornerstone={
@@ -198,8 +359,10 @@ local ogerpon_cornerstone={
   pos = {x = 0, y = 12},
   soul_pos = {x = 4, y = 12},
   config = {extra = {}},
-  loc_vars = function(self, info_queue, center)
-    type_tooltip(self, info_queue, center)
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Hard Stone"}}
+    info_queue[#info_queue+1] = G.P_CENTERS.m_stone
   end,
   rarity = 4, 
   cost = 20,
@@ -211,20 +374,60 @@ local ogerpon_cornerstone={
   blueprint_compat = true,
   calculate = function(self, card, context)
     -- stone cards as their own rank in the lovely patch
+    -- rank defined in pokermon-maelmc.lua
 
+    -- cannot change type
+    --[[if not context.blueprint then
+      local type = get_type(card)
+      if type ~= self.ptype then
+        apply_type_sticker(card, card.ability.extra.type)
+      end
+    end]]
+    
   end,
   in_pool = function(self)
     return false
   end,
   set_ability = function(self, card, initial, delay_sprites)
     apply_type_sticker(card, "Earth")
-  end
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    if not from_debuff then
+      local _card = create_card("Item", G.consumeables, nil, nil, nil, nil, "c_poke_hardstone")
+      local edition = {negative = true}
+      _card:set_edition(edition, true)
+      _card:add_to_deck()
+      G.consumeables:emplace(_card)
+      card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('poke_plus_pokeitem'), colour = G.C.FILTER})
+    end
+  end,
 }
+
+-- function that determines what card ogerpon hearthflame uses for the round, copied from The Idol
+local function reset_maelmc_hearthflame_card()
+    G.GAME.current_round.maelmc_hearthflame_card = { rank = 'Ace', suit = 'Spades' }
+    local valid_hearthflame_cards = {}
+    for _, playing_card in ipairs(G.playing_cards) do
+        if SMODS.has_enhancement(playing_card,"m_mult") then
+            valid_hearthflame_cards[#valid_hearthflame_cards + 1] = playing_card
+        end
+    end
+    local hearthflame_card = pseudorandom_element(valid_hearthflame_cards, 'maelmc_ogerpon_hearthflame' .. G.GAME.round_resets.ante)
+    if hearthflame_card then
+        G.GAME.current_round.maelmc_hearthflame_card.rank = hearthflame_card.base.value
+        G.GAME.current_round.maelmc_hearthflame_card.suit = hearthflame_card.base.suit
+        G.GAME.current_round.maelmc_hearthflame_card.id = hearthflame_card.base.id
+    end
+end
+
+function SMODS.current_mod.reset_game_globals(run_start)
+  reset_maelmc_hearthflame_card()
+end
 
 return {
   name = "Maelmc's Jokers Gen 9",
   list = {
     glimmet, glimmora,
-    --ogerpon, ogerpon_wellspring, ogerpon_hearthflame, ogerpon_cornerstone,
+    ogerpon, ogerpon_wellspring, ogerpon_hearthflame, ogerpon_cornerstone,
   },
 }
