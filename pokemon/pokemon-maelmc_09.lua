@@ -127,7 +127,7 @@ local ogerpon={
   poke_custom_prefix = "maelmc",
   pos = {x = 0, y = 12},
   soul_pos = {x = 1, y = 12},
-  config = {extra = {money = 0, money_mod = 2, retriggers = 1}},
+  config = {extra = {money = 2, money_mod = 2, retriggers = 1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Leaf Stone"}}

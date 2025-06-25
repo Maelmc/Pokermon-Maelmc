@@ -67,12 +67,12 @@ local malamar={
   name = "malamar",
   poke_custom_prefix = "maelmc",
   pos = {x = 9, y = 2},
-  config = {extra = {Xmult = 1.5}},
+  config = {extra = {Xmult_multi = 1.5}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    return {vars = {abbr.Xmult}}
+    return {vars = {abbr.Xmult_multi}}
   end,
   rarity = "poke_safari",
   cost = 8,
@@ -95,7 +95,7 @@ local malamar={
     if context.individual and context.cardarea == G.play and context.other_card.maelmc_flipped then
       if not context.end_of_round and not context.before and not context.after and not context.other_card.debuff then
         return {
-          Xmult = card.ability.extra.Xmult ,
+          Xmult = card.ability.extra.Xmult_multi ,
           card = card
         }
       end
