@@ -131,6 +131,7 @@ local ogerpon={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Leaf Stone"}}
+    --info_queue[#info_queue+1] = { set = 'Item', key = 'c_poke_leafstone', vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), 3}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
     return {vars = {card.ability.extra.money_mod, card.ability.extra.money, card.ability.extra.retriggers}}
   end,
@@ -198,6 +199,7 @@ local ogerpon_wellspring={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Water Stone"}}
+    --info_queue[#info_queue+1] = {set = 'Item', key = 'c_poke_waterstone', vars = {1, 50}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_bonus
     return {vars = {card.ability.extra.Xchips_multi, card.ability.extra.chips}}
   end,
@@ -274,6 +276,7 @@ local ogerpon_hearthflame={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Fire Stone"}}
+    --info_queue[#info_queue+1] = { set = 'Item', key = 'c_poke_firestone', vars = {4}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_mult
     info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"One Punch Idiot, Gem"}}
     local hearthflame_card = G.GAME.current_round.maelmc_hearthflame_card or {rank = "Ace", suit = "Spades"}
@@ -358,11 +361,13 @@ local ogerpon_cornerstone={
   poke_custom_prefix = "maelmc",
   pos = {x = 0, y = 12},
   soul_pos = {x = 4, y = 12},
-  config = {extra = {}},
+  config = {extra = {mult = 1, mult_divide = 10}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Hard Stone"}}
+    --info_queue[#info_queue+1] = { set = 'Item', key = 'c_poke_hardstone', vars = {1, 10}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_stone
+    return {vars = {card.ability.extra.mult, card.ability.extra.mult_divide}}
   end,
   rarity = 4, 
   cost = 20,
@@ -383,6 +388,30 @@ local ogerpon_cornerstone={
         apply_type_sticker(card, card.ability.extra.type)
       end
     end]]
+
+    if context.before and context.cardarea == G.jokers then
+      local stonecount = 0
+      for _, v in pairs(context.full_hand) do
+        if SMODS.has_enhancement(v,"m_stone") then
+          stonecount = stonecount + 1
+        end
+      end
+      if stonecount >= 3 or stonecount == 2 and (context.scoring_name == "Pair" or context.scoring_name == "Two Pair" or context.scoring_name == "Full House") then
+        return {
+          message = localize("maelmc_ivy_cudgle"),
+          colour = G.C.GREY,
+        }
+      end
+    end
+
+    -- stones give n/10th of their chips as +mult
+    if context.individual and context.cardarea == G.play and SMODS.has_enhancement(context.other_card,"m_stone") then
+      local total_chips = poke_total_chips(context.other_card)
+      return {
+          colour = G.C.MULT,
+          mult = total_chips * card.ability.extra.mult / card.ability.extra.mult_divide
+      }
+    end
     
   end,
   in_pool = function(self)
