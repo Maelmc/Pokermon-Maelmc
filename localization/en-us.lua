@@ -388,7 +388,7 @@ return {
                 }
             },
             fitem = {
-                name = "Form-chane Item",
+                name = "Form-change Item",
                 text = {
                     "When consumed, changes form of leftmost",
                     "or selected {C:attention}eligible{} Joker",
