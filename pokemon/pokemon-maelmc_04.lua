@@ -18,6 +18,7 @@ local spiritomb={
   stage = "Basic",
   ptype = "Psychic",
   atlas = "Pokedex4-Maelmc",
+  aux_poke = true,
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.playing_card_added and not card.getting_sliced and #G.playing_cards >= card.ability.extra.to_negative and not (card.edition and card.edition.negative) then
@@ -39,7 +40,10 @@ local spiritomb={
   end,
   remove_from_deck = function(self, card, from_debuff)
     G.hand:change_size(card.ability.extra.h_size)
-  end
+  end,
+  in_pool = function(self)
+    return false
+  end,
 }
 
 --[[local spiritombl={
