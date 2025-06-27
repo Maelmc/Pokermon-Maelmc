@@ -374,6 +374,18 @@ return {
                     "{C:inactive,s:0.8}(Changes form using a {C:attention,s:0.8}Mask{C:inactive,s:0.8})",
                 }
             },
+            j_maelmc_pokewalker = {
+                name = "Pokéwalker",
+                text = {
+                    "Sell a Joker to take it",
+                    "for a walk",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Sell this Joker to retrieve",
+                    "the Joker sold and {C:pink}Energize{} it",
+                    "by {C:attention}1{} for each round walked with",
+                    "{C:inactive}(Currently walking {C:attention}#1#{C:inactive} for {C:attention}#2#{C:inactive} rounds)"
+                }
+            }
         },
 
         Other = {
@@ -425,6 +437,8 @@ return {
             maelmc_clubs = "Clubs",
             maelmc_hearts = "Hearts",
             maelmc_ivy_cudgle = "Ivy Cudgle!",
+            maelmc_pokewalker_taken = "Taken",
+            maelmc_pokewalker_walking = "Walking",
         }
     }
 }

@@ -188,9 +188,135 @@ local odd_keystone={
   end,
 }
 
+-- Pokéwalker
+local pokewalker = {
+  name = "pokewalker",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 0, y = 2},
+  config = {extra = {walk_info = {name = nil, key = nil, edition = nil, seal = nil, type_sticker = nil, ability = {}}, walked_for = -2}}, -- -2 = free to walk smth, -1 = just took the joker sold, 0+ = walking
+  loc_vars = function(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'energize'}
+    if card.ability.extra.walk_info["name"] then
+      local wfor = card.ability.extra.walked_for
+      if wfor < 0 then wfor = 0 end
+      return {vars = {card.ability.extra.walk_info["name"], wfor}}
+    else
+      return {vars = {"None", 0}}
+    end
+  end,
+  rarity = 2,
+  cost = 8,
+  stage = "Other",
+  atlas = "Others-Maelmc",
+  blueprint_compat = false,
+  eternal_compat = false,
+  calculate = function(self, card, context)
+    -- getting the 1st joker sold when this is possessed
+    if context.selling_card and not context.selling_self and not context.blueprint then
+      if card.ability.extra.walked_for == -1 then
+        card.ability.extra.walked_for = 0
+        return
+      end
+      if not card.ability.extra.walk_info["name"] then
+        local pokewalkers = SMODS.find_card("j_maelmc_pokewalker")
+        for _, v in pairs(pokewalkers) do
+          if v == card then
+            break
+          end
+          if v.ability.extra.walked_for == -1 then -- if another pokewalker already took this joker, end
+            return
+          end
+        end
+        local walking = context.card
+        card.ability.extra.walk_info["key"] = walking.config.center_key
+        card.ability.extra.walk_info["name"] = G.localization.descriptions["Joker"][walking.config.center_key]["name"]
+        card.ability.extra.walk_info["edition"] = walking.edition
+        card.ability.extra.walk_info["seal"] = walking.seal
+        card.ability.extra.walk_info["type_sticker"] = type_sticker_applied(walking)
+        for k, v in pairs(walking.ability) do
+          card.ability.extra.walk_info["ability"][k] = v
+        end
+        card.ability.extra.walked_for = -1
+        return {
+          message = localize("maelmc_pokewalker_taken")
+        }
+      end
+    end
+
+    -- when selling this, recreate the original joker and energize it
+    if card.ability.extra.walk_info["name"] and context.selling_self and not context.blueprint then
+      local walked = card.ability.extra.walk_info
+      local temp_card = {set = "Joker", area = G.jokers, key = walked["key"]}
+      local reward_card = SMODS.create_card(temp_card)
+
+      if walked["edition"] then
+        reward_card:set_edition(walked["edition"],true)
+      end
+      if walked["seal"] then
+        reward_card:set_seal(walked["seal"],true)
+      end
+      if walked["type_sticker"] then
+        apply_type_sticker(reward_card,walked["type_sticker"])
+      end
+      for k, v in pairs(walked["ability"]) do
+        reward_card.ability[k] = v
+      end
+
+      if not get_type(reward_card) and card.ability.extra.walked_for >= 1 then
+        apply_type_sticker(reward_card,"Colorless")
+      end
+
+      reward_card:add_to_deck()
+      G.jokers:emplace(reward_card)
+      reward_card:start_materialize()
+
+      for _ = 1, card.ability.extra.walked_for do
+        if can_increase_energy(reward_card) then
+          increment_energy(reward_card,get_type(reward_card))
+        end
+      end
+    end
+
+    -- increasing walked rounds
+    if card.ability.extra.walk_info["name"] and context.end_of_round and context.cardarea == G.jokers and not context.blueprint then
+      if card.ability.extra.walked_for == -1 then
+        card.ability.extra.walked_for = 0
+      end
+      card.ability.extra.walked_for = card.ability.extra.walked_for + 1
+      return {
+        message = localize("maelmc_pokewalker_walking")
+      }
+    end
+
+  end,
+}
+
+--[[
+
+local name = {
+  name = "name",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 0, y = 0},
+  config = {extra = {}},
+  loc_vars = function(self, info_queue, card)
+    return {vars = {}}
+  end,
+  rarity = 3,
+  cost = 8,
+  stage = "Other",
+  atlas = "Custom-Maelmc",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+}
+
+]]
+
 return {
   name = "Maelmc's Jokers Other",
   list = {
-    gym_leader, odd_keystone
+    gym_leader,
+    odd_keystone,
+    pokewalker
   },
 }
