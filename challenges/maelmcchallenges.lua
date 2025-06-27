@@ -62,7 +62,6 @@ local spiritomb = {
         {id = "j_poke_tall_grass"},
     },
     consumeables = {
-        {id = "c_soul"},
         {id = "c_hermit"},
     },
 }
