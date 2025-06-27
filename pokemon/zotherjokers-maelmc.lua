@@ -304,6 +304,7 @@ local name = {
   rarity = 3,
   cost = 8,
   stage = "Other",
+  ptype = "Earth",
   atlas = "Custom-Maelmc",
   blueprint_compat = true,
   calculate = function(self, card, context)
