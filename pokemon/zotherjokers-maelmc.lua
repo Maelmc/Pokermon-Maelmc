@@ -211,35 +211,49 @@ local pokewalker = {
   blueprint_compat = false,
   eternal_compat = false,
   calculate = function(self, card, context)
+
     -- getting the 1st joker sold when this is possessed
     if context.selling_card and not context.selling_self and not context.blueprint then
       if card.ability.extra.walked_for == -1 then
         card.ability.extra.walked_for = 0
         return
       end
-      if not card.ability.extra.walk_info["name"] then
-        local pokewalkers = SMODS.find_card("j_maelmc_pokewalker")
-        for _, v in pairs(pokewalkers) do
-          if v == card then
-            break
+      if context.card.config.center.rarity then --if it's a joker
+        if not card.ability.extra.walk_info["name"] then
+
+          -- check position in jokers, only the leftmost pokewalker can get the pokemon
+          local pokewalkers = SMODS.find_card("j_maelmc_pokewalker")
+          for _, v in pairs(pokewalkers) do
+            if v == card then
+              break
+            end
+            if v.ability.extra.walked_for == -1 then -- if another pokewalker already took this joker, end
+              return
+            end
           end
-          if v.ability.extra.walked_for == -1 then -- if another pokewalker already took this joker, end
-            return
+
+          local walking = context.card
+
+          -- if it's a mega, devolve it
+          if walking.config.center.rarity == "poke_mega" then
+            local forced_key = get_previous_evo(walking, true)
+            poke_backend_evolve(walking, forced_key)
           end
+
+          -- get joker infos
+          card.ability.extra.walk_info["key"] = walking.config.center_key
+          card.ability.extra.walk_info["name"] = G.localization.descriptions["Joker"][walking.config.center_key]["name"]
+          card.ability.extra.walk_info["edition"] = walking.edition
+          card.ability.extra.walk_info["seal"] = walking.seal
+          card.ability.extra.walk_info["type_sticker"] = type_sticker_applied(walking)
+          for k, v in pairs(walking.ability) do
+            card.ability.extra.walk_info["ability"][k] = v
+          end
+          card.ability.extra.walked_for = -1
+          return {
+            message = localize("maelmc_pokewalker_taken")
+          }
         end
-        local walking = context.card
-        card.ability.extra.walk_info["key"] = walking.config.center_key
-        card.ability.extra.walk_info["name"] = G.localization.descriptions["Joker"][walking.config.center_key]["name"]
-        card.ability.extra.walk_info["edition"] = walking.edition
-        card.ability.extra.walk_info["seal"] = walking.seal
-        card.ability.extra.walk_info["type_sticker"] = type_sticker_applied(walking)
-        for k, v in pairs(walking.ability) do
-          card.ability.extra.walk_info["ability"][k] = v
-        end
-        card.ability.extra.walked_for = -1
-        return {
-          message = localize("maelmc_pokewalker_taken")
-        }
       end
     end
 
