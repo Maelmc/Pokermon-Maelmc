@@ -94,6 +94,12 @@ Cornerstone is more gimmick than the rest. It allows to play Pair, Two Pair, 3oa
 
 All 4 are subject to change in the future, especially Hearthflame since between the Mask and the Fire Stone you create a lot of Mult cards which goes against the fact you want to have as few different mult cards as possible for its effect, and Cornerstone since it might be a bit too weak right now.
 
+| Joker | Effect |
+| ------ | ------ |
+| Pokéwalker | Sell a Joker to take it for a walk<br/>Sell this Joker to retrieve the Joker sold and Energize by 1 for each round walked with |
+
+This is a variant of the Jelly Donut joker. The upside is that it energizes at full value, and not half value with Colorless energies. The downside is that, well, you don't have the joker anymore until you sell the Pokéwalker. It also has the secondary effect of giving a Colorless sticker to jokers that don't have a type, so that they can still be energized.
+
 
 ## Consumables
 
