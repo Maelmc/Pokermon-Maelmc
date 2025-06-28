@@ -18,16 +18,25 @@ local gym_leader={
   blueprint_compat = true,
   calculate = function(self, card, context)
     
-    -- Gym Leader challenge management
+    -- Gym Challenge challenge management
     if G.GAME.modifiers.maelmc_gym_challenge and not G.GAME.maelmc_gym_leader_type then
-      G.GAME.maelmc_gym_leader_type = card.ability.extra.form
+      if card.ability.extra.form == "Darkness" then
+        G.GAME.maelmc_gym_leader_type = "Dark"
+      else
+        G.GAME.maelmc_gym_leader_type = card.ability.extra.form
+      end
       G.GAME.perishable_rounds = 3
     end
 
     if G.GAME.modifiers.maelmc_gym_challenge then
       for _, v in ipairs(G.jokers.cards) do
-        if not (v == card) and not (v.ability.perishable) and not (get_type(v) == G.GAME.maelmc_gym_leader_type) then
-          v:set_perishable(true)
+        if not (v == card) then 
+          if not (v.ability.perishable) and not (get_type(v) == G.GAME.maelmc_gym_leader_type) then
+            v:set_perishable(true) -- give perishable if not the type of the gym leader
+          end
+          if (v.ability.perishable) and (get_type(v) == G.GAME.maelmc_gym_leader_type) then
+            v.ability.perishable = nil -- remove perishable if it became the type of the gym leader
+          end
         end
       end
     end
