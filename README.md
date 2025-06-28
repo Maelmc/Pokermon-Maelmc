@@ -83,7 +83,7 @@ All pseudo legendaries are based on a specific hand. On the Pokermon Discord ser
 | ------ | ------ |
 | Ogerpon | Holding Negative Leaf Stone<br/>Increases earned money at the end of round by \$2 for each Lucky card that triggered (starts at \$2)<br/>Retriggers all Lucky cards |
 | Ogerpon Wellspring | Holding Negative Water Stone<br/>Scored Bonus cards give X3 their total chips then permanently gain +30 Chips |
-| Ogerpon hearthflame | Holding Negative Fire Stone<br/>Each played Mult [rank] of [suit] gives X3 Mult when scored (card changed every round)<br/>If first played hand has exactly 1 card, destroy 2 random non-Mult cards held in hand|
+| Ogerpon Hearthflame | Holding Negative Fire Stone<br/>Each played Mult [rank] of [suit] gives X3 Mult when scored (card changed every round)<br/>If first played hand has exactly 1 card, destroy 2 random non-Mult cards held in hand|
 | Ogerpon Cornerstone | Holding Negative Hard Stone<br/>Stone cards count as their own rank<br/>Scored Stone cards give + Mult equal to 1/10 of their total chips |
 
 Each Ogerpon has 2 effect that encourages playing cards with a specific enhancement: Lucky, Bonus, Mult and Stone.
@@ -122,20 +122,9 @@ Hazard Stack is an hazard-focused deck that would get more hazards in general th
 
 ## Challenges
 
-They are not challenges in the sense that they are not challenging. It's just a way to test the different jokers I created. Some might be a bit weird since I use challenges to test the Jokers.
-
-| Name | Starting jokers | Starting consumables |
-| ------ | ------ | ------ |
-| Glimmora | Jynx, Jirachi (Copy), Glimmora, Gigalith, Golurk | N/A |
-| Copperajah | Jynx, Copperajah, Magnezone, Aggron, Hitmonchan | Mega Stone, Metal Coat |
-| Odd Keystone | Odd Keystone, Persian, Magmortar, Tall Grass | The Soul, The Hermit |
-| Gym Leader | Gym Leader | N/A |
-| Kecleon | Kecleon, Treasure Eatery | Dragon Scale, Poké Ball |
-| Lunatone & Solrock | Lunatone, Solrock, Venonat | The World, The Stars |
-| Inkay | Inkay, Raticate | N/A |
-| Binacle | Mankey, Oddish, Binacle | N/A |
-| Ralts | Sentret, Natu, Ralts, Elgyem | Mega Stone |
-| Gible | Gible | Mega Stone |
+| Name | Description |
+| ------ | ------ |
+| Gym Challenge | Jokers not matching the Gym Leader's Type perish after 3 rounds |
 
 ## Localization
 

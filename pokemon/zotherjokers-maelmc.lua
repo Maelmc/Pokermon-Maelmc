@@ -18,6 +18,21 @@ local gym_leader={
   blueprint_compat = true,
   calculate = function(self, card, context)
     
+    -- Gym Leader challenge management
+    if G.GAME.modifiers.maelmc_gym_challenge and not G.GAME.maelmc_gym_leader_type then
+      G.GAME.maelmc_gym_leader_type = card.ability.extra.form
+      G.GAME.perishable_rounds = 3
+    end
+
+    if G.GAME.modifiers.maelmc_gym_challenge then
+      for _, v in ipairs(G.jokers.cards) do
+        if not (v == card) and not (v.ability.perishable) and not (get_type(v) == G.GAME.maelmc_gym_leader_type) then
+          v:set_perishable(true)
+        end
+      end
+    end
+
+    -- Regular actions
     if context.setting_blind and context.blind.boss and not context.blueprint then
       card.ability.extra.boss = true
     end

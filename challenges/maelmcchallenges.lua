@@ -1,4 +1,4 @@
-local glimmora = {
+--[[local glimmora = {
     object_type = "Challenge",
     key = "glimmora",
     jokers = {
@@ -8,9 +8,9 @@ local glimmora = {
         {id = "j_poke_gigalith"},
         {id = "j_poke_golurk"},
     },
-}
+}]]
 
-local copperajah = {
+--[[local copperajah = {
     object_type = "Challenge",
     key = "copperajah",
     jokers = {
@@ -24,7 +24,7 @@ local copperajah = {
         {id = "c_poke_megastone"},
         {id = "c_poke_metalcoat"},
     },
-}
+}]]
 
 --[[local spiritomb = {
     object_type = "Challenge",
@@ -52,7 +52,7 @@ local copperajah = {
     },
 }]]
 
-local spiritomb = {
+--[[local spiritomb = {
     object_type = "Challenge",
     key = "spiritomb",
     jokers = {
@@ -64,17 +64,22 @@ local spiritomb = {
     consumeables = {
         {id = "c_hermit"},
     },
-}
+}]]
 
-local gym_leader = {
+local gym_challenge = {
     object_type = "Challenge",
-    key = "gym_leader",
+    key = "gym_challenge",
+    rules = {
+        custom = {
+            {id = 'maelmc_gym_challenge'}
+        },
+    },
     jokers = {
-        {id = "j_maelmc_gym_leader"},
+        {id = "j_maelmc_gym_leader", eternal = true, edition = 'negative'},
     },
 }
 
-local kecleon = {
+--[[local kecleon = {
     object_type = "Challenge",
     key = "kecleon",
     jokers = {
@@ -85,9 +90,9 @@ local kecleon = {
         {id = "c_poke_dragonscale"},
         {id = "c_poke_pokeball"},
     },
-}
+}]]
 
-local lunatone_solrock = {
+--[[local lunatone_solrock = {
     object_type = "Challenge",
     key = "lunatone_solrock",
     jokers = {
@@ -99,18 +104,18 @@ local lunatone_solrock = {
         {id = "c_world"},
         {id = "c_star"},
     },
-}
+}]]
 
-local inkay = {
+--[[local inkay = {
     object_type = "Challenge",
     key = "inkay",
     jokers = {
         {id = "j_maelmc_inkay"},
         {id = "j_poke_raticate"},
     },
-}
+}]]
 
-local binacle = {
+--[[local binacle = {
     object_type = "Challenge",
     key = "binacle",
     jokers = {
@@ -135,9 +140,9 @@ local binacle = {
         },
       type = 'Challenge Deck',
     },
-}
+}]]
 
-local ralts = {
+--[[local ralts = {
     object_type = "Challenge",
     key = "ralts",
     jokers = {
@@ -149,9 +154,9 @@ local ralts = {
     consumeables = {
         {id = "c_poke_megastone"},
     },
-}
+}]]
 
-local gible = {
+--[[local gible = {
     object_type = "Challenge",
     key = "gible",
     jokers = {
@@ -177,7 +182,7 @@ local gible = {
     consumeables = {
         {id = "c_poke_megastone"},
     },
-}
+}]]
 
 --[[local ogerpon = {
     object_type = "Challenge",
@@ -207,15 +212,15 @@ local gible = {
     },
 }]]
 
-local teal = {
+--[[local teal = {
     object_type = "Challenge",
     key = "teal",
     jokers = {
         {id = "j_maelmc_ogerpon"},
     }
-}
+}]]
 
-local wellspring = {
+--[[local wellspring = {
     object_type = "Challenge",
     key = "wellspring",
     jokers = {
@@ -224,9 +229,9 @@ local wellspring = {
     consumeables = {
         {id = "c_maelmc_wellspringmask"},
     },
-}
+}]]
 
-local hearthflame = {
+--[[local hearthflame = {
     object_type = "Challenge",
     key = "hearthflame",
     jokers = {
@@ -235,9 +240,9 @@ local hearthflame = {
     consumeables = {
         {id = "c_maelmc_hearthflamemask"},
     },
-}
+}]]
 
-local cornerstone = {
+--[[local cornerstone = {
     object_type = "Challenge",
     key = "cornerstone",
     jokers = {
@@ -246,11 +251,12 @@ local cornerstone = {
     consumeables = {
         {id = "c_maelmc_cornerstonemask"},
     },
-}
+}]]
 
 return {name = "Challenges",
         list = {
-            glimmora,
+            gym_challenge,
+            --[[glimmora,
             copperajah,
             spiritomb,
             gym_leader,
@@ -261,6 +267,6 @@ return {name = "Challenges",
             ralts,
             gible,
             --ogerpon,
-            teal, wellspring, hearthflame, cornerstone,
+            teal, wellspring, hearthflame, cornerstone,]]
         }
 }

@@ -411,7 +411,7 @@ return {
     },
     misc = {
         challenge_names = {
-            c_maelmc_glimmora = "Glimmora",
+            --[[c_maelmc_glimmora = "Glimmora",
             c_maelmc_copperajah = "Copperajah",
             --c_maelmc_spiritomb = "Spiritomb's Short Yet Strong Hand",
             c_maelmc_spiritomb = "Odd Keystone",
@@ -425,7 +425,8 @@ return {
             c_maelmc_teal = "Teal Mask",
             c_maelmc_wellspring = "Wellspring Mask",
             c_maelmc_hearthflame = "Hearthflame Mask",
-            c_maelmc_cornerstone = "Cornerstone Mask",
+            c_maelmc_cornerstone = "Cornerstone Mask",]]
+            c_maelmc_gym_challenge = "Gym Challenge",
         },
         dictionary = {
             maelmc_steel = "Steel!",
@@ -439,6 +440,9 @@ return {
             maelmc_ivy_cudgle = "Ivy Cudgle!",
             maelmc_pokewalker_taken = "Taken",
             maelmc_pokewalker_walking = "Walking",
-        }
+        },
+        v_text = {
+           ch_c_maelmc_gym_challenge = {"Jokers not matching the Gym Leader's {C:attention}Type{} {C:attention}perish{} after 3 rounds"},
+        },
     }
 }
