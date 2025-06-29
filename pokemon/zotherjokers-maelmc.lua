@@ -19,6 +19,7 @@ local gym_leader={
   calculate = function(self, card, context)
     
     -- Gym Challenge challenge management
+    -- Applying perish to cards in shop and boosters in lovely patch, the rest is here
     if G.GAME.modifiers.maelmc_gym_challenge and not G.GAME.maelmc_gym_leader_type then
       if card.ability.extra.form == "Darkness" then
         G.GAME.maelmc_gym_leader_type = "Dark"

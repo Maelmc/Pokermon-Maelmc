@@ -3,6 +3,7 @@ version = "1.0.0"
 dump_lua = true
 priority = 0
 
+# Ogerpon Cornestone "Stones have a rank"
 [[patches]]
 [patches.pattern]
 target = 'card.lua'
@@ -14,6 +15,16 @@ payload = '''
     if #ogerpons_cornerstone > 0 and self.ability.effect == 'Stone Card' then
         return SMODS.Ranks["maelmc_Ogerpon"].id
     end
+'''
 
+# Gym Challenge applying perish to jokers created (mainly for jokers in shop and boosters as Gym Leader already applies to jokers possessed)
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "if card.ability.consumeable and not skip_materialize then card:start_materialize() end"
+position = "after"
+match_indent = true
+payload = '''
+if _type == 'Joker' and G.GAME.modifiers.maelmc_gym_challenge and not (get_type(card) == G.GAME.maelmc_gym_leader_type) then card:set_perishable(true) end
 '''
 
