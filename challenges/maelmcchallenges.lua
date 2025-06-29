@@ -71,13 +71,30 @@ local gym_challenge = {
     key = "gym_challenge",
     rules = {
         custom = {
-            {id = 'maelmc_gym_challenge'}
+            {id = 'maelmc_gym_challenge'},
+            {id = 'maelmc_ban_no_perish'}
         },
     },
     jokers = {
         {id = "j_maelmc_gym_leader", eternal = true, edition = 'negative'},
+    }
+}
+
+local tildeathdouspart = {
+    object_type = "Challenge",
+    key = "tildeathdouspart",
+    rules = {
+        custom = {
+            {id = 'maelmc_perish_3'},
+            {id = 'maelmc_ban_no_perish'}
+        },
     },
-    button_colour = HEX('EA6F22')
+    restrictions = {
+        banned_cards = {}
+    },
+    jokers = {
+        {id = "j_maelmc_cursola", eternal = true, edition = 'negative'},
+    }
 }
 
 --[[local kecleon = {
@@ -257,6 +274,7 @@ local gym_challenge = {
 return {name = "Challenges",
         list = {
             gym_challenge,
+            tildeathdouspart,
             --[[glimmora,
             copperajah,
             spiritomb,

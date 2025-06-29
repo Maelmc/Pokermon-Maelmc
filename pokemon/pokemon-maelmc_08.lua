@@ -1,3 +1,58 @@
+-- Cursola
+local cursola={
+  name = "cursola",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 1, y = 4},
+  config = {extra = {Xmult_multi = 2, volatile = 'left', perish_rounds = 3}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return {vars = {card.ability.extra.Xmult_multi, card.ability.extra.perish_rounds}}
+  end,
+  rarity = "poke_safari",
+  cost = 9,
+  stage = "One",
+  ptype = "Psychic",
+  atlas = "Pokedex8-Maelmc",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  volatile = true,
+  calculate = function(self, card, context)
+
+    -- 'Til Death Do Us Part challenge perish rounds change
+    if G.GAME.modifiers.maelmc_perish_3 then
+      G.GAME.perishable_rounds = 3
+    end
+
+    -- add perish
+    if context.setting_blind and not context.blueprint and volatile_active(self, card, card.ability.extra.volatile) then
+      for _, target in ipairs(G.jokers.cards) do
+        if target ~= card and not (target.ability.eternal or target.ability.perishable) and target.config.center.perishable_compat then
+          target:set_perishable(true)
+          target.ability.perish_tally = card.ability.extra.perish_rounds
+          card:juice_up()
+          card_eval_status_text(target, 'extra', nil, nil, nil, {message = localize('maelmc_perish_body_dot'), COLOUR = G.C.DARK_EDITION})
+        end
+      end
+    end
+
+    -- xmult on each perishable
+    if context.other_joker and context.other_joker.ability and context.other_joker.ability.perishable and context.other_joker.ability.perish_tally > 0 then
+      G.E_MANAGER:add_event(Event({
+        func = function()
+            context.other_joker:juice_up(0.5, 0.5)
+            return true
+        end
+      })) 
+      return {
+        message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.Xmult_multi}}, 
+        colour = G.C.XMULT,
+        Xmult_mod = card.ability.extra.Xmult_multi
+      }
+    end
+  end,
+}
+
 -- Cufant
 local cufant = {
   name = "cufant",
@@ -275,6 +330,7 @@ local mega_copperajah = {
 return {
   name = "Maelmc's Jokers Gen 8",
   list = {
+    cursola,
     cufant, copperajah, mega_copperajah,
   },
 }

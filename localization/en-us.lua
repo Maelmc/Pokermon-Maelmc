@@ -385,6 +385,31 @@ return {
                     "by {C:attention}1{} for each round walked with",
                     "{C:inactive}(Currently walking {C:attention}#1#{C:inactive} for {C:attention}#2#{C:inactive} rounds)"
                 }
+            },
+            j_maelmc_g_corsola = {
+                name = "Galarian Corsola",
+                text = {
+                    "Each {C:attention}Perishable{} Joker",
+                    "gives {X:mult,C:white}X#1#{} Mult",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "{C:attention}Volatile Left{}",
+                    "When blind is selected",
+                    "add {C:attention}#2# rounds of Perishable{}",
+                    "to rightmost Joker",
+                    "{C:inactive,s:0.8}(Evolves when {C:attention,s:0.8}#3#{C:inactive,s:0.8} Jokers {C:attention,s:0.8}perished{C:inactive,s:0.8})",
+                }
+            },
+            j_maelmc_cursola = {
+                name = "Cursola",
+                text = {
+                    "Each {C:attention}Perishable{} Joker",
+                    "gives {X:mult,C:white}X#1#{} Mult",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "{C:attention}Volatile Left{}",
+                    "When blind is selected",
+                    "add {C:attention}#2# rounds of Perishable{}",
+                    "to all other Jokers",
+                }
             }
         },
         Voucher = {
@@ -444,6 +469,7 @@ return {
             c_maelmc_hearthflame = "Hearthflame Mask",
             c_maelmc_cornerstone = "Cornerstone Mask",]]
             c_maelmc_gym_challenge = "Gym Challenge",
+            c_maelmc_tildeathdouspart = "'Til Death Do Us Part",
         },
         dictionary = {
             maelmc_steel = "Steel!",
@@ -457,9 +483,13 @@ return {
             maelmc_ivy_cudgle = "Ivy Cudgle!",
             maelmc_pokewalker_taken = "Taken",
             maelmc_pokewalker_walking = "Walking",
+            maelmc_cursed_body_dot = "Cursed Body...",
+            maelmc_perish_body_dot = "Perish Body...",
         },
         v_text = {
            ch_c_maelmc_gym_challenge = {"Jokers not matching the Gym Leader's {C:attention}Type{} {C:attention}perish{} after 3 rounds"},
+           ch_c_maelmc_perish_3 = {"All Jokers {C:attention}perish{} after 3 rounds"},
+           ch_c_maelmc_ban_no_perish = {"Non-Perishable Jokers are banned"}
         },
     }
 }

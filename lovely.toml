@@ -17,7 +17,7 @@ payload = '''
     end
 '''
 
-# Gym Challenge applying perish to jokers created (mainly for jokers in shop and boosters as Gym Leader already applies to jokers possessed)
+# Gym Challenge and 'Til Death Do Us Part applying perish to jokers created (mainly for jokers in shop and boosters as Gym Leader already applies to jokers possessed)
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
@@ -26,5 +26,65 @@ position = "after"
 match_indent = true
 payload = '''
 if _type == 'Joker' and G.GAME.modifiers.maelmc_gym_challenge and not (get_type(card) == G.GAME.maelmc_gym_leader_type) then card:set_perishable(true) end
+if _type == 'Joker' and G.GAME.modifiers.maelmc_perish_3 then card:set_perishable(true) end
 '''
 
+# maelmc_ban_no_perish banishing non perish jokers
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "if _ch.rules then"
+position = "before"
+match_indent = true
+payload = "local no_perish = false"
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "for k, v in ipairs(_ch.rules.custom) do"
+position = "after"
+match_indent = true
+payload = '''
+    if v.id == 'maelmc_ban_no_perish' then
+        no_perish = true
+    end
+'''
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "if _ch.restrictions then"
+position = "after"
+match_indent = true
+payload = '''
+    if no_perish then
+        for _, v in ipairs(G.P_CENTER_POOLS.Joker) do
+            if not v.perishable_compat then
+                _ch.restrictions.banned_cards[#_ch.restrictions.banned_cards+1] = {id = v.key}
+            end
+        end
+    end
+'''
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "if challenge.restrictions then"
+position = "after"
+match_indent = true
+payload = '''
+    local no_perish = false
+    for k, v in ipairs(challenge.rules.custom) do
+        if v.id == 'maelmc_ban_no_perish' then 
+            no_perish = true
+            break
+        end
+    end
+    if no_perish then
+        for _, v in ipairs(G.P_CENTER_POOLS.Joker) do
+            if not v.perishable_compat then
+                challenge.restrictions.banned_cards[#challenge.restrictions.banned_cards+1] = {id = v.key}
+            end
+        end
+    end
+'''

@@ -9,7 +9,7 @@
 	"badge_colour": "EA6F22",
 	"badge_text_colour": "FFFFFF",
   "display_name": "Pokermon-Maelmc",
-	"version": "1.8.2-3",
+	"version": "1.9.0",
 	"dependencies": [
 	  "Pokermon (>=2.9.9-617a)",
 	  "Steamodded (>=1.0.0~BETA-0624a)"
