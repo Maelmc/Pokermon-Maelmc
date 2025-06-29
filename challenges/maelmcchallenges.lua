@@ -77,6 +77,7 @@ local gym_challenge = {
     jokers = {
         {id = "j_maelmc_gym_leader", eternal = true, edition = 'negative'},
     },
+    button_colour = HEX('EA6F22')
 }
 
 --[[local kecleon = {

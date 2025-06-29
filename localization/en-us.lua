@@ -387,7 +387,24 @@ return {
                 }
             }
         },
-
+        Voucher = {
+            v_maelmc_pokemart = {
+                name = "Poké Mart",
+                text = {
+                    "{C:item}Item{} cards appear",
+                    "{C:attention}#1#X{} more frequently",
+                    "in the shop"
+                },
+            },
+            v_maelmc_departmentstore = {
+                name = "Department Store",
+                text = {
+                    "{C:item}Item{} cards appear",
+                    "{C:attention}#1#X{} more frequently",
+                    "in the shop"
+                },
+            },
+        },
         Other = {
             gym_leader_tag_pool = {
                 name = "Tag Pool",

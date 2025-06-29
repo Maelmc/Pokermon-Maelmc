@@ -61,6 +61,13 @@ SMODS.Atlas({
  }):register()
 
  SMODS.Atlas({
+    key = "maelmcvouchers",
+    path = "maelmcvouchers.png",
+    px = 71,
+    py = 95
+}):register()
+
+ SMODS.Atlas({
    key = "shiny_Custom-Maelmc",
    path = "ShinyCustom.png",
    px = 71,
@@ -238,6 +245,25 @@ for _, file in ipairs(pconsumables) do
   end
 end
 
+--Load vouchers
+local vouchers = NFS.getDirectoryItems(mod_dir.."vouchers")
+
+for _, file in ipairs(vouchers) do
+  sendDebugMessage ("The file is: "..file)
+  local voucher, load_error = SMODS.load_file("vouchers/"..file)
+  if load_error then
+    sendDebugMessage ("The error is: "..load_error)
+  else
+    local curr_voucher = voucher()
+    if curr_voucher.init then curr_voucher:init() end
+    
+    for i, item in ipairs(curr_voucher.list) do
+      item.discovered = not pokermon_config.pokemon_discovery
+      SMODS.Voucher(item)
+    end
+  end
+end
+
 --Load backs
 if (SMODS.Mods["Pokermon"] or {}).can_load and SMODS.Mods["Pokermon"] and not pokermon_config.jokers_only then
   local backs = NFS.getDirectoryItems(mod_dir.."backs")
@@ -273,4 +299,4 @@ for _, file in ipairs(pchallenges) do
       SMODS.Challenge(item)
     end
   end
-end 
+end
