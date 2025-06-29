@@ -331,6 +331,7 @@ local kecleon={
   stage = "Basic",
   ptype = "Colorless",
   atlas = "Pokedex3-Maelmc",
+  perishable_compat = false,
   blueprint_compat = true,
   calculate = function(self, card, context)
 

@@ -140,6 +140,7 @@ local ogerpon={
   stage = "Legendary",
   ptype = "Grass",
   atlas = "Pokedex9-Maelmc",
+  perishable_compat = false,
   blueprint_compat = true,
   calculate = function(self, card, context)
     -- cannot change type
