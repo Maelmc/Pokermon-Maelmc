@@ -396,7 +396,7 @@ return {
                     "When blind is selected",
                     "add {C:attention}#2# rounds of Perishable{}",
                     "to rightmost Joker",
-                    "{C:inactive,s:0.8}(Evolves when #3#/{C:attention,s:0.8}#4#{C:inactive,s:0.8} Jokers {C:attention,s:0.8}perished{C:inactive,s:0.8})",
+                    "{C:inactive,s:0.8}(Evolves when you have {C:attention,s:0.8}#3#{C:inactive,s:0.8}/#4# perished Jokers)",
                 }
             },
             j_maelmc_cursola = {
