@@ -17,7 +17,7 @@ local spiritomb={
   cost = 10,
   stage = "Basic",
   ptype = "Psychic",
-  atlas = "Pokedex4-Maelmc",
+  atlas = "Pokedex4",
   aux_poke = true,
   blueprint_compat = true,
   calculate = function(self, card, context)
@@ -104,7 +104,7 @@ local gible={
   cost = 6,
   stage = "Base",
   ptype = "Dragon",
-  atlas = "Pokedex4-Maelmc",
+  atlas = "Pokedex4",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
@@ -164,7 +164,7 @@ local gabite={
   cost = 8,
   stage = "One",
   ptype = "Dragon",
-  atlas = "Pokedex4-Maelmc",
+  atlas = "Pokedex4",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
@@ -224,7 +224,7 @@ local garchomp={
   cost = 10,
   stage = "Two",
   ptype = "Dragon",
-  atlas = "Pokedex4-Maelmc",
+  atlas = "Pokedex4",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
@@ -270,7 +270,7 @@ local mega_garchomp={
   cost = 12,
   stage = "Mega",
   ptype = "Dragon",
-  atlas = "Megas-Maelmc",
+  atlas = "Megas",
   blueprint_compat = true,
   calculate = function(self, card, context)
 

@@ -8,7 +8,7 @@ local hazarddeck = {
     return {vars = {self.config.jokers, self.config.extra.hazard_ratio}}
   end,
 	pos = { x = 1, y = 0 },
-	atlas = "pokedeck-Maelmc",
+	atlas = "maelmc_pokedeck",
   calculate = function(self, card, context)
     if context.setting_blind then
       poke_add_hazards(self.config.extra.hazard_ratio)

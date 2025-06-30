@@ -1,6 +1,6 @@
 local pokemart = {
 	key = "pokemart",
-	atlas = "maelmcvouchers",
+	atlas = "maelmc_vouchers",
     order = 37,
     set = "Voucher",
     pos = { x = 0, y = 0 },
@@ -32,7 +32,7 @@ local pokemart = {
 
 local departmentstore = {
 	key = "departmentstore",
-	atlas = "maelmcvouchers",
+	atlas = "maelmc_vouchers",
     order = 38,
     set = "Voucher",
     pos = { x = 1, y = 0 },

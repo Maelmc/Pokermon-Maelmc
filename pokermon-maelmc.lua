@@ -9,10 +9,10 @@ else
 end]]
 
 --Required by the pokemon family function (right click on a pokemon joker)
-table.insert(pokermon.family, {"glimmet", "glimmora"})
-table.insert(pokermon.family, {"cufant","copperajah","mega_copperajah"})
-table.insert(pokermon.family,{"odd_keystone","spiritomb"})
-table.insert(pokermon.family,{
+pokermon.add_family({"glimmet", "glimmora"})
+pokermon.add_family({"cufant","copperajah","mega_copperajah"})
+pokermon.add_family({"odd_keystone","spiritomb"})
+pokermon.add_family({
   {key = "gym_leader", form = "Grass"},
   {key = "gym_leader", form = "Fire"},
   {key = "gym_leader", form = "Water"},
@@ -26,12 +26,12 @@ table.insert(pokermon.family,{
   {key = "gym_leader", form = "Dragon"},
   {key = "gym_leader", form = "Earth"},
 })
-table.insert(pokermon.family,{"inkay","malamar"})
-table.insert(pokermon.family,{"binacle","barbaracle"})
-table.insert(pokermon.family,{"ralts","kirlia","gardevoir","mega_gardevoir"})
-table.insert(pokermon.family,{"gible","gabite","garchomp","mega_garchomp"})
-table.insert(pokermon.family,{"ogerpon","ogerpon_wellspring","ogerpon_hearthflame","ogerpon_cornerstone"})
-table.insert(pokermon.family,{"g_corsola","cursola"})
+pokermon.add_family({"inkay","malamar"})
+pokermon.add_family({"binacle","barbaracle"})
+pokermon.add_family({"ralts","kirlia","gardevoir","mega_gardevoir"})
+pokermon.add_family({"gible","gabite","garchomp","mega_garchomp"})
+pokermon.add_family({"ogerpon","ogerpon_wellspring","ogerpon_hearthflame","ogerpon_cornerstone"})
+pokermon.add_family({"g_corsola","cursola"})
 
 --Load Sprites file
 local sprite, load_error = SMODS.load_file("maelmcsprites.lua")
@@ -81,7 +81,13 @@ for _, file in ipairs(pfiles) do
     
     if curr_pokemon.list and #curr_pokemon.list > 0 then
       for i, item in ipairs(curr_pokemon.list) do
-        pokermon.load_pokemon(item)
+        if string.find(item.atlas, "maelmc") then
+          print("true "..item.name)
+          pokermon.Pokemon(item,"maelmc",true)
+        else
+          print("false "..item.name)
+          pokermon.Pokemon(item,"maelmc",false)
+        end
       end
     end
   end

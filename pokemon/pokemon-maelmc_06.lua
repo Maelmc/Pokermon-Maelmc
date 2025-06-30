@@ -14,7 +14,7 @@ local inkay={
   cost = 6,
   stage = "Basic",
   ptype = "Dark",
-  atlas = "Pokedex6-Maelmc",
+  atlas = "Pokedex6",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
@@ -78,7 +78,7 @@ local malamar={
   cost = 8,
   stage = "One",
   ptype = "Dark",
-  atlas = "Pokedex6-Maelmc",
+  atlas = "Pokedex6",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
@@ -140,7 +140,7 @@ local binacle={
   cost = 5,
   stage = "Base",
   ptype = "Earth",
-  atlas = "Pokedex6-Maelmc",
+  atlas = "Pokedex6",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
@@ -208,7 +208,7 @@ local barbaracle={
   cost = 6,
   stage = "One",
   ptype = "Earth",
-  atlas = "Pokedex6-Maelmc",
+  atlas = "Pokedex6",
   blueprint_compat = true,
   calculate = function(self, card, context)
 

@@ -12,7 +12,7 @@ local cursola={
   cost = 9,
   stage = "One",
   ptype = "Psychic",
-  atlas = "Pokedex8-Maelmc",
+  atlas = "Pokedex8",
   perishable_compat = true,
   blueprint_compat = true,
   eternal_compat = true,
@@ -82,7 +82,7 @@ local cufant = {
   cost = 7,
   stage = "Basic",
   ptype = "Metal",
-  atlas = "Pokedex8-Maelmc",
+  atlas = "Pokedex8",
   blueprint_compat = false,
   calculate = function(self, card, context)
     if context.setting_blind then
@@ -166,7 +166,7 @@ local copperajah = {
   cost = 9,
   stage = "One",
   ptype = "Metal",
-  atlas = "Pokedex8-Maelmc",
+  atlas = "Pokedex8",
   blueprint_compat = false,
   calculate = function(self, card, context)
     if context.setting_blind then
@@ -263,7 +263,7 @@ local mega_copperajah = {
   cost = 12,
   stage = "Mega",
   ptype = "Metal",
-  atlas = "Gmax-Maelmc",
+  atlas = "maelmc_gmax",
   blueprint_compat = false,
   calculate = function(self, card, context)
     if context.setting_blind then

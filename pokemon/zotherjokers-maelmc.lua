@@ -14,7 +14,7 @@ local gym_leader={
   rarity = 2,
   cost = 5,
   stage = "Other",
-  atlas = "Custom-Maelmc",
+  atlas = "maelmc_custom",
   blueprint_compat = true,
   calculate = function(self, card, context)
     
@@ -129,7 +129,7 @@ local odd_keystone={
   rarity = 3,
   cost = 8,
   stage = "Other",
-  atlas = "Custom-Maelmc",
+  atlas = "maelmc_custom",
   blueprint_compat = true,
   calculate = function(self, card, context)
     -- if using The Soul, evolve
@@ -232,7 +232,7 @@ local pokewalker = {
   rarity = 2,
   cost = 8,
   stage = "Other",
-  atlas = "Others-Maelmc",
+  atlas = "others",
   blueprint_compat = false,
   eternal_compat = false,
   calculate = function(self, card, context)
