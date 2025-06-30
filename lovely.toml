@@ -58,10 +58,22 @@ position = "after"
 match_indent = true
 payload = '''
     if no_perish then
+        local to_add = {}
         for _, v in ipairs(G.P_CENTER_POOLS.Joker) do
-            local to_add = {id = v.key}
-            if not table.contains(_ch.restrictions.banned_cards,to_add) then
-                _ch.restrictions.banned_cards[#_ch.restrictions.banned_cards+1] = {id = v.key}
+            if not v.perishable_compat then
+                if not table.contains(to_add, v.key) then
+                    to_add[#to_add+1] = v.key
+                end
+            end
+        end
+        local banned = {}
+        for _, v in ipairs(_ch.restrictions.banned_cards) do
+            local curr = v["id"]
+            banned[#banned+1] = curr
+        end
+        for _, v in ipairs(to_add) do
+            if not table.contains(banned,v) then
+                _ch.restrictions.banned_cards[#_ch.restrictions.banned_cards+1] = {id = v}
             end
         end
     end
@@ -75,19 +87,31 @@ position = "after"
 match_indent = true
 payload = '''
     local no_perish = false
-    for k, v in ipairs(challenge.rules.custom) do
-        if v.id == 'maelmc_ban_no_perish' then 
-            no_perish = true
-            break
+    if challenge.rules and challenge.rules.custom then
+        for k, v in ipairs(challenge.rules.custom) do
+            if v.id == 'maelmc_ban_no_perish' then 
+                no_perish = true
+                break
+            end
         end
     end
     if no_perish then
+        local to_add = {}
         for _, v in ipairs(G.P_CENTER_POOLS.Joker) do
             if not v.perishable_compat then
-                local to_add = {id = v.key}
-                if not table.contains(challenge.restrictions.banned_cards,to_add) then
-                    challenge.restrictions.banned_cards[#challenge.restrictions.banned_cards+1] = {id = v.key}
+                if not table.contains(to_add, v.key) then
+                    to_add[#to_add+1] = v.key
                 end
+            end
+        end
+        local banned = {}
+        for _, v in ipairs(challenge.restrictions.banned_cards) do
+            local curr = v["id"]
+            banned[#banned+1] = curr
+        end
+        for _, v in ipairs(to_add) do
+            if not table.contains(banned,v) then
+                challenge.restrictions.banned_cards[#challenge.restrictions.banned_cards+1] = {id = v}
             end
         end
     end
