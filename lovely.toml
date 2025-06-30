@@ -59,7 +59,8 @@ match_indent = true
 payload = '''
     if no_perish then
         for _, v in ipairs(G.P_CENTER_POOLS.Joker) do
-            if not v.perishable_compat then
+            local to_add = {id = v.key}
+            if not table.contains(_ch.restrictions.banned_cards,to_add) then
                 _ch.restrictions.banned_cards[#_ch.restrictions.banned_cards+1] = {id = v.key}
             end
         end
@@ -83,7 +84,10 @@ payload = '''
     if no_perish then
         for _, v in ipairs(G.P_CENTER_POOLS.Joker) do
             if not v.perishable_compat then
-                challenge.restrictions.banned_cards[#challenge.restrictions.banned_cards+1] = {id = v.key}
+                local to_add = {id = v.key}
+                if not table.contains(challenge.restrictions.banned_cards,to_add) then
+                    challenge.restrictions.banned_cards[#challenge.restrictions.banned_cards+1] = {id = v.key}
+                end
             end
         end
     end

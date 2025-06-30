@@ -3,7 +3,7 @@ local g_corsola={
   name = "g_corsola",
   poke_custom_prefix = "maelmc",
   pos = {x = 3, y = 3},
-  config = {extra = {Xmult_multi = 1.5, volatile = 'left', perish_rounds = 3, perished_to_evo = 2}},
+  config = {extra = {Xmult_multi = 1.5, volatile = 'left', perish_rounds = 3, currently_perished = 0}, evo_rqmt = 2},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     local compatible = false
@@ -26,7 +26,7 @@ local g_corsola={
                 }
             }
         }
-    return {vars = {card.ability.extra.Xmult_multi,  card.ability.extra.perish_rounds, card.ability.extra.perished_to_evo}, main_end = main_end}
+    return {vars = {card.ability.extra.Xmult_multi,  card.ability.extra.perish_rounds, card.ability.extra.currently_perished, self.config.evo_rqmt}, main_end = main_end}
   end,
   rarity = 2,
   cost = 7,
@@ -66,14 +66,14 @@ local g_corsola={
     end
 
     if G.jokers and G.jokers.cards then
-        local evo_con = 0
+        card.ability.extra.currently_perished = 0
         for _, v in ipairs(G.jokers.cards) do
-            if v.ability.perishable and v.ability.ability.perish_tally <= 0 then
-                evo_con = evo_con + 1
+            if v.ability.perishable and v.ability.perish_tally <= 0 then
+                card.ability.extra.currently_perished = card.ability.extra.currently_perished + 1
             end
         end
-        return scaling_evo(self, card, context, "j_poke_cursola", evo_con, card.ability.extra.perished_to_evo)
     end
+    return scaling_evo(self, card, context, "j_maelmc_cursola", card.ability.extra.currently_perished, self.config.evo_rqmt)
   end,
 }
 
