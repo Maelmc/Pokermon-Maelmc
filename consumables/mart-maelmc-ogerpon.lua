@@ -9,7 +9,7 @@ local tealmask = {
     return {vars = {self.config.max_highlighted}}
   end,
   pos = { x = 0, y = 0 },
-  atlas = "Mart-Maelmc",
+  atlas = "maelmc_mart",
   cost = 4,
   evo_item = true,
   unlocked = true,
@@ -76,7 +76,7 @@ local wellspringmask = {
     return {vars = {self.config.max_highlighted}}
   end,
   pos = { x = 1, y = 0 },
-  atlas = "Mart-Maelmc",
+  atlas = "maelmc_mart",
   cost = 4,
   evo_item = true,
   unlocked = true,
@@ -143,7 +143,7 @@ local hearthflamemask = {
     return {vars = {self.config.max_highlighted}}
   end,
   pos = { x = 2, y = 0 },
-  atlas = "Mart-Maelmc",
+  atlas = "maelmc_mart",
   cost = 4,
   evo_item = true,
   unlocked = true,
@@ -210,7 +210,7 @@ local cornerstonemask = {
     return {vars = {self.config.max_highlighted}}
   end,
   pos = { x = 3, y = 0 },
-  atlas = "Mart-Maelmc",
+  atlas = "maelmc_mart",
   cost = 4,
   evo_item = true,
   unlocked = true,
