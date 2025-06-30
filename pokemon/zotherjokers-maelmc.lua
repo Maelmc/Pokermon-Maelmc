@@ -3,7 +3,7 @@ local gym_leader={
   name = "gym_leader",
   poke_custom_prefix = "maelmc",
   pos = {x = 1, y = 0},
-  config = {extra = {boss = false, form = "Earth"}},
+  config = {extra = {form = "Earth"}},
   loc_vars = function(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
@@ -19,7 +19,7 @@ local gym_leader={
   calculate = function(self, card, context)
     
     -- Gym Challenge challenge management
-    -- Applying perish to cards in shop and boosters in lovely patch, the rest is here
+    -- Applying perish to cards in shop and boosters is definied in the lovely patch, the rest is here
     if G.GAME.modifiers.maelmc_gym_challenge and not G.GAME.maelmc_gym_leader_type then
       if card.ability.extra.form == "Darkness" then
         G.GAME.maelmc_gym_leader_type = "Dark"
@@ -43,11 +43,7 @@ local gym_leader={
     end
 
     -- Regular actions
-    if context.setting_blind and context.blind.boss and not context.blueprint then
-      card.ability.extra.boss = true
-    end
-
-    if context.end_of_round and card.ability.extra.boss then
+    if context.end_of_round and context.cardarea == G.jokers and G.GAME.blind and G.GAME.blind:get_type() == 'Boss' then
       local tag = ''
       local tag_choice = pseudorandom('gymleader')
       if tag_choice < 1/6 then
@@ -73,10 +69,6 @@ local gym_leader={
         energy:add_to_deck()
         G.consumeables:emplace(energy)
         card_eval_status_text(energy, 'extra', nil, nil, nil, {message = localize("poke_plus_energy"), colour = G.ARGS.LOC_COLOURS["pink"]})
-      end
-
-      if not context.blueprint then
-        card.ability.extra.boss = false
       end
 
       return {
