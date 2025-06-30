@@ -263,7 +263,7 @@ local mega_copperajah = {
   cost = 12,
   stage = "Mega",
   ptype = "Metal",
-  atlas = "maelmc_gmax",
+  atlas = "Gmax",
   blueprint_compat = false,
   calculate = function(self, card, context)
     if context.setting_blind then
