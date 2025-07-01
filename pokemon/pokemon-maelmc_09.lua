@@ -155,7 +155,7 @@ local ogerpon={
     if context.individual and context.cardarea == G.play and context.other_card.lucky_trigger and not context.blueprint then
       card.ability.extra.money = card.ability.extra.money  + card.ability.extra.money_mod
       return {
-          message = localize("maelmc_ivy_cudgle"),
+          message = localize("maelmc_ivy_cudgle_ex"),
           colour = G.C.MONEY,
           card = card
         }
@@ -228,7 +228,7 @@ local ogerpon_wellspring={
         context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus or 0
         context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + card.ability.extra.chips
         return {
-          message = localize("maelmc_ivy_cudgle"),
+          message = localize("maelmc_ivy_cudgle_ex"),
           colour = G.C.CHIPS,
           chips = total_chips*card.ability.extra.Xchips_multi,
           card = card
@@ -317,7 +317,7 @@ local ogerpon_hearthflame={
         end
       end
       if deleted then
-        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("maelmc_ivy_cudgle"), colour = G.C.MULT})
+        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("maelmc_ivy_cudgle_ex"), colour = G.C.MULT})
       end
     end
 
@@ -399,7 +399,7 @@ local ogerpon_cornerstone={
       end
       if stonecount >= 3 or stonecount == 2 and (context.scoring_name == "Pair" or context.scoring_name == "Two Pair" or context.scoring_name == "Full House") then
         return {
-          message = localize("maelmc_ivy_cudgle"),
+          message = localize("maelmc_ivy_cudgle_ex"),
           colour = G.C.GREY,
         }
       end

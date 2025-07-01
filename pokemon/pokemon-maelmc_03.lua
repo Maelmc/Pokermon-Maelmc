@@ -314,52 +314,6 @@ local mega_gardevoir={
   end,
 }
 
--- Kecleon 352
-local kecleon={
-  name = "kecleon",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 3, y = 10},
-  config = {extra = {mult = 0, mult_mod = 6, current_type = "Colorless"}},
-  loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
-    -- just to shorten function
-    local abbr = card.ability.extra
-    return {vars = {abbr.mult_mod, abbr.mult}}
-  end,
-  rarity = 1,
-  cost = 5,
-  stage = "Basic",
-  ptype = "Colorless",
-  atlas = "Pokedex3",
-  perishable_compat = false,
-  blueprint_compat = true,
-  calculate = function(self, card, context)
-
-    -- all context to be futureproof
-    if not context.blueprint then
-      local type = get_type(card)
-      if type ~= card.ability.extra.current_type then
-        card.ability.extra.current_type = type
-        card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
-        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_color_change')})
-      end
-    end
-    
-    if context.cardarea == G.jokers and context.scoring_hand then
-      if context.joker_main and card.ability.extra.mult > 0 then
-        return {
-          colour = G.C.MULT,
-          mult = card.ability.extra.mult,
-          card = card
-        }
-      end
-    end
-  end,
-  add_to_deck = function(self, card, from_debuff)
-    card.ability.extra.current_type = get_type(card)
-  end,
-}
-
 -- Lunatone 337
 local lunatone={
   name = "lunatone",
@@ -463,11 +417,91 @@ local solrock={
   end,
 }
 
+-- Kecleon 352
+local kecleon={
+  name = "kecleon",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 3, y = 10},
+  config = {extra = {mult = 0, mult_mod = 6, current_type = "Colorless"}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    return {vars = {abbr.mult_mod, abbr.mult}}
+  end,
+  rarity = 1,
+  cost = 5,
+  stage = "Basic",
+  ptype = "Colorless",
+  atlas = "Pokedex3",
+  perishable_compat = false,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+
+    -- all context to be futureproof
+    if not context.blueprint then
+      local type = get_type(card)
+      if type ~= card.ability.extra.current_type then
+        card.ability.extra.current_type = type
+        card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
+        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_color_change')})
+      end
+    end
+    
+    if context.cardarea == G.jokers and context.scoring_hand then
+      if context.joker_main and card.ability.extra.mult > 0 then
+        return {
+          colour = G.C.MULT,
+          mult = card.ability.extra.mult,
+          card = card
+        }
+      end
+    end
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    card.ability.extra.current_type = get_type(card)
+  end,
+}
+
+-- Tropius 357
+local tropius = {
+  name = "tropius",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 8, y = 10},
+  config = {extra = {create_odds = 2, cavendish_odds = 20}},
+  loc_vars = function(self, info_queue, card)
+    return {vars = {(G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.create_odds}}
+  end,
+  rarity = 1,
+  cost = 7,
+  stage = "Basic",
+  ptype = "Grass",
+  atlas = "Pokedex3",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    if context.setting_blind and ((#G.jokers.cards + G.GAME.joker_buffer) < G.jokers.config.card_limit) and (#find_joker("gros_michel") == 0 and #find_joker("cavendish") == 0) and (pseudorandom('tropius') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.create_odds) then
+      local banana = nil
+      if G.GAME and G.GAME.pool_flags and G.GAME.pool_flags.gros_michel_extinct and (pseudorandom('tropius') < 1/card.ability.extra.cavendish_odds) then
+        banana = {set = "Joker", area = G.jokers, key = "j_cavendish"}
+      end
+      banana = banana or {set = "Joker", area = G.jokers, key = "j_gros_michel"}
+      local final_banana = SMODS.create_card(banana)
+      final_banana:add_to_deck()
+      G.jokers:emplace(final_banana)
+      final_banana:start_materialize()
+      return {
+        message = localize("maelmc_banana_ex")
+      }
+    end
+  end,
+}
+
 return {
   name = "Maelmc's Jokers Gen 3",
   list = {
     ralts, kirlia, gardevoir, mega_gardevoir,
-    kecleon,
     lunatone, solrock,
+    kecleon,
+    tropius,
   },
 }

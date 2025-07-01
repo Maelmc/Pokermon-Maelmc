@@ -420,6 +420,15 @@ return {
                     "{C:inactive}(Currently {X:red,C:white}X#1#{C:inactive} Mult)",
                 }
             },
+            j_maelmc_tropius = {
+                name = "Tropius",
+                text = {
+                    "When {C:attention}Blind{} is selected,",
+                    "{C:green}#1# in #2#{} chance to",
+                    "create a {C:attention}banana",
+                    "if you have none",
+                }
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -481,19 +490,20 @@ return {
             c_maelmc_tildeathdouspart = "'Til Death Do Us Part",
         },
         dictionary = {
-            maelmc_steel = "Steel!",
-            maelmc_gmax_steelsurge = "G-Max Steelsurge!",
+            maelmc_steel_ex = "Steel!",
+            maelmc_gmax_steelsurge_ex = "G-Max Steelsurge!",
             maelmc_consume = "Consume",
             maelmc_soul_collected = "Soul collected",
             maelmc_gym_beaten = "Gym beaten",
             maelmc_color_change = "Color Change",
             maelmc_clubs = "Clubs",
             maelmc_hearts = "Hearts",
-            maelmc_ivy_cudgle = "Ivy Cudgle!",
+            maelmc_ivy_cudgle_ex = "Ivy Cudgle!",
             maelmc_pokewalker_taken = "Taken",
             maelmc_pokewalker_walking = "Walking",
             maelmc_cursed_body_dot = "Cursed Body...",
             maelmc_perish_body_dot = "Perish Body...",
+            maelmc_banana_ex = "Banana!",
         },
         v_text = {
            ch_c_maelmc_gym_challenge = {"Jokers not matching the Gym Leader's {C:attention}Type{} {C:attention}perish{} after 3 rounds"},

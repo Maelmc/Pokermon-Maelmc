@@ -123,7 +123,7 @@ local cufant = {
       if context.individual and not context.blueprint and table.contains(card.ability.extra.hazard_to_steel,context.other_card) then
         context.other_card:set_ability(G.P_CENTERS.m_steel,nil,true)
         return {
-          message = localize("maelmc_steel"),
+          message = localize("maelmc_steel_ex"),
           colour = G.C.GREY
         }
       end
@@ -206,7 +206,7 @@ local copperajah = {
       if context.individual and not context.blueprint and table.contains(card.ability.extra.hazard_to_steel,context.other_card) then
         context.other_card:set_ability(G.P_CENTERS.m_steel,nil,true)
         return {
-          message = localize("maelmc_steel"),
+          message = localize("maelmc_steel_ex"),
           colour = G.C.GREY
         }
       end
@@ -304,7 +304,7 @@ local mega_copperajah = {
       if context.individual and not context.blueprint and table.contains(card.ability.extra.hazard_to_steel,context.other_card) then
         context.other_card:set_ability(G.P_CENTERS.m_steel,nil,true)
         return {
-          message = localize("maelmc_gmax_steelsurge"),
+          message = localize("maelmc_gmax_steelsurge_ex"),
           colour = G.C.GREY
         }
       end

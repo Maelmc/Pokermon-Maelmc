@@ -214,8 +214,8 @@ return {
             c_maelmc_binacle = "Opermine",
         },
         dictionary = {
-            maelmc_steel = "Acier!",
-            maelmc_gmax_steelsurge = "Percée G-Max!",
+            maelmc_steel_ex = "Acier!",
+            maelmc_gmax_steelsurge_ex = "Percée G-Max!",
             maelmc_consume = "Consomme",
             maelmc_soul_collected = "Âme collectée",
             maelmc_gym_beaten = "Arène battue",
