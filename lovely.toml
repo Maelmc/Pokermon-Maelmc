@@ -149,3 +149,35 @@ payload = '''
         end
     end
 '''
+
+# call to remove and start_dissolve triggers Guzzlord
+
+#[[patches]]
+#[patches.pattern]
+#target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
+#pattern = '''remove = function(self, card, context, check_shiny)
+#  if check_shiny and card.edition and card.edition.poke_shiny then
+#    SMODS.change_booster_limit(-1)
+#  end'''
+#position = "after"
+#match_indent = true
+#payload = '''
+#    if card.config and card.config.center and (self == card.config.center) then
+#        local guzzlords = find_joker("guzzlord")
+#        for _, v in ipairs(guzzlords) do
+#            v.ability.extra.Xmult = v.ability.extra.Xmult + v.ability.extra.Xmult_mod
+#            v:juice_up()
+#            card_eval_status_text(v, 'extra', nil, nil, nil, {message = "Eaten", COLOUR = G.C.DARK_EDITION})
+#        end
+#    end
+#'''
+
+#[[patches]]
+#[patches.pattern]
+#target = 'card.lua'
+#pattern = "function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)"
+#position = "after"
+#match_indent = true
+#payload = '''
+#    if not self.getting_sliced)
+#'''

@@ -410,7 +410,16 @@ return {
                     "add {C:attention}#2# rounds of Perishable{}",
                     "to all other Jokers",
                 }
-            }
+            },
+            j_maelmc_guzzlord = {
+                name = "Guzzlord",
+                text = {
+                    "Gains {X:mult,C:white}X#2#{} Mult",
+                    "when a Joker",
+                    "{C:attention}self destructs{}",
+                    "{C:inactive}(Currently {X:red,C:white}X#1#{C:inactive} Mult)",
+                }
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
