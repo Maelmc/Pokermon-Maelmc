@@ -477,11 +477,10 @@ local kecleon={
     card.children.center:set_sprite_pos(type_table[get_type(card)])
   end,
   add_to_deck = function(self, card, from_debuff)
-    card.ability.extra.current_type = get_type(card)
+    self:set_sprites(card)
   end,
   set_ability = function(self, card, initial, delay_sprites)
     if initial and G.playing_cards then
-      card.ability.extra.current_type = get_type(card)
       self:set_sprites(card)
     end
   end,
