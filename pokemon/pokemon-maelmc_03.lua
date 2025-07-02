@@ -444,6 +444,7 @@ local kecleon={
       if type ~= card.ability.extra.current_type then
         card.ability.extra.current_type = type
         card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
+        self:set_sprites(card)
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_color_change')})
       end
     end
@@ -458,8 +459,31 @@ local kecleon={
       end
     end
   end,
+  set_sprites = function(self,card,front)
+    local type_table = {
+      Grass = {x = 7, y = 16},
+      Fire = {x = 5, y = 16},
+      Water = {x = 3, y = 17},
+      Lightning = {x = 0, y = 17},
+      Psychic = {x = 2, y = 17},
+      Fighting = {x = 4, y = 16},
+      Colorless = {x = 3, y = 10},
+      Dark = {x = 0, y = 16},
+      Metal = {x = 1, y = 17},
+      Fairy = {x = 3, y = 16},
+      Dragon = {x = 1, y = 16},
+      Earth = {x = 2, y = 16},
+    }
+    card.children.center:set_sprite_pos(type_table[get_type(card)])
+  end,
   add_to_deck = function(self, card, from_debuff)
     card.ability.extra.current_type = get_type(card)
+  end,
+  set_ability = function(self, card, initial, delay_sprites)
+    if initial and G.playing_cards then
+      card.ability.extra.current_type = get_type(card)
+      self:set_sprites(card)
+    end
   end,
 }
 
