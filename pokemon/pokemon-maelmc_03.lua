@@ -491,7 +491,7 @@ local tropius = {
   name = "tropius",
   poke_custom_prefix = "maelmc",
   pos = {x = 8, y = 10},
-  config = {extra = {create_odds = 2, cavendish_odds = 20}},
+  config = {extra = {create_odds = 2, cavendish_odds = 10}},
   loc_vars = function(self, info_queue, card)
     return {vars = {(G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.create_odds}}
   end,
@@ -502,7 +502,7 @@ local tropius = {
   atlas = "Pokedex3",
   blueprint_compat = true,
   calculate = function(self, card, context)
-    if context.setting_blind and ((#G.jokers.cards + G.GAME.joker_buffer) < G.jokers.config.card_limit) and (#find_joker("gros_michel") == 0 and #find_joker("cavendish") == 0) and (pseudorandom('tropius') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.create_odds) then
+    if context.setting_blind and ((#G.jokers.cards + G.GAME.joker_buffer) < G.jokers.config.card_limit) and (#find_joker("gros_michel") + #find_joker("cavendish") == 0) and (pseudorandom('tropius') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.create_odds) then
       local banana = nil
       if G.GAME and G.GAME.pool_flags and G.GAME.pool_flags.gros_michel_extinct and (pseudorandom('tropius') < 1/card.ability.extra.cavendish_odds) then
         banana = {set = "Joker", area = G.jokers, key = "j_cavendish"}
