@@ -9,7 +9,11 @@ local gym_leader={
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = {set = 'Other', key = 'nature', vars = {"Type"}}
     info_queue[#info_queue+1] = {set = 'Other', key = 'gym_leader_tag_pool', vars = {'Uncommon', 'Rare', 'Handy', 'Garbage', 'Investment'}}
-    return {vars = {abbr.form}}
+    local cname = localize('maelmc_gym_leader_name')
+    if card.ability.extra.form == "Fairy" then
+      cname = localize('maelmc_trial_captain_name')
+    end
+    return {vars = {abbr.form, cname}}
   end,
   rarity = 2,
   cost = 5,

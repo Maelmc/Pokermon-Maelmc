@@ -144,7 +144,7 @@ return {
                 } 
             },]]
             j_maelmc_gym_leader = {
-                name = "Gym Leader",
+                name = "#2#",
                 text = {
                     "{C:attention}Nature: #1#",
                     "Creates a {C:attention}tag{} and an {C:pink}Energy{} card",
@@ -504,6 +504,8 @@ return {
             maelmc_cursed_body_dot = "Cursed Body...",
             maelmc_perish_body_dot = "Perish Body...",
             maelmc_banana_ex = "Banana!",
+            maelmc_gym_leader_name = "Gym Leader",
+            maelmc_trial_captain_name = "Trial Captain",
         },
         v_text = {
            ch_c_maelmc_gym_challenge = {"Jokers not matching the Gym Leader's {C:attention}Type{} {C:attention}perish{} after 3 rounds"},
