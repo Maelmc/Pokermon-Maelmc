@@ -115,7 +115,6 @@ local odd_keystone={
   loc_vars = function(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = { set = 'Spectral', key = 'c_soul'}
     return {vars = {abbr.evolve_progress, abbr.evolve_after, abbr.evolve_using}}
   end,
   rarity = 3,
