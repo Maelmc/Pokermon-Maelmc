@@ -5,15 +5,15 @@ SMODS.Atlas({
   py = 32
 }):register()
 SMODS.Atlas({
-  key = "maelmc_custom",
-  path = "maelmc_custom.png",
+  key = "maelmc_jokers",
+  path = "maelmc_jokers.png",
   px = 71,
   py = 95
 }):register()
 
 SMODS.Atlas({
-  key = "shiny_maelmc_custom",
-  path = "maelmc_shinycustom.png",
+  key = "shiny_maelmc_jokers",
+  path = "maelmc_shiny_jokers.png",
   px = 71,
   py = 95
 }):register()

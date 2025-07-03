@@ -18,7 +18,7 @@ local gym_leader={
   rarity = 2,
   cost = 5,
   stage = "Other",
-  atlas = "maelmc_custom",
+  atlas = "maelmc_jokers",
   blueprint_compat = true,
   calculate = function(self, card, context)
     
@@ -124,7 +124,7 @@ local odd_keystone={
   rarity = 3,
   cost = 8,
   stage = "Other",
-  atlas = "maelmc_custom",
+  atlas = "maelmc_jokers",
   blueprint_compat = true,
   calculate = function(self, card, context)
     -- if using The Soul, evolve
