@@ -352,57 +352,49 @@ local pc = {
   calculate = function(self, card, context)
 
     -- getting the 1st 3 joker sold when this is possessed
-    if context.selling_card and not context.selling_self and not context.blueprint then
-      if card.ability.extra.just_stored == true then
-        card.ability.extra.just_stored = false
+    if context.setting_blind and not context.blueprint then
+      local stored = nil
+      for i = 1, #G.jokers.cards do
+        if G.jokers.cards[i] == card then stored = G.jokers.cards[i+1] end
       end
-      if context.card.config.center.rarity then --if it's a joker
-      
-        -- check position in jokers, only the leftmost pc can get the joker
-        local all_pc = SMODS.find_card("j_maelmc_pc")
-        for _, v in pairs(all_pc) do
-          if v == card then
-            break
-          end
-          if v.ability.extra.just_stored then -- if another pc already took this joker, end
-            return
-          end
-        end
+      if not stored then return end
+      if stored.config.center_key == "j_maelmc_pc" then return end
 
-        local slot = nil -- find which pc slot to store the joker in
-        if not card.ability.extra.joker_one_info.name then slot = "joker_one_info"
-        elseif not card.ability.extra.joker_two_info.name then slot = "joker_two_info"
-        elseif not card.ability.extra.joker_three_info.name then slot = "joker_three_info" end
-        if not slot then return end
+      local slot = nil -- find which pc slot to store the joker in
+      if not card.ability.extra.joker_one_info.name then slot = "joker_one_info"
+      elseif not card.ability.extra.joker_two_info.name then slot = "joker_two_info"
+      elseif not card.ability.extra.joker_three_info.name then slot = "joker_three_info" end
+      if not slot then return end
 
-        local stored = context.card
+      remove(self,stored,context)
 
-        -- if it's a mega, devolve it
-        if stored.config.center.rarity == "poke_mega" then
-          local forced_key = get_previous_evo(stored, true)
-          poke_backend_evolve(stored, forced_key)
-        end
-
-        card.ability.extra[slot].name = G.localization.descriptions["Joker"][stored.config.center_key]["name"]
-        card.ability.extra[slot].card = stored
-
-        card.ability.extra.just_stored = true
-        return {
-          message = localize("maelmc_stored")
-        }
+      -- if it's a mega, devolve it
+      if stored.config.center.rarity == "poke_mega" then
+        local forced_key = get_previous_evo(stored, true)
+        poke_backend_evolve(stored, forced_key)
       end
+
+      card.ability.extra[slot].name = G.localization.descriptions["Joker"][stored.config.center_key]["name"]
+      card.ability.extra[slot].card = stored
+
+      card.ability.extra.just_stored = true
+      return {
+        message = localize("maelmc_stored")
+      }
     end
 
-    if ((context.individual or context.repetition) and context.cardarea == G.play) or -- cards played
+    if (((context.individual or context.repetition) and context.cardarea == G.play) or -- cards played
       ((context.individual or context.repetition) and not context.end_of_round and context.cardarea == G.hand) or -- cards held in hand
-      (context.cardarea == G.jokers and context.scoring_hand and context.joker_main) then -- jokers
+      (context.cardarea == G.jokers and context.scoring_hand and context.joker_main))
+      and not context.blueprint then -- jokers
 
       local rets = {}
       table.insert(rets, card.ability.extra.joker_one_info.name and Card.calculate_joker(card.ability.extra.joker_one_info.card, context) or false)
       table.insert(rets, card.ability.extra.joker_two_info.name and Card.calculate_joker(card.ability.extra.joker_two_info.card, context) or false)
       table.insert(rets, card.ability.extra.joker_three_info.name and Card.calculate_joker(card.ability.extra.joker_three_info.card, context) or false)
-      if not (rets[1]) and not (rets[2]) and not (rets[3]) then return end
+      if not (rets[1]) and not (rets[2]) and not (rets[3]) then return end -- if no joker triggered, do nothing
 
+      -- sum the chips, mult, xmult and money (among other things?) of all jokers that triggered
       local final_ret = {}
       for _, v in ipairs(rets) do
         if v then
