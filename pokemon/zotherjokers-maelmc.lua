@@ -5,6 +5,7 @@ local gym_leader={
   pos = {x = 1, y = 0},
   config = {extra = {form = "Earth"}},
   loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = {set = 'Other', key = 'nature', vars = {"Type"}}
@@ -117,6 +118,7 @@ local odd_keystone={
   pos = {x = 0, y = 0},
   config = {extra = {evolve_progress = 0, evolve_after = 108, evolve_using = "The Soul"}},
   loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.evolve_progress, abbr.evolve_after, abbr.evolve_using}}
@@ -215,13 +217,14 @@ local pokewalker = {
   pos = {x = 0, y = 2},
   config = {extra = {walk_info = {name = nil, key = nil, edition = nil, seal = nil, type_sticker = nil, ability = {}}, walked_for = -2}}, -- -2 = free to walk smth, -1 = just took the joker sold, 0+ = walking
   loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'energize'}
     if card.ability.extra.walk_info["name"] then
       local wfor = card.ability.extra.walked_for
       if wfor < 0 then wfor = 0 end
       return {vars = {card.ability.extra.walk_info["name"], wfor}}
     else
-      return {vars = {"None", 0}}
+      return {vars = {localize("maelmc_none"), 0}}
     end
   end,
   rarity = 2,
@@ -325,6 +328,104 @@ local pokewalker = {
   end,
 }
 
+-- PC
+local pc = {
+  name = "pc",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 3, y = 1},
+  config = {extra = {joker_one_info = {name = nil, card = nil},
+                    joker_two_info = {name = nil, card = nil},
+                    joker_three_info = {name = nil, card = nil},
+                    just_stored = false}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    local jname_one = card.ability.extra.joker_one_info.name or localize("maelmc_none")
+    local jname_two = card.ability.extra.joker_two_info.name or localize("maelmc_none")
+    local jname_three = card.ability.extra.joker_three_info.name or localize("maelmc_none")
+    return {vars = {jname_one, jname_two, jname_three}}
+  end,
+  rarity = 3,
+  cost = 10,
+  stage = "Other",
+  atlas = "maelmc_jokers",
+  blueprint_compat = false,
+  calculate = function(self, card, context)
+
+    -- getting the 1st 3 joker sold when this is possessed
+    if context.selling_card and not context.selling_self and not context.blueprint then
+      if card.ability.extra.just_stored == true then
+        card.ability.extra.just_stored = false
+      end
+      if context.card.config.center.rarity then --if it's a joker
+      
+        -- check position in jokers, only the leftmost pc can get the joker
+        local all_pc = SMODS.find_card("j_maelmc_pc")
+        for _, v in pairs(all_pc) do
+          if v == card then
+            break
+          end
+          if v.ability.extra.just_stored then -- if another pc already took this joker, end
+            return
+          end
+        end
+
+        local slot = nil -- find which pc slot to store the joker in
+        if not card.ability.extra.joker_one_info.name then slot = "joker_one_info"
+        elseif not card.ability.extra.joker_two_info.name then slot = "joker_two_info"
+        elseif not card.ability.extra.joker_three_info.name then slot = "joker_three_info" end
+        if not slot then return end
+
+        local stored = context.card
+
+        -- if it's a mega, devolve it
+        if stored.config.center.rarity == "poke_mega" then
+          local forced_key = get_previous_evo(stored, true)
+          poke_backend_evolve(stored, forced_key)
+        end
+
+        card.ability.extra[slot].name = G.localization.descriptions["Joker"][stored.config.center_key]["name"]
+        card.ability.extra[slot].card = stored
+
+        card.ability.extra.just_stored = true
+        return {
+          message = localize("maelmc_stored")
+        }
+      end
+    end
+
+    if ((context.individual or context.repetition) and context.cardarea == G.play) or -- cards played
+      ((context.individual or context.repetition) and not context.end_of_round and context.cardarea == G.hand) or -- cards held in hand
+      (context.cardarea == G.jokers and context.scoring_hand and context.joker_main) then -- jokers
+
+      local rets = {}
+      table.insert(rets, card.ability.extra.joker_one_info.name and Card.calculate_joker(card.ability.extra.joker_one_info.card, context) or false)
+      table.insert(rets, card.ability.extra.joker_two_info.name and Card.calculate_joker(card.ability.extra.joker_two_info.card, context) or false)
+      table.insert(rets, card.ability.extra.joker_three_info.name and Card.calculate_joker(card.ability.extra.joker_three_info.card, context) or false)
+      if not (rets[1]) and not (rets[2]) and not (rets[3]) then return end
+
+      local final_ret = {}
+      for _, v in ipairs(rets) do
+        if v then
+          for k, w in pairs(v) do
+            if final_ret[k] then
+              final_ret[k] = final_ret[k] + w
+            elseif k ~= "extra" and k ~= "message" and k ~= "colour" and k ~= "card" then
+              final_ret[k] = w
+            end
+          end
+        end
+      end
+
+      final_ret.colour = G.C.GREY
+      final_ret.card = card
+      final_ret.message = localize("maelmc_pc")
+      return final_ret
+
+    end
+
+  end,
+}
+
 --[[
 
 local name = {
@@ -352,6 +453,7 @@ return {
   list = {
     gym_leader,
     odd_keystone,
-    pokewalker
+    pokewalker,
+    pc,
   },
 }

@@ -429,6 +429,16 @@ return {
                     "if you have none",
                 }
             },
+            j_maelmc_pc = {
+                name = "PC",
+                text = {
+                    "Sell a {C:attention}Joker{} to store it",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Stored Jokers trigger their",
+                    "effects that happen during scoring",
+                    "{C:inactive}(Stored: {C:attention}#1#{C:inactive}, {C:attention}#2#{C:inactive}, {C:attention}#3#{C:inactive})"
+                }
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -506,6 +516,9 @@ return {
             maelmc_banana_ex = "Banana!",
             maelmc_gym_leader_name = "Gym Leader",
             maelmc_trial_captain_name = "Trial Captain",
+            maelmc_none = "None",
+            maelmc_stored = "Stored",
+            maelmc_pc = "PC",
         },
         v_text = {
            ch_c_maelmc_gym_challenge = {"Jokers not matching the Gym Leader's {C:attention}Type{} {C:attention}perish{} after 3 rounds"},
