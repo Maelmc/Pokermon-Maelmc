@@ -184,12 +184,12 @@ return {
             j_maelmc_inkay = {
                 name = "Inkay",
                 text = {
-                    "Cards have a {C:green}#1#%{} chance to",
+                    "Cards have a {C:green}#1# in #2#{} chance to",
                     "be drawn face down",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Played face down cards give",
-                    "{C:red}+#2#{} Mult when scored",
-                    "{C:inactive,s:0.8}(Evolves after triggering face down cards {C:attention,s:0.8}#3#{C:inactive,s:0.8} times)"
+                    "{C:red}+#3#{} Mult when scored",
+                    "{C:inactive,s:0.8}(Evolves after triggering face down cards {C:attention,s:0.8}#4#{C:inactive,s:0.8} times)"
                 } 
             },
             j_maelmc_malamar = {

@@ -8,7 +8,7 @@ local inkay={
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    return {vars = {50, abbr.mult, math.max(0, self.config.evo_rqmt - abbr.flipped_triggered)}}
+    return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), abbr.odds, abbr.mult, math.max(0, self.config.evo_rqmt - abbr.flipped_triggered)}}
   end,
   rarity = 2,
   cost = 6,
@@ -17,6 +17,13 @@ local inkay={
   atlas = "Pokedex6",
   blueprint_compat = true,
   calculate = function(self, card, context)
+
+    -- 1 in 2 is flipped
+    if context.stay_flipped and context.to_area == G.hand and pseudorandom('inkay') < G.GAME.probabilities.normal / card.ability.extra.odds then
+      return {
+          stay_flipped = true
+      }
+    end
 
     -- flag all face down cards
     if G.hand then
@@ -54,12 +61,6 @@ local inkay={
     end
     return scaling_evo(self, card, context, "j_maelmc_malamar", card.ability.extra.flipped_triggered, self.config.evo_rqmt)
   end,
-  add_to_deck = function(self, card, from_debuff)
-    G.GAME.modifiers.flipped_cards = card.ability.extra.odds
-  end,
-  remove_from_deck = function(self, card, from_debuff)
-    G.GAME.modifiers.flipped_cards = nil
-  end
 }
 
 -- Malamar 687
@@ -81,6 +82,13 @@ local malamar={
   atlas = "Pokedex6",
   blueprint_compat = true,
   calculate = function(self, card, context)
+
+    -- all are flipped
+    if context.stay_flipped and context.to_area == G.hand then
+      return {
+          stay_flipped = true
+      }
+    end
 
     -- flag all face down cards
     if G.hand then
@@ -116,12 +124,6 @@ local malamar={
       end
     end
   end,
-  add_to_deck = function(self, card, from_debuff)
-    G.GAME.modifiers.flipped_cards = 1
-  end,
-  remove_from_deck = function(self, card, from_debuff)
-    G.GAME.modifiers.flipped_cards = nil
-  end
 }
 
 -- Binacle 688
