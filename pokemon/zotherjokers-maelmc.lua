@@ -81,6 +81,9 @@ local gym_leader={
       }
     end
   end,
+  add_to_deck = function(self,card,from_debuff)
+    self:set_sprites(card)
+  end,
   set_ability = function(self, card, initial, delay_sprites)
     if initial and G.playing_cards then
       local poketype_list = {"Grass", "Fire", "Water", "Lightning", "Psychic", "Fighting", "Colorless", "Darkness", "Metal", "Fairy", "Dragon", "Earth"}
