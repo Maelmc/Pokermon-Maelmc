@@ -519,6 +519,175 @@ local tropius = {
   end,
 }
 
+-- Deoxys 386
+local deoxys = {
+  name = "deoxys",
+  pos = {x = 6, y = 14},
+  soul_pos = { x = 0, y = 15},
+  config = {extra = {hands = 1, d_size = 1, h_size = 1}},
+  loc_vars = function(self, info_queue, center)
+    type_tooltip(self, info_queue, center)
+		return {vars = {center.ability.extra.hands, center.ability.extra.d_size, center.ability.extra.h_size}}
+  end,
+  rarity = 4,
+  cost = 20,
+  stage = "Legendary",
+  ptype = "Psychic",
+  atlas = "Pokedex3",
+  blueprint_compat = false,
+  add_to_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands
+    G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.d_size
+    G.hand:change_size(card.ability.extra.h_size)
+    if not from_debuff then
+      ease_hands_played(card.ability.extra.hands)
+      ease_discard(card.ability.extra.d_size)
+      if G.hand and G.hand.cards and #G.hand.cards > 0 then
+        local hand_space = math.min(#G.deck.cards, card.ability.extra.h_size - 1)
+        delay(0.3)
+        for i=1, hand_space do --draw cards from deck
+          if G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK then 
+            draw_card(G.deck,G.hand, i*100/hand_space,'up', true)
+          else
+            draw_card(G.deck,G.hand, i*100/hand_space,'up', true)
+          end
+        end
+      end
+
+      -- meteorite
+      local ok = true
+      for _, v in pairs(G.consumeables.cards) do
+        if v.config.center.name == "meteorite" then
+          ok = false
+          break
+        end
+      end
+      if ok then
+        local _card = create_card("Item", G.consumeables, nil, nil, nil, nil, "c_maelmc_meteorite")
+        local edition = {negative = true}
+        _card:set_edition(edition, true)
+        _card:add_to_deck()
+        G.consumeables:emplace(_card)
+        card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('poke_plus_pokeitem'), colour = G.C.FILTER})
+      end
+    end
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.hands
+    G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.d_size
+    G.hand:change_size(-card.ability.extra.h_size)
+    local to_decrease = math.min(G.GAME.current_round.hands_left - 1, card.ability.extra.hands)
+    if to_decrease > 0 then
+      ease_hands_played(-to_decrease)
+    end
+    ease_discard(-card.ability.extra.d_size)
+  end,
+}
+
+local deoxys_attack = {
+  name = "deoxys_attack",
+  pos = {x = 6, y = 14},
+  soul_pos = { x = 1, y = 15},
+  config = {extra = {hands = 3}},
+  loc_vars = function(self, info_queue, center)
+    type_tooltip(self, info_queue, center)
+		return {vars = {center.ability.extra.hands}}
+  end,
+  rarity = 4,
+  cost = 20,
+  stage = "Legendary",
+  ptype = "Psychic",
+  atlas = "Pokedex3",
+  aux_poke = true,
+  no_collection = true,
+  blueprint_compat = false,
+  add_to_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands
+    if not from_debuff then
+      ease_hands_played(card.ability.extra.hands)
+    end
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.hands
+    local to_decrease = math.min(G.GAME.current_round.hands_left - 1, card.ability.extra.hands)
+    if to_decrease > 0 then
+      ease_hands_played(-to_decrease)
+    end
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
+local deoxys_defense = {
+  name = "deoxys_defense", 
+  pos = {x = 6, y = 14},
+  soul_pos = { x = 2, y = 15},
+  config = {extra = {d_size = 5}},
+  loc_vars = function(self, info_queue, center)
+    type_tooltip(self, info_queue, center)
+    return {vars = {center.ability.extra.d_size}}
+  end,
+  rarity = 4,
+  cost = 20,
+  stage = "Legendary",
+  ptype = "Psychic",
+  atlas = "Pokedex3",
+  aux_poke = true,
+  no_collection = true,
+  blueprint_compat = false,
+  add_to_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.d_size
+    ease_discard(card.ability.extra.d_size)
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.d_size
+    ease_discard(-card.ability.extra.d_size)
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
+local deoxys_speed = {
+  name = "deoxys_speed",
+  pos = { x = 6, y = 14 },
+  soul_pos = { x = 3, y = 15 },
+  config = { extra = { h_size = 4} },
+  loc_vars = function(self, info_queue, center)
+    type_tooltip(self, info_queue, center)
+    return { vars = { center.ability.extra.h_size } }
+  end,
+  rarity = 4,
+  cost = 20,
+  stage = "Legendary",
+  ptype = "Psychic",
+  atlas = "Pokedex3",
+  aux_poke = true,
+  no_collection = true,
+  blueprint_compat = false,
+  add_to_deck = function(self, card, from_debuff)
+    G.hand:change_size(card.ability.extra.h_size)
+    if not from_debuff and G.hand and G.hand.cards and #G.hand.cards > 0 then
+      local hand_space = math.min(#G.deck.cards, card.ability.extra.h_size - 1)
+      delay(0.3)
+      for i=1, hand_space do --draw cards from deck
+        if G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK then 
+            draw_card(G.deck,G.hand, i*100/hand_space,'up', true)
+        else
+            draw_card(G.deck,G.hand, i*100/hand_space,'up', true)
+        end
+      end
+    end
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.hand:change_size(-card.ability.extra.h_size)
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
 return {
   name = "Maelmc's Jokers Gen 3",
   list = {
@@ -526,5 +695,6 @@ return {
     lunatone, solrock,
     kecleon,
     tropius,
+    --deoxys, deoxys_attack, deoxys_defense, deoxys_speed
   },
 }

@@ -10,6 +10,36 @@ return {
                 }
             },
         },
+        Spectral = {
+            c_maelmc_fake_deoxys = {
+                name = "Normal Form",
+                text = {
+                    "Return to {C:attention}Normal",
+                    "{C:inactive,s:0.8}(Applies to leftmost Deoxys)"
+                },
+            },
+            c_maelmc_fake_deoxys_attack = {
+                name = "Attack Form",
+                text = {
+                    "Focus toward {C:attention}Attack",
+                    "{C:inactive,s:0.8}(Applies to leftmost Deoxys)"
+                },
+            },
+            c_maelmc_fake_deoxys_defense = {
+                name = "Defense Form",
+                text = {
+                    "Focus toward {C:attention}Defense",
+                    "{C:inactive,s:0.8}(Applies to leftmost Deoxys)"
+                },
+            },
+            c_maelmc_fake_deoxys_speed = {
+                name = "Speed Form",
+                text = {
+                    "Focus toward {C:attention}Speed",
+                    "{C:inactive,s:0.8}(Applies to leftmost Deoxys)"
+                },
+            },
+        },
         Item = {
             c_maelmc_tealmask = {
                 name = "Teal Mask",
@@ -41,6 +71,12 @@ return {
                     "Enhance {C:attention}#1#",
                     "selected cards to",
                     "{C:attention}Stone Cards"
+                },
+            },
+            c_maelmc_meteorite = {
+                name = "Meteorite",
+                text = {
+                    "Use to change {C:attention}Deoxys{}' form"
                 },
             },
         },
@@ -445,6 +481,34 @@ return {
                     "{C:inactive,s:0.8}reset outside of scoring)",
                 }
             },
+            j_maelmc_deoxys = {
+                name = "Deoxys",
+                text = {
+                    "Holding {C:attention}Meteorite",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "{C:chips}+#1#{} hands",
+                    "{C:red}+#2#{} discards",
+                    "{C:attention}+#3#{} hand size",
+                }
+            },
+            j_maelmc_deoxys_attack = {
+                name = "Deoxys",
+                text = {
+                    "{C:chips}+#1#{} hands",
+                }
+            },
+            j_maelmc_deoxys_defense = {
+                name = "Deoxys",
+                text = {
+                    "{C:red}+#1#{} discards",
+                }
+            },
+            j_maelmc_deoxys_speed = {
+                name = "Deoxys",
+                text = {
+                    "{C:attention}+#1#{} hand size",
+                }
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -482,7 +546,13 @@ return {
                     "or selected {C:attention}eligible{} Joker",
                     "at end of next round",
                 }
-            }
+            },
+            p_maelmc_meteorite_pack = {
+                name = "Meteorite Pack",
+                text = {
+                    "Change {C:attention}Deoxys{}' form",
+                },
+            },
         },
     },
     misc = {
@@ -525,6 +595,8 @@ return {
             maelmc_none = "None",
             maelmc_stored = "Stored",
             maelmc_pc = "PC",
+
+            k_maelmc_meteorite_pack = "Meteorite Pack",
         },
         v_text = {
            ch_c_maelmc_gym_challenge = {"Jokers not matching the Gym Leader's {C:attention}Type{} {C:attention}perish{} after 3 rounds"},
