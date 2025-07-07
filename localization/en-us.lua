@@ -76,7 +76,9 @@ return {
             c_maelmc_meteorite = {
                 name = "Meteorite",
                 text = {
-                    "Use to change {C:attention}Deoxys{}' form"
+                    "Cycle through leftmost or",
+                    "selected {C:attention}Deoxys{}' forms",
+                    "{C:inactive,s:0.8}(Normal, Attack, Defense, Speed)"
                 },
             },
         },
@@ -484,29 +486,33 @@ return {
             j_maelmc_deoxys = {
                 name = "Deoxys",
                 text = {
-                    "Holding {C:attention}Meteorite",
+                    "Holding {C:dark_edition}Negative {C:attention}Meteorite",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "{C:chips}+#1#{} hands",
-                    "{C:red}+#2#{} discards",
+                    "When {C:attention}Blind{} is selected,",
+                    "gain {C:chips}+#1#{} hand,",
+                    "{C:red}+#2#{} discard and",
                     "{C:attention}+#3#{} hand size",
                 }
             },
             j_maelmc_deoxys_attack = {
                 name = "Deoxys",
                 text = {
-                    "{C:chips}+#1#{} hands",
+                    "When {C:attention}Blind{} is selected,",
+                    "gain {C:chips}+#1#{} hands",
                 }
             },
             j_maelmc_deoxys_defense = {
                 name = "Deoxys",
                 text = {
-                    "{C:red}+#1#{} discards",
+                    "When {C:attention}Blind{} is selected,",
+                    "gain {C:red}+#1#{} discards",
                 }
             },
             j_maelmc_deoxys_speed = {
                 name = "Deoxys",
                 text = {
-                    "{C:attention}+#1#{} hand size",
+                    "When {C:attention}Blind{} is selected,",
+                    "gain {C:attention}+#1#{} hand size",
                 }
             },
         },
@@ -595,8 +601,12 @@ return {
             maelmc_none = "None",
             maelmc_stored = "Stored",
             maelmc_pc = "PC",
+            maelmc_discard = "+#1# Discard",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
+        },
+        v_dictionary = {
+            maelmc_discard = "+#1# Discard",
         },
         v_text = {
            ch_c_maelmc_gym_challenge = {"Jokers not matching the Gym Leader's {C:attention}Type{} {C:attention}perish{} after 3 rounds"},

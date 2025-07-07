@@ -281,8 +281,14 @@ local meteorite = {
   evo_item = true,
   unlocked = true,
   discovered = true,
-  can_use = function(self, card)
-    if not card.ability.extra.usable then return false end
+  can_use = function(self, card, context)
+    if G.jokers.highlighted and #G.jokers.highlighted == 1 then
+      if string.find(G.jokers.highlighted[1].config.center.name,"deoxys") then
+        return true
+      else
+        return false
+      end
+    end
     for _, poke in pairs(G.jokers.cards) do
       if (string.find(poke.config.center.name,"deoxys") and not (poke.debuff)) then
         return true
@@ -291,44 +297,48 @@ local meteorite = {
     return false
   end,
   use = function(self, card, area, copier)
-    G.E_MANAGER:add_event(Event({
-      func = function()
-        local key = 'p_maelmc_meteorite_pack'
-        local pack = Card(G.play.T.x + G.play.T.w/2 - G.CARD_W*1.27/2,
-        G.play.T.y + G.play.T.h/2-G.CARD_H*1.27/2, G.CARD_W*1.27, G.CARD_H*1.27, G.P_CARDS.empty, G.P_CENTERS[key], {bypass_discovery_center = true, bypass_discovery_ui = true})
-        pack.cost = 0
-        pack.from_tag = true
-        G.FUNCS.use_card({config = {ref_table = pack}})
-        pack:start_materialize()
-        
-        for _,poke in pairs(G.jokers.cards) do
-          if string.find(poke.config.center.name,"deoxys") then
-            poke:juice_up(0.1)
-          end
+    local target = nil
+    if G.jokers.highlighted and #G.jokers.highlighted == 1 and string.find(G.jokers.highlighted[1].config.center.name,"deoxys") and not (G.jokers.highlighted[1].debuff) then
+      target = G.jokers.highlighted[1]
+    else
+      for _, poke in pairs(G.jokers.cards) do
+        if (string.find(poke.config.center.name,"deoxys") and not (poke.debuff)) then
+          target = poke
+          break
         end
-        return true
       end
-    }))
-    card.ability.extra.usable = false
-end,
-calculate = function(self, card, context)
-  if context.end_of_round and not card.ability.extra.usable then
-    card.ability.extra.usable = true
-    card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_reset')})
+    end
+    if target then
+      if target.config.center.name == "deoxys" then
+        poke_evolve(target, "j_maelmc_deoxys_attack")
+        return
+      end
+      if target.config.center.name == "deoxys_attack" then
+        poke_evolve(target, "j_maelmc_deoxys_defense")
+        return
+      end
+      if target.config.center.name == "deoxys_defense" then
+        poke_evolve(target, "j_maelmc_deoxys_speed")
+        return
+      end
+      if target.config.center.name == "deoxys_speed" then
+        poke_evolve(target, "j_maelmc_deoxys")
+        return
+      end
+    end
+  end,
+  keep_on_use = function(self, card)
+    return true
+  end,
+  in_pool = function(self)
+    return false
+  end,
+  set_ability = function(self, card, initial, delay_sprites)
+    if initial then
+      local edition = {negative = true}
+      card:set_edition(edition, true, true)
+    end
   end
-end,
-keep_on_use = function(self, card)
-  return true
-end,
-in_pool = function(self)
-  return false
-end,
-set_ability = function(self, card, initial, delay_sprites)
-  if initial then
-    local edition = {negative = true}
-    card:set_edition(edition, true, true)
-  end
-end
 }
 
 local fake_deoxys = {
@@ -454,6 +464,6 @@ local fake_deoxys_speed = {
 return {name = "Maelmc's Items",
   list = {
     tealmask, wellspringmask, hearthflamemask, cornerstonemask,
-    --meteorite, fake_deoxys, fake_deoxys_attack, fake_deoxys_defense, fake_deoxys_speed,
+    meteorite, --fake_deoxys, fake_deoxys_attack, fake_deoxys_defense, fake_deoxys_speed,
   }
 }
