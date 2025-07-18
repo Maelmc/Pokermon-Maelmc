@@ -83,10 +83,8 @@ for _, file in ipairs(pfiles) do
     if curr_pokemon.list and #curr_pokemon.list > 0 then
       for i, item in ipairs(curr_pokemon.list) do
         if string.find(item.atlas, "maelmc") then
-          print("true "..item.name)
           pokermon.Pokemon(item,"maelmc",true)
         else
-          print("false "..item.name)
           pokermon.Pokemon(item,"maelmc",false)
         end
       end

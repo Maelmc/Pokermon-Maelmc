@@ -387,9 +387,9 @@ local pc = {
     end
 
     if (((context.individual or context.repetition) and context.cardarea == G.play) or -- cards played
-      ((context.individual or context.repetition) and not context.end_of_round and context.cardarea == G.hand) or -- cards held in hand
-      (context.cardarea == G.jokers and context.scoring_hand and context.joker_main))
-      and not context.blueprint then -- jokers
+      ((context.individual or context.repetition) and context.cardarea == G.hand) or -- cards held in hand
+      (context.cardarea == G.jokers and context.scoring_hand and context.joker_main) or (context.other_joker)) -- jokers
+      and not context.blueprint and not context.end_of_round and not context.setting_blind then
 
       local rets = {}
       table.insert(rets, card.ability.extra.joker_one_info.name and Card.calculate_joker(card.ability.extra.joker_one_info.card, context) or false)

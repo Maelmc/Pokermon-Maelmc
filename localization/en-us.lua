@@ -473,6 +473,7 @@ return {
                     "When {C:attention}Blind{} is selected,",
                     "stores {C:attention}Joker{} to the right",
                     "{C:inactive,s:0.8}Cannot store {C:attention,s:0.8}PC",
+                    "{C:inactive,s:0.8}Devolves {C:attention,s:0.8}Mega{C:inactive,s:0.8} Pokémon before storing them",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Stored Jokers trigger their",
                     "effects that happen during scoring",
