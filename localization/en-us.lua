@@ -479,7 +479,7 @@ return {
                     "effects that happen during scoring",
                     "{C:inactive}(Stored: {C:attention}#1#{C:inactive}, {C:attention}#2#{C:inactive}, {C:attention}#3#{C:inactive})",
                     "{C:inactive,s:0.8}(Effects that need to reset at some point",
-                    "{C:inactive,s:0.8}to work properly, like Octillery, might",
+                    "{C:inactive,s:0.8}to work properly, like Barbaracle, might",
                     "{C:inactive,s:0.8}eventually stop working as they",
                     "{C:inactive,s:0.8}reset outside of scoring)",
                 }
