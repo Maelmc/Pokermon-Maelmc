@@ -47,7 +47,6 @@ local inkay={
 
     -- remove flag and flip back cards
     if context.end_of_round and context.cardarea == G.jokers and not context.blueprint then
-      G.GAME.modifiers.flipped_cards = 2
       for i = 1, #G.hand.cards do
         if G.hand.cards[i].facing == 'back' then
             G.hand.cards[i]:flip()
@@ -111,7 +110,6 @@ local malamar={
 
     -- remove flag and flip back cards
     if context.end_of_round and context.cardarea == G.jokers and not context.blueprint then
-      G.GAME.modifiers.flipped_cards = 1
       for i = 1, #G.hand.cards do
         if G.hand.cards[i].facing == 'back' then
             G.hand.cards[i]:flip()
