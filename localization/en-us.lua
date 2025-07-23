@@ -516,6 +516,31 @@ return {
                     "gain {C:attention}+#1#{} hand size",
                 }
             },
+            j_maelmc_woobat = {
+                name = "Woobat",
+                text = {
+                    "If scored hand only contains",
+                    "{C:hearts}Hearts{} cards, {C:green}#1# in #2#{} chance",
+                    "to add a {C:attention}red seal{} to a",
+                    "{C:hearts}Hearts{} card held in hand",
+                    "{C:inactive,s:0.8}(Evolves when you have {C:attention,s:0.8}#3#{C:inactive,s:0.8} Hearts",
+                    "{C:inactive,s:0.8}with a red seal in your deck)",
+
+                }
+            },
+            j_maelmc_swoobat = {
+                name = "Swoobat",
+                text = {
+                    "If scored hand only contains",
+                    "{C:hearts}Hearts{} cards, {C:green}#1# in #2#{} chance",
+                    "to add a {C:attention}red seal{} to each",
+                    "{C:hearts}Hearts{} card held in hand",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "{C:hearts}Hearts{C:attention} with a red seal",
+                    "{C:attention}can't{} be debuffed"
+
+                }
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -603,6 +628,7 @@ return {
             maelmc_stored = "Stored",
             maelmc_pc = "PC",
             maelmc_discard = "+#1# Discard",
+            maelmc_hearthstamp_ex = "Heartstamp!",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
         },

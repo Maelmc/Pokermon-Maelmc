@@ -68,6 +68,14 @@ else
   helper()
 end
 
+--Load Debuff logic
+local debuff, load_error = SMODS.load_file("functions/debuffs.lua")
+if load_error then
+  sendDebugMessage ("The error is: "..load_error)
+else
+  debuff()
+end
+
 --Load pokemon file
 local pfiles = NFS.getDirectoryItems(mod_dir.."pokemon")
 
