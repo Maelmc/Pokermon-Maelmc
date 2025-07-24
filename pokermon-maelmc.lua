@@ -33,6 +33,7 @@ pokermon.add_family({"gible","gabite","garchomp","mega_garchomp"})
 pokermon.add_family({"ogerpon","ogerpon_wellspring","ogerpon_hearthflame","ogerpon_cornerstone"})
 pokermon.add_family({"g_corsola","cursola"})
 pokermon.add_family({"deoxys","deoxys_attack","deoxys_defense","deoxys_speed"})
+pokermon.add_family({"woobat","swoobat"})
 
 --Load Sprites file
 local sprite, load_error = SMODS.load_file("maelmcsprites.lua")
