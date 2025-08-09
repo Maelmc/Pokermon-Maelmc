@@ -49,7 +49,7 @@ local woobat = {
   update = function(self, card, dt)
     if not poke_is_in_collection(card) then
       local heart_stamped_count = 0
-      for _, v in pairs(G.deck.cards) do
+      for _, v in pairs(G.playing_cards) do
         if v:is_suit("Hearts") and v:get_seal() == "Red" then
           heart_stamped_count = heart_stamped_count + 1
         end
