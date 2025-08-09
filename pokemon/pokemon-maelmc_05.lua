@@ -3,7 +3,7 @@ local woobat = {
   name = "woobat",
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 2},
-  config = {extra = {odds = 2}, evo_rqmt = 4},
+  config = {extra = {odds = 2, heart_stamped_count = 0}, evo_rqmt = 4},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     return {vars = {""..(G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.odds, self.config.evo_rqmt}}
@@ -44,14 +44,19 @@ local woobat = {
       end
     end
 
-    local heart_stamped_count = 0
-    for _, v in pairs(G.deck.cards) do
-      if v:is_suit("Hearts") and v:get_seal() == "Red" then
-        heart_stamped_count = heart_stamped_count + 1
-      end
-    end
-    return scaling_evo(self, card, context, "j_maelmc_swoobat", heart_stamped_count, self.config.evo_rqmt)
+    return scaling_evo(self, card, context, "j_maelmc_swoobat", card.ability.extra.heart_stamped_count, self.config.evo_rqmt)
   end,
+  update = function(self, card, dt)
+    if not poke_is_in_collection(card) then
+      local heart_stamped_count = 0
+      for _, v in pairs(G.deck.cards) do
+        if v:is_suit("Hearts") and v:get_seal() == "Red" then
+          heart_stamped_count = heart_stamped_count + 1
+        end
+      end
+      card.ability.extra.heart_stamped_count = heart_stamped_count
+    end
+  end
 }
 
 local swoobat = {
