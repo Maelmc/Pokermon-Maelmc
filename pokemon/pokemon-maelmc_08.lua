@@ -58,25 +58,15 @@ local cufant = {
   name = "cufant",
   poke_custom_prefix = "maelmc",
   pos = {x = 4, y = 5},
-  config = {extra = {hazard_ratio = 10, to_steel = 1, reset_steel = 1, rounds = 5, all_hazard = {}, hazard_to_steel = {}}},
+  config = {extra = {hazards = 4, to_steel = 1, reset_steel = 1, rounds = 5, all_hazard = {}, hazard_to_steel = {}}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards'}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {abbr.hazards}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
 
-    local to_add = math.floor(52 / abbr.hazard_ratio)
-    if G.playing_cards then
-      local count = #G.playing_cards
-      for _, v in pairs(G.playing_cards) do
-        if SMODS.has_enhancement(v, "m_poke_hazard") then
-          count = count - 1
-        end
-      end
-      to_add = math.floor(count / abbr.hazard_ratio)
-    end
-    return {vars = {to_add, abbr.hazard_ratio, abbr.reset_steel, abbr.rounds}}
+    return {vars = {abbr.hazards, abbr.reset_steel, abbr.rounds}}
   end,
   rarity = 3,
   cost = 7,
@@ -86,7 +76,7 @@ local cufant = {
   blueprint_compat = false,
   calculate = function(self, card, context)
     if context.setting_blind then
-      poke_add_hazards(card.ability.extra.hazard_ratio)
+      poke_set_hazards(card.ability.extra.hazards)
       card.ability.extra.hazard_to_steel = {}
       card.ability.extra.all_hazard = {}
     end
@@ -137,30 +127,24 @@ local copperajah = {
   name = "copperajah",
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 5},
-  config = {extra = {hazard_ratio = 10, reset_steel = 3, mult_mod = 3, all_hazard = {}, hazard_to_steel = {}}},
+  config = {extra = {hazards = 4, reset_steel = 3, mult_mod = 3, all_hazard = {}, hazard_to_steel = {}}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = {set = 'Other', key = 'mega_poke'}
-    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards'}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {abbr.hazards}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
 
-    local to_add = math.floor(52 / abbr.hazard_ratio)
     local steel_count = 0
     if G.playing_cards then
-      local count = #G.playing_cards
       for _, v in pairs(G.playing_cards) do
-        if SMODS.has_enhancement(v, "m_poke_hazard") then
-          count = count - 1
-        end
         if SMODS.has_enhancement(v, "m_steel") then
           steel_count = steel_count + 1
         end
       end
-      to_add = math.floor(count / abbr.hazard_ratio)
     end
-    return {vars = {to_add, abbr.hazard_ratio, abbr.reset_steel, abbr.mult_mod, abbr.mult_mod * steel_count}}
+    return {vars = {abbr.hazards, abbr.reset_steel, abbr.mult_mod, abbr.mult_mod * steel_count}}
   end,
   rarity = "poke_safari",
   cost = 9,
@@ -170,7 +154,7 @@ local copperajah = {
   blueprint_compat = false,
   calculate = function(self, card, context)
     if context.setting_blind then
-      poke_add_hazards(card.ability.extra.hazard_ratio)
+      poke_set_hazards(card.ability.extra.hazards)
       card.ability.extra.hazard_to_steel = {}
       card.ability.extra.all_hazard = {}
     end
@@ -235,29 +219,23 @@ local mega_copperajah = {
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 2},
   soul_pos = { x = 5, y = 5 },
-  config = {extra = {hazard_ratio = 10, to_steel = 5, reset_steel = 5, Xmult_mod = 0.1, mult_mod = 6, all_hazard = {}, hazard_to_steel = {}}},
+  config = {extra = {hazards = 4, to_steel = 5, reset_steel = 5, Xmult_mod = 0.1, mult_mod = 6, all_hazard = {}, hazard_to_steel = {}}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards'}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {abbr.hazards}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
 
-    local to_add = math.floor(52 / abbr.hazard_ratio)
     local steel_count = 0
     if G.playing_cards then
-      local count = #G.playing_cards
       for _, v in pairs(G.playing_cards) do
-        if SMODS.has_enhancement(v, "m_poke_hazard") then
-          count = count - 1
-        end
         if SMODS.has_enhancement(v, "m_steel") then
           steel_count = steel_count + 1
         end
       end
-      to_add = math.floor(count / abbr.hazard_ratio)
     end
-    return {vars = {to_add, abbr.hazard_ratio, abbr.reset_steel, abbr.Xmult_mod, 1 + abbr.Xmult_mod * steel_count, abbr.mult_mod, abbr.mult_mod * steel_count }}
+    return {vars = {abbr.hazards, abbr.reset_steel, abbr.Xmult_mod, 1 + abbr.Xmult_mod * steel_count, abbr.mult_mod, abbr.mult_mod * steel_count }}
   end,
   rarity = "poke_mega",
   cost = 12,
@@ -267,7 +245,7 @@ local mega_copperajah = {
   blueprint_compat = false,
   calculate = function(self, card, context)
     if context.setting_blind then
-      poke_add_hazards(card.ability.extra.hazard_ratio)
+      poke_set_hazards(card.ability.extra.hazards)
       card.ability.extra.hazard_to_steel = {}
       card.ability.extra.all_hazard = {}
     end

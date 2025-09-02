@@ -86,63 +86,62 @@ return {
             j_maelmc_glimmet = {
                 name = "Glimmet",
                 text = {
-                    "{C:purple}+#1# Hazards {C:inactive}(#5# per #2# cards)",
+                    "{C:purple}+#1# Hazards {C:inactive}",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
-                    "gives {C:chips}+#3#{} Chips",
-                    "{C:inactive,s:0.8}(Evolves after triggering Hazard Cards {C:attention,s:0.8}#4#{C:inactive,s:0.8} times)"
+                    "gives {C:chips}+#2#{} Chips",
+                    "{C:inactive,s:0.8}(Evolves after triggering Hazard Cards {C:attention,s:0.8}#3#{C:inactive,s:0.8} times)"
                 }
             },
             j_maelmc_glimmora = {
                 name = "Glimmora",
                 text = {
-                    "{C:purple}+#1# Hazards {C:inactive}(#4# per #2# cards)",
-                    "Decreases cards required by 1",
-                    "after triggering {C:purple}#5# Hazard Cards{}",
-                    "{C:inactive,s:0.8}(Decreases in {C:attention,s:0.8}#6#{C:inactive,s:0.8} triggers)",
-                    "{C:inactive,s:0.8}(Caps at #4# per #4# cards)",
+                    "{C:purple}+#1# Hazards {C:inactive}",
+                    "Increases hazards set by #2#",
+                    "after triggering {C:purple}#3# Hazard Cards{}",
+                    "{C:inactive,s:0.8}(Requirement increases by #4# after each increase)",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
-                    "gives {C:chips}+#3#{} Chips"
+                    "gives {C:chips}+#5#{} Chips"
                 }
             },
             j_maelmc_cufant = {
                 name = "Cufant",
                 text = {
-                    "{C:purple}+#1# Hazards {C:inactive}(1 per #2# cards)",
+                    "{C:purple}+#1# Hazards {C:inactive}",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Enhance {C:purple}#3# Hazard{} card in hand",
+                    "Enhance {C:purple}#2# Hazard{} card in hand",
                     "into a {C:attention}Steel{} card",
                     "at the end of round",
-                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#4#{C:inactive,s:0.8} rounds)"
+                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#3#{C:inactive,s:0.8} rounds)"
                 }
             },
             j_maelmc_copperajah = {
                 name = "Copperajah",
                 text = {
-                    "{C:purple}+#1# Hazards {C:inactive}(1 per #2# cards)",
+                    "{C:purple}+#1# Hazards {C:inactive}",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Enhance {C:purple}#3# Hazards{} cards in hand",
+                    "Enhance {C:purple}#2# Hazards{} cards in hand",
                     "into {C:attention}Steel{} cards",
                     "at the end of round",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "{C:red}+#4#{} Mult for every {C:attention}Steel card",
+                    "{C:red}+#3#{} Mult for every {C:attention}Steel card",
                     "in your full deck",
-                    "{C:inactive}(Currently {C:red}+#5#{C:inactive} Mult)",
+                    "{C:inactive}(Currently {C:red}+#4#{C:inactive} Mult)",
                 }
             },
             j_maelmc_mega_copperajah = {
                 name = "Gigantamax Copperajah",
                 text = {
-                    "{C:purple}+#1# Hazards {C:inactive}(1 per #2# cards)",
+                    "{C:purple}+#1# Hazards {C:inactive}",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Enhance {C:purple}#3# Hazards{} cards in hand",
+                    "Enhance {C:purple}#2# Hazards{} cards in hand",
                     "into {C:attention}Steel{} cards",
                     "at the end of round",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "{C:red}+#6#{} and {X:red,C:white}X#4#{} Mult for every {C:attention}Steel card",
+                    "{C:red}+#5#{} and {X:red,C:white}X#3#{} Mult for every {C:attention}Steel card",
                     "in your full deck",
-                    "{C:inactive}(Currently {C:red}+#7#{C:inactive} and {X:red,C:white}X#5#{C:inactive} Mult)",
+                    "{C:inactive}(Currently {C:red}+#6#{C:inactive} and {X:red,C:white}X#4#{C:inactive} Mult)",
                 }
             },
             j_maelmc_odd_keystone = {

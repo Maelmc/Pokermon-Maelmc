@@ -3,25 +3,15 @@ local glimmet={
   name = "glimmet",
   poke_custom_prefix = "maelmc",
   pos = {x = 4, y = 5},
-  config = {extra = {hazard_ratio = 10, chips = 4, hazard_triggered = 0, hazard_per_ratio = 2}, evo_rqmt = 25},
+  config = {extra = {hazards = 8, chips = 4, hazard_triggered = 0}, evo_rqmt = 25},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards'}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {abbr.hazards}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
 
-    local to_add = math.floor(52 / abbr.hazard_ratio)
-    if G.playing_cards then
-      local count = #G.playing_cards
-      for _, v in pairs(G.playing_cards) do
-        if SMODS.has_enhancement(v, "m_poke_hazard") then
-          count = count - 1
-        end
-      end
-      to_add = math.floor(count / abbr.hazard_ratio)
-    end
-    return {vars = {to_add * abbr.hazard_per_ratio, abbr.hazard_ratio, abbr.chips, math.max(0, self.config.evo_rqmt - abbr.hazard_triggered), abbr.hazard_per_ratio}}
+    return {vars = {abbr.hazards, abbr.chips, math.max(0, self.config.evo_rqmt - abbr.hazard_triggered)}}
   end,
   rarity = 1,
   cost = 5,
@@ -32,8 +22,7 @@ local glimmet={
   calculate = function(self, card, context)
     -- adding hazards
     if context.setting_blind then
-      poke_add_hazards(card.ability.extra.hazard_ratio)
-      poke_add_hazards(card.ability.extra.hazard_ratio)
+      poke_set_hazards(card.ability.extra.hazards)
     end
 
     -- scoring hazards
@@ -63,25 +52,15 @@ local glimmora={
   name = "glimmora",
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 5},
-  config = {extra = {hazard_ratio = 10, chips = 8, hazard_triggered = 0, decrease_every = 25, hazard_per_ratio = 2}},
+  config = {extra = {hazards = 8, chips = 8, base_increase = 25, req_increase = 5, increase_in = 25, increase_by = 1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards'}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {abbr.hazards}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
 
-    local to_add = math.floor(52 / abbr.hazard_ratio)
-    if G.playing_cards then
-      local count = #G.playing_cards
-      for _, v in pairs(G.playing_cards) do
-        if SMODS.has_enhancement(v, "m_poke_hazard") then
-          count = count - 1
-        end
-      end
-      to_add = math.floor(count / abbr.hazard_ratio)
-    end
-    return {vars = {to_add * abbr.hazard_per_ratio , abbr.hazard_ratio, abbr.chips, abbr.hazard_per_ratio, abbr.decrease_every, abbr.decrease_every - abbr.hazard_triggered }}
+    return {vars = {abbr.hazards, abbr.increase_by, abbr.increase_in, abbr.req_increase, abbr.chips}}
   end,
   rarity = "poke_safari",
   cost = 6,
@@ -92,9 +71,7 @@ local glimmora={
   calculate = function(self, card, context)
     -- adding hazards
     if context.setting_blind then
-      for i = 1,card.ability.extra.hazard_per_ratio do
-        poke_add_hazards(card.ability.extra.hazard_ratio)
-      end
+      poke_set_hazards(card.ability.extra.hazards)
     end
 
     -- scoring hazards
@@ -107,10 +84,11 @@ local glimmora={
           }
       else
           if not context.blueprint then
-            card.ability.extra.hazard_triggered = card.ability.extra.hazard_triggered + 1
-            if card.ability.extra.hazard_triggered >= card.ability.extra.decrease_every then
-              card.ability.extra.hazard_triggered = card.ability.extra.hazard_triggered - card.ability.extra.decrease_every
-              card.ability.extra.hazard_ratio = math.max(card.ability.extra.hazard_per_ratio,card.ability.extra.hazard_ratio - 1)
+            card.ability.extra.increase_in = card.ability.extra.increase_in - 1
+            if card.ability.extra.increase_in <= 0 then
+              card.ability.extra.base_increase = card.ability.extra.base_increase + card.ability.extra.req_increase
+              card.ability.extra.increase_in = card.ability.extra.base_increase
+              card.ability.extra.hazards = card.ability.extra.hazards + card.ability.extra.increase_by
             end
           end
           return {
