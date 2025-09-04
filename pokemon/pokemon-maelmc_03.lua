@@ -9,8 +9,14 @@ local ralts={
     --info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_high_priestess'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"Foxthor, One Punch Idiot"}}
     local mult = 0
-    for _, v in pairs(G.GAME.hands) do
-      mult = mult + (v.level - 1) * card.ability.extra.mult_mod
+    if (SMODS.Mods["Talisman"] or {}).can_load then
+      for _, v in pairs(G.GAME.hands) do
+        mult = mult + (to_number(v.level) - 1) * card.ability.extra.mult_mod
+      end
+    else
+      for _, v in pairs(G.GAME.hands) do
+        mult = mult + (v.level - 1) * card.ability.extra.mult_mod
+      end
     end
     return {vars = {card.ability.extra.mult_mod, mult, card.ability.extra.rounds}}
   end,
@@ -70,8 +76,14 @@ local ralts={
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main then
         local mult = 0
-        for _, v in pairs(G.GAME.hands) do
-          mult = mult + (v.level - 1) * card.ability.extra.mult_mod
+        if (SMODS.Mods["Talisman"] or {}).can_load then
+          for _, v in pairs(G.GAME.hands) do
+            mult = mult + (to_number(v.level) - 1) * card.ability.extra.mult_mod
+          end
+        else
+          for _, v in pairs(G.GAME.hands) do
+            mult = mult + (v.level - 1) * card.ability.extra.mult_mod
+          end
         end
         if mult > 0 then
           return {
@@ -98,8 +110,14 @@ local kirlia={
     --info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_black_hole'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"Foxthor, One Punch Idiot"}}
     local mult = 0
-    for _, v in pairs(G.GAME.hands) do
-      mult = mult + (v.level - 1) * card.ability.extra.mult_mod
+    if (SMODS.Mods["Talisman"] or {}).can_load then
+      for _, v in pairs(G.GAME.hands) do
+        mult = mult + (to_number(v.level) - 1) * card.ability.extra.mult_mod
+      end
+    else
+      for _, v in pairs(G.GAME.hands) do
+        mult = mult + (v.level - 1) * card.ability.extra.mult_mod
+      end
     end
     return {vars = {card.ability.extra.mult_mod, mult, card.ability.extra.rounds}}
   end,
@@ -164,8 +182,14 @@ local kirlia={
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main then
         local mult = 0
-        for _, v in pairs(G.GAME.hands) do
-          mult = mult + (v.level - 1) * card.ability.extra.mult_mod
+        if (SMODS.Mods["Talisman"] or {}).can_load then
+          for _, v in pairs(G.GAME.hands) do
+            mult = mult + (to_number(v.level) - 1) * card.ability.extra.mult_mod
+          end
+        else
+          for _, v in pairs(G.GAME.hands) do
+            mult = mult + (v.level - 1) * card.ability.extra.mult_mod
+          end
         end
         if mult > 0 then
           return {
@@ -192,8 +216,14 @@ local gardevoir={
     --info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_black_hole'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"Foxthor, One Punch Idiot"}}
     local xmult = 1
-    for _, v in pairs(G.GAME.hands) do
-      xmult = xmult + (v.level - 1) * card.ability.extra.Xmult_mod
+    if (SMODS.Mods["Talisman"] or {}).can_load then
+      for _, v in pairs(G.GAME.hands) do
+        xmult = xmult + (to_number(v.level) - 1) * card.ability.extra.Xmult_mod
+      end
+    else
+      for _, v in pairs(G.GAME.hands) do
+        xmult = xmult + (v.level - 1) * card.ability.extra.Xmult_mod
+      end
     end
     return {vars = {card.ability.extra.Xmult_mod, xmult}}
   end,
@@ -258,8 +288,14 @@ local gardevoir={
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main then
         local xmult = 1
-        for _, v in pairs(G.GAME.hands) do
-          xmult = xmult + (v.level - 1) * card.ability.extra.Xmult_mod
+        if (SMODS.Mods["Talisman"] or {}).can_load then
+          for _, v in pairs(G.GAME.hands) do
+            xmult = xmult + (to_number(v.level) - 1) * card.ability.extra.Xmult_mod
+          end
+        else
+          for _, v in pairs(G.GAME.hands) do
+            xmult = xmult + (v.level - 1) * card.ability.extra.Xmult_mod
+          end
         end
         if xmult > 1 then
           return {
@@ -474,7 +510,8 @@ local kecleon={
       Dragon = {x = 1, y = 16},
       Earth = {x = 2, y = 16},
     }
-    card.children.center:set_sprite_pos(type_table[get_type(card)])
+    local type = get_type(card) or "Colorless"
+    card.children.center:set_sprite_pos(type_table[type])
   end,
   add_to_deck = function(self, card, from_debuff)
     self:set_sprites(card)
