@@ -5,8 +5,9 @@ return {
                 name = "Hazard Deck",
                 text = {
                     "At the start of blind,",
-                    "add {C:purple,T:m_poke_hazard}1 Hazard{} per #2# cards",
-                    "in full deck"
+                    "{C:purple,T:m_poke_hazard}+#1# Hazards{}",
+                    "Hazards held in hand",
+                    "give {C:attention}+1{} hand size"
                 }
             },
         },
