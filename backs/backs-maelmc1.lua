@@ -14,13 +14,13 @@ local hazarddeck = {
       poke_set_hazards(self.config.extra.hazards)
     end
 
-    if context.end_of_round then
+    --[[if context.end_of_round then
       for _, v in pairs(G.playing_cards) do
-        if SMODS.has_enhancement(v, "m_poke_hazard") then
+        if SMODS.has_enhancement(v, "m_poke_hazard") and v.ability.card_limit then
           v.ability.card_limit = nil
         end
       end
-    end
+    end]]
   end,
   apply = function(self)
     G.GAME.modifiers.hazard_deck = true

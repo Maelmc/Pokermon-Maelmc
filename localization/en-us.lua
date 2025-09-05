@@ -125,24 +125,14 @@ return {
                     "Enhance {C:purple}#2# Hazards{} cards in hand",
                     "into {C:attention}Steel{} cards",
                     "at the end of round",
-                    "{br:3}ERROR - CONTACT STEAK",
-                    "{C:red}+#3#{} Mult for every {C:attention}Steel card",
-                    "in your full deck",
-                    "{C:inactive}(Currently {C:red}+#4#{C:inactive} Mult)",
                 }
             },
             j_maelmc_mega_copperajah = {
                 name = "Gigantamax Copperajah",
                 text = {
-                    "{C:purple}+#1# Hazards {C:inactive}",
-                    "{br:3}ERROR - CONTACT STEAK",
-                    "Enhance {C:purple}#2# Hazards{} cards in hand",
-                    "into {C:attention}Steel{} cards",
-                    "at the end of round",
-                    "{br:3}ERROR - CONTACT STEAK",
-                    "{C:red}+#5#{} and {X:red,C:white}X#3#{} Mult for every {C:attention}Steel card",
-                    "in your full deck",
-                    "{C:inactive}(Currently {C:red}+#6#{C:inactive} and {X:red,C:white}X#4#{C:inactive} Mult)",
+                    "{X:red,C:white}X#1#{} Mult for every {C:attention}Steel",
+                    "{C:attention}Card{} in your full deck",
+                    "{C:inactive}(Currently {X:red,C:white}X#2#{C:inactive} Mult)",
                 }
             },
             j_maelmc_odd_keystone = {
@@ -574,9 +564,9 @@ return {
             fitem = {
                 name = "Form-change Item",
                 text = {
-                    "When consumed, changes form of leftmost",
-                    "or selected {C:attention}eligible{} Joker",
-                    "at end of next round",
+                    "When consumed, changes",
+                    "form of leftmost or",
+                    "selected {C:attention}eligible{} Joker",
                 }
             },
             p_maelmc_meteorite_pack = {
