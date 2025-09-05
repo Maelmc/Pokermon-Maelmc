@@ -88,9 +88,9 @@ Meteorite is obtained when you get Deoxys
 
 | Name | Effect |
 | ------ | ------ |
-| Hazard Stack | Adds +1 Hazard per 10 cards in deck at the start of blind |
+| Hazard Stack | +4 Hazards at the start of blind<br/>Hazards give +1 hand size |
 
-Hazard Stack is an hazard-focused deck that would get more hazards in general than any other deck.
+Hazard Stack is an hazard-focused deck that would get more hazards in general than any other deck. It's also based on the old effect of hazards.
 
 ## Challenges
 
