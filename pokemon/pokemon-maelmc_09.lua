@@ -435,7 +435,7 @@ end
 return {
   name = "Maelmc's Jokers Gen 9",
   list = {
-    glimmet, glimmora,
+    --glimmet, glimmora,
     ogerpon, ogerpon_wellspring, ogerpon_hearthflame, ogerpon_cornerstone,
   },
 }

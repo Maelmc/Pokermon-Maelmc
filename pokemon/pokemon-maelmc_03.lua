@@ -539,7 +539,7 @@ local tropius = {
   atlas = "Pokedex3",
   blueprint_compat = true,
   calculate = function(self, card, context)
-    if context.setting_blind and ((#G.jokers.cards + G.GAME.joker_buffer) < G.jokers.config.card_limit) and (#find_joker("gros_michel") + #find_joker("cavendish") == 0) and (pseudorandom('tropius') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.create_odds) then
+    if context.setting_blind and ((#G.jokers.cards + G.GAME.joker_buffer) < G.jokers.config.card_limit) and (#find_joker("Gros Michel") + #find_joker("Cavendish") == 0) and (pseudorandom('tropius') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.create_odds) then
       local banana = nil
       if G.GAME and G.GAME.pool_flags and G.GAME.pool_flags.gros_michel_extinct and (pseudorandom('tropius') < 1/card.ability.extra.cavendish_odds) then
         banana = {set = "Joker", area = G.jokers, key = "j_cavendish"}
