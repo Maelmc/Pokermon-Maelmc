@@ -6,6 +6,9 @@ local cursola={
   config = {extra = {Xmult_multi = 2, volatile = 'left', perish_rounds = 3}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
+    if pokermon_config.detailed_tooltips then
+      info_queue[#info_queue+1] = {set = 'Other', key = 'poke_volatile_'..card.ability.extra.volatile}
+    end
     return {vars = {card.ability.extra.Xmult_multi, card.ability.extra.perish_rounds}}
   end,
   rarity = "poke_safari",

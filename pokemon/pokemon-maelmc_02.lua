@@ -6,6 +6,9 @@ local g_corsola={
   config = {extra = {Xmult_multi = 1.5, volatile = 'left', perish_rounds = 3, currently_perished = 0}, evo_rqmt = 2},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
+    if pokermon_config.detailed_tooltips then
+      info_queue[#info_queue+1] = {set = 'Other', key = 'poke_volatile_'..card.ability.extra.volatile}
+    end
     local compatible = false
     if G.jokers and G.jokers.cards and #G.jokers.cards > 0 then
         local target = G.jokers.cards[#G.jokers.cards]
