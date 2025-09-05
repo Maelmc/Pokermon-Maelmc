@@ -43,12 +43,12 @@ My own add-on for InertSteak's Pokermon mod for Balatro
 | Galarian Corsola | All Perishable Jokers give X1.5 Mult<br/>Volatile Left: When Blind is selected, add 3 rounds of Perishable to the rightmost Joker |
 | Cursola | All Perishable Jokers give X2 Mult<br/>Volatile Left: When Blind is selected, add 3 rounds of Perishable to all other Jokers |
 | - | - |
-| Cufant | +1 Hazards per 10 cards in deck<br/>Turns 1 Hazard to Steel at end of round |
-| Copperajah | +1 Hazards per 10 cards in deck<br/>Turns 3 Hazard to Steel at end of round<br/>+3 Mult per Steel in full deck |
-| Gmax Copperajah | +1 Hazards per 10 cards in deck<br/>Turns 5 Hazard to Steel at end of round<br/>+6 Mult and x0.1 Mult per Steel in full deck |
+| Cufant | +4 Hazards<br/>Turns 1 Hazard to Steel at end of round |
+| Copperajah | +4 Hazards<br/>Turns 3 Hazard to Steel at end of round|
+| Gmax Copperajah | x1 Mult per Steel in full deck |
 | - | - |
-| Glimmet | +2 Hazards per 10 cards in deck<br/>+4 Chips per Hazard in hand |
-| Glimmora | +2 Hazards per 10 cards in deck, Decreases cards needed by 1 for each 25 Hazards triggered<br/>+8 Chips per Hazard in hand |
+| Glimmet | +8 Hazards<br/>+4 Chips per Hazard in hand |
+| Glimmora | +8 Hazards<br/>Increases by 1 after triggering many hazards<br/>+8 Chips per Hazard in hand |
 | - | - |
 | Ogerpon | Holding Negative Leaf Stone<br/>Increases earned money at the end of round by \$2 for each Lucky card that triggered (starts at \$2)<br/>Retriggers all Lucky cards |
 | Ogerpon Wellspring | Holding Negative Water Stone<br/>Scored Bonus cards give X3 their total chips then permanently gain +30 Chips |
