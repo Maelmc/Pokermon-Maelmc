@@ -3,15 +3,24 @@ local glimmet={
   name = "glimmet",
   poke_custom_prefix = "maelmc",
   pos = {x = 4, y = 5},
-  config = {extra = {hazards = 8, chips = 4, hazard_triggered = 0}, evo_rqmt = 25},
+  config = {extra = {hazards = 4, chips = 10, hazard_triggered = 0}, evo_rqmt = 25},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {abbr.hazards}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
-
-    return {vars = {abbr.hazards, abbr.chips, math.max(0, self.config.evo_rqmt - abbr.hazard_triggered)}}
+    local hazard_count = 0
+    if G.playing_cards then
+      for _, v in pairs(G.playing_cards) do
+        if SMODS.has_enhancement(v, "m_poke_hazard") then
+          hazard_count = hazard_count + 1
+        end
+      end
+    else
+      hazard_count = abbr.hazards
+    end
+    return {vars = {abbr.hazards, abbr.chips, hazard_count * abbr.chips, math.max(0, self.config.evo_rqmt - abbr.hazard_triggered)}}
   end,
   rarity = 1,
   cost = 5,
@@ -37,8 +46,14 @@ local glimmet={
           if not context.blueprint then
             card.ability.extra.hazard_triggered = card.ability.extra.hazard_triggered + 1
           end
+          local hazard_count = 0
+          for _, v in pairs(G.playing_cards) do
+            if SMODS.has_enhancement(v, "m_poke_hazard") then
+              hazard_count = hazard_count + 1
+            end
+          end
           return {
-              chips = card.ability.extra.chips,
+              chips = hazard_count * card.ability.extra.chips,
               card = card
           }
       end
@@ -52,15 +67,24 @@ local glimmora={
   name = "glimmora",
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 5},
-  config = {extra = {hazards = 8, chips = 8, base_increase = 25, req_increase = 5, increase_in = 25, increase_by = 1}},
+  config = {extra = {hazards = 4, chips = 20, base_increase = 25, req_increase = 5, increase_in = 25, increase_by = 1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {abbr.hazards}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
-
-    return {vars = {abbr.hazards, abbr.increase_by, abbr.increase_in, abbr.req_increase, abbr.chips}}
+    local hazard_count = 0
+    if G.playing_cards then
+      for _, v in pairs(G.playing_cards) do
+        if SMODS.has_enhancement(v, "m_poke_hazard") then
+          hazard_count = hazard_count + 1
+        end
+      end
+    else
+      hazard_count = abbr.hazards
+    end
+    return {vars = {abbr.hazards, abbr.increase_by, abbr.increase_in, abbr.req_increase, abbr.chips, abbr.chips * hazard_count}}
   end,
   rarity = "poke_safari",
   cost = 6,
@@ -91,8 +115,14 @@ local glimmora={
               card.ability.extra.hazards = card.ability.extra.hazards + card.ability.extra.increase_by
             end
           end
+          local hazard_count = 0
+          for _, v in pairs(G.playing_cards) do
+            if SMODS.has_enhancement(v, "m_poke_hazard") then
+              hazard_count = hazard_count + 1
+            end
+          end
           return {
-              chips = card.ability.extra.chips,
+              chips = hazard_count * card.ability.extra.chips,
               card = card
           }
       end
@@ -435,7 +465,7 @@ end
 return {
   name = "Maelmc's Jokers Gen 9",
   list = {
-    --glimmet, glimmora,
+    glimmet, glimmora,
     ogerpon, ogerpon_wellspring, ogerpon_hearthflame, ogerpon_cornerstone,
   },
 }

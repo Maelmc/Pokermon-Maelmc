@@ -14,7 +14,7 @@ local g_corsola={
         local target = G.jokers.cards[#G.jokers.cards]
         compatible = (target ~= card and target.config.center.perishable_compat == true and not target.ability.perishable)
     end 
-    local main_end = { -- creates the "compatible" or "incompatible" box, copied from VanillaRemade's Blueprint
+    local main_end = (card.area and card.area == G.jokers) and { -- creates the "compatible" or "incompatible" box, copied from VanillaRemade's Blueprint
             {
                 n = G.UIT.C,
                 config = { align = "bm", minh = 0.4 },
@@ -28,7 +28,7 @@ local g_corsola={
                     }
                 }
             }
-        }
+        } or nil
     return {vars = {card.ability.extra.Xmult_multi,  card.ability.extra.perish_rounds, card.ability.extra.currently_perished, self.config.evo_rqmt}, main_end = main_end}
   end,
   rarity = 2,

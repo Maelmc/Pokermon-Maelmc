@@ -90,8 +90,10 @@ return {
                     "{C:purple}+#1# Hazards {C:inactive}",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
-                    "gives {C:chips}+#2#{} Chips",
-                    "{C:inactive,s:0.8}(Evolves after triggering Hazard Cards {C:attention,s:0.8}#3#{C:inactive,s:0.8} times)"
+                    "gives {C:chips}+#2#{} Chips for every {C:attention}Hazard",
+                    "{C:attention}Card{} in your full deck",
+                    "{C:inactive}(Currently {C:chips}+#3#{C:inactive} Chips)",
+                    "{C:inactive,s:0.8}(Evolves after triggering held {C:purple,s:0.8}Hazard Cards{} {C:attention,s:0.8}#4#{C:inactive,s:0.8} times)"
                 }
             },
             j_maelmc_glimmora = {
@@ -99,11 +101,13 @@ return {
                 text = {
                     "{C:purple}+#1# Hazards {C:inactive}",
                     "Increases hazards set by #2#",
-                    "after triggering {C:purple}#3# Hazard Cards{}",
+                    "after triggering {C:attention}#3#{} held {C:purple}Hazard Cards{}",
                     "{C:inactive,s:0.8}(Requirement increases by #4# after each increase)",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
-                    "gives {C:chips}+#5#{} Chips"
+                    "gives {C:chips}+#5#{} Chips for every {C:attention}Hazard",
+                    "{C:attention}Card{} in your full deck",
+                    "{C:inactive}(Currently {C:chips}+#6#{C:inactive} Chips)",
                 }
             },
             j_maelmc_cufant = {
