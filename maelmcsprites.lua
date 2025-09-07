@@ -39,10 +39,3 @@ SMODS.Atlas({
   px = 71,
   py = 95,
 }):register()
-
-SMODS.Atlas({
-  key = "Pokedex3",
-  path = "Pokedex3.png",
-  px = 71,
-  py = 95,
-}):register()
