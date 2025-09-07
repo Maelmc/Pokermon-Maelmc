@@ -1,8 +1,7 @@
 -- Galarian Corsola 222
 local g_corsola={
   name = "g_corsola",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 3, y = 3},
+  pos = {x = 8, y = 4},
   config = {extra = {Xmult_multi = 1.5, volatile = 'left', perish_rounds = 3, currently_perished = 0}, evo_rqmt = 2},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -35,7 +34,7 @@ local g_corsola={
   cost = 7,
   stage = "Basic",
   ptype = "Psychic",
-  atlas = "Regionals",
+  atlas = "AtlasJokersBasicGen02",
   perishable_compat = true,
   blueprint_compat = true,
   eternal_compat = true,

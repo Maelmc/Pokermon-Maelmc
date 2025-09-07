@@ -1,7 +1,6 @@
 -- Guzzlord 799
 local guzzlord = {
   name = "guzzlord",
-  poke_custom_prefix = "maelmc",
   pos = {x = 10, y = 7},
   soul_pos = {x = 11, y = 7},
   config = {extra = {Xmult = 1, Xmult_mod = 1}},
@@ -13,7 +12,7 @@ local guzzlord = {
   cost = 20,
   stage = "Legendary",
   ptype = "Dragon",
-  atlas = "Pokedex7",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
     -- code to detect self destruct and scale in lovely patch

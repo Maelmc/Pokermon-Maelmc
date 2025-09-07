@@ -1,8 +1,7 @@
 -- Woobat
 local woobat = {
   name = "woobat",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 5, y = 2},
+  pos = {x = 2, y = 35},
   config = {extra = {odds = 2, heart_stamped_count = 0}, evo_rqmt = 4},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -12,7 +11,7 @@ local woobat = {
   cost = 6,
   stage = "Basic",
   ptype = "Psychic",
-  atlas = "Pokedex5",
+  atlas = "AtlasJokersBasicNatdex",
   perishable_compat = true,
   blueprint_compat = true,
   eternal_compat = true,
@@ -61,8 +60,7 @@ local woobat = {
 
 local swoobat = {
   name = "swoobat",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 6, y = 2},
+  pos = {x = 4, y = 35},
   config = {extra = {odds = 2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -72,7 +70,7 @@ local swoobat = {
   cost = 9,
   stage = "One",
   ptype = "Psychic",
-  atlas = "Pokedex5",
+  atlas = "AtlasJokersBasicNatdex",
   perishable_compat = true,
   blueprint_compat = true,
   eternal_compat = true,

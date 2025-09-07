@@ -1,8 +1,7 @@
 -- Cursola
 local cursola={
   name = "cursola",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 1, y = 4},
+  pos = {x = 16, y = 57},
   config = {extra = {Xmult_multi = 2, volatile = 'left', perish_rounds = 3}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -15,7 +14,7 @@ local cursola={
   cost = 9,
   stage = "One",
   ptype = "Psychic",
-  atlas = "Pokedex8",
+  atlas = "AtlasJokersBasicNatdex",
   perishable_compat = true,
   blueprint_compat = true,
   eternal_compat = true,
@@ -59,8 +58,7 @@ local cursola={
 -- Cufant
 local cufant = {
   name = "cufant",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 4, y = 5},
+  pos = {x = 14, y = 58},
   config = {extra = {hazards = 4, to_steel = 1, reset_steel = 1, rounds = 5, all_hazard = {}, hazard_to_steel = {}}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -76,7 +74,7 @@ local cufant = {
   cost = 7,
   stage = "Basic",
   ptype = "Metal",
-  atlas = "Pokedex8",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.setting_blind then
@@ -125,8 +123,7 @@ local cufant = {
 -- Copperajah
 local copperajah = {
   name = "copperajah",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 5, y = 5},
+  pos = {x = 16, y = 58},
   config = {extra = {hazards = 4, reset_steel = 3, all_hazard = {}, hazard_to_steel = {}}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -143,7 +140,7 @@ local copperajah = {
   cost = 9,
   stage = "One",
   ptype = "Metal",
-  atlas = "Pokedex8",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.setting_blind then
@@ -191,9 +188,8 @@ local copperajah = {
 -- Gmax Copperajah
 local mega_copperajah = {
   name = "mega_copperajah",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 5, y = 2},
-  soul_pos = { x = 5, y = 5 },
+  pos = {x = 8, y = 13},
+  soul_pos = { x = 9, y = 13 },
   config = {extra = {Xmult_mod = 1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -215,7 +211,7 @@ local mega_copperajah = {
   cost = 12,
   stage = "Mega",
   ptype = "Metal",
-  atlas = "Gmax",
+  atlas = "AtlasJokersBasicGen08",
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.cardarea == G.jokers and context.scoring_hand then
@@ -237,8 +233,7 @@ local mega_copperajah = {
 
 local bloodmoon_ursaluna = {
   name = "bloodmoon_ursaluna",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 3, y = 8},
+  pos = {x = 0, y = 11},
   config = {extra = {Xmult = 1, Xmult2 = 1, Xmult_multi = 1.5, Xmult_mod = 0.1, suit = "Hearts"}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -249,7 +244,7 @@ local bloodmoon_ursaluna = {
   cost = 15,
   stage = "Basic",
   ptype = "Earth",
-  atlas = "Pokedex8",
+  atlas = "AtlasJokersBasicGen08",
   aux_poke = true,
   blueprint_compat = true,
   calculate = function(self, card, context)

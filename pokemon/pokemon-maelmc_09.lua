@@ -2,7 +2,7 @@
 local glimmet={
   name = "glimmet",
   poke_custom_prefix = "maelmc",
-  pos = {x = 4, y = 5},
+  pos = {x = 16, y = 64},
   config = {extra = {hazards = 4, chips = 10, hazard_triggered = 0}, evo_rqmt = 25},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -26,7 +26,7 @@ local glimmet={
   cost = 5,
   stage = "Basic",
   ptype = "Earth",
-  atlas = "Pokedex9",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
     -- adding hazards
@@ -65,8 +65,7 @@ local glimmet={
 -- Glimmora 970
 local glimmora={
   name = "glimmora",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 5, y = 5},
+  pos = {x = 18, y = 64},
   config = {extra = {hazards = 4, chips = 20, base_increase = 25, req_increase = 5, increase_in = 25, increase_by = 1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -90,7 +89,7 @@ local glimmora={
   cost = 6,
   stage = "One",
   ptype = "Earth",
-  atlas = "Pokedex9",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
     -- adding hazards
@@ -132,9 +131,8 @@ local glimmora={
 
 local ogerpon={
   name = "ogerpon", 
-  poke_custom_prefix = "maelmc",
-  pos = {x = 0, y = 12},
-  soul_pos = {x = 1, y = 12},
+  pos = {x = 4, y = 4},
+  soul_pos = {x = 5, y = 4},
   config = {extra = {money = 2, money_mod = 2, retriggers = 1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -147,7 +145,7 @@ local ogerpon={
   cost = 20,
   stage = "Legendary",
   ptype = "Grass",
-  atlas = "Pokedex9",
+  atlas = "AtlasJokersBasicGen09",
   perishable_compat = false,
   blueprint_compat = true,
   calculate = function(self, card, context)
@@ -201,9 +199,8 @@ local ogerpon={
 
 local ogerpon_wellspring={
   name = "ogerpon_wellspring", 
-  poke_custom_prefix = "maelmc",
-  pos = {x = 0, y = 12},
-  soul_pos = {x = 2, y = 12},
+  pos = {x = 2, y = 5},
+  soul_pos = {x = 3, y = 5},
   config = {extra = {Xchips_multi = 3, chips = 30}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -216,7 +213,7 @@ local ogerpon_wellspring={
   cost = 20,
   stage = "Legendary",
   ptype = "Water",
-  atlas = "Pokedex9",
+  atlas = "AtlasJokersBasicGen09",
   aux_poke = true,
   no_collection = true,
   blueprint_compat = true,
@@ -278,9 +275,8 @@ local ogerpon_wellspring={
 
 local ogerpon_hearthflame={
   name = "ogerpon_hearthflame", 
-  poke_custom_prefix = "maelmc",
-  pos = {x = 0, y = 12},
-  soul_pos = {x = 3, y = 12},
+  pos = {x = 8, y = 4},
+  soul_pos = {x = 9, y = 4},
   config = {extra = {Xmult_multi = 3, delete = 2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -295,7 +291,7 @@ local ogerpon_hearthflame={
   cost = 20,
   stage = "Legendary",
   ptype = "Fire",
-  atlas = "Pokedex9",
+  atlas = "AtlasJokersBasicGen09",
   aux_poke = true,
   no_collection = true,
   blueprint_compat = true,
@@ -367,9 +363,8 @@ local ogerpon_hearthflame={
 
 local ogerpon_cornerstone={
   name = "ogerpon_cornerstone", 
-  poke_custom_prefix = "maelmc",
-  pos = {x = 0, y = 12},
-  soul_pos = {x = 4, y = 12},
+  pos = {x = 6, y = 5},
+  soul_pos = {x = 7, y = 5},
   config = {extra = {mult = 1, mult_divide = 10}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -382,7 +377,7 @@ local ogerpon_cornerstone={
   cost = 20,
   stage = "Legendary",
   ptype = "Earth",
-  atlas = "Pokedex9",
+  atlas = "AtlasJokersBasicGen09",
   aux_poke = true,
   no_collection = true,
   blueprint_compat = true,

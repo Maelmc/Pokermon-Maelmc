@@ -1,8 +1,8 @@
 -- Spiritomb 442
 local spiritomb={
   name = "spiritomb",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 13, y = 3},
+  --poke_custom_prefix = "maelmc",
+  pos = {x = 12, y = 29},
   config = {extra = {chips = 108, mult = 108, h_size = 3, to_negative = 108}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -17,7 +17,7 @@ local spiritomb={
   cost = 10,
   stage = "Basic",
   ptype = "Psychic",
-  atlas = "Pokedex4",
+  atlas = "AtlasJokersBasicNatdex",
   aux_poke = true,
   blueprint_compat = true,
   calculate = function(self, card, context)
@@ -90,8 +90,8 @@ local spiritomb={
 -- Gible 443
 local gible={
   name = "gible",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 0, y = 4},
+  --poke_custom_prefix = "maelmc",
+  pos = {x = 14, y = 29},
   config = {extra = {retriggers = 1, rightmost = 2, mult = 2, retriggered = 0}, evo_rqmt = 16},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -104,7 +104,7 @@ local gible={
   cost = 6,
   stage = "Base",
   ptype = "Dragon",
-  atlas = "Pokedex4",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
@@ -150,8 +150,8 @@ local gible={
 -- Gabite 444
 local gabite={
   name = "gabite",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 1, y = 4},
+  --poke_custom_prefix = "maelmc",
+  pos = {x = 16, y = 29},
   config = {extra = {retriggers = 1, rightmost = 4, mult = 3, retriggered = 0}, evo_rqmt = 40},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -164,7 +164,7 @@ local gabite={
   cost = 8,
   stage = "One",
   ptype = "Dragon",
-  atlas = "Pokedex4",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
@@ -210,8 +210,8 @@ local gabite={
 -- Garchomp 445
 local garchomp={
   name = "garchomp",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 2, y = 4},
+  --poke_custom_prefix = "maelmc",
+  pos = {x = 18, y = 29},
   config = {extra = {retriggers = 1, mult = 4, h_size = 1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -224,7 +224,7 @@ local garchomp={
   cost = 10,
   stage = "Two",
   ptype = "Dragon",
-  atlas = "Pokedex4",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
@@ -256,9 +256,9 @@ local garchomp={
 
 local mega_garchomp={
   name = "mega_garchomp",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 4, y = 6},
-  soul_pos = {x = 5, y = 6},
+  --poke_custom_prefix = "maelmc",
+  pos = {x = 2, y = 7},
+  soul_pos = {x = 3, y = 7},
   config = {extra = {retriggers = 1, Xmult_multi = 1.5, h_size = 2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -270,7 +270,7 @@ local mega_garchomp={
   cost = 12,
   stage = "Mega",
   ptype = "Dragon",
-  atlas = "Megas",
+  atlas = "AtlasJokersBasicGen04",
   blueprint_compat = true,
   calculate = function(self, card, context)
 

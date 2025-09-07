@@ -1,8 +1,7 @@
 -- Inkay 686
 local inkay={
   name = "inkay",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 8, y = 2},
+  pos = {x = 20, y = 45},
   config = {extra = {mult = 8, odds = 2, flipped_triggered = 0}, evo_rqmt = 20},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -14,7 +13,7 @@ local inkay={
   cost = 6,
   stage = "Basic",
   ptype = "Dark",
-  atlas = "Pokedex6",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
@@ -65,8 +64,7 @@ local inkay={
 -- Malamar 687
 local malamar={
   name = "malamar",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 9, y = 2},
+  pos = {x = 22, y = 45},
   config = {extra = {Xmult_multi = 1.5}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -78,7 +76,7 @@ local malamar={
   cost = 8,
   stage = "One",
   ptype = "Dark",
-  atlas = "Pokedex6",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
@@ -127,8 +125,7 @@ local malamar={
 -- Binacle 688
 local binacle={
   name = "binacle",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 10, y = 2},
+  pos = {x = 24, y = 45},
   config = {extra = {value = "7", retriggers = 1, retrigger_hand = 2, retrigger_held = 2, retriggered_hand = 0, retriggered_held = 0, retriggered_held_end = 0, rounds = 4}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -140,7 +137,7 @@ local binacle={
   cost = 5,
   stage = "Base",
   ptype = "Earth",
-  atlas = "Pokedex6",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
@@ -195,8 +192,7 @@ local binacle={
 -- Barbaracle 689
 local barbaracle={
   name = "barbaracle",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 11, y = 2},
+  pos = {x = 26, y = 45},
   config = {extra = {value = "7", retriggers = 1, retrigger_hand = 7, retrigger_held = 7, retriggered_hand = 0, retriggered_held = 0, retriggered_held_end = 0}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -208,7 +204,7 @@ local barbaracle={
   cost = 6,
   stage = "One",
   ptype = "Earth",
-  atlas = "Pokedex6",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
 

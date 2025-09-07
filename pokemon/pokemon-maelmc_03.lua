@@ -1,8 +1,7 @@
 -- Ralts 280
 local ralts={
   name = "ralts",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 8, y = 2},
+  pos = {x = 18, y = 18},
   config = {extra = {mult_mod = 1, rounds = 4}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -24,7 +23,7 @@ local ralts={
   cost = 6,
   stage = "Base",
   ptype = "Psychic",
-  atlas = "Pokedex3",
+  atlas = "AtlasJokersBasicNatdex",
   perishable_compat = true,
   blueprint_compat = true,
   eternal_compat = true,
@@ -102,8 +101,8 @@ local ralts={
 -- Kirlia 281
 local kirlia={
   name = "kirlia",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 9, y = 2},
+  --poke_custom_prefix = "maelmc",
+  pos = {x = 20, y = 18},
   config = {extra = {mult_mod = 2, rounds = 5}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -125,7 +124,7 @@ local kirlia={
   cost = 7,
   stage = "One",
   ptype = "Psychic",
-  atlas = "Pokedex3",
+  atlas = "AtlasJokersBasicNatdex",
   perishable_compat = true,
   blueprint_compat = true,
   eternal_compat = true,
@@ -208,8 +207,8 @@ local kirlia={
 -- Gardevoir 282
 local gardevoir={
   name = "gardevoir",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 0, y = 3},
+  --poke_custom_prefix = "maelmc",
+  pos = {x = 22, y = 18},
   config = {extra = {Xmult_mod = 0.1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -231,7 +230,7 @@ local gardevoir={
   cost = 10,
   stage = "Two",
   ptype = "Psychic",
-  atlas = "Pokedex3",
+  atlas = "AtlasJokersBasicNatdex",
   perishable_compat = true,
   blueprint_compat = true,
   eternal_compat = true,
@@ -312,9 +311,9 @@ local gardevoir={
 
 local mega_gardevoir={
   name = "mega_gardevoir",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 3, y = 3},
-  soul_pos = { x = 4, y = 3 },
+  --poke_custom_prefix = "maelmc",
+  pos = {x = 6, y = 4},
+  soul_pos = { x = 7, y = 4 },
   config = {extra = {blackhole_amount = 2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -325,7 +324,7 @@ local mega_gardevoir={
   cost = 12,
   stage = "Mega",
   ptype = "Psychic",
-  atlas = "Megas",
+  atlas = "AtlasJokersBasicGen03",
   perishable_compat = true,
   blueprint_compat = true,
   eternal_compat = true,
@@ -353,8 +352,8 @@ local mega_gardevoir={
 -- Lunatone 337
 local lunatone={
   name = "lunatone",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 5, y = 8},
+  --poke_custom_prefix = "maelmc",
+  pos = {x = 12, y = 22},
   config = {extra = {clubs_odds = 4, suit = "Clubs", level_amt = 1, level_odds = 4}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -366,7 +365,7 @@ local lunatone={
   cost = 6,
   stage = "Basic",
   ptype = "Earth",
-  atlas = "Pokedex3",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.before and context.cardarea == G.jokers then
@@ -403,8 +402,8 @@ local lunatone={
 -- Solrock 338
 local solrock={
   name = "solrock",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 6, y = 8},
+  --poke_custom_prefix = "maelmc",
+  pos = {x = 14, y = 22},
   config = {extra = {hearts_odds = 4, suit = "Hearts", wild_odds = 4}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -417,7 +416,7 @@ local solrock={
   cost = 6,
   stage = "Basic",
   ptype = "Earth",
-  atlas = "Pokedex3",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.before and context.cardarea == G.jokers then
@@ -456,8 +455,8 @@ local solrock={
 -- Kecleon 352
 local kecleon={
   name = "kecleon",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 3, y = 10},
+  --poke_cust1om_prefix = "maelmc",
+  pos = {x = 12, y = 23},
   config = {extra = {mult = 0, mult_mod = 6, current_type = "Colorless"}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -469,7 +468,7 @@ local kecleon={
   cost = 5,
   stage = "Basic",
   ptype = "Colorless",
-  atlas = "Pokedex3",
+  atlas = "AtlasJokersBasicNatdex",
   perishable_compat = false,
   blueprint_compat = true,
   calculate = function(self, card, context)
@@ -497,20 +496,25 @@ local kecleon={
   end,
   set_sprites = function(self,card,front)
     local type_table = {
-      Grass = {x = 7, y = 16},
-      Fire = {x = 5, y = 16},
-      Water = {x = 3, y = 17},
-      Lightning = {x = 0, y = 17},
-      Psychic = {x = 2, y = 17},
-      Fighting = {x = 4, y = 16},
-      Colorless = {x = 3, y = 10},
-      Dark = {x = 0, y = 16},
-      Metal = {x = 1, y = 17},
-      Fairy = {x = 3, y = 16},
-      Dragon = {x = 1, y = 16},
-      Earth = {x = 2, y = 16},
+      Grass = {x = 6, y = 1},
+      Fire = {x = 4, y = 1},
+      Water = {x = 2, y = 2},
+      Lightning = {x = 8, y = 1},
+      Psychic = {x = 0, y = 2},
+      Fighting = {x = 2, y = 1},
+      Colorless = {x = 12, y = 23},
+      Dark = {x = 6, y = 0},
+      Metal = {x = 10, y = 1},
+      Fairy = {x = 0, y = 1},
+      Dragon = {x = 8, y = 0},
+      Earth = {x = 10, y = 0},
     }
     local type = get_type(card) or "Colorless"
+    if type == "Colorless" and card.children.center.atlas.name ~= "poke_AtlasJokersBasicNatdex" then
+      card.children.center.atlas = G.ASSET_ATLAS["poke_AtlasJokersBasicNatdex"]
+    elseif type ~= "Colorless" and card.children.center.atlas.name ~= "poke_AtlasJokersBasicGen03" then
+      card.children.center.atlas = G.ASSET_ATLAS["poke_AtlasJokersBasicGen03"]
+    end
     card.children.center:set_sprite_pos(type_table[type])
   end,
   add_to_deck = function(self, card, from_debuff)
@@ -526,8 +530,8 @@ local kecleon={
 -- Tropius 357
 local tropius = {
   name = "tropius",
-  poke_custom_prefix = "maelmc",
-  pos = {x = 8, y = 10},
+  --poke_custom_prefix = "maelmc",
+  pos = {x = 22, y = 23},
   config = {extra = {create_odds = 2, cavendish_odds = 10}},
   loc_vars = function(self, info_queue, card)
     return {vars = {(G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.create_odds}}
@@ -536,7 +540,7 @@ local tropius = {
   cost = 7,
   stage = "Basic",
   ptype = "Grass",
-  atlas = "Pokedex3",
+  atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.setting_blind and ((#G.jokers.cards + G.GAME.joker_buffer) < G.jokers.config.card_limit) and (#find_joker("Gros Michel") + #find_joker("Cavendish") == 0) and (pseudorandom('tropius') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.create_odds) then
@@ -559,8 +563,8 @@ local tropius = {
 -- Deoxys 386
 local deoxys = {
   name = "deoxys",
-  pos = {x = 6, y = 14},
-  soul_pos = { x = 0, y = 15},
+  pos = {x = 2, y = 3},
+  soul_pos = { x = 3, y = 3},
   config = {extra = {hands = 1, d_size = 1, h_size = 1, in_round = false}},
   loc_vars = function(self, info_queue, center)
     type_tooltip(self, info_queue, center)
@@ -570,7 +574,7 @@ local deoxys = {
   cost = 20,
   stage = "Legendary",
   ptype = "Psychic",
-  atlas = "Pokedex3",
+  atlas = "AtlasJokersBasicGen03",
   blueprint_compat = false,
   calculate = function(self,card,context)
     if context.setting_blind then
@@ -624,8 +628,8 @@ local deoxys = {
 
 local deoxys_attack = {
   name = "deoxys_attack",
-  pos = {x = 6, y = 14},
-  soul_pos = { x = 1, y = 15},
+  pos = {x = 4, y = 3},
+  soul_pos = { x = 5, y = 3},
   config = {extra = {hands = 3}},
   loc_vars = function(self, info_queue, center)
     type_tooltip(self, info_queue, center)
@@ -635,7 +639,7 @@ local deoxys_attack = {
   cost = 20,
   stage = "Legendary",
   ptype = "Psychic",
-  atlas = "Pokedex3",
+  atlas = "AtlasJokersBasicGen03",
   aux_poke = true,
   no_collection = true,
   blueprint_compat = true,
@@ -660,8 +664,8 @@ local deoxys_attack = {
 
 local deoxys_defense = {
   name = "deoxys_defense", 
-  pos = {x = 6, y = 14},
-  soul_pos = { x = 2, y = 15},
+  pos = {x = 6, y = 3},
+  soul_pos = { x = 7, y = 3},
   config = {extra = {d_size = 5}},
   loc_vars = function(self, info_queue, center)
     type_tooltip(self, info_queue, center)
@@ -671,7 +675,7 @@ local deoxys_defense = {
   cost = 20,
   stage = "Legendary",
   ptype = "Psychic",
-  atlas = "Pokedex3",
+  atlas = "AtlasJokersBasicGen03",
   aux_poke = true,
   no_collection = true,
   blueprint_compat = true,
@@ -694,8 +698,8 @@ local deoxys_defense = {
 
 local deoxys_speed = {
   name = "deoxys_speed",
-  pos = { x = 6, y = 14 },
-  soul_pos = { x = 3, y = 15 },
+  pos = { x = 8, y = 3 },
+  soul_pos = { x = 9, y = 3 },
   config = { extra = { h_size = 4, in_round = false} },
   loc_vars = function(self, info_queue, center)
     type_tooltip(self, info_queue, center)
@@ -705,7 +709,7 @@ local deoxys_speed = {
   cost = 20,
   stage = "Legendary",
   ptype = "Psychic",
-  atlas = "Pokedex3",
+  atlas = "AtlasJokersBasicGen03",
   aux_poke = true,
   no_collection = true,
   blueprint_compat = true,

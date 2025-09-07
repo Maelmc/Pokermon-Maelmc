@@ -1,7 +1,6 @@
 -- Gym Leader
 local gym_leader={
   name = "gym_leader",
-  poke_custom_prefix = "maelmc",
   pos = {x = 1, y = 0},
   config = {extra = {form = "Earth"}},
   loc_vars = function(self, info_queue, card)
@@ -117,7 +116,7 @@ local gym_leader={
 -- Odd Keystone
 local odd_keystone={
   name = "odd_keystone",
-  poke_custom_prefix = "maelmc",
+  --poke_custom_prefix = "maelmc",
   pos = {x = 0, y = 0},
   config = {extra = {evolve_progress = 0, evolve_after = 108, evolve_using = "The Soul"}},
   loc_vars = function(self, info_queue, card)
@@ -216,7 +215,7 @@ local odd_keystone={
 -- Pokéwalker
 local pokewalker = {
   name = "pokewalker",
-  poke_custom_prefix = "maelmc",
+  --poke_custom_prefix = "maelmc",
   pos = {x = 0, y = 2},
   config = {extra = {walk_info = {name = nil, key = nil, edition = nil, seal = nil, type_sticker = nil, ability = {}}, walked_for = -2}}, -- -2 = free to walk smth, -1 = just took the joker sold, 0+ = walking
   loc_vars = function(self, info_queue, card)
@@ -334,7 +333,7 @@ local pokewalker = {
 -- PC
 local pc = {
   name = "pc",
-  poke_custom_prefix = "maelmc",
+  --poke_custom_prefix = "maelmc",
   pos = {x = 3, y = 1},
   config = {extra = {joker_one_info = {name = nil, card = nil},
                     joker_two_info = {name = nil, card = nil},
@@ -423,11 +422,8 @@ local pc = {
 
 local photographer = {
   name = "photographer",
-  poke_custom_prefix = "maelmc",
   pos = {x = 4, y = 1},
-  config = {extra = {timeless_woods_found = {}, mult_mod = "5", generated_bloodmoon = 0
-            }
-  },
+  config = {extra = {timeless_woods_found = {}, mult_mod = 5, generated_bloodmoon = 0}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     return {vars = {card.ability.extra.mult_mod, card.ability.extra.mult_mod * #card.ability.extra.timeless_woods_found}}
@@ -531,7 +527,7 @@ return {
   list = {
     gym_leader,
     odd_keystone,
-    pokewalker,
+    --pokewalker,
     pc,
     photographer,
   },
