@@ -235,10 +235,58 @@ local mega_copperajah = {
   end,
 }
 
+local bloodmoon_ursaluna = {
+  name = "bloodmoon_ursaluna",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 3, y = 8},
+  config = {extra = {Xmult = 1, Xmult2 = 1, Xmult_multi = 1.5, Xmult_mod = 0.1, suit = "Hearts"}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    local abbr = card.ability.extra
+    return {vars = {abbr.suit, abbr.Xmult_multi, abbr.Xmult_mod, abbr.Xmult2}}
+  end,
+  rarity = "poke_safari",
+  cost = 15,
+  stage = "Basic",
+  ptype = "Earth",
+  atlas = "Pokedex8",
+  aux_poke = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+
+    if context.skipping_booster and not context.blueprint then
+      card.ability.extra.Xmult_multi = card.ability.extra.Xmult_multi + card.ability.extra.Xmult_mod
+      card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("k_upgrade_ex"), colour = G.C.XMULT})
+    end
+
+    if context.individual and context.cardarea == G.play and context.other_card:is_suit(card.ability.extra.suit) and (not context.blueprint) then
+      card.ability.extra.Xmult2 = card.ability.extra.Xmult2 * card.ability.extra.Xmult_multi
+    end
+
+    if context.cardarea == G.jokers and context.scoring_hand then
+      if context.joker_main then
+        return {
+          colour = G.C.XMULT,
+          Xmult = card.ability.extra.Xmult2
+        }
+      end
+    end
+
+    if context.before or context.end_of_round then
+      card.ability.extra.Xmult2 = card.ability.extra.Xmult
+    end
+
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
 return {
   name = "Maelmc's Jokers Gen 8",
   list = {
     cursola,
     cufant, copperajah, mega_copperajah,
+    bloodmoon_ursaluna,
   },
 }

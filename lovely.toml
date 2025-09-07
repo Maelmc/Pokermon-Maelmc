@@ -51,6 +51,7 @@ if _r == card.base.value then
 '''
 
 # Gym Challenge and 'Til Death Do Us Part applying perish to jokers created (mainly for jokers in shop and boosters as Gym Leader already applies to jokers possessed)
+# Also the code for Perrin / Photographer 
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
@@ -58,8 +59,44 @@ pattern = "if card.ability.consumeable and not skip_materialize then card:start_
 position = "after"
 match_indent = true
 payload = '''
-if _type == 'Joker' and G.GAME.modifiers.maelmc_gym_challenge and not (get_type(card) == G.GAME.maelmc_gym_leader_type) then card:set_perishable(true) end
-if _type == 'Joker' and G.GAME.modifiers.maelmc_perish_3 then card:set_perishable(true) end
+if _type == 'Joker' then
+    if G.GAME.modifiers.maelmc_gym_challenge and not (get_type(card) == G.GAME.maelmc_gym_leader_type) then card:set_perishable(true) end
+    if G.GAME.modifiers.maelmc_perish_3 then card:set_perishable(true) end
+    photographer_util(card)
+end
+'''
+
+# More code for Photographer, to make it compatible with evolving pokemon
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
+pattern = '''G.P_CENTERS.e_poke_shiny.on_load(card)
+    end
+  end'''
+position = "after"
+match_indent = true
+payload = '''
+photographer_util(card)
+'''
+
+# Right-click on Photographer to see all Pokémon taken in photo
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
+pattern = '''if cardname == "ruins_of_alph" then
+    for k, v in pairs(card.ability.extra.forms) do
+      local form = {key = "j_poke_unown", form = v}
+      table.insert(keys, form)
+    end
+  end'''
+position = "after"
+match_indent = true
+payload = '''
+if cardname == "photographer" then
+    for k, v in pairs(card.ability.extra.timeless_woods_found) do
+        table.insert(keys, v)
+    end
+end
 '''
 
 # maelmc_ban_no_perish banishing non perish jokers

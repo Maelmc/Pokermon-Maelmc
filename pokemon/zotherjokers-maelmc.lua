@@ -421,6 +421,89 @@ local pc = {
   end,
 }
 
+local photographer = {
+  name = "photographer",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 4, y = 1},
+  config = {extra = {timeless_woods_found = {}, mult_mod = "5", generated_bloodmoon = 0
+            }
+  },
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return {vars = {card.ability.extra.mult_mod, card.ability.extra.mult_mod * #card.ability.extra.timeless_woods_found}}
+  end,
+  rarity = 3,
+  cost = 8,
+  stage = "Other",
+  atlas = "maelmc_jokers",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    -- when seeing a new joker, check if it's in timeless_woods_available and if yes add it to timeless_woods_found
+    --[[local do_return = false
+    for _, v in pairs(G.jokers.cards) do
+      if table.contains(card.ability.extra.timeless_woods_available, v.name) then
+        card.ability.extra.timeless_woods_found[#card.ability.extra.timeless_woods_found+1] = v.name
+        do_return = true
+      end
+    end
+    if do_return then
+      return {
+        message = localize("photo_ex"),
+      }
+    end
+    
+    -- check all shop jokers
+    if context.starting_shop or context.reroll_shop then
+      for _, v in pairs(G.shop_jokers.cards) do
+        if table.contains(card.ability.extra.timeless_woods_available, v.name) then
+          card.ability.extra.timeless_woods_found[#card.ability.extra.timeless_woods_found+1] = v.name
+          do_return = true
+        end
+      end
+      if do_return then
+        return {
+          message = localize("photo_ex"),
+        }
+      end
+    end]]
+
+    -- scoring
+    if context.cardarea == G.jokers and context.scoring_hand then
+      if context.joker_main then
+        local mult = #card.ability.extra.timeless_woods_found * card.ability.extra.mult_mod
+        if mult > 0 then
+          return {
+            colour = G.C.MULT,
+            mult = mult,
+            card = card
+          }
+        end
+      end
+    end
+
+    -- generating bloodmoon ursaluna in the next shop when you reach 10 photos
+    if context.reroll_shop and (not context.blueprint) and (#card.ability.extra.timeless_woods_found >= 10) and (card.ability.extra.generated_bloodmoon < 2) then
+      if card.ability.extra.generated_bloodmoon == 0 and context.reroll_shop then card.ability.extra.generated_bloodmoon = 1
+      else 
+        card.ability.extra.generated_bloodmoon = 2
+        local temp_card = {set = "Joker", area = G.shop_jokers, key = "j_maelmc_bloodmoon_ursaluna"}
+        local add_card = SMODS.create_card(temp_card)
+        poke_add_shop_card(add_card, card)
+      end
+    end
+
+    if context.starting_shop and (not context.blueprint) and (#card.ability.extra.timeless_woods_found >= 10) and (card.ability.extra.generated_bloodmoon < 2) then
+      card.ability.extra.generated_bloodmoon = 2
+      local temp_card = {set = "Joker", area = G.shop_jokers, key = "j_maelmc_bloodmoon_ursaluna"}
+      local add_card = SMODS.create_card(temp_card)
+      poke_add_shop_card(add_card, card)
+      add_card.ability.couponed = true
+      add_card:set_cost()
+    end
+
+  end,
+}
+
 --[[
 
 local name = {
@@ -435,7 +518,7 @@ local name = {
   cost = 8,
   stage = "Other",
   ptype = "Earth",
-  atlas = "Custom-Maelmc",
+  atlas = "maelmc_jokers",
   blueprint_compat = true,
   calculate = function(self, card, context)
   end,
@@ -450,5 +533,6 @@ return {
     odd_keystone,
     pokewalker,
     pc,
+    photographer,
   },
 }

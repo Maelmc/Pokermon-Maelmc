@@ -535,6 +535,32 @@ return {
 
                 }
             },
+            j_maelmc_photographer = {
+                name = "Photographer",
+                text = {
+                    "Gains {C:red}+#1#{} Mult for each",
+                    "Pokémon from the",
+                    "Timeless Woods encountered",
+                    "{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
+                    " ",
+                    '"Snap photos of {C:red}10 species{}!"',
+                    "{C:inactive,s:0.8}(Right-click to see your photos)",
+
+                }
+            },
+            j_maelmc_bloodmoon_ursaluna = {
+                name = "Bloodmoon Ursaluna",
+                text = {
+                    "Played {C:hearts}#1#{} cards multiply",
+                    "this Joker's {X:red,C:white}X{} Mult by {X:red,C:white}X#2#{}",
+                    "{C:inactive}(Currently {X:red,C:white}X#4#{C:inactive} Mult)",
+                    "{C:inactive,s:0.8}(Resets every hand)",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "Increases the multiplier by {X:red,C:white}X#3#{}",
+                    "when any {C:attention}Booster Pack{} is skipped",
+
+                }
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -623,6 +649,7 @@ return {
             maelmc_pc = "PC",
             maelmc_discard = "+#1# Discard",
             maelmc_hearthstamp_ex = "Heartstamp!",
+            maelmc_photo_ex = "Photo!",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
         },
