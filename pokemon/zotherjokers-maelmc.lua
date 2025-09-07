@@ -385,12 +385,8 @@ local pc = {
       }
     end
 
-    if (((context.individual or context.repetition) and context.cardarea == G.play) or -- cards played
-      ((context.individual or context.repetition) and context.cardarea == G.hand) or -- cards held in hand
-      (context.cardarea == G.jokers and context.scoring_hand and context.joker_main) or (context.other_joker) -- jokers
-      or context.before or context.after) -- this is specifically so Ursaluna Bloodmoon doesnt indefinitely scale,
-      -- or any joker that resets every hand for that matter; it also allows for more synergises
-      and not context.blueprint and not context.end_of_round and not context.setting_blind then
+    -- calculating stored jokers
+    if not context.blueprint then
 
       local rets = {}
       table.insert(rets, card.ability.extra.joker_one_info.name and Card.calculate_joker(card.ability.extra.joker_one_info.card, context) or false)
@@ -398,23 +394,32 @@ local pc = {
       table.insert(rets, card.ability.extra.joker_three_info.name and Card.calculate_joker(card.ability.extra.joker_three_info.card, context) or false)
       if not (rets[1]) and not (rets[2]) and not (rets[3]) then return end -- if no joker triggered, do nothing
 
-      -- sum the chips, mult, xmult and money (among other things?) of all jokers that triggered
+      -- sum everything but the chips, mult and xmult of all jokers that triggered
       local final_ret = {}
+      local scoring = {
+        "chips","Chips","chips_mod","Chips_mod",
+        "xchips","Xchips","x_chips","X_chips","xchips_mod","Xchips_mod","x_chips_mod","X_chips_mod",
+        "mult","Mult","mult_mod","Mult_mod",
+        "xmult","Xmult","x_mult","X_mult","xmult_mod","Xmult_mod","x_mult_mod","X_mult_mod"
+      }
       for _, v in ipairs(rets) do
         if v then
           for k, w in pairs(v) do
             if final_ret[k] then
               final_ret[k] = final_ret[k] + w
-            elseif k ~= "extra" and k ~= "message" and k ~= "colour" and k ~= "card" then
+            elseif not (table.contains(scoring,k)) and k ~= "extra" and k ~= "message" and k ~= "colour" and k ~= "card" then
               final_ret[k] = w
             end
           end
         end
       end
 
+      if #final_ret == 0 then return end
+
       final_ret.colour = G.C.GREY
       final_ret.card = card
       final_ret.message = localize("maelmc_pc")
+
       return final_ret
 
     end
