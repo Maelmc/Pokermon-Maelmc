@@ -387,7 +387,9 @@ local pc = {
 
     if (((context.individual or context.repetition) and context.cardarea == G.play) or -- cards played
       ((context.individual or context.repetition) and context.cardarea == G.hand) or -- cards held in hand
-      (context.cardarea == G.jokers and context.scoring_hand and context.joker_main) or (context.other_joker)) -- jokers
+      (context.cardarea == G.jokers and context.scoring_hand and context.joker_main) or (context.other_joker) -- jokers
+      or context.before or context.after) -- this is specifically so Ursaluna Bloodmoon doesnt indefinitely scale,
+      -- or any joker that resets every hand for that matter; it also allows for more synergises
       and not context.blueprint and not context.end_of_round and not context.setting_blind then
 
       local rets = {}
