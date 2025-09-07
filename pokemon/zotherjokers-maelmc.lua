@@ -216,7 +216,7 @@ local odd_keystone={
 local pokewalker = {
   name = "pokewalker",
   --poke_custom_prefix = "maelmc",
-  pos = {x = 0, y = 2},
+  pos = {x = 8, y = 2},
   config = {extra = {walk_info = {name = nil, key = nil, edition = nil, seal = nil, type_sticker = nil, ability = {}}, walked_for = -2}}, -- -2 = free to walk smth, -1 = just took the joker sold, 0+ = walking
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -232,7 +232,7 @@ local pokewalker = {
   rarity = 2,
   cost = 8,
   stage = "Other",
-  atlas = "others",
+  atlas = "AtlasJokersBasicOthers",
   blueprint_compat = false,
   eternal_compat = false,
   calculate = function(self, card, context)
@@ -527,7 +527,7 @@ return {
   list = {
     gym_leader,
     odd_keystone,
-    --pokewalker,
+    pokewalker,
     pc,
     photographer,
   },
