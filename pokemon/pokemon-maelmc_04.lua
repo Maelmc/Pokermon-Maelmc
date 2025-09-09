@@ -19,6 +19,7 @@ local spiritomb={
   ptype = "Psychic",
   atlas = "AtlasJokersBasicNatdex",
   aux_poke = true,
+  custom_pool_func = true,
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.playing_card_added and not card.getting_sliced and #G.playing_cards >= card.ability.extra.to_negative and not (card.edition and card.edition.negative) then

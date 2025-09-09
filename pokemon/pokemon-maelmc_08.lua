@@ -246,6 +246,7 @@ local bloodmoon_ursaluna = {
   ptype = "Earth",
   atlas = "AtlasJokersBasicGen08",
   aux_poke = true,
+  custom_pool_func = true,
   blueprint_compat = true,
   calculate = function(self, card, context)
 
