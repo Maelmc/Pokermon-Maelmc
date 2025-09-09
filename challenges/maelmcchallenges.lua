@@ -85,7 +85,7 @@ local tildeathdouspart = {
     key = "tildeathdouspart",
     rules = {
         custom = {
-            {id = 'maelmc_perish_3'},
+            --{id = 'maelmc_perish_3'},
             {id = 'maelmc_ban_no_perish'}
         },
     },
@@ -93,7 +93,7 @@ local tildeathdouspart = {
         banned_cards = {}
     },
     jokers = {
-        {id = "j_maelmc_cursola", eternal = true, edition = 'negative'},
+        {id = "j_maelmc_cursola", pinned = true, eternal = true, edition = 'negative'},
     }
 }
 
