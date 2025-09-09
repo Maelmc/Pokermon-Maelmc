@@ -441,34 +441,6 @@ local photographer = {
   atlas = "maelmc_jokers",
   blueprint_compat = true,
   calculate = function(self, card, context)
-    -- when seeing a new joker, check if it's in timeless_woods_available and if yes add it to timeless_woods_found
-    --[[local do_return = false
-    for _, v in pairs(G.jokers.cards) do
-      if table.contains(card.ability.extra.timeless_woods_available, v.name) then
-        card.ability.extra.timeless_woods_found[#card.ability.extra.timeless_woods_found+1] = v.name
-        do_return = true
-      end
-    end
-    if do_return then
-      return {
-        message = localize("photo_ex"),
-      }
-    end
-    
-    -- check all shop jokers
-    if context.starting_shop or context.reroll_shop then
-      for _, v in pairs(G.shop_jokers.cards) do
-        if table.contains(card.ability.extra.timeless_woods_available, v.name) then
-          card.ability.extra.timeless_woods_found[#card.ability.extra.timeless_woods_found+1] = v.name
-          do_return = true
-        end
-      end
-      if do_return then
-        return {
-          message = localize("photo_ex"),
-        }
-      end
-    end]]
 
     -- scoring
     if context.cardarea == G.jokers and context.scoring_hand then
@@ -505,6 +477,34 @@ local photographer = {
     end
 
   end,
+  add_to_deck = function(self, card, from_debuff)
+    local do_return = false
+    local timeless_woods_available = {
+      "bloodmoon_ursaluna",
+      "pikachu","vulpix","mankey","primeape","growlithe","geodude","graveler","snorlax",
+      "hoothoot","noctowl","spinarak","ariados","sudowoodo","aipom","yanma","wooper","quagsire","dunsparce","gligar","sneasel","stantler",
+      "poochyena","mightyena","lotad","lombre","seedot","nuzleaf","ralts","kirlia","gardevoir","surskit","volbeat","illumise","duskull","dusclops",
+      "shinx","luxio","luxray","pachirisu","munchlax","riolu","lucario","gallade",
+      "h_basculin","tynamo","eelektrik","litwick","lampent","pawniard","bisharp",
+      "goomy","sliggoo","phantump","trevenant",
+      "grubbin","charjabug","vikavolt","fomantis","lurantis","salandit","mimikyu",
+      "skowvet","greedent","chewtle","drednaw","cramorant","hatenna","hattrem","hatterene","impidimp","morgrem","grimmsnarl","indeedee","indeedee_f","indeedee_m",
+      "toedscool","toedscruel","bombirdier","annihilape","dudunsparce","kingambit"
+    }
+    for _, v in pairs(G.jokers.cards) do
+      if table.contains(timeless_woods_available, v.config.center.name) then
+        card.ability.extra.timeless_woods_found[#card.ability.extra.timeless_woods_found+1] = v.config.center_key
+        card:juice_up()
+        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("maelmc_photo_ex")})
+        do_return = true
+      end
+    end
+    if do_return then
+      return {
+        message = localize("photo_ex"),
+      }
+    end
+  end
 }
 
 --[[
