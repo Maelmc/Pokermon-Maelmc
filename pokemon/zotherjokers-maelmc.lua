@@ -478,20 +478,13 @@ local photographer = {
 
   end,
   add_to_deck = function(self, card, from_debuff)
-    local do_return = false
     local timeless_woods_available = get_timeless_woods_pokemon()
     for _, v in pairs(G.jokers.cards) do
       if table.contains(timeless_woods_available, v.config.center.name) then
         card.ability.extra.timeless_woods_found[#card.ability.extra.timeless_woods_found+1] = v.config.center_key
         card:juice_up()
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("maelmc_photo_ex")})
-        do_return = true
       end
-    end
-    if do_return then
-      return {
-        message = localize("photo_ex"),
-      }
     end
   end
 }
