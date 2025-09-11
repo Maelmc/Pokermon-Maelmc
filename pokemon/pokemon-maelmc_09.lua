@@ -284,10 +284,10 @@ local ogerpon_hearthflame={
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Fire Stone"}}
     --info_queue[#info_queue+1] = { set = 'Item', key = 'c_poke_firestone', vars = {4}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_mult
-    info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"One Punch Idiot, Gem"}}
     local hearthflame_card = G.GAME.current_round.maelmc_hearthflame_card or {rank = "Ace", suit = "Spades"}
     return {vars = {localize(hearthflame_card.rank, "ranks"), localize(hearthflame_card.suit, "suits_plural"), card.ability.extra.Xmult_multi, card.ability.extra.delete, colours = {G.C.SUITS[hearthflame_card.suit]}}}
   end,
+  designer = "One Punch Idiot, Gem",
   rarity = 4, 
   cost = 20,
   stage = "Legendary",

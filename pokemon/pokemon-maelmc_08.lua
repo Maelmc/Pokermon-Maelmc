@@ -240,6 +240,7 @@ local bloodmoon_ursaluna = {
     local abbr = card.ability.extra
     return {vars = {abbr.suit, abbr.Xmult_multi, abbr.Xmult_mod, abbr.Xmult2}}
   end,
+  designer = "Gem",
   rarity = "poke_safari",
   cost = 15,
   stage = "Basic",

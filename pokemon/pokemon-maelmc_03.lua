@@ -107,7 +107,6 @@ local kirlia={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     --info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_black_hole'}
-    info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"Foxthor, One Punch Idiot"}}
     local mult = 0
     if (SMODS.Mods["Talisman"] or {}).can_load then
       for _, v in pairs(G.GAME.hands) do
@@ -120,6 +119,7 @@ local kirlia={
     end
     return {vars = {card.ability.extra.mult_mod, mult, card.ability.extra.rounds}}
   end,
+  designer = "Foxthor, One Punch Idiot",
   rarity = "poke_safari",
   cost = 7,
   stage = "One",
@@ -213,7 +213,6 @@ local gardevoir={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     --info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_black_hole'}
-    info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"Foxthor, One Punch Idiot"}}
     local xmult = 1
     if (SMODS.Mods["Talisman"] or {}).can_load then
       for _, v in pairs(G.GAME.hands) do
@@ -226,6 +225,7 @@ local gardevoir={
     end
     return {vars = {card.ability.extra.Xmult_mod, xmult}}
   end,
+  designer = "Foxthor, One Punch Idiot",
   rarity = "poke_safari",
   cost = 10,
   stage = "Two",
