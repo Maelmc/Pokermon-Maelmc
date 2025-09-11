@@ -9,21 +9,26 @@ function table.contains(table, element)
   return false
 end
 
+function get_timeless_woods_pokemon()
+  local timeless_woods_available = {
+    "bloodmoon_ursaluna",
+    "pikachu","vulpix","mankey","primeape","growlithe","geodude","graveler","snorlax",
+    "hoothoot","noctowl","spinarak","ariados","sudowoodo","aipom","yanma","wooper","quagsire","dunsparce","gligar","sneasel","stantler",
+    "poochyena","mightyena","lotad","lombre","seedot","nuzleaf","ralts","kirlia","gardevoir","surskit","volbeat","illumise","duskull","dusclops",
+    "shinx","luxio","luxray","pachirisu","munchlax","riolu","lucario","gallade",
+    "h_basculin","tynamo","eelektrik","litwick","lampent","pawniard","bisharp",
+    "goomy","sliggoo","phantump","trevenant",
+    "grubbin","charjabug","vikavolt","fomantis","lurantis","salandit","mimikyu",
+    "skowvet","greedent","chewtle","drednaw","cramorant","hatenna","hattrem","hatterene","impidimp","morgrem","grimmsnarl","indeedee","indeedee_f","indeedee_m",
+    "toedscool","toedscruel","bombirdier","annihilape","dudunsparce","kingambit"
+  }
+  return timeless_woods_available
+end
+
 function photographer_util(card)
   local photographers = find_joker("photographer")
   if #photographers > 0 then
-    local timeless_woods_available = {
-      "bloodmoon_ursaluna",
-      "pikachu","vulpix","mankey","primeape","growlithe","geodude","graveler","snorlax",
-      "hoothoot","noctowl","spinarak","ariados","sudowoodo","aipom","yanma","wooper","quagsire","dunsparce","gligar","sneasel","stantler",
-      "poochyena","mightyena","lotad","lombre","seedot","nuzleaf","ralts","kirlia","gardevoir","surskit","volbeat","illumise","duskull","dusclops",
-      "shinx","luxio","luxray","pachirisu","munchlax","riolu","lucario","gallade",
-      "h_basculin","tynamo","eelektrik","litwick","lampent","pawniard","bisharp",
-      "goomy","sliggoo","phantump","trevenant",
-      "grubbin","charjabug","vikavolt","fomantis","lurantis","salandit","mimikyu",
-      "skowvet","greedent","chewtle","drednaw","cramorant","hatenna","hattrem","hatterene","impidimp","morgrem","grimmsnarl","indeedee","indeedee_f","indeedee_m",
-      "toedscool","toedscruel","bombirdier","annihilape","dudunsparce","kingambit"
-    }
+    local timeless_woods_available = get_timeless_woods_pokemon()
     if table.contains(timeless_woods_available, card.config.center.name) then
       for _, v in ipairs(photographers) do
         if not table.contains(v.ability.extra.timeless_woods_found, card.config.center_key) then
