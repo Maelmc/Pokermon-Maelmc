@@ -40,6 +40,14 @@ return {
                     "{C:inactive,s:0.8}(Applies to leftmost Deoxys)"
                 },
             },
+            c_maelmc_beastball = {
+                name = "Beast Ball",
+                text = {
+                    "Creates an",
+                    "{C:dark_edition}Ultra Beast{C:attention} Pokemon {}Joker",
+                    "{C:inactive}(Must have room)"
+                }
+            }
         },
         Item = {
             c_maelmc_tealmask = {
@@ -557,6 +565,14 @@ return {
 
                 }
             },
+            j_maelmc_nihilego = {
+                name = "Nihilego",
+                text = {
+                    "{C:attention}+#1#{} hand size",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:attention}#2#{} more times"
+                }
+            }
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -601,6 +617,16 @@ return {
                     "Change {C:attention}Deoxys{}' form",
                 },
             },
+            beast_boost = {
+                name = "Beast Boost",
+                text = {
+                    "Increases this Joker's effect",
+                    "when Blind is defeated",
+                    "based on how energized it is",
+                    "{C:inactive,s:0.8}(Requirement increases after",
+                    "{C:inactive,s:0.8}each Beast Boost)"
+                }
+            }
         },
     },
     misc = {
@@ -646,8 +672,13 @@ return {
             maelmc_discard = "+#1# Discard",
             maelmc_hearthstamp_ex = "Heartstamp!",
             maelmc_photo_ex = "Photo!",
+            maelmc_beast_boost = "Beast Boost",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
+            k_maelmc_ultra_beast = "Ultra Beast",
+        },
+        labels = {
+            k_maelmc_ultra_beast = "Ultra Beast",
         },
         v_dictionary = {
             maelmc_discard = "+#1# Discard",

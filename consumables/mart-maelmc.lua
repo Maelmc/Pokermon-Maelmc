@@ -461,9 +461,42 @@ local fake_deoxys_speed = {
   end
 }
 
+local beastball = {
+  name = "beastball",
+  key = "beastball",
+  set = "Spectral",
+  pos = { x = 6, y = 0 },
+  --soul_pos = { x = 0, y = 0},
+  atlas = "maelmc_mart",
+  cost = 4,
+  pokeball = true,
+  hidden = true,
+  soul_set = "Planet",
+  soul_rate = .0065,
+  unlocked = true,
+  discovered = true,
+  can_use = function(self, card)
+    if #G.jokers.cards < G.jokers.config.card_limit or self.area == G.jokers then
+        return true
+    else
+        return false
+    end
+  end,
+  use = function(self, card, area, copier)
+    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+        play_sound('timpani')
+        local _card = create_random_poke_joker("beastball", "Ultra Beast")
+        _card:add_to_deck()
+        G.jokers:emplace(_card)
+        return true end }))
+    delay(0.6)
+  end
+}
+
 return {name = "Maelmc's Items",
   list = {
     tealmask, wellspringmask, hearthflamemask, cornerstonemask,
     meteorite, --fake_deoxys, fake_deoxys_attack, fake_deoxys_defense, fake_deoxys_speed,
+    beastball,
   }
 }

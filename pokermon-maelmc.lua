@@ -54,6 +54,16 @@ SMODS.Rank {
   end,
 }
 
+SMODS.Rarity{
+    key = "ultra_beast",
+    default_weight = 0,
+    badge_colour = HEX("8ED3F6"),
+    pools = {["Joker"] = true},
+    get_weight = function(self, weight, object_type)
+        return weight
+    end,
+}
+
 maelmc_config = SMODS.current_mod.config
 -- Get mod path and load other files
 mod_dir = ''..SMODS.current_mod.path
