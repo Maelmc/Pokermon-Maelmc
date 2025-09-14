@@ -451,7 +451,7 @@ return {
                     "to all other Jokers",
                 }
             },
-            j_maelmc_guzzlord = {
+            --[[j_maelmc_guzzlord = {
                 name = "Guzzlord",
                 text = {
                     "Gains {X:mult,C:white}X#2#{} Mult",
@@ -459,7 +459,7 @@ return {
                     "{C:attention}self destructs{}",
                     "{C:inactive}(Currently {X:red,C:white}X#1#{C:inactive} Mult)",
                 }
-            },
+            },]]
             j_maelmc_tropius = {
                 name = "Tropius",
                 text = {
@@ -569,6 +569,22 @@ return {
                 name = "Nihilego",
                 text = {
                     "{C:attention}+#1#{} hand size",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:attention}#2#{} more times"
+                }
+            },
+            j_maelmc_buzzwole = {
+                name = "Buzzwole",
+                text = {
+                    "{C:chips}+#1#{} hands",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:attention}#2#{} more times"
+                }
+            },
+            j_maelmc_pheromosa = {
+                name = "Pheromosa",
+                text = {
+                    "{C:red}+#1#{} discards",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
                     "{C:attention}#2#{} more times"
                 }
