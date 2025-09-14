@@ -115,6 +115,50 @@ local pheromosa = {
   end,
 }
 
+-- Xurkitree 796
+local xurkitree = {
+  name = "xurkitree",
+  pos = PokemonSprites["xurkitree"].base.pos,
+  soul_pos = {x = PokemonSprites["xurkitree"].base.pos.x + 1, y = PokemonSprites["xurkitree"].base.pos.y},
+  config = {extra = {energy_bonus = 2, chips = 1, next_boost = 1, next_increase = 1}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
+    return {vars = {card.ability.extra.energy_bonus, card.ability.extra.next_boost - get_total_energy(card)}}
+  end,
+  rarity = "maelmc_ultra_beast",
+  cost = 15,
+  stage = "Ultra Beast",
+  ptype = "Lightning",
+  atlas = "AtlasJokersBasicNatdex",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    if context.end_of_round and get_total_energy(card) >= card.ability.extra.next_boost then
+      G.GAME.energy_plus = G.GAME.energy_plus + 1
+      card.ability.extra.energy_bonus = card.ability.extra.energy_bonus + 1
+      card.ability.extra.next_increase = card.ability.extra.next_increase + 1
+      card.ability.extra.next_boost = card.ability.extra.next_boost + card.ability.extra.next_increase
+      return {
+        message = localize("maelmc_beast_boost")
+      }
+    end
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    if not G.GAME.energy_plus then
+      G.GAME.energy_plus = card.ability.extra.energy_bonus
+    else
+      G.GAME.energy_plus = G.GAME.energy_plus + card.ability.extra.energy_bonus
+    end
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    if not G.GAME.energy_plus then
+      G.GAME.energy_plus = 0
+    else
+      G.GAME.energy_plus = G.GAME.energy_plus - card.ability.extra.energy_bonus
+    end
+  end,
+}
+
 -- Guzzlord 799
 --[[local guzzlord = {
   name = "guzzlord",
@@ -153,6 +197,7 @@ return {
     nihilego,
     buzzwole,
     pheromosa,
+    xurkitree,
     --guzzlord,
   },
 }

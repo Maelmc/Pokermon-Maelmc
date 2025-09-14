@@ -588,6 +588,14 @@ return {
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
                     "{C:attention}#2#{} more times"
                 }
+            },
+            j_maelmc_xurkitree = {
+                name = "Xurkitree",
+                text = {
+                    "{C:pink}+#1#{} Energy Limit",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:attention}#2#{} more times"
+                }
             }
         },
         Voucher = {
