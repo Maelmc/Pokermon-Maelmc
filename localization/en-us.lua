@@ -570,7 +570,11 @@ return {
                 text = {
                     "{C:attention}+#1#{} hand size",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times"
+                    "{C:attention}#2#{} more times",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "{C:chips}+#3#{} Chips for each",
+                    "remaining card in {C:attention}deck",
+                    "{C:inactive}(Currently {C:chips}+#4#{C:inactive} Chips)",
                 }
             },
             j_maelmc_buzzwole = {
@@ -578,7 +582,10 @@ return {
                 text = {
                     "{C:chips}+#1#{} hands",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times"
+                    "{C:attention}#2#{} more times",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "{X:red,C:white}X#3#{} Mult per remaining hands",
+                    "on the {C:attention}first hand{} or round",
                 }
             },
             j_maelmc_pheromosa = {
@@ -593,6 +600,27 @@ return {
                 name = "Xurkitree",
                 text = {
                     "{C:pink}+#1#{} Energy Limit",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:attention}#2#{} more times",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "Earn {C:money}$#3#{} at end of round",
+                    "equal to the amount of",
+                    "{C:pink}Energy{} usable on other Jokers",
+                    "{C:inactive}(Currently {C:money}$#4#{C:inactive})",
+                }
+            },
+            j_maelmc_celesteela = {
+                name = "Celesteela",
+                text = {
+                    "{C:attention}+#1#{} consumable slots",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:attention}#2#{} more times"
+                }
+            },
+            j_maelmc_kartana = {
+                name = "Kartana",
+                text = {
+                    "{C:attention}+#1#{} card selection in boosters",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
                     "{C:attention}#2#{} more times"
                 }
@@ -656,6 +684,13 @@ return {
                 text = {
                     "Change {C:attention}Deoxys{}' form",
                 },
+            },
+            ultra_beast = {
+                name = "Ultra Beast",
+                text = {
+                    "{C:pink}Energizing{} doesn't affect this Joker's",
+                    "{C:mult}Mult{}, {C:chips}Chips{}, {C:money}${} and {X:mult,C:white}X{} Mult values",
+                }
             },
             beast_boost = {
                 name = "Beast Boost",
