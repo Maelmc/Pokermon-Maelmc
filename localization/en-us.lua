@@ -596,6 +596,22 @@ return {
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
                     "{C:attention}#2#{} more times"
                 }
+            },
+            j_maelmc_stakataka = {
+                name = "Stakataka",
+                text = {
+                    "{C:attention}+#1#{} Voucher slot available in shop",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:attention}#2#{} more times"
+                }
+            },
+            j_maelmc_blacephalon = {
+                name = "Blacephalon",
+                text = {
+                    "{C:attention}+#1#{} card slot available in shop",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:attention}#2#{} more times"
+                }
             }
         },
         Voucher = {
