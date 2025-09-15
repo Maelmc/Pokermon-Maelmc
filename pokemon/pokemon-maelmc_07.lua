@@ -22,7 +22,7 @@ local nihilego = {
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and get_total_energy(card) >= card.ability.extra.next_boost and not context.blueprint then
+    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
       G.hand:change_size(1)
       card.ability.extra.h_size = card.ability.extra.h_size + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
@@ -71,8 +71,11 @@ local buzzwole = {
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and get_total_energy(card) >= card.ability.extra.next_boost and not context.blueprint then
+    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
       G.GAME.round_resets.hands = G.GAME.round_resets.hands + 1
+      if not from_debuff then
+        ease_hands_played(1)
+      end
       card.ability.extra.hands = card.ability.extra.hands + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
       card.ability.extra.next_boost = card.ability.extra.next_boost + card.ability.extra.next_increase
@@ -142,8 +145,9 @@ local pheromosa = {
       }
     end
 
-    if context.end_of_round and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
-      G.GAME.round_resets.d_size = G.GAME.round_resets.d_size + 1
+    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
+      G.GAME.round_resets.discards = G.GAME.round_resets.discards + 1
+      ease_discard(1)
       card.ability.extra.d_size = card.ability.extra.d_size + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
       card.ability.extra.next_boost = card.ability.extra.next_boost + card.ability.extra.next_increase
@@ -197,7 +201,7 @@ local xurkitree = {
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and get_total_energy(card) >= card.ability.extra.next_boost and not context.blueprint then
+    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
       G.GAME.energy_plus = G.GAME.energy_plus + 1
       card.ability.extra.energy_bonus = card.ability.extra.energy_bonus + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
@@ -257,7 +261,7 @@ local celesteela = {
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and get_total_energy(card) >= card.ability.extra.next_boost and not context.blueprint then
+    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
       G.E_MANAGER:add_event(Event({
         func = function()
           G.consumeables.config.card_limit = G.consumeables.config.card_limit + 1
@@ -310,7 +314,7 @@ local kartana = {
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and get_total_energy(card) >= card.ability.extra.next_boost and not context.blueprint then
+    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
       G.GAME.modifiers.booster_choice_mod = G.GAME.modifiers.booster_choice_mod + 1
       card.ability.extra.booster_choice_mod = card.ability.extra.booster_choice_mod + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
@@ -360,7 +364,7 @@ local stakataka = {
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and get_total_energy(card) >= card.ability.extra.next_boost and not context.blueprint then
+    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
       SMODS.change_voucher_limit(1)
       card.ability.extra.voucher_slots = card.ability.extra.voucher_slots + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
@@ -402,7 +406,7 @@ local blacephalon = {
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and get_total_energy(card) >= card.ability.extra.next_boost and not context.blueprint then
+    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
       change_shop_size(1)
       card.ability.extra.card_slots = card.ability.extra.card_slots + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1

@@ -595,8 +595,7 @@ return {
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
                     "{C:attention}#2#{} more times",
                     "{br:2}ERROR - CONTACT STEAK",
-                    "Earn money equal to {X:money,C:white}X#3#{} the",
-                    "amount of remaining discards",
+                    "Earn {C:money}$#3#{} per discard",
                     "if {C:attention}poker hand{} is a",
                     "{C:attention}Four of a Kind{} or above",
                 }
