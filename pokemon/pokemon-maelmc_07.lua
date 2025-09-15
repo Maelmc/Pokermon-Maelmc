@@ -108,12 +108,12 @@ local pheromosa = {
   name = "pheromosa",
   pos = PokemonSprites["pheromosa"].base.pos,
   soul_pos = {x = PokemonSprites["pheromosa"].base.pos.x + 1, y = PokemonSprites["pheromosa"].base.pos.y},
-  config = {extra = {d_size = 4, chips = 1, next_boost = 1, next_increase = 1, unscalable_dollars = 2, poker_hand = "Four of a Kind"}},
+  config = {extra = {d_size = 4, chips = 1, next_boost = 1, next_increase = 1, unscalable_dollars = 2, poker_hands = {"Flush Five","Flush House","Five of a Kind","Straight Flush","Four of a Kind"}}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.d_size, card.ability.extra.next_boost - get_total_energy(card), card.ability.extra.unscalable_dollars, localize(card.ability.extra.poker_hand, 'poker_hands')}}
+    return {vars = {card.ability.extra.d_size, card.ability.extra.next_boost - get_total_energy(card), card.ability.extra.unscalable_dollars}}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,
@@ -127,7 +127,7 @@ local pheromosa = {
       juice_card_until(card, eval, true)
     end
 
-    if context.before and context.scoring_name == card.ability.extra.poker_hand then
+    if context.before and table.contains(card.ability.extra.poker_hands, context.scoring_name) then
       G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.unscalable_dollars * G.GAME.current_round.discards_left
       return {
         dollars = card.ability.extra.unscalable_dollars * G.GAME.current_round.discards_left,
@@ -142,27 +142,13 @@ local pheromosa = {
       }
     end
 
-    if context.end_of_round and not context.blueprint and context.main_eval then
-      local _poker_hands = {"Flush Five","Flush House","Five of a Kind","Straight Flush","Four of a Kind"}
-      card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, 'pheromosa')
-      
-      if get_total_energy(card) >= card.ability.extra.next_boost then
-        G.GAME.round_resets.d_size = G.GAME.round_resets.d_size + 1
-        card.ability.extra.d_size = card.ability.extra.d_size + 1
-        card.ability.extra.next_increase = card.ability.extra.next_increase + 1
-        card.ability.extra.next_boost = card.ability.extra.next_boost + card.ability.extra.next_increase
-        G.E_MANAGER:add_event(Event({
-          func = function()
-            G.GAME.dollar_buffer = 0
-            return {
-              message = localize("maelmc_beast_boost")
-            }
-          end
-        }))
-      end
-
+    if context.end_of_round and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
+      G.GAME.round_resets.d_size = G.GAME.round_resets.d_size + 1
+      card.ability.extra.d_size = card.ability.extra.d_size + 1
+      card.ability.extra.next_increase = card.ability.extra.next_increase + 1
+      card.ability.extra.next_boost = card.ability.extra.next_boost + card.ability.extra.next_increase
       return {
-        message = localize('k_reset')
+        message = localize("maelmc_beast_boost")
       }
     end
 
@@ -175,10 +161,6 @@ local pheromosa = {
     G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.d_size
     ease_discard(-card.ability.extra.d_size)
   end,
-  set_ability = function(self, card, initial, delay_sprites)
-    local _poker_hands = {"Flush Five","Flush House","Five of a Kind","Straight Flush","Four of a Kind"}
-    card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, 'pheromosa')
-  end
 }
 
 -- Xurkitree 796

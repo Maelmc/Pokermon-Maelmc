@@ -596,11 +596,9 @@ return {
                     "{C:attention}#2#{} more times",
                     "{br:2}ERROR - CONTACT STEAK",
                     "Earn money equal to {X:money,C:white}X#3#{} the",
-                    "amount of remaining discards if",
-                    "{C:attention}poker hand{} is a {C:attention}#4#",
-                    "Poker hand changes at",
-                    "end of round among",
-                    "{C:attention}Four of a Kind{} and above"
+                    "amount of remaining discards",
+                    "if {C:attention}poker hand{} is a",
+                    "{C:attention}Four of a Kind{} or above",
                 }
             },
             j_maelmc_xurkitree = {
