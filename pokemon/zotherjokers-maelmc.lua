@@ -397,10 +397,13 @@ local pc = {
       -- sum everything but the chips, mult and xmult of all jokers that triggered
       local final_ret = {}
       local scoring = {
-        "chips","Chips","chips_mod","Chips_mod",
-        "xchips","Xchips","x_chips","X_chips","xchips_mod","Xchips_mod","x_chips_mod","X_chips_mod",
-        "mult","Mult","mult_mod","Mult_mod",
-        "xmult","Xmult","x_mult","X_mult","xmult_mod","Xmult_mod","x_mult_mod","X_mult_mod"
+        'chips', 'h_chips', 'chip_mod',
+        'mult', 'h_mult', 'mult_mod',
+        'x_chips', 'xchips', 'Xchip_mod',
+        'x_mult', 'Xmult', 'xmult', 'x_mult_mod', 'Xmult_mod',
+        'e_mult', 'e_chips', 'ee_mult', 'ee_chips', 'eee_mult', 'eee_chips', 'hyper_mult', 'hyper_chips',
+        'emult', 'echips', 'eemult', 'eechips', 'eeemult', 'eeechips', 'hypermult', 'hyperchips',
+        'Emult_mod', 'Echip_mod', 'EEmult_mod', 'EEchip_mod', 'EEEmult_mod', 'EEEchip_mod', 'hypermult_mod', 'hyperchip_mod'
       }
       for _, v in ipairs(rets) do
         if v then
