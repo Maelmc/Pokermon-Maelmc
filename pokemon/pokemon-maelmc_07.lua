@@ -73,9 +73,7 @@ local buzzwole = {
 
     if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
       G.GAME.round_resets.hands = G.GAME.round_resets.hands + 1
-      if not from_debuff then
-        ease_hands_played(1)
-      end
+      ease_hands_played(1)
       card.ability.extra.hands = card.ability.extra.hands + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
       card.ability.extra.next_boost = card.ability.extra.next_boost + card.ability.extra.next_increase
