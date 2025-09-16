@@ -624,9 +624,14 @@ return {
             j_maelmc_kartana = {
                 name = "Kartana",
                 text = {
-                    "{C:attention}+#1#{} card selection in boosters",
+                    "{C:attention}+#1#{} card selection in Boosters",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times"
+                    "{C:attention}#2#{} more times",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "This Joker gains {C:mult}+#3#{} Mult per",
+                    "{C:attention}remaining{} card selection when",
+                    "any {C:attention}Booster Pack{} is skipped",
+                    "{C:inactive}(Currently {C:mult}+#4#{C:inactive})",
                 }
             },
             j_maelmc_stakataka = {

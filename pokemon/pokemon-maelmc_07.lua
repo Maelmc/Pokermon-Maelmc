@@ -295,12 +295,12 @@ local kartana = {
   name = "kartana",
   pos = PokemonSprites["kartana"].base.pos,
   soul_pos = {x = PokemonSprites["kartana"].base.pos.x + 1, y = PokemonSprites["kartana"].base.pos.y},
-  config = {extra = {booster_choice_mod = 1, chips = 1, next_boost = 3, next_increase = 3}},
+  config = {extra = {booster_choice_mod = 1, chips = 1, next_boost = 3, next_increase = 3, unscalable_mult = 0, unscalable_mult2 = 5, size_of_booster = 0}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.booster_choice_mod, card.ability.extra.next_boost - get_total_energy(card)}}
+    return {vars = {card.ability.extra.booster_choice_mod, card.ability.extra.next_boost - get_total_energy(card), card.ability.extra.unscalable_mult2, card.ability.extra.unscalable_mult}}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,
@@ -309,6 +309,7 @@ local kartana = {
   atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
+
     if context.setting_blind and not context.blueprint then
       local eval = function(c) return get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
       juice_card_until(card, eval, true)
@@ -323,6 +324,27 @@ local kartana = {
         message = localize("maelmc_beast_boost")
       }
     end
+
+    if context.open_booster and not context.blueprint then
+      card.ability.extra.size_of_booster = G.GAME.pack_choices
+    end
+
+    if context.skipping_booster and not context.blueprint then
+      card.ability.extra.unscalable_mult = card.ability.extra.unscalable_mult + card.ability.extra.unscalable_mult2 * G.GAME.pack_choices
+      return {
+        message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.unscalable_mult2 * G.GAME.pack_choices} },
+        colour = G.C.RED,
+      }
+    end
+
+    if context.joker_main then
+      if card.ability.extra.unscalable_mult ~= 0 then
+        return {
+          mult = card.ability.extra.unscalable_mult
+        }
+      end
+    end
+
   end,
   add_to_deck = function(self, card, from_debuff)
     if G.GAME.modifiers.booster_choice_mod then
