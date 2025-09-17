@@ -47,7 +47,7 @@ local gym_leader={
     end
 
     -- Regular actions
-    if context.end_of_round and context.cardarea == G.jokers and G.GAME.blind and G.GAME.blind:get_type() == 'Boss' then
+    if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint and context.beat_boss then
       local tag = ''
       local tag_choice = pseudorandom('gymleader')
       if tag_choice < 1/6 then

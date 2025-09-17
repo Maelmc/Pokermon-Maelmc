@@ -647,7 +647,14 @@ return {
                 text = {
                     "{C:attention}+#1#{} card slot available in shop",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times"
+                    "{C:attention}#2#{} more times",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "{C:red}+#3#{} Mult per card slot in shop",
+                    "{C:red}-#4#{} Mult per card bought",
+                    "except Vouchers and Boosters",
+                    "Resets when {C:attention}Boss",
+                    "{C:attention}Blind{} is defeated",
+                    "{C:inactive}(Currently {C:red}+#5#{C:inactive} Mult)"
                 }
             }
         },

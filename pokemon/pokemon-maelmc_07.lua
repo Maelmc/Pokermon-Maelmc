@@ -407,12 +407,14 @@ local blacephalon = {
   name = "blacephalon",
   pos = PokemonSprites["blacephalon"].base.pos,
   soul_pos = {x = PokemonSprites["blacephalon"].base.pos.x + 1, y = PokemonSprites["blacephalon"].base.pos.y},
-  config = {extra = {card_slots = 1, chips = 1, next_boost = 2, next_increase = 2}},
+  config = {extra = {card_slots = 1, chips = 1, next_boost = 2, next_increase = 2, unscalable_mult = 23, unscalable_negative_mult = 11, amount_bought = 0}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.card_slots, card.ability.extra.next_boost - get_total_energy(card)}}
+    return {vars = {card.ability.extra.card_slots, card.ability.extra.next_boost - get_total_energy(card),
+    card.ability.extra.unscalable_mult, card.ability.extra.unscalable_negative_mult,
+    card.ability.extra.unscalable_mult * (G.GAME.shop.joker_max or 3) - card.ability.extra.unscalable_negative_mult * card.ability.extra.amount_bought}}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,
@@ -435,6 +437,29 @@ local blacephalon = {
         message = localize("maelmc_beast_boost")
       }
     end
+
+    if context.buying_card and context.card.ability.set ~= "Voucher" then
+      card.ability.extra.amount_bought = card.ability.extra.amount_bought + 1
+      return {
+        message = localize { type = 'variable', key = 'a_xmult_minus', vars = { card.ability.extra.unscalable_negative_mult } },
+        colour = G.C.RED
+      }
+    end
+
+    if context.joker_main then
+      return {
+        mult = card.ability.extra.unscalable_mult * (G.GAME.shop.joker_max or 3) - card.ability.extra.unscalable_negative_mult * card.ability.extra.amount_bought
+      }
+    end
+
+    if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint and context.beat_boss and card.ability.extra.amount_bought > 0 then
+      card.ability.extra.amount_bought = 0
+      return {
+        message = localize('k_reset'),
+        colour = G.C.RED
+      }
+    end
+
   end,
   add_to_deck = function(self, card, from_debuff)
     change_shop_size(card.ability.extra.card_slots)
