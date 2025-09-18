@@ -354,12 +354,14 @@ local lunatone={
   name = "lunatone",
   --poke_custom_prefix = "maelmc",
   pos = {x = 12, y = 22},
-  config = {extra = {clubs_odds = 4, suit = "Clubs", level_amt = 1, level_odds = 4}},
+  config = {extra = {num_clubs = 1, dem_clubs = 4, suit = "Clubs", level_amt = 1, num_level = 1, dem_level = 4}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), abbr.clubs_odds, abbr.suit, abbr.level_odds}}
+    local num_clubs, dem_clubs = SMODS.get_probability_vars(card, card.ability.extra.num_clubs, card.ability.extra.dem_clubs, 'lunatone')
+    local num_level, dem_level = SMODS.get_probability_vars(card, card.ability.extra.num_level, card.ability.extra.dem_level, 'lunatone')
+    return {vars = {num_clubs, dem_clubs, abbr.suit, num_level, dem_level}}
   end,
   rarity = 2,
   cost = 6,
@@ -372,7 +374,7 @@ local lunatone={
       -- turn cards to club
       local clubs_trigg = 0
       for _, v in pairs(context.scoring_hand) do
-        if not (v:is_suit(card.ability.extra.suit)) and (pseudorandom('lunatone') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.clubs_odds) then
+        if not (v:is_suit(card.ability.extra.suit)) and SMODS.pseudorandom_probability(card, 'lunatone', card.ability.extra.num_clubs, card.ability.extra.dem_clubs, 'lunatone') then
           clubs_trigg = 1
           local rank = v:get_id()
           if rank > 9 then
@@ -389,7 +391,7 @@ local lunatone={
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_clubs')})
       end
 
-      if (pseudorandom('lunatone') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.level_odds) then
+      if SMODS.pseudorandom_probability(card, 'lunatone', card.ability.extra.num_level, card.ability.extra.dem_level, 'lunatone') then
         local hand = context.scoring_name
         update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=localize(hand, 'poker_hands'), chips = G.GAME.hands[hand].chips, mult = G.GAME.hands[hand].mult, level=G.GAME.hands[hand].level})
         level_up_hand(card, hand, nil, card.ability.extra.level_amt)
@@ -404,13 +406,15 @@ local solrock={
   name = "solrock",
   --poke_custom_prefix = "maelmc",
   pos = {x = 14, y = 22},
-  config = {extra = {hearts_odds = 4, suit = "Hearts", wild_odds = 4}},
+  config = {extra = {num_hearts = 1, dem_hearts = 4, suit = "Hearts", num_wild = 1, dem_wild = 4}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     info_queue[#info_queue+1] = G.P_CENTERS.m_wild
     local abbr = card.ability.extra
-    return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), abbr.hearts_odds, abbr.suit, abbr.wild_odds}}
+    local num_hearts, dem_hearts = SMODS.get_probability_vars(card, card.ability.extra.num_hearts, card.ability.extra.dem_hearts, 'solrock')
+    local num_wild, dem_wild = SMODS.get_probability_vars(card, card.ability.extra.num_wild, card.ability.extra.dem_wild, 'solrock')
+    return {vars = {num_hearts, dem_hearts, abbr.suit, num_wild, dem_wild}}
   end,
   rarity = 2,
   cost = 6,
@@ -425,7 +429,7 @@ local solrock={
       local wild_trigg = 0
       for _, v in pairs(context.scoring_hand) do
         if not (v:is_suit(card.ability.extra.suit)) then
-          if (pseudorandom('solrock') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.hearts_odds) then
+          if SMODS.pseudorandom_probability(card, 'solrock', card.ability.extra.num_hearts, card.ability.extra.dem_hearts, 'solrock') then
             hearts_trigg = 1
             local rank = v:get_id()
             if rank > 9 then
@@ -436,7 +440,7 @@ local solrock={
               if rank == 14 then rank = "A" end
             end
             v:set_base(G.P_CARDS["H_"..rank])
-          elseif not (SMODS.has_enhancement(v, "m_wild")) and (pseudorandom('solrock') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.wild_odds) then
+          elseif not (SMODS.has_enhancement(v, "m_wild")) and SMODS.pseudorandom_probability(card, 'solrock', card.ability.extra.num_wild, card.ability.extra.dem_wild, 'solrock') then
             wild_trigg = 1
             v:set_ability(G.P_CENTERS.m_wild,nil,true)
           end
@@ -532,9 +536,10 @@ local tropius = {
   name = "tropius",
   --poke_custom_prefix = "maelmc",
   pos = {x = 22, y = 23},
-  config = {extra = {create_odds = 2, cavendish_odds = 10}},
+  config = {extra = {num_banana = 1, dem_banana = 2, num_cavendish = 1, dem_cavendish = 10}},
   loc_vars = function(self, info_queue, card)
-    return {vars = {(G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.create_odds}}
+    local num, dem = SMODS.get_probability_vars(card, card.ability.extra.num_banana, card.ability.extra.dem_banana, 'tropius')
+    return {vars = {num, dem}}
   end,
   rarity = 1,
   cost = 7,
@@ -543,9 +548,12 @@ local tropius = {
   atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
-    if context.setting_blind and ((#G.jokers.cards + G.GAME.joker_buffer) < G.jokers.config.card_limit) and (#find_joker("Gros Michel") + #find_joker("Cavendish") == 0) and (pseudorandom('tropius') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.create_odds) then
+    if context.setting_blind and ((#G.jokers.cards + G.GAME.joker_buffer) < G.jokers.config.card_limit)
+    and (#find_joker("Gros Michel") + #find_joker("Cavendish") == 0)
+    and SMODS.pseudorandom_probability(card, 'tropius', card.ability.extra.num_banana, card.ability.extra.dem_banana, 'tropius') then
       local banana = nil
-      if G.GAME and G.GAME.pool_flags and G.GAME.pool_flags.gros_michel_extinct and (pseudorandom('tropius') < 1/card.ability.extra.cavendish_odds) then
+      if G.GAME and G.GAME.pool_flags and G.GAME.pool_flags.gros_michel_extinct
+      and SMODS.pseudorandom_probability(card, 'tropius', card.ability.extra.num_cavendish, card.ability.extra.dem_cavendish, 'tropius') then
         banana = {set = "Joker", area = G.jokers, key = "j_cavendish"}
       end
       banana = banana or {set = "Joker", area = G.jokers, key = "j_gros_michel"}

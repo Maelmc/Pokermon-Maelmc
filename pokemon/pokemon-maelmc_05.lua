@@ -2,10 +2,11 @@
 local woobat = {
   name = "woobat",
   pos = {x = 2, y = 35},
-  config = {extra = {odds = 2, heart_stamped_count = 0}, evo_rqmt = 4},
+  config = {extra = {num = 1, dem = 2, heart_stamped_count = 0}, evo_rqmt = 4},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
-    return {vars = {""..(G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.odds, self.config.evo_rqmt}}
+    local num, dem = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.dem, 'woobat')
+    return {vars = {num, dem, self.config.evo_rqmt}}
   end,
   rarity = 2,
   cost = 6,
@@ -18,7 +19,7 @@ local woobat = {
   volatile = true,
   calculate = function(self, card, context)
 
-    if context.before and context.cardarea == G.jokers and (pseudorandom('woobat') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.odds) then
+    if context.before and context.cardarea == G.jokers and SMODS.pseudorandom_probability(card, 'woobat', card.ability.extra.num, card.ability.extra.dem, 'woobat') then
       local all_heart = true
       for _, v in pairs(context.scoring_hand) do
         if not v:is_suit("Hearts") then
@@ -61,10 +62,11 @@ local woobat = {
 local swoobat = {
   name = "swoobat",
   pos = {x = 4, y = 35},
-  config = {extra = {odds = 2}},
+  config = {extra = {num = 1, dem = 2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
-    return {vars = {""..(G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.odds}}
+    local num, dem = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.dem, 'swoobat')
+    return {vars = {num, dem}}
   end,
   rarity = "poke_safari",
   cost = 9,
@@ -88,7 +90,7 @@ local swoobat = {
       if all_heart then
         local stamp_set = false
         for _, v in pairs(G.hand.cards) do
-          if v:is_suit("Hearts") and (pseudorandom('swoobat') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.odds) then
+          if v:is_suit("Hearts") and SMODS.pseudorandom_probability(card, 'swoobat', card.ability.extra.num, card.ability.extra.dem, 'swoobat') then
             v:set_seal("Red",true)
             stamp_set = true
           end

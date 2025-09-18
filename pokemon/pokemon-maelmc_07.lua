@@ -177,10 +177,8 @@ local xurkitree = {
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
     local energy_usable = 0
     if G.jokers and G.jokers.cards then
-      print(G.GAME.energy_plus)
       for i = 1, #G.jokers.cards do
         if G.jokers.cards[i] ~= card then
-          print(get_total_energy(G.jokers.cards[i]))
           energy_usable = energy_usable + energy_max + (G.GAME.energy_plus or 0) - math.min(get_total_energy(G.jokers.cards[i]), (G.GAME.energy_plus or 0))
         end
       end

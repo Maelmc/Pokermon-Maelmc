@@ -2,12 +2,13 @@
 local inkay={
   name = "inkay",
   pos = {x = 20, y = 45},
-  config = {extra = {mult = 8, odds = 2, flipped_triggered = 0}, evo_rqmt = 20},
+  config = {extra = {mult = 8, num = 1, dem = 2, flipped_triggered = 0}, evo_rqmt = 20},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), abbr.odds, abbr.mult, math.max(0, self.config.evo_rqmt - abbr.flipped_triggered)}}
+    local num, dem = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.dem, 'inkay')
+    return {vars = {num, dem, abbr.mult, math.max(0, self.config.evo_rqmt - abbr.flipped_triggered)}}
   end,
   rarity = 2,
   cost = 6,
@@ -18,7 +19,7 @@ local inkay={
   calculate = function(self, card, context)
 
     -- 1 in 2 is flipped
-    if context.stay_flipped and context.to_area == G.hand and pseudorandom('inkay') < G.GAME.probabilities.normal / card.ability.extra.odds then
+    if context.stay_flipped and context.to_area == G.hand and SMODS.pseudorandom_probability(card, 'inkay', card.ability.extra.num, card.ability.extra.dem, 'inkay') then
       return {
           stay_flipped = true
       }

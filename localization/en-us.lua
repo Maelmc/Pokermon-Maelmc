@@ -206,7 +206,7 @@ return {
                     "{C:green}#1# in #2#{} chance for each",
                     "card in poker hand to become {C:clubs}#3#",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "{C:green}#1# in #4#{} chance to upgrade",
+                    "{C:green}#4# in #5#{} chance to upgrade",
                     "level of played poker hand"
                 } 
             },
@@ -217,7 +217,7 @@ return {
                     "card in poker hand to become {C:hearts}#3#",
                     "{br:3}ERROR - CONTACT STEAK",
                     "If a non-{C:hearts}Hearts{} card didn't",
-                    "become {C:hearts}Hearts{}, {C:green}#1# in #4#{} chance",
+                    "become {C:hearts}Hearts{}, {C:green}#4# in #5#{} chance",
                     "to enhance it to {C:attention}Wild"
                 } 
             },
