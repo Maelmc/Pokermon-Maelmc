@@ -6,7 +6,6 @@ local ralts={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     --info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_high_priestess'}
-    info_queue[#info_queue+1] = {set = 'Other', key = 'designed_by', vars = {"Foxthor, One Punch Idiot"}}
     local mult = 0
     if (SMODS.Mods["Talisman"] or {}).can_load then
       for _, v in pairs(G.GAME.hands) do
@@ -19,6 +18,7 @@ local ralts={
     end
     return {vars = {card.ability.extra.mult_mod, mult, card.ability.extra.rounds}}
   end,
+  designer = "Foxthor, One Punch Idiot",
   rarity = 2,
   cost = 6,
   stage = "Base",
