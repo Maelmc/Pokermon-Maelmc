@@ -133,7 +133,7 @@ local ogerpon={
   name = "ogerpon", 
   pos = {x = 4, y = 4},
   soul_pos = {x = 5, y = 4},
-  config = {extra = {money = 2, money_mod = 2, retriggers = 1}},
+  config = {extra = {money = 0, money_mod = 2, retriggers = 1, beat_boss = false}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Leaf Stone"}}
@@ -176,11 +176,22 @@ local ogerpon={
       }
     end
 
+    if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint and context.beat_boss then
+      card.ability.extra.beat_boss = true
+    end
+
+    if context.starting_shop and card.ability.extra.beat_boss then
+      card.ability.extra.beat_boss = false
+      card.ability.extra.money = 0
+      return {
+        message = localize('k_reset'),
+        colour = G.C.RED
+      }
+    end
+
   end,
   calc_dollar_bonus = function(self, card)
-    if card.ability.extra.money > 0 then
-      return ease_poke_dollars(card, "ogerpon", card.ability.extra.money, true)
-    end
+    return ease_poke_dollars(card, "ogerpon", card.ability.extra.money, true)
 	end,
   set_ability = function(self, card, initial, delay_sprites)
     apply_type_sticker(card, "Grass")
