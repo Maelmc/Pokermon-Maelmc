@@ -4,7 +4,6 @@ local tealmask = {
   set = "Item",
   config = {max_highlighted = 3, min_highlighted = 1, enhancement = "m_lucky"},
   loc_vars = function(self, info_queue, center)
-    info_queue[#info_queue+1] = {set = 'Other', key = 'fitem'}
     info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
     return {vars = {self.config.max_highlighted}}
   end,
@@ -71,7 +70,6 @@ local wellspringmask = {
   set = "Item",
   config = {max_highlighted = 3, min_highlighted = 1, enhancement = "m_bonus"},
   loc_vars = function(self, info_queue, center)
-    info_queue[#info_queue+1] = {set = 'Other', key = 'fitem'}
     info_queue[#info_queue+1] = G.P_CENTERS.m_bonus
     return {vars = {self.config.max_highlighted}}
   end,
@@ -138,7 +136,6 @@ local hearthflamemask = {
   set = "Item",
   config = {max_highlighted = 3, min_highlighted = 1, enhancement = "m_mult"},
   loc_vars = function(self, info_queue, center)
-    info_queue[#info_queue+1] = {set = 'Other', key = 'fitem'}
     info_queue[#info_queue+1] = G.P_CENTERS.m_mult
     return {vars = {self.config.max_highlighted}}
   end,
@@ -205,7 +202,6 @@ local cornerstonemask = {
   set = "Item",
   config = {max_highlighted = 3, min_highlighted = 1, enhancement = "m_stone"},
   loc_vars = function(self, info_queue, center)
-    info_queue[#info_queue+1] = {set = 'Other', key = 'fitem'}
     info_queue[#info_queue+1] = G.P_CENTERS.m_stone
     return {vars = {self.config.max_highlighted}}
   end,
@@ -272,7 +268,6 @@ local meteorite = {
   set = "Item",
   config = {extra = {usable = true}},
   loc_vars = function(self, info_queue, center)
-    info_queue[#info_queue+1] = {set = 'Other', key = 'fitem'}
     return {vars = {}}
   end,
   pos = { x = 4, y = 0 },

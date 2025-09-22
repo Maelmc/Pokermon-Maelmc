@@ -55,7 +55,10 @@ return {
                 text = {
                     "Enhance {C:attention}#1#",
                     "selected cards to",
-                    "{C:attention}Lucky Cards"
+                    "{C:attention}Lucky Cards",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "Transforms leftmost",
+                    "or selected {C:attention}Ogerpon"
                 },
             },
             c_maelmc_wellspringmask = {
@@ -63,7 +66,10 @@ return {
                 text = {
                     "Enhance {C:attention}#1#",
                     "selected cards to",
-                    "{C:attention}Bonus Cards"
+                    "{C:attention}Bonus Cards",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "Transforms leftmost",
+                    "or selected {C:attention}Ogerpon"
                 },
             },
             c_maelmc_hearthflamemask = {
@@ -71,7 +77,10 @@ return {
                 text = {
                     "Enhance {C:attention}#1#",
                     "selected cards to",
-                    "{C:attention}Mult Cards"
+                    "{C:attention}Mult Cards",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "Transforms leftmost",
+                    "or selected {C:attention}Ogerpon"
                 },
             },
             c_maelmc_cornerstonemask = {
@@ -79,7 +88,10 @@ return {
                 text = {
                     "Enhance {C:attention}#1#",
                     "selected cards to",
-                    "{C:attention}Stone Cards"
+                    "{C:attention}Stone Cards",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "Transforms leftmost",
+                    "or selected {C:attention}Ogerpon"
                 },
             },
             c_maelmc_meteorite = {
@@ -87,7 +99,7 @@ return {
                 text = {
                     "Cycle through leftmost or",
                     "selected {C:attention}Deoxys{}' forms",
-                    "{C:inactive,s:0.8}(Normal, Attack, Defense, Speed)"
+                    "{C:inactive,s:0.8}(Normal, Attack, Defense, Speed)",
                 },
             },
         },
