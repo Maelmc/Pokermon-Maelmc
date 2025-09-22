@@ -230,7 +230,6 @@ local xurkitree = {
     end
     return card.ability.extra.unscalable_dollars * energy_usable
   end
-  
 }
 
 -- Celesteela 797
@@ -363,12 +362,12 @@ local stakataka = {
   name = "stakataka",
   pos = PokemonSprites["stakataka"].base.pos,
   soul_pos = {x = PokemonSprites["stakataka"].base.pos.x + 1, y = PokemonSprites["stakataka"].base.pos.y},
-  config = {extra = {voucher_slots = 1, chips = 1, next_boost = 2, next_increase = 2}},
+  config = {extra = {voucher_slots = 1, chips = 1, next_boost = 2, next_increase = 2, unscalable_dollars = 7, voucher_bought = 0, beat_boss = false}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.voucher_slots, card.ability.extra.next_boost - get_total_energy(card)}}
+    return {vars = {card.ability.extra.voucher_slots, card.ability.extra.next_boost - get_total_energy(card), card.ability.extra.unscalable_dollars, card.ability.extra.unscalable_dollars * (1 + (G.GAME.modifiers.extra_vouchers or 0) - card.ability.extra.voucher_bought)}}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,
@@ -391,6 +390,28 @@ local stakataka = {
         message = localize("maelmc_beast_boost")
       }
     end
+
+    if context.buying_card and context.card.ability.set == "Voucher" then
+      card.ability.extra.voucher_bought = card.ability.extra.voucher_bought + 1
+      return {
+        message = localize { type = 'variable', key = 'maelmc_dollars_minus', vars = { card.ability.extra.unscalable_dollars } },
+        colour = G.C.GOLD
+      }
+    end
+
+    if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint and context.beat_boss then
+      card.ability.extra.beat_boss = true
+    end
+
+    if context.starting_shop and card.ability.extra.beat_boss then
+      card.ability.extra.beat_boss = false
+      card.ability.extra.voucher_bought = 0
+      return {
+        message = localize('k_reset'),
+        colour = G.C.GOLD
+      }
+    end
+
   end,
   add_to_deck = function(self, card, from_debuff)
     SMODS.change_voucher_limit(card.ability.extra.voucher_slots)
@@ -398,6 +419,9 @@ local stakataka = {
   remove_from_deck = function(self, card, from_debuff)
     SMODS.change_voucher_limit(-card.ability.extra.voucher_slots)
   end,
+  calc_dollar_bonus = function(self, card)
+    return card.ability.extra.unscalable_dollars * (1 + (G.GAME.modifiers.extra_vouchers or 0) - card.ability.extra.voucher_bought)
+  end
 }
 
 -- Blacephalon 806

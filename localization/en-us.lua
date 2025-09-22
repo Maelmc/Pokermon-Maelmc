@@ -640,7 +640,13 @@ return {
                 text = {
                     "{C:attention}+#1#{} Voucher slot available in shop",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times"
+                    "{C:attention}#2#{} more times",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "Earn {C:money}$#3#{} at end of round",
+                    "per Voucher slot, {C:money}-$#3#",
+                    "when a Voucher is bought",
+                    "Resets when {C:attention}Boss Blind{} is",
+                    "defeated {C:inactive}(Currently {C:money}$#4#{C:inactive})"
                 }
             },
             j_maelmc_blacephalon = {
@@ -774,6 +780,7 @@ return {
         },
         v_dictionary = {
             maelmc_discard = "+#1# Discard",
+            maelmc_dollars_minus = "-$#1#",
         },
         v_text = {
            ch_c_maelmc_gym_challenge = {"Jokers not matching the Gym Leader's {C:attention}Type{} {C:attention}perish{} after 3 rounds"},
