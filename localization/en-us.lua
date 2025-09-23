@@ -371,7 +371,7 @@ return {
                 name = "Ogerpon",
                 text = {
                     --"This Joker cannot change {C:attention}Type",
-                    "Holding {C:dark_edition}Negative {C:attention}Leaf Stone",
+                    "Holding {C:dark_edition}Negative {C:item}Leaf Stone",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Increases earned money at",
                     "end of round by {C:money}$#1#{} for each",
@@ -388,7 +388,7 @@ return {
                 name = "Ogerpon",
                 text = {
                     --"This Joker cannot change {C:attention}Type",
-                    "Holding {C:dark_edition}Negative {C:attention}Water Stone",
+                    "Holding {C:dark_edition}Negative {C:item}Water Stone",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Scored {C:attention}Bonus{} cards give",
                     "{X:chips,C:white}X#1#{} their total chips",
@@ -403,7 +403,7 @@ return {
                 name = "Ogerpon",
                 text = {
                     --"This Joker cannot change {C:attention}Type",
-                    "Holding {C:dark_edition}Negative {C:attention}Fire Stone",
+                    "Holding {C:dark_edition}Negative {C:item}Fire Stone",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each played {C:attention}Mult #1#{} of {V:1}#2#",
                     "gives {X:red,C:white}X#3#{} Mult when scored",
@@ -418,7 +418,7 @@ return {
                 name = "Ogerpon",
                 text = {
                     --"This Joker cannot change {C:attention}Type",
-                    "Holding {C:dark_edition}Negative {C:attention}Hard Stone",
+                    "Holding {C:dark_edition}Negative {C:item}Hard Stone",
                     "{br:3}ERROR - CONTACT STEAK",
                     "{C:attention}Stone{} cards count as their own rank",
                     "{br:3}ERROR - CONTACT STEAK",
