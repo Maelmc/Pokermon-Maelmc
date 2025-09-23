@@ -391,12 +391,12 @@ return {
                     "Holding {C:dark_edition}Negative {C:attention}Water Stone",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Scored {C:attention}Bonus{} cards give",
-                    "{X:chips,C:white}X#1#{} their total chips then",
-                    "permanently gain {C:chips}+#2#{} Chips",
+                    "{X:chips,C:white}X#1#{} their total chips",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "If scoring hand contains",
+                    "no {C:attention}Bonus{} card,",
+                    "create a {C:item}Water Stone",
                     "{C:inactive,s:0.8}(Changes form using a {C:attention,s:0.8}Mask{C:inactive,s:0.8})",
-                    --[["{br:3}ERROR - CONTACT STEAK",
-                    "Gives {X:red,C:white}X{} Mult equal to the",
-                    "{C:attention}cube root{} of total {C:chips}Chips",]]
                 }
             },
             j_maelmc_ogerpon_hearthflame = {

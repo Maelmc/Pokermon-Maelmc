@@ -137,7 +137,6 @@ local ogerpon={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Leaf Stone"}}
-    --info_queue[#info_queue+1] = { set = 'Item', key = 'c_poke_leafstone', vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), 3}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
     return {vars = {card.ability.extra.money_mod, card.ability.extra.money, card.ability.extra.retriggers}}
   end,
@@ -212,11 +211,10 @@ local ogerpon_wellspring={
   name = "ogerpon_wellspring", 
   pos = {x = 2, y = 5},
   soul_pos = {x = 3, y = 5},
-  config = {extra = {Xchips_multi = 3, chips = 30}},
+  config = {extra = {Xchips_multi = 3}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Water Stone"}}
-    --info_queue[#info_queue+1] = {set = 'Item', key = 'c_poke_waterstone', vars = {1, 50}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_bonus
     return {vars = {card.ability.extra.Xchips_multi, card.ability.extra.chips}}
   end,
@@ -242,13 +240,40 @@ local ogerpon_wellspring={
     if context.individual and context.cardarea == G.play and SMODS.has_enhancement(context.other_card, "m_bonus") then
       if not context.end_of_round and not context.before and not context.after and not context.other_card.debuff then
         local total_chips = poke_total_chips(context.other_card)
-        context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus or 0
-        context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + card.ability.extra.chips
         return {
           message = localize("maelmc_ivy_cudgle_ex"),
           colour = G.C.CHIPS,
           chips = total_chips*card.ability.extra.Xchips_multi,
           card = card
+        }
+      end
+    end
+
+    -- if hand contains no Bonus card, create a Water Stone
+    if context.cardarea == G.jokers and context.scoring_hand and context.before then
+      local bonus = false
+      for _, v in pairs(context.scoring_hand) do
+        if SMODS.has_enhancement(v, "m_bonus") then
+          bonus = true
+          break
+        end
+      end
+      if not bonus then
+        G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+        return {
+          extra = {focus = card, message = localize('poke_plus_pokeitem'), colour = G.ARGS.LOC_COLOURS.pink, func = function()
+            G.E_MANAGER:add_event(Event({
+              trigger = 'before',
+              delay = 0.0,
+              func = function()
+                local _card = create_card('Item',G.consumeables, nil, nil, nil, nil, "c_poke_waterstone")
+                _card:add_to_deck()
+                G.consumeables:emplace(_card)
+                G.GAME.consumeable_buffer = 0
+                return true
+              end
+            }))
+          end}
         }
       end
     end
@@ -293,7 +318,6 @@ local ogerpon_hearthflame={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Fire Stone"}}
-    --info_queue[#info_queue+1] = { set = 'Item', key = 'c_poke_firestone', vars = {4}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_mult
     local hearthflame_card = G.GAME.current_round.maelmc_hearthflame_card or {rank = "Ace", suit = "Spades"}
     return {vars = {localize(hearthflame_card.rank, "ranks"), localize(hearthflame_card.suit, "suits_plural"), card.ability.extra.Xmult_multi, card.ability.extra.delete, colours = {G.C.SUITS[hearthflame_card.suit]}}}
@@ -382,7 +406,6 @@ local ogerpon_cornerstone={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Hard Stone"}}
-    --info_queue[#info_queue+1] = { set = 'Item', key = 'c_poke_hardstone', vars = {1, 10}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_stone
     return {vars = {card.ability.extra.mult, card.ability.extra.mult_divide}}
   end,
