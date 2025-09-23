@@ -786,6 +786,8 @@ return {
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",
+
+            background_color = "Custom Background on Main Menu?",
         },
         labels = {
             k_maelmc_ultra_beast = "Ultra Beast",

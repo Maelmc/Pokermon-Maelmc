@@ -1,1 +1,3 @@
-return {["others"] = false}
+return {
+    background_color = true
+}

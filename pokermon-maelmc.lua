@@ -71,6 +71,24 @@ if (SMODS.Mods["Pokermon"] or {}).can_load then
     pokermon_config = SMODS.Mods["Pokermon"].config
 end
 
+SMODS.current_mod.config_tab = function() 
+    return {
+        n = G.UIT.ROOT,
+        config = {
+            align = "cm",
+            padding = 0.05,
+            colour = G.C.CLEAR,
+        },
+        nodes = {
+          create_toggle({
+            label = localize("background_color"),
+            ref_table = maelmc_config,
+            ref_value = "background_color",
+          }),
+        },
+    }
+end
+
 --Load helper function files
 local helper, load_error = SMODS.load_file("functions/maelmc-utils.lua")
 if load_error then
@@ -85,6 +103,14 @@ if load_error then
   sendDebugMessage ("The error is: "..load_error)
 else
   debuff()
+end
+
+--Load UI stuff
+local ui, load_error = SMODS.load_file("functions/ui.lua")
+if load_error then
+  sendDebugMessage ("The error is: "..load_error)
+else
+  ui()
 end
 
 --Load pokemon file

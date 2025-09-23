@@ -39,3 +39,8 @@ SMODS.Atlas({
   px = 71,
   py = 95,
 }):register()
+
+G.C.MAELMC = {
+    ORANGE = HEX("EA6F22"),
+    GREY = HEX("747474"),
+}
