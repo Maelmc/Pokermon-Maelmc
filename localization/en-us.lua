@@ -446,7 +446,7 @@ return {
                     "gives {X:mult,C:white}X#1#{} Mult",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:attention}Volatile Left{}",
-                    "When blind is selected",
+                    "When {C:attention}Blind{} is selected",
                     "add {C:attention}#2# rounds of Perishable{}",
                     "to rightmost Joker",
                     "{C:inactive,s:0.8}(Evolves when you have {C:attention,s:0.8}#3#{C:inactive,s:0.8}/#4# perished Jokers)",
@@ -459,7 +459,7 @@ return {
                     "gives {X:mult,C:white}X#1#{} Mult",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:attention}Volatile Left{}",
-                    "When blind is selected",
+                    "When {C:attention}Blind{} is selected",
                     "add {C:attention}#2# rounds of Perishable{}",
                     "to all other Jokers",
                 }
@@ -631,7 +631,12 @@ return {
                 text = {
                     "{C:attention}+#1#{} consumable slots",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times"
+                    "{C:attention}#2#{} more times",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "When {C:attention}Blind{} is selected,",
+                    "gains {X:red,C:white}X#3#{} Mult per",
+                    "empty consumeable slot",
+                    "{C:inactive}(Currently {X:red,C:white}X#4#{C:inactive})",
                 }
             },
             j_maelmc_kartana = {
@@ -731,7 +736,7 @@ return {
                 name = "Beast Boost",
                 text = {
                     "Increases this Joker's effect",
-                    "when Blind is defeated",
+                    "when {C:attention}Blind{} is defeated",
                     "based on how energized it is",
                     "{C:inactive,s:0.8}(Requirement increases after",
                     "{C:inactive,s:0.8}each Beast Boost)"

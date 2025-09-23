@@ -237,12 +237,12 @@ local celesteela = {
   name = "celesteela",
   pos = PokemonSprites["celesteela"].base.pos,
   soul_pos = {x = PokemonSprites["celesteela"].base.pos.x + 1, y = PokemonSprites["celesteela"].base.pos.y},
-  config = {extra = {card_limit = 1, chips = 1, next_boost = 2, next_increase = 2}},
+  config = {extra = {card_limit = 1, chips = 1, next_boost = 2, next_increase = 2, unscalable_mult = 1, unscalable_mult2 = 0.2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.card_limit, card.ability.extra.next_boost - get_total_energy(card)}}
+    return {vars = {card.ability.extra.card_limit, card.ability.extra.next_boost - get_total_energy(card), card.ability.extra.unscalable_mult2, card.ability.extra.unscalable_mult}}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,
@@ -270,6 +270,21 @@ local celesteela = {
         message = localize("maelmc_beast_boost")
       }
     end
+
+    if context.setting_blind then
+      card.ability.extra.unscalable_mult = card.ability.extra.unscalable_mult + card.ability.extra.unscalable_mult2 * (G.consumeables.config.card_limit - #G.consumeables.cards)
+      return {
+        message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.unscalable_mult2 * (G.consumeables.config.card_limit - #G.consumeables.cards) } },
+        colour = G.C.RED,
+      }
+    end
+
+    if context.joker_main and G.GAME.current_round.hands_played == 0 and card.ability.extra.unscalable_mult ~= 1 then
+      return {
+        xmult = card.ability.extra.unscalable_mult
+      }
+    end
+
   end,
   add_to_deck = function(self, card, from_debuff)
     local add = card.ability.extra.card_limit
