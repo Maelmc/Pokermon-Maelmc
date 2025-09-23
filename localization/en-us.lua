@@ -620,8 +620,7 @@ return {
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
                     "{C:attention}#2#{} more times",
                     "{br:2}ERROR - CONTACT STEAK",
-                    "Earn {C:money}$#3#{} at end of round",
-                    "equal to the amount of",
+                    "Earn {C:money}$#3#{} at end of round per",
                     "{C:pink}Energy{} usable on other Jokers",
                     "{C:inactive}(Currently {C:money}$#4#{C:inactive})",
                 }
@@ -676,9 +675,8 @@ return {
                     "{C:red}+#3#{} Mult per card slot in shop",
                     "{C:red}-#4#{} Mult per card bought",
                     "except Vouchers and Boosters",
-                    "Resets when {C:attention}Boss",
-                    "{C:attention}Blind{} is defeated",
-                    "{C:inactive}(Currently {C:red}+#5#{C:inactive} Mult)"
+                    "Resets when {C:attention}Boss Blind{} is",
+                    "defeated {C:inactive}(Currently {C:red}+#5#{C:inactive} Mult)"
                 }
             }
         },
