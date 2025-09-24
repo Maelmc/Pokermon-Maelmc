@@ -9,6 +9,25 @@ function table.contains(table, element)
   return false
 end
 
+-- https://www.reddit.com/r/lua/comments/8t0mlf/comment/e13xk1m/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+function weighted_random(pool,seed)
+   local poolsize = 0
+   for k,v in pairs(pool) do
+      poolsize = poolsize + v["weight"]
+   end
+   if seed then 
+    if type(seed) == 'string' then seed = pseudoseed(seed) end
+    math.randomseed(seed)
+  end
+   local selection = math.random(1,poolsize)
+   for k,v in pairs(pool) do
+      selection = selection - v["weight"] 
+      if (selection <= 0) then
+         return v
+      end
+   end
+end
+
 function get_timeless_woods_pokemon()
   local timeless_woods_available = {
     "bloodmoon_ursaluna",

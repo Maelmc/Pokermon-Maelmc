@@ -678,7 +678,18 @@ return {
                     "Resets when {C:attention}Boss Blind{} is",
                     "defeated {C:inactive}(Currently {C:red}+#5#{C:inactive} Mult)"
                 }
-            }
+            },
+            j_maelmc_guzzlord = {
+                name = "Guzzlord",
+                text = {
+                    "At the end of shop, eats",
+                    "{C:attention}#1#{} thing and gains",
+                    "{X:red,C:white}X#2#{} Mult {C:inactive}(Currently {X:red,C:white}X#3#{C:inactive})",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:attention}#4#{} more times",
+                }
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -787,6 +798,10 @@ return {
             maelmc_photo_ex = "Photo!",
             maelmc_beast_boost = "Beast Boost",
 
+            maelmc_shop_reroll = "Shop reroll",
+            maelmc_shop_sign = "Shop sign",
+            maelmc_hungry_dot = "Hungry...",
+
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",
 
@@ -798,6 +813,16 @@ return {
         v_dictionary = {
             maelmc_discard = "+#1# Discard",
             maelmc_dollars_minus = "-$#1#",
+            maelmc_hand_minus = "-#1# Hand",
+            maelmc_discard_minus = "-#1# Discard",
+            maelmc_hand_size_minus = "-#1# Hand size",
+            maelmc_consumable_slot_minus = "-#1# Consumable slot",
+            maelmc_card_slot_minus = "-#1# Card slot",
+            maelmc_joker_slot_minus = "-#1# Joker slot",
+            maelmc_pack_slot_minus = "-#1# Booster pack slot",
+            maelmc_playing_card_minus = "-#1# Playing card",
+            maelmc_voucher_slot_minus = "-#1# Voucher slot",
+            maelmc_energy_limit_minus = "-#1# Energy limit",
         },
         v_text = {
            ch_c_maelmc_gym_challenge = {"Jokers not matching the Gym Leader's {C:attention}Type{} {C:attention}perish{} after 3 rounds"},

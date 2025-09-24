@@ -257,12 +257,7 @@ local celesteela = {
     end
 
     if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
-      G.E_MANAGER:add_event(Event({
-        func = function()
-          G.consumeables.config.card_limit = G.consumeables.config.card_limit + 1
-          return true
-        end 
-      }))
+      G.consumeables.config.card_limit = G.consumeables.config.card_limit + 1
       card.ability.extra.card_limit = card.ability.extra.card_limit + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
       card.ability.extra.next_boost = card.ability.extra.next_boost + card.ability.extra.next_increase
@@ -271,7 +266,7 @@ local celesteela = {
       }
     end
 
-    if context.setting_blind then
+    if context.setting_blind and not context.blueprint then
       card.ability.extra.unscalable_mult = card.ability.extra.unscalable_mult + card.ability.extra.unscalable_mult2 * (G.consumeables.config.card_limit - #G.consumeables.cards)
       return {
         message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.unscalable_mult2 * (G.consumeables.config.card_limit - #G.consumeables.cards) } },
@@ -279,7 +274,7 @@ local celesteela = {
       }
     end
 
-    if context.joker_main and G.GAME.current_round.hands_played == 0 and card.ability.extra.unscalable_mult ~= 1 then
+    if context.joker_main and card.ability.extra.unscalable_mult ~= 1 then
       return {
         xmult = card.ability.extra.unscalable_mult
       }
@@ -406,7 +401,7 @@ local stakataka = {
       }
     end
 
-    if context.buying_card and context.card.ability.set == "Voucher" then
+    if context.buying_card and context.card.ability.set == "Voucher" and not context.blueprint then
       card.ability.extra.voucher_bought = card.ability.extra.voucher_bought + 1
       return {
         message = localize { type = 'variable', key = 'maelmc_dollars_minus', vars = { card.ability.extra.unscalable_dollars } },
@@ -418,7 +413,7 @@ local stakataka = {
       card.ability.extra.beat_boss = true
     end
 
-    if context.starting_shop and card.ability.extra.beat_boss then
+    if context.starting_shop and card.ability.extra.beat_boss and not context.blueprint then
       card.ability.extra.beat_boss = false
       card.ability.extra.voucher_bought = 0
       return {
@@ -475,7 +470,7 @@ local blacephalon = {
       }
     end
 
-    if context.buying_card and context.card.ability.set ~= "Voucher" then
+    if context.buying_card and context.card.ability.set ~= "Voucher" and not context.blueprint then
       card.ability.extra.amount_bought = card.ability.extra.amount_bought + 1
       return {
         message = localize { type = 'variable', key = 'a_xmult_minus', vars = { card.ability.extra.unscalable_negative_mult } },
@@ -506,37 +501,157 @@ local blacephalon = {
   end,
 }
 
--- Guzzlord 799
---[[local guzzlord = {
+--Guzzlord 799
+local guzzlord = {
   name = "guzzlord",
-  pos = {x = 10, y = 7},
-  soul_pos = {x = 11, y = 7},
-  config = {extra = {Xmult = 1, Xmult_mod = 1}},
+  pos = PokemonSprites["guzzlord"].base.pos,
+  soul_pos = {x = PokemonSprites["guzzlord"].base.pos.x + 1, y = PokemonSprites["guzzlord"].base.pos.y},
+  config = {extra = {to_eat = 1, chips = 1, next_boost = 3, next_increase = 3, unscalable_mult = 1, unscalable_mult2 = 1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
-    return {vars = {card.ability.extra.Xmult,card.ability.extra.Xmult_mod}}
+    return {vars = {card.ability.extra.to_eat,card.ability.extra.unscalable_mult2 * card.ability.extra.to_eat,card.ability.extra.unscalable_mult,card.ability.extra.next_boost}}
   end,
-  rarity = 4,
-  cost = 20,
-  stage = "Legendary",
+  rarity = "maelmc_ultra_beast",
+  cost = 15,
+  stage = "Ultra Beast",
   ptype = "Dragon",
   atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
-    -- code to detect self destruct and scale in lovely patch
-    if context.cardarea == G.jokers and context.scoring_hand then
-      if context.joker_main then
-        if card.ability.extra.Xmult > 1 then
-            return {
-                colour = G.C.MULT,
-                xmult = card.ability.extra.Xmult,
-                card = card
-            }
+    if context.setting_blind and not context.blueprint then
+      local eval = function(c) return get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
+      juice_card_until(card, eval, true)
+    end
+
+    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
+      card.ability.extra.to_eat = card.ability.extra.to_eat + 1
+      card.ability.extra.next_increase = card.ability.extra.next_increase + 1
+      card.ability.extra.next_boost = card.ability.extra.next_boost + card.ability.extra.next_increase
+      return {
+        message = localize("maelmc_beast_boost")
+      }
+    end
+
+    if context.joker_main then
+      return {
+        xmult = card.ability.extra.unscalable_mult
+      }
+    end
+
+    if context.ending_shop and not context.blueprint then
+      for _ = 1, card.ability.extra.to_eat do
+        local pool = {}
+        -- listing everything that guzzlord can eat
+        if to_big(G.GAME.dollars) > to_big(0) then table.insert(pool,{weight = 100, name = "money"}) end
+        if #G.consumeables.cards > 0 then table.insert(pool,{weight = 100, name = "consumable"}) end
+        if #G.jokers.cards > 1 then table.insert(pool,{weight = 100, name = "joker"}) end
+        if #G.playing_cards > 1 then table.insert(pool,{weight = 100, name = "playing cards"}) end
+        if G.GAME.round_resets.hands > 1 then table.insert(pool,{weight = 75, name = "hand"}) end
+        if G.GAME.round_resets.discards > 0 then table.insert(pool,{weight = 75, name = "discard"}) end
+        if G.hand.config.card_limit > 1 then table.insert(pool,{weight = 75, name = "hand size"}) end
+        if G.jokers.config.card_limit > 1 then table.insert(pool,{weight = 50, name = "joker slot"}) end
+        if G.consumeables.config.card_limit > 0 then table.insert(pool,{weight = 50, name = "consumable slot"}) end
+        if G.shop_jokers.config.card_limit > 1 then table.insert(pool,{weight = 50, name = "card slot"}) end
+        if (G.GAME.modifiers.extra_boosters or 0) > -2 then table.insert(pool,{weight = 50, name = "booster slot"}) end
+        if (G.GAME.modifiers.extra_vouchers or 0) > -1 then table.insert(pool,{weight = 50, name = "voucher slot"}) end
+        if (G.GAME.energy_plus or 0) > -energy_max then table.insert(pool,{weight = 50, name = "energy limit"}) end
+        if not G.GAME.modifiers.guzzlord_eat_shop_reroll then table.insert(pool,{weight = 1, name = "shop reroll"}) end
+        if not G.GAME.modifiers.guzzlord_eat_shop_sign then table.insert(pool,{weight = 1, name = "shop sign"}) end
+
+        if not next(pool) then
+          card.ability.extra.unscalable_mult = card.ability.extra.unscalable_mult - card.ability.extra.unscalable_mult2
+          SMODS.calculate_effect({message = localize("maelmc_hungry_dot")}, card)
+        else
+          card.ability.extra.unscalable_mult = card.ability.extra.unscalable_mult + card.ability.extra.unscalable_mult2
+          local rng = weighted_random(pool,"guzzlord")
+          local result = rng["name"]
+
+          if result == "money" then
+            local lost = math.random(1,math.ceil(to_number(to_big(G.GAME.dollars))/2))
+            SMODS.calculate_effect({dollars = -lost}, card)
+
+          elseif result == "consumable" then
+            local consum = pseudorandom_element(G.consumeables.cards,pseudoseed("guzzlord"))
+            consum.getting_sliced = true
+            consum:start_dissolve({ G.C.RED }, nil, 1.6)
+            SMODS.calculate_effect({message = G.localization.descriptions[consum.ability.set][consum.config.center_key]["name"]}, card)
+
+          elseif result == "joker" then
+            local torand = {}
+            for _, v in ipairs(G.jokers.cards) do
+              if v ~= card then
+                table.insert(torand,v)
+              end
+            end
+            local jok = pseudorandom_element(torand,pseudoseed("guzzlord"))
+            jok.getting_sliced = true
+            jok:start_dissolve({ G.C.RED }, nil, 1.6)
+            SMODS.calculate_effect({message = G.localization.descriptions["Joker"][jok.config.center_key]["name"]}, card)
+          
+          elseif result == "playing cards" then
+            local car = pseudorandom_element(G.playing_cards,pseudoseed("guzzlord"))
+            car.getting_sliced = true
+            car:start_dissolve({ G.C.RED }, nil, 1.6)
+            SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_playing_card_minus', vars = { 1 } } }, card)
+            return true
+
+          elseif result == "hand" then
+            G.GAME.round_resets.hands = G.GAME.round_resets.hands - 1
+            ease_hands_played(-1)
+            SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_hand_minus', vars = { 1 } } }, card)
+          
+          elseif result == "discard" then
+            G.GAME.round_resets.discards = G.GAME.round_resets.discards - 1
+            ease_discard(-1)
+            SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_discard_minus', vars = { 1 } } }, card)
+
+          elseif result == "hand size" then
+            G.hand.config.real_card_limit = (G.hand.config.real_card_limit or G.hand.config.card_limit) - 1
+            G.hand.config.card_limit = math.max(0, G.hand.config.real_card_limit)
+            SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_hand_size_minus', vars = { 1 } } }, card)
+          
+          elseif result == "joker slot" then
+            G.jokers.config.real_card_limit = (G.jokers.config.real_card_limit or G.jokers.config.card_limit) - 1
+            G.jokers.config.card_limit = math.max(0, G.jokers.config.real_card_limit)
+            SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_joker_slot_minus', vars = { 1 } } }, card)
+          
+          elseif result == "consumable slot" then
+            G.consumeables.config.real_card_limit = (G.consumeables.config.real_card_limit or G.consumeables.config.card_limit) - 1
+            G.consumeables.config.card_limit = math.max(0, G.consumeables.config.real_card_limit)
+            SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_consumable_slot_minus', vars = { 1 } } }, card)
+          
+          elseif result == "card slot" then
+            change_shop_size(-1)
+            SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_card_slot_minus', vars = { 1 } } }, card)
+          
+          elseif result == "booster slot" then
+            if G.GAME.modifiers.extra_boosters then G.GAME.modifiers.extra_boosters = G.GAME.modifiers.extra_boosters - 1
+            else G.GAME.modifiers.extra_boosters = -1 end
+            SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_pack_slot_minus', vars = { 1 } } }, card)
+          
+          elseif result == "voucher slot" then
+            SMODS.change_voucher_limit(-1)
+            SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_voucher_slot_minus', vars = { 1 } } }, card)
+          
+          elseif result == "energy limit" then
+            if G.GAME.energy_plus then G.GAME.energy_plus = G.GAME.energy_plus - 1
+            else G.GAME.energy_plus = -1 end
+            SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_energy_limit_minus', vars = { 1 } } }, card)
+
+          elseif result == "shop reroll" then
+            G.GAME.modifiers.guzzlord_eat_shop_reroll = true
+            SMODS.calculate_effect({message = localize("maelmc_shop_reroll")}, card)
+          
+          elseif result == "shop sign" then
+            G.GAME.modifiers.guzzlord_eat_shop_sign = true
+            SMODS.calculate_effect({message = localize("maelmc_shop_sign")}, card)
+          end
         end
       end
+      return true
     end
   end,
-}]]
+}
 
 return {
   name = "Maelmc's Jokers Gen 7",
@@ -547,8 +662,8 @@ return {
     xurkitree,
     celesteela,
     kartana,
+    guzzlord,
     stakataka,
-    blacephalon
-    --guzzlord,
+    blacephalon,
   },
 }
