@@ -509,6 +509,8 @@ local guzzlord = {
   config = {extra = {to_eat = 1, chips = 1, next_boost = 3, next_increase = 3, unscalable_mult = 1, unscalable_mult2 = 1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
     return {vars = {card.ability.extra.to_eat,card.ability.extra.unscalable_mult2 * card.ability.extra.to_eat,card.ability.extra.unscalable_mult,card.ability.extra.next_boost}}
   end,
   rarity = "maelmc_ultra_beast",
