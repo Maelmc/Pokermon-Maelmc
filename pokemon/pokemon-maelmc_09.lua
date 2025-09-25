@@ -261,7 +261,7 @@ local ogerpon_wellspring={
       if not bonus then
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
         return {
-          extra = {focus = card, message = localize('poke_plus_pokeitem'), colour = G.ARGS.LOC_COLOURS.pink, func = function()
+          extra = {focus = (context.blueprint_card or card), message = localize('poke_plus_pokeitem'), colour = G.ARGS.LOC_COLOURS.pink, func = function()
             G.E_MANAGER:add_event(Event({
               trigger = 'before',
               delay = 0.0,
@@ -358,7 +358,7 @@ local ogerpon_hearthflame={
         end
       end
       if deleted then
-        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("maelmc_ivy_cudgle_ex"), colour = G.C.MULT})
+        card_eval_status_text((context.blueprint_card or card), 'extra', nil, nil, nil, {message = localize("maelmc_ivy_cudgle_ex"), colour = G.C.MULT})
       end
     end
 
