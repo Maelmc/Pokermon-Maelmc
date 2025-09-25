@@ -314,7 +314,7 @@ local ogerpon_hearthflame={
   name = "ogerpon_hearthflame", 
   pos = {x = 8, y = 4},
   soul_pos = {x = 9, y = 4},
-  config = {extra = {Xmult_multi = 3, delete = 2}},
+  config = {extra = {Xmult_multi = 3, delete = 1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Fire Stone"}}
@@ -343,8 +343,8 @@ local ogerpon_hearthflame={
 
     -- delete n non-mult cards held in hand when 1st hand played has 1 card
     if context.before and G.GAME.current_round.hands_played == 0 and context.full_hand and #context.full_hand == 1 then
-      local deleted = nil
-      for _ = 1,card.ability.extra.delete do
+      local deleted = false
+      for _ = 1, card.ability.extra.delete do
         local non_mult_card = {}
         for _, v in pairs(G.hand.cards) do
           if not SMODS.has_enhancement(v, "m_mult") then
@@ -353,7 +353,7 @@ local ogerpon_hearthflame={
         end
         local to_delete = pseudorandom_element(non_mult_card, 'maelmc_ogerpon_hearthflame')
         if to_delete then
-          deleted = 1
+          deleted = true
           poke_remove_card(to_delete, card)
         end
       end
