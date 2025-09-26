@@ -488,10 +488,69 @@ local beastball = {
   end
 }
 
+local metronome = {
+  name = "metronome",
+  key = "metronome",
+  set = "Item",
+  config = {hand_played = nil, hand_times = 0, use_at = 5, level_by = 3},
+  loc_vars = function(self, info_queue, card)
+    return {vars = {card.ability.use_at, card.ability.level_by, (card.ability.hand_played and localize(card.ability.hand_played, 'poker_hands') or localize('poke_none')), card.ability.hand_times}}
+  end,
+  pos = { x = 7, y = 0 },
+  atlas = "maelmc_mart",
+  cost = 4,
+  unlocked = true,
+  discovered = true,
+  can_use = function(self, card)
+    if card.ability.hand_times >= card.ability.use_at then return true end
+    return false
+  end,
+  use = function(self, card, area, copier)
+    set_spoon_item(card)
+    local text = card.ability.hand_played
+    local disp_text = localize(text,'poker_hands')
+    level_up_hand(card, text, nil, card.ability.level_by)
+    if G.STATE == G.STATES.SMODS_BOOSTER_OPENED or G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK
+      or G.STATE == G.STATES.STANDARD_PACK then
+      update_hand_text({nopulse = true, delay = 0.3}, {mult = 0, chips = 0, level = '', handname = ''})
+    else
+      update_hand_text({nopulse = nil, delay = 0.3}, {handname=disp_text, level=G.GAME.hands[text].level, mult = G.GAME.hands[text].mult, chips = G.GAME.hands[text].chips})
+    end
+  end,
+  calculate = function(self, card, context)
+    if context.cardarea == G.jokers and context.scoring_hand and context.joker_main then
+      if (card.ability.hand_played and card.ability.hand_played ~= context.scoring_name) then
+        card.ability.hand_times = 1
+        card.ability.hand_played = context.scoring_name
+        return {
+          message = localize("maelmc_outoftune_dot")
+        }
+      end
+      card.ability.hand_times = card.ability.hand_times + 1
+      card.ability.hand_played = context.scoring_name
+      local eval = function(c) return c.ability.hand_times >= c.ability.use_at and not G.RESET_JIGGLES end
+      juice_card_until(card, eval, true)
+      if card.ability.hand_times % 2 == 1 then
+        return {
+          message = localize("maelmc_tic")
+        }
+      else
+        return {
+          message = localize("maelmc_tac")
+        }
+      end
+    end
+  end,
+  in_pool = function(self)
+    return true
+  end
+}
+
 return {name = "Maelmc's Items",
   list = {
     tealmask, wellspringmask, hearthflamemask, cornerstonemask,
     meteorite, --fake_deoxys, fake_deoxys_attack, fake_deoxys_defense, fake_deoxys_speed,
     beastball,
+    metronome,
   }
 }

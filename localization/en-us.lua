@@ -102,6 +102,15 @@ return {
                     "{C:inactive,s:0.8}(Normal, Attack, Defense, Speed)",
                 },
             },
+            c_maelmc_metronome = {
+                name = "Metronome",
+                text = {
+                    "Play the same hand {C:attention}#1#",
+                    "times in a row while holding this",
+                    "to upgrade that hand by",
+                    "{C:attention}#2#{} levels {C:inactive}(Hand: {C:attention}#3# #4#{C:inactive} times)"
+                },
+            },
         },
         Joker = {
             j_maelmc_glimmet = {
@@ -797,6 +806,9 @@ return {
             maelmc_hearthstamp_ex = "Heartstamp!",
             maelmc_photo_ex = "Photo!",
             maelmc_beast_boost = "Beast Boost",
+            maelmc_tic = "Tic",
+            maelmc_tac = "Tac",
+            maelmc_outoftune_dot = "Out of tune...",
 
             maelmc_shop_reroll = "Shop reroll",
             maelmc_shop_sign = "Shop sign",
