@@ -388,14 +388,14 @@ local lunatone={
         end
       end
       if clubs_trigg == 1 then
-        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_clubs')})
+        card_eval_status_text((context.blueprint_card or card), 'extra', nil, nil, nil, {message = localize('maelmc_clubs')})
       end
 
       if SMODS.pseudorandom_probability(card, 'lunatone', card.ability.extra.num_level, card.ability.extra.dem_level, 'lunatone') then
-        local hand = context.scoring_name
-        update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=localize(hand, 'poker_hands'), chips = G.GAME.hands[hand].chips, mult = G.GAME.hands[hand].mult, level=G.GAME.hands[hand].level})
-        level_up_hand(card, hand, nil, card.ability.extra.level_amt)
-        update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
+        return {
+          level_up = true,
+          message = localize('k_level_up_ex')
+        }
       end
     end
   end,
@@ -447,10 +447,10 @@ local solrock={
         end
       end
       if hearts_trigg == 1 then
-        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_hearts')})
+        card_eval_status_text((context.blueprint_card or card), 'extra', nil, nil, nil, {message = localize('maelmc_hearts')})
       end
       if wild_trigg == 1 then
-        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('maelmc_wild')})
+        card_eval_status_text((context.blueprint_card or card), 'extra', nil, nil, nil, {message = localize('maelmc_wild')})
       end
     end
   end,
