@@ -232,6 +232,16 @@ payload = '''set_ability = function(self, card, initial, delay_sprites)
     end
   end,'''
 
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''function Card:set_ability(center, initial, delay_sprites)'''
+position = "after"
+match_indent = true
+payload = '''    if G.GAME.modifiers.hazard_deck and SMODS.has_enhancement(self, "m_poke_hazard") and self.ability.card_limit then
+        self.ability.card_limit = 0
+    end'''
+
 # Guzzlord eats the reroll button
 [[patches]]
 [patches.pattern]
