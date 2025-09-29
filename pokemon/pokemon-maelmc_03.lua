@@ -573,7 +573,7 @@ local deoxys = {
   name = "deoxys",
   pos = {x = 2, y = 3},
   soul_pos = { x = 3, y = 3},
-  config = {extra = {hands = 1, d_size = 1, h_size = 1, in_round = false}},
+  config = {extra = {hands = 1, d_size = 1, h_size = 1}},
   loc_vars = function(self, info_queue, center)
     type_tooltip(self, info_queue, center)
 		return {vars = {center.ability.extra.hands, center.ability.extra.d_size, center.ability.extra.h_size}}
@@ -586,24 +586,10 @@ local deoxys = {
   blueprint_compat = false,
   calculate = function(self,card,context)
     if context.setting_blind then
-      card.ability.extra.in_round = true
-      G.E_MANAGER:add_event(Event({
-        func = function()
-          ease_hands_played(card.ability.extra.hands)
-          ease_discard(card.ability.extra.d_size)
-          G.hand:change_size(card.ability.extra.h_size)
-          local hand_space = math.min(#G.deck.cards, card.ability.extra.h_size)
-          delay(0.3)
-          for i=1, hand_space do --draw cards from deck
-            draw_card(G.deck,G.hand, i*100/hand_space,'up', true)
-          end
-          SMODS.calculate_effect({ message = localize { type = 'variable', key = 'a_hands', vars = { card.ability.extra.hands } } }, context.blueprint_card or card)
-          SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_discard', vars = { card.ability.extra.d_size } } }, context.blueprint_card or card)
-          SMODS.calculate_effect({ message = localize { type = 'variable', key = 'a_handsize', vars = { card.ability.extra.h_size } } }, context.blueprint_card or card)
-          return true
-        end
-      }))
-      return nil, true -- This is for Joker retrigger purposes
+      ease_hands_played(card.ability.extra.hands)
+      ease_discard(card.ability.extra.d_size)
+      G.hand:change_size(card.ability.extra.h_size)
+      G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + card.ability.extra.h_size
     end
     if context.end_of_round and card.ability.extra.in_round then
       G.hand:change_size(-card.ability.extra.h_size)
@@ -625,11 +611,6 @@ local deoxys = {
       _card:add_to_deck()
       G.consumeables:emplace(_card)
       card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('poke_plus_pokeitem'), colour = G.C.FILTER})
-    end
-  end,
-  remove_from_deck = function(self, card, from_debuff)
-    if card.ability.extra.in_round then
-      G.hand:change_size(-card.ability.extra.h_size)
     end
   end,
 }
@@ -654,16 +635,7 @@ local deoxys_attack = {
   blueprint_compat = true,
   calculate = function(self,card,context)
     if context.setting_blind then
-      G.E_MANAGER:add_event(Event({
-        func = function()
-          ease_hands_played(card.ability.extra.hands)
-          SMODS.calculate_effect(
-              { message = localize { type = 'variable', key = 'a_hands', vars = { card.ability.extra.hands } } },
-              context.blueprint_card or card)
-          return true
-        end
-      }))
-      return nil, true -- This is for Joker retrigger purposes
+      ease_hands_played(card.ability.extra.hands)
     end
   end,
   in_pool = function(self)
@@ -691,14 +663,7 @@ local deoxys_defense = {
   blueprint_compat = true,
   calculate = function(self,card,context)
     if context.setting_blind then
-      G.E_MANAGER:add_event(Event({
-        func = function()
-          ease_discard(card.ability.extra.d_size)
-          SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_discard', vars = { card.ability.extra.d_size } } }, context.blueprint_card or card)
-          return true
-        end
-      }))
-      return nil, true -- This is for Joker retrigger purposes
+      ease_discard(card.ability.extra.d_size)
     end
   end,
   in_pool = function(self)
@@ -710,7 +675,7 @@ local deoxys_speed = {
   name = "deoxys_speed",
   pos = { x = 8, y = 3 },
   soul_pos = { x = 9, y = 3 },
-  config = { extra = { h_size = 4, in_round = false} },
+  config = { extra = { h_size = 4} },
   loc_vars = function(self, info_queue, center)
     type_tooltip(self, info_queue, center)
     return { vars = { center.ability.extra.h_size } }
@@ -726,31 +691,8 @@ local deoxys_speed = {
   blueprint_compat = true,
   calculate = function(self,card,context)
     if context.setting_blind then
-      card.ability.extra.in_round = true
-      G.E_MANAGER:add_event(Event({
-        func = function()
-          G.hand:change_size(card.ability.extra.h_size)
-          local hand_space = math.min(#G.deck.cards, card.ability.extra.h_size)
-          delay(0.3)
-          for i=1, hand_space do --draw cards from deck
-            draw_card(G.deck,G.hand, i*100/hand_space,'up', true)
-          end
-          SMODS.calculate_effect(
-              { message = localize { type = 'variable', key = 'a_handsize', vars = { card.ability.extra.h_size } } },
-              context.blueprint_card or card)
-          return true
-        end
-      }))
-      return nil, true -- This is for Joker retrigger purposes
-    end
-    if context.end_of_round and card.ability.extra.in_round then
-      G.hand:change_size(-card.ability.extra.h_size)
-      card.ability.extra.in_round = false
-    end
-  end,
-  remove_from_deck = function(self, card, from_debuff)
-    if card.ability.extra.in_round then
-      G.hand:change_size(-card.ability.extra.h_size)
+      G.hand:change_size(card.ability.extra.h_size)
+      G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + card.ability.extra.h_size
     end
   end,
   in_pool = function(self)
