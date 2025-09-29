@@ -16,7 +16,6 @@ local woobat = {
   perishable_compat = true,
   blueprint_compat = true,
   eternal_compat = true,
-  volatile = true,
   calculate = function(self, card, context)
 
     if context.before and context.cardarea == G.jokers and SMODS.pseudorandom_probability(card, 'woobat', card.ability.extra.num, card.ability.extra.dem, 'woobat') then
@@ -76,7 +75,6 @@ local swoobat = {
   perishable_compat = true,
   blueprint_compat = true,
   eternal_compat = true,
-  volatile = true,
   calculate = function(self, card, context)
 
     if context.before and context.cardarea == G.jokers then
@@ -105,9 +103,58 @@ local swoobat = {
   end,
 }
 
+local bouffalant = {
+  name = "bouffalant",
+  pos = PokemonSprites["bouffalant"].base.pos,
+  config = {extra = {money = 10, blind_buff = 1.5}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return {vars = {card.ability.extra.blind_buff, card.ability.extra.money}}
+  end,
+  rarity = 2,
+  cost = 7,
+  stage = "Basic",
+  ptype = "Colorless",
+  atlas = "AtlasJokersBasicNatdex",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  calculate = function(self, card, context)
+
+    -- stolen from VanillaRemade Matador
+    if context.debuffed_hand or context.joker_main then
+      if G.GAME.blind.triggered then
+        G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.money
+        return {
+          dollars = card.ability.extra.money,
+          func = function() -- This is for timing purposes, it runs after the dollar manipulation
+            G.E_MANAGER:add_event(Event({
+              func = function()
+                G.GAME.dollar_buffer = 0
+                return true
+              end
+            }))
+          end
+        }
+      end
+    end
+
+    if context.setting_blind and context.blind.boss and not context.blueprint then
+      G.GAME.blind.chips = G.GAME.blind.chips * card.ability.extra.blind_buff
+      G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+      SMODS.calculate_effect({ message = localize('maelmc_reckless_ex') }, card)
+    end
+
+  end,
+  calc_dollar_bonus = function(self, card)
+    return G.GAME.blind.boss and ease_poke_dollars(card, "bouffalant", card.ability.extra.money, true) or nil
+  end
+}
+
 return {
   name = "Maelmc's Jokers Gen 5",
   list = {
     woobat, swoobat,
+    bouffalant,
   },
 }

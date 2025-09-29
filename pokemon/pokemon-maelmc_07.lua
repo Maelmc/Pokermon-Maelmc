@@ -544,7 +544,11 @@ local guzzlord = {
       for _ = 1, card.ability.extra.to_eat do
         local pool = {}
         -- listing everything that guzzlord can eat
-        if to_big(G.GAME.dollars) > to_big(0) then table.insert(pool,{weight = 100, name = "money"}) end
+        if (SMODS.Mods["Talisman"] or {}).can_load then
+          if to_big(G.GAME.dollars) > to_big(0) then table.insert(pool,{weight = 100, name = "money"}) end
+        else
+          if G.GAME.dollars > 0 then table.insert(pool,{weight = 100, name = "money"}) end
+        end
         if #G.consumeables.cards > 0 then table.insert(pool,{weight = 100, name = "consumable"}) end
         if #G.jokers.cards > 1 then table.insert(pool,{weight = 100, name = "joker"}) end
         if #G.playing_cards > 1 then table.insert(pool,{weight = 100, name = "playing cards"}) end
@@ -569,7 +573,12 @@ local guzzlord = {
           local result = rng["name"]
 
           if result == "money" then
-            local lost = math.random(1,math.ceil(to_number(to_big(G.GAME.dollars))/2))
+            local lost = 0 
+            if (SMODS.Mods["Talisman"] or {}).can_load then
+              lost = math.random(1,math.ceil(to_number(to_big(G.GAME.dollars))/2))
+            else
+              lost = math.random(1,math.ceil(G.GAME.dollars)/2)
+            end
             SMODS.calculate_effect({dollars = -lost}, card)
 
           elseif result == "consumable" then

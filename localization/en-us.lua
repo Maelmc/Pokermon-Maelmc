@@ -699,6 +699,17 @@ return {
                     "{C:attention}#4#{} more times",
                 }
             },
+            j_maelmc_bouffalant = {
+                name = "Bouffalant",
+                text = {
+                    "Increases {C:attention}Boss Blind{} score",
+                    "requirement by {X:chips,C:white}X#1#",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "Earn {C:money}$#2#{} if played hand",
+                    "triggers the {C:attention}Boss Blind{} ability",
+                    "and at end of round"
+                }
+            }
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -809,6 +820,7 @@ return {
             maelmc_tic = "Tic",
             maelmc_tac = "Tac",
             maelmc_outoftune_dot = "Out of tune...",
+            maelmc_reckless_ex = "Reckless!",
 
             maelmc_shop_reroll = "Shop reroll",
             maelmc_shop_sign = "Shop sign",
