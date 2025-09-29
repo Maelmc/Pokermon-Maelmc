@@ -703,7 +703,7 @@ return {
                 name = "Bouffalant",
                 text = {
                     "Increases {C:attention}Boss Blind{} score",
-                    "requirement by {X:chips,C:white}X#1#",
+                    "requirement by {X:attention,C:white}X#1#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "Earn {C:money}$#2#{} if played hand",
                     "triggers the {C:attention}Boss Blind{} ability",
