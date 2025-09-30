@@ -344,6 +344,7 @@ local pc = {
     local jname_one = card.ability.extra.joker_one_info.name or localize("maelmc_none")
     local jname_two = card.ability.extra.joker_two_info.name or localize("maelmc_none")
     local jname_three = card.ability.extra.joker_three_info.name or localize("maelmc_none")
+    info_queue[#info_queue+1] = {set = 'Other', key = 'pc_bug'}
     return {vars = {jname_one, jname_two, jname_three}}
   end,
   rarity = 3,
@@ -417,7 +418,7 @@ local pc = {
         end
       end
 
-      if #final_ret == 0 then return end
+      if not next(final_ret) then return end
 
       final_ret.colour = G.C.GREY
       final_ret.card = card
@@ -428,6 +429,13 @@ local pc = {
     end
 
   end,
+  calc_dollar_bonus = function(self, card)
+    local money = 0
+    money = money + ((card.ability.extra.joker_one_info.card and card.ability.extra.joker_one_info.card:calculate_dollar_bonus()) or 0)
+    money = money + ((card.ability.extra.joker_two_info.card and card.ability.extra.joker_two_info.card:calculate_dollar_bonus()) or 0)
+    money = money + ((card.ability.extra.joker_three_info.card and card.ability.extra.joker_three_info.card:calculate_dollar_bonus()) or 0)
+    return (money ~= 0 and ease_poke_dollars(card, "pc", money, true)) or nil
+  end
 }
 
 local photographer = {

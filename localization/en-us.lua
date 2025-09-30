@@ -770,6 +770,15 @@ return {
                     "{C:inactive,s:0.8}(Requirement increases after",
                     "{C:inactive,s:0.8}each Beast Boost)"
                 }
+            },
+            pc_bug = {
+                name = "Known bug",
+                text = {
+                    "Storing a Joker, going",
+                    "back to main menu and",
+                    "resuming the run will",
+                    "crash the game"
+                }
             }
         },
     },
