@@ -46,7 +46,7 @@ local woobat = {
     return scaling_evo(self, card, context, "j_maelmc_swoobat", card.ability.extra.heart_stamped_count, self.config.evo_rqmt)
   end,
   update = function(self, card, dt)
-    if not poke_is_in_collection(card) then
+    if not poke_is_in_collection(card) and G.playing_cards then
       local heart_stamped_count = 0
       for _, v in pairs(G.playing_cards) do
         if v:is_suit("Hearts") and v:get_seal() == "Red" then

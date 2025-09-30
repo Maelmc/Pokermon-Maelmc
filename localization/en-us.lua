@@ -702,12 +702,11 @@ return {
             j_maelmc_bouffalant = {
                 name = "Bouffalant",
                 text = {
-                    "Increases {C:attention}Boss Blind{} score",
-                    "requirement by {X:attention,C:white}X#1#",
+                    "{X:attention,C:white}X#1#{} {C:attention}Boss Blind{} requirement",
                     "{br:2}ERROR - CONTACT STEAK",
                     "Earn {C:money}$#2#{} if played hand",
                     "triggers the {C:attention}Boss Blind{} ability",
-                    "and at end of round"
+                    "and at end of {C:attention}Boss Blind{} round"
                 }
             }
         },
