@@ -28,50 +28,6 @@ local ralts={
   blueprint_compat = true,
   eternal_compat = true,
   calculate = function(self, card, context)
-    --[[if context.setting_blind and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-      if (pseudorandom('ralts') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.priestress_odds) then
-        local _card = create_card("Tarot", G.consumeables, nil, nil, nil, nil, "c_high_priestess")
-        _card:add_to_deck()
-        G.consumeables:emplace(_card)
-        card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize("k_plus_tarot"), colour = G.C.PURPLE})
-      else
-        for _ = 1,card.ability.extra.planet_amount do
-          local temp_hands = {}
-          local min_level = nil
-          for k, v in pairs(G.GAME.hands) do
-            if v.visible then
-              local hand = v
-              hand.handname = k
-              if next(temp_hands) == nil then
-                table.insert(temp_hands, hand)
-                min_level = hand.level
-              elseif min_level == hand.level then
-                table.insert(temp_hands, hand)
-              elseif min_level > hand.level then
-                temp_hands = {}
-                table.insert(temp_hands, hand)
-                min_level = hand.level
-              end
-            end
-          end
-          
-          local _hand =  pseudorandom_element(temp_hands, pseudoseed('ralts'))
-          local _planet = nil
-          for x, y in pairs(G.P_CENTER_POOLS.Planet) do
-            if y.config.hand_type == _hand.handname then
-              _planet = y.key
-              break
-            end
-          end
-
-          local _card = create_card('Planet', G.consumeables, nil, nil, nil, nil, _planet)
-          _card:add_to_deck()
-          G.consumeables:emplace(_card)
-          card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
-        end
-      end
-    end]]
-
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main then
         local mult = 0
@@ -129,55 +85,6 @@ local kirlia={
   blueprint_compat = true,
   eternal_compat = true,
   calculate = function(self, card, context)
-    --[[if context.setting_blind then
-      local edition = {negative = true}
-
-      if (pseudorandom('kirlia') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.priestress_odds) then
-        local _card = create_card("Tarot", G.consumeables, nil, nil, nil, nil, "c_high_priestess")
-        _card:set_edition(edition, true)
-        _card:add_to_deck()
-        G.consumeables:emplace(_card)
-        card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize("k_plus_tarot"), colour = G.C.PURPLE})
-
-      else
-        for _ = 1,card.ability.extra.planet_amount do
-          local temp_hands = {}
-          local min_level = nil
-          for k, v in pairs(G.GAME.hands) do
-            if v.visible then
-              local hand = v
-              hand.handname = k
-              if next(temp_hands) == nil then
-                table.insert(temp_hands, hand)
-                min_level = hand.level
-              elseif min_level == hand.level then
-                table.insert(temp_hands, hand)
-              elseif min_level > hand.level then
-                temp_hands = {}
-                table.insert(temp_hands, hand)
-                min_level = hand.level
-              end
-            end
-          end
-          
-          local _hand =  pseudorandom_element(temp_hands, pseudoseed('kirlia'))
-          local _planet = nil
-          for x, y in pairs(G.P_CENTER_POOLS.Planet) do
-            if y.config.hand_type == _hand.handname then
-              _planet = y.key
-              break
-            end
-          end
-
-          local _card = create_card('Planet', G.consumeables, nil, nil, nil, nil, _planet)
-          _card:set_edition(edition, true)
-          _card:add_to_deck()
-          G.consumeables:emplace(_card)
-          card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
-        end
-      end
-    end]]
-
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main then
         local mult = 0
@@ -235,55 +142,6 @@ local gardevoir={
   blueprint_compat = true,
   eternal_compat = true,
   calculate = function(self, card, context)
-    --[[if context.setting_blind then
-      local edition = {negative = true}
-
-      if (pseudorandom('gardevoir') < (G.GAME and G.GAME.probabilities.normal or 1)/card.ability.extra.blackhole_odds) then
-        local _card = create_card("Spectral", G.consumeables, nil, nil, nil, nil, "c_black_hole")
-        _card:set_edition(edition, true)
-        _card:add_to_deck()
-        G.consumeables:emplace(_card)
-        card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
-
-      else
-        for _ = 1,card.ability.extra.planet_amount do
-          local temp_hands = {}
-          local min_level = nil
-          for k, v in pairs(G.GAME.hands) do
-            if v.visible then
-              local hand = v
-              hand.handname = k
-              if next(temp_hands) == nil then
-                table.insert(temp_hands, hand)
-                min_level = hand.level
-              elseif min_level == hand.level then
-                table.insert(temp_hands, hand)
-              elseif min_level > hand.level then
-                temp_hands = {}
-                table.insert(temp_hands, hand)
-                min_level = hand.level
-              end
-            end
-          end
-          
-          local _hand =  pseudorandom_element(temp_hands, pseudoseed('kirlia'))
-          local _planet = nil
-          for x, y in pairs(G.P_CENTER_POOLS.Planet) do
-            if y.config.hand_type == _hand.handname then
-              _planet = y.key
-              break
-            end
-          end
-
-          local _card = create_card('Planet', G.consumeables, nil, nil, nil, nil, _planet)
-          _card:set_edition(edition, true)
-          _card:add_to_deck()
-          G.consumeables:emplace(_card)
-          card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
-        end      
-      end
-    end]]
-
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main then
         local xmult = 1
@@ -347,6 +205,127 @@ local mega_gardevoir={
       end
     end
   end,
+}
+
+-- Gulpin 316
+local gulpin={
+  name = "gulpin",
+  pos = PokemonSprites["gulpin"].base.pos,
+  config = {extra = {stockpile = 0, max_stockpile = 3,
+    money = 3, chips = 8, money2 = 15, -- chips scales the same as money and there aren't enough money variables that scale rn
+    xmult = 1.5, xmult1 = 3, xmult2 = 4.5,
+    volatile = "left", volatile2 = "right",
+    stockpile_count = 0}, evo_rqmt = 5},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'stockpile'}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'volatile_both'}
+    local abbr = card.ability.extra
+    local stockpile_left = math.max(0, self.config.evo_rqmt - card.ability.extra.stockpile_count)
+    return {vars = {abbr.stockpile, abbr.money, abbr.chips, abbr.money2, abbr.xmult, abbr.xmult1, abbr.xmult2, stockpile_left}}
+  end,
+  poke_custom_values_to_keep = {"stockpile"},
+  rarity = 2,
+  cost = 6,
+  stage = "Basic",
+  ptype = "Dark",
+  atlas = "AtlasJokersBasicNatdex",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    if context.setting_blind and not context.blueprint and card.ability.extra.stockpile < card.ability.extra.max_stockpile then
+      card.ability.extra.stockpile = card.ability.extra.stockpile + 1
+      card.ability.extra.stockpile_count = card.ability.extra.stockpile_count + 1
+      return {
+        message = localize("maelmc_stockpile")
+      }
+    end
+
+    if context.cardarea == G.jokers and context.scoring_hand then
+      if context.joker_main and volatile_active(self, card, card.ability.extra.volatile2) then
+        local xmult = 0
+        if card.ability.extra.stockpile == 0 then return nil
+        elseif card.ability.extra.stockpile == 1 then xmult = card.ability.extra.xmult
+        elseif card.ability.extra.stockpile == 2 then xmult =  card.ability.extra.xmult1
+        else xmult = card.ability.extra.xmult2 end
+        card.ability.extra.stockpile = 0
+        return {
+          colour = G.C.XMULT,
+          Xmult = xmult,
+        }
+      end
+    end
+
+    return scaling_evo(self, card, context, "j_maelmc_swalot", card.ability.extra.stockpile_count, self.config.evo_rqmt)
+  end,
+  calc_dollar_bonus = function(self, card)
+    if volatile_active(self, card, card.ability.extra.volatile) then
+      local money = 0
+      if card.ability.extra.stockpile == 0 then return nil
+      elseif card.ability.extra.stockpile == 1 then money = card.ability.extra.money
+      elseif card.ability.extra.stockpile == 2 then money =  card.ability.extra.chips
+      else money = card.ability.extra.money2 end
+      card.ability.extra.stockpile = 0
+      return ease_poke_dollars(card, "gulpin", money, true)
+    end
+  end
+}
+
+-- Swalot 317
+local swalot={
+  name = "swalot",
+  pos = PokemonSprites["swalot"].base.pos,
+  config = {extra = {stockpile = 0, max_stockpile = 3,
+    money = 5, chips = 12, money2 = 21, -- chips scales the same as money and there aren't enough money variables that scale rn
+    xmult = 2, xmult1 = 4, xmult2 = 6,
+    volatile = "left", volatile2 = "right"}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'stockpile'}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'volatile_both'}
+    local abbr = card.ability.extra
+    return {vars = {abbr.stockpile, abbr.money, abbr.chips, abbr.money2, abbr.xmult, abbr.xmult1, abbr.xmult2}}
+  end,
+  rarity = "poke_safari",
+  cost = 8,
+  stage = "One",
+  ptype = "Dark",
+  atlas = "AtlasJokersBasicNatdex",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    if context.setting_blind and not context.blueprint and card.ability.extra.stockpile < card.ability.extra.max_stockpile then
+      card.ability.extra.stockpile = card.ability.extra.stockpile + 1
+      card.ability.extra.stockpile_count = card.ability.extra.stockpile_count + 1
+      return {
+        message = localize("maelmc_stockpile")
+      }
+    end
+
+    if context.cardarea == G.jokers and context.scoring_hand then
+      if context.joker_main and volatile_active(self, card, card.ability.extra.volatile2) then
+        local xmult = 0
+        if card.ability.extra.stockpile == 0 then return nil
+        elseif card.ability.extra.stockpile == 1 then xmult = card.ability.extra.xmult
+        elseif card.ability.extra.stockpile == 2 then xmult =  card.ability.extra.xmult1
+        else xmult = card.ability.extra.xmult2 end
+        card.ability.extra.stockpile = 0
+        return {
+          colour = G.C.XMULT,
+          Xmult = xmult,
+        }
+      end
+    end
+  end,
+  calc_dollar_bonus = function(self, card)
+    if volatile_active(self, card, card.ability.extra.volatile) then
+      local money = 0
+      if card.ability.extra.stockpile == 0 then return nil
+      elseif card.ability.extra.stockpile == 1 then money = card.ability.extra.money
+      elseif card.ability.extra.stockpile == 2 then money =  card.ability.extra.chips
+      else money = card.ability.extra.money2 end
+      card.ability.extra.stockpile = 0
+      return ease_poke_dollars(card, "swalot", money, true)
+    end
+  end
 }
 
 -- Lunatone 337
@@ -704,6 +683,7 @@ return {
   name = "Maelmc's Jokers Gen 3",
   list = {
     ralts, kirlia, gardevoir, mega_gardevoir,
+    gulpin, swalot,
     lunatone, solrock,
     kecleon,
     tropius,

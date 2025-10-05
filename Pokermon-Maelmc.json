@@ -4,12 +4,12 @@
 	"author": ["Maelmc"],
 	"description": "Maelmc's Pokermon add-on",
 	"prefix": "maelmc",
-	"main_file": "pokermon-maelmc.lua",
+	"main_file": "main.lua",
 	"priority": 20,
 	"badge_colour": "EA6F22",
 	"badge_text_colour": "FFFFFF",
   	"display_name": "Pokermon-Maelmc",
-	"version": "1.13.1-14",
+	"version": "1.13.1-15",
 	"dependencies": [
 		"Pokermon (>=3.2.0-911a)"
 	],

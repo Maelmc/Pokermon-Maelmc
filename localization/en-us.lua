@@ -708,6 +708,23 @@ return {
                     "triggers the {C:attention}Boss Blind{} ability",
                     "and at end of {C:attention}Boss Blind{} round"
                 }
+            },
+            j_maelmc_gulpin = {
+                name = "Gulpin",
+                text = {
+                    "{C:attention}Stockpile{} when blind is selected {C:inactive}(#1#)",
+                    "{C:attention}Volatile Left{}: Gain {C:money}$#2#{}, {C:money}$#3#{} or {C:money}$#4#{} at end of round",
+                    "{C:attention}Volatile Right{}: {X:red,C:white}X#5#{}, {X:red,C:white}X#6#{} or {X:red,C:white}X#7#{} Mult",
+                    "{C:inactive,s:0.8}(Evolves after stockpiling {C:attention,s:0.8}#8# {C:inactive,s:0.8}times)"
+                }
+            },
+            j_maelmc_swalot = {
+                name = "Swalot",
+                text = {
+                    "{C:attention}Stockpile{} when blind is selected {C:inactive}(#1#)",
+                    "{C:attention}Volatile Left{}: Gain {C:money}$#2#{}, {C:money}$#3#{} or {C:money}$#4#{} at end of round",
+                    "{C:attention}Volatile Right{}: {X:red,C:white}X#5#{}, {X:red,C:white}X#6#{} or {X:red,C:white}X#7#{} Mult",
+                }
             }
         },
         Voucher = {
@@ -778,7 +795,25 @@ return {
                     "resuming the run will",
                     "crash the game"
                 }
-            }
+            },
+            stockpile = {
+                name = "Stockpile",
+                text = {
+                    "A counter that goes up to 3",
+                    "that powers up this Joker's ability",
+                    "the higher the counter is",
+                    "Resets when said ability is used"
+                }
+            },
+            volatile_both = {
+              name = "Volatile",
+              text = {
+                "The following ability only triggers",
+                "when this is the leftmost",
+                "or rightmost Joker",
+                "{C:inactive}(Ignoring {C:attention}Volatile{C:inactive} Pokemon)"
+              }
+            },
         },
     },
     misc = {
@@ -829,10 +864,10 @@ return {
             maelmc_tac = "Tac",
             maelmc_outoftune_dot = "Out of tune...",
             maelmc_reckless_ex = "Reckless!",
-
             maelmc_shop_reroll = "Shop reroll",
             maelmc_shop_sign = "Shop sign",
             maelmc_hungry_dot = "Hungry...",
+            maelmc_stockpile = "Stockpile",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",

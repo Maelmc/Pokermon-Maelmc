@@ -1,13 +1,3 @@
---default_poke_custom_prefix = "maelmc"
-
---Load Sprites file
---[[local sprite, load_error = SMODS.load_file("pokesprites.lua")
-if load_error then
-  sendDebugMessage ("The error is: "..load_error)
-else
-  sprite()
-end]]
-
 --Required by the pokemon family function (right click on a pokemon joker)
 pokermon.add_family({"glimmet", "glimmora"})
 pokermon.add_family({"cufant","copperajah","mega_copperajah"})
@@ -34,9 +24,10 @@ pokermon.add_family({"ogerpon","ogerpon_wellspring","ogerpon_hearthflame","ogerp
 pokermon.add_family({"g_corsola","cursola"})
 pokermon.add_family({"deoxys","deoxys_attack","deoxys_defense","deoxys_speed"})
 pokermon.add_family({"woobat","swoobat"})
+pokermon.add_family({"gulpin","swalot"})
 
 --Load Sprites file
-local sprite, load_error = SMODS.load_file("maelmcsprites.lua")
+local sprite, load_error = SMODS.load_file("sprites.lua")
 if load_error then
   sendDebugMessage ("The error is: "..load_error)
 else
