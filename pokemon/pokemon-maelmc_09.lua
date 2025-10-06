@@ -475,6 +475,72 @@ local ogerpon_cornerstone={
 
 -- function that determines what card ogerpon hearthflame uses for the round, copied from The Idol
 local function reset_maelmc_hearthflame_card()
+    -- multiplayer crash fix
+    if SMODS.Mods["Multiplayer"] and SMODS.Mods["Multiplayer"].can_load and MP.should_use_the_order() then
+      G.GAME.current_round.maelmc_hearthflame_card.rank = "Ace"
+      G.GAME.current_round.maelmc_hearthflame_card.suit = "Spades"
+
+      local count_map = {}
+      local valid_hearthflame_cards = {}
+
+      for _, v in ipairs(G.playing_cards) do
+        if SMODS.has_enhancement(v,"m_mult") then
+          local key = v.base.value .. "_" .. v.base.suit
+          if not count_map[key] then
+            count_map[key] = { count = 0, card = v }
+            table.insert(valid_hearthflame_cards, count_map[key])
+          end
+          count_map[key].count = count_map[key].count + 1
+        end
+      end
+      --failsafe in case no cards are mult or no cards in deck. Defaults to Ace of Spades
+      if #valid_hearthflame_cards == 0 then return end
+
+      local value_order = {}
+      for i, rank in ipairs(SMODS.Rank.obj_buffer) do
+        value_order[rank] = i
+      end
+
+      local suit_order = {}
+      for i, suit in ipairs(SMODS.Suit.obj_buffer) do
+        suit_order[suit] = i
+      end
+
+      table.sort(valid_hearthflame_cards, function(a, b)
+        -- Sort by count descending first
+        if a.count ~= b.count then return a.count > b.count end
+
+        local a_suit = a.card.base.suit
+        local b_suit = b.card.base.suit
+        if suit_order[a_suit] ~= suit_order[b_suit] then return suit_order[a_suit] < suit_order[b_suit] end
+
+        local a_value = a.card.base.value
+        local b_value = b.card.base.value
+        return value_order[a_value] < value_order[b_value]
+      end)
+
+      -- Weighted random selection based on count
+      local total_weight = 0
+      for _, entry in ipairs(valid_hearthflame_cards) do
+        total_weight = total_weight + entry.count
+      end
+
+      local raw_random = pseudorandom("idol" .. G.GAME.round_resets.ante)
+
+      local threshold = 0
+      for _, entry in ipairs(valid_hearthflame_cards) do
+        threshold = threshold + (entry.count / total_weight)
+        if raw_random < threshold then
+          local hearthflame_card = entry.card
+          G.GAME.current_round.maelmc_hearthflame_card.rank = hearthflame_card.base.value
+          G.GAME.current_round.maelmc_hearthflame_card.suit = hearthflame_card.base.suit
+          G.GAME.current_round.maelmc_hearthflame_card.id = hearthflame_card.base.id
+          break
+        end
+      end
+      return
+    end
+
     G.GAME.current_round.maelmc_hearthflame_card = { rank = 'Ace', suit = 'Spades' }
     local valid_hearthflame_cards = {}
     for _, playing_card in ipairs(G.playing_cards) do
