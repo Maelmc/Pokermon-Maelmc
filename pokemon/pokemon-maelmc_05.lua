@@ -106,10 +106,10 @@ local swoobat = {
 local bouffalant = {
   name = "bouffalant",
   pos = PokemonSprites["bouffalant"].base.pos,
-  config = {extra = {money = 10, blind_buff = 1.5}},
+  config = {extra = {money = 10, boss_trigger = 0, blind_buff = 1.5, boss_blind = nil}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
-    return {vars = {card.ability.extra.blind_buff, card.ability.extra.money}}
+    return {vars = {card.ability.extra.blind_buff, card.ability.extra.money, card.ability.extra.boss_trigger}}
   end,
   rarity = 2,
   cost = 7,
@@ -117,37 +117,89 @@ local bouffalant = {
   ptype = "Colorless",
   atlas = "AtlasJokersBasicNatdex",
   perishable_compat = true,
-  blueprint_compat = true,
+  blueprint_compat = false,
   eternal_compat = true,
   calculate = function(self, card, context)
 
-    -- stolen from VanillaRemade Matador
-    if context.debuffed_hand or context.joker_main then
-      if G.GAME.blind.triggered then
-        G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.money
-        return {
-          dollars = card.ability.extra.money,
-          func = function() -- This is for timing purposes, it runs after the dollar manipulation
-            G.E_MANAGER:add_event(Event({
-              func = function()
-                G.GAME.dollar_buffer = 0
-                return true
-              end
-            }))
+    if context.setting_blind and context.blind and context.blind.boss and not context.blueprint then
+      card.ability.extra.boss_blind = context.blind.name
+      G.GAME.blind.chips = G.GAME.blind.chips * card.ability.extra.blind_buff
+      G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+      
+      local boss_name = card.ability.extra.boss_blind
+      print(boss_name)
+      if (boss_name == "The Wall" or boss_name == "The Water" or boss_name == "The Manacle" or boss_name == "The Needle" or boss_name == "Amber Acorn" or boss_name == "Violet Vessel") and not G.GAME.blind.disabled then
+        card.ability.extra.boss_trigger = card.ability.extra.boss_trigger + 1
+      end
+
+      return {
+        message = localize('maelmc_reckless_ex')
+      }
+    end
+      
+    if card.ability.extra.boss_blind then
+      local boss_name = card.ability.extra.boss_blind
+      local boss_trigg = false
+
+      -- window, head, club, goad, plant, pillar, flint, eye, mouth, psychic, arm, ox, leaf
+      if context.debuffed_hand or context.joker_main then
+        if G.GAME.blind.triggered then
+          boss_trigg = true
+        end
+
+      elseif context.first_hand_drawn and boss_name == "The House" then
+        boss_trigg = true
+      
+      elseif (context.press_play or context.pre_discard) and boss_name == "The Serpent" and #G.hand.highlighted > 3 then
+        card.ability.extra.boss_blind = "okserpent"
+      
+      elseif context.press_play then
+        local jokdebuff = false
+        for i = 1, #G.jokers.cards do
+          if G.jokers.cards[i].debuff then
+            jokdebuff = true
+            break
           end
+        end
+        if (boss_name == "The Hook" and (#G.hand.cards - #G.hand.highlighted) > 0) or
+        boss_name == "The Tooth" or
+        ((boss_name == "Crimson Heart" or boss_name == "bl_poke_cgoose") and jokdebuff) then
+          boss_trigg = true
+        end
+      
+      elseif context.hand_drawn then
+        local facedown = false
+        for _, v in pairs(context.hand_drawn) do
+          if v.facing == 'back' then
+              facedown = true
+              break
+          end
+        end
+        if boss_name == "okserpent" or
+        ((boss_name == "The Wheel" or boss_name == "The Mark" or boss_name == "The Fish") and facedown) then
+          boss_trigg = true
+          -- first set the flag when hand is played or discarded, then
+          -- only apply boss_trigg when the hand is drawn
+          if boss_name == "okserpent" then card.ability.extra.boss_blind = "The Serpent" end
+        end
+      end
+
+      if boss_trigg and not G.GAME.blind.disabled then
+        card.ability.extra.boss_trigger = card.ability.extra.boss_trigger + 1
+        return {
+          message = localize('maelmc_reckless_ex')
         }
       end
     end
-
-    if context.setting_blind and context.blind.boss and not context.blueprint then
-      G.GAME.blind.chips = G.GAME.blind.chips * card.ability.extra.blind_buff
-      G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
-      SMODS.calculate_effect({ message = localize('maelmc_reckless_ex') }, card)
-    end
-
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    card.ability.extra.boss_blind = (G.GAME.blind and G.GAME.blind.boss and G.GAME.blind.name) or nil
   end,
   calc_dollar_bonus = function(self, card)
-    return G.GAME.blind.boss and ease_poke_dollars(card, "bouffalant", card.ability.extra.money, true) or nil
+    local trigger = card.ability.extra.boss_trigger
+    card.ability.extra.boss_trigger = 0
+    card.ability.extra.boss_blind = nil
+    return G.GAME.blind.boss and ease_poke_dollars(card, "bouffalant", (trigger + 1) * card.ability.extra.money, true) or nil
   end
 }
 

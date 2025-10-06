@@ -704,9 +704,11 @@ return {
                 text = {
                     "{X:attention,C:white}X#1#{} {C:attention}Boss Blind{} requirement",
                     "{br:2}ERROR - CONTACT STEAK",
-                    "Earn {C:money}$#2#{} if played hand",
-                    "triggers the {C:attention}Boss Blind{} ability",
-                    "and at end of {C:attention}Boss Blind{} round"
+                    "Earn {C:money}$#2#{} at end of {C:attention}Boss Blind{}",
+                    "round, {C:money}+$#2#{} per times the",
+                    "{C:attention}Boss Blind{} triggered",
+                    "{C:inactive}(Currently {C:attention}#3#{C:inactive})",
+                    "{C:inactive,s:0.8}(Works with all Bosses except Cerulean Bell)"
                 }
             },
             j_maelmc_gulpin = {
