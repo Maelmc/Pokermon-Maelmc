@@ -212,7 +212,7 @@ local gulpin={
   name = "gulpin",
   pos = PokemonSprites["gulpin"].base.pos,
   config = {extra = {stockpile = 0, max_stockpile = 3,
-    money = 3, chips = 8, money2 = 15, -- chips scales the same as money and there aren't enough money variables that scale rn
+    money = 3, money1 = 8, money2 = 15,
     xmult = 1.5, xmult1 = 3, xmult2 = 4.5,
     volatile = "left", volatile2 = "right",
     stockpile_count = 0}, evo_rqmt = 5},
@@ -222,7 +222,7 @@ local gulpin={
     info_queue[#info_queue+1] = {set = 'Other', key = 'volatile_both'}
     local abbr = card.ability.extra
     local stockpile_left = math.max(0, self.config.evo_rqmt - card.ability.extra.stockpile_count)
-    return {vars = {abbr.stockpile, abbr.money, abbr.chips, abbr.money2, abbr.xmult, abbr.xmult1, abbr.xmult2, stockpile_left}}
+    return {vars = {abbr.stockpile, abbr.money, abbr.money1, abbr.money2, abbr.xmult, abbr.xmult1, abbr.xmult2, stockpile_left}}
   end,
   poke_custom_values_to_keep = {"stockpile"},
   rarity = 2,
@@ -262,7 +262,7 @@ local gulpin={
       local money = 0
       if card.ability.extra.stockpile == 0 then return nil
       elseif card.ability.extra.stockpile == 1 then money = card.ability.extra.money
-      elseif card.ability.extra.stockpile == 2 then money =  card.ability.extra.chips
+      elseif card.ability.extra.stockpile == 2 then money =  card.ability.extra.money1
       else money = card.ability.extra.money2 end
       card.ability.extra.stockpile = 0
       return ease_poke_dollars(card, "gulpin", money, true)
@@ -275,7 +275,7 @@ local swalot={
   name = "swalot",
   pos = PokemonSprites["swalot"].base.pos,
   config = {extra = {stockpile = 0, max_stockpile = 3,
-    money = 5, chips = 12, money2 = 21, -- chips scales the same as money and there aren't enough money variables that scale rn
+    money = 5, money1 = 12, money2 = 21,
     xmult = 2, xmult1 = 4, xmult2 = 6,
     volatile = "left", volatile2 = "right"}},
   loc_vars = function(self, info_queue, card)
@@ -283,7 +283,7 @@ local swalot={
     info_queue[#info_queue+1] = {set = 'Other', key = 'stockpile'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'volatile_both'}
     local abbr = card.ability.extra
-    return {vars = {abbr.stockpile, abbr.money, abbr.chips, abbr.money2, abbr.xmult, abbr.xmult1, abbr.xmult2}}
+    return {vars = {abbr.stockpile, abbr.money, abbr.money1, abbr.money2, abbr.xmult, abbr.xmult1, abbr.xmult2}}
   end,
   rarity = "poke_safari",
   cost = 8,
@@ -320,7 +320,7 @@ local swalot={
       local money = 0
       if card.ability.extra.stockpile == 0 then return nil
       elseif card.ability.extra.stockpile == 1 then money = card.ability.extra.money
-      elseif card.ability.extra.stockpile == 2 then money =  card.ability.extra.chips
+      elseif card.ability.extra.stockpile == 2 then money =  card.ability.extra.money1
       else money = card.ability.extra.money2 end
       card.ability.extra.stockpile = 0
       return ease_poke_dollars(card, "swalot", money, true)
