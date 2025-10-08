@@ -247,7 +247,9 @@ local gulpin={
         elseif card.ability.extra.stockpile == 1 then xmult = card.ability.extra.xmult
         elseif card.ability.extra.stockpile == 2 then xmult =  card.ability.extra.xmult1
         else xmult = card.ability.extra.xmult2 end
-        card.ability.extra.stockpile = 0
+        if not context.blueprint then
+          card.ability.extra.stockpile = 0
+        end
         return {
           colour = G.C.XMULT,
           Xmult = xmult,
@@ -307,7 +309,9 @@ local swalot={
         elseif card.ability.extra.stockpile == 1 then xmult = card.ability.extra.xmult
         elseif card.ability.extra.stockpile == 2 then xmult =  card.ability.extra.xmult1
         else xmult = card.ability.extra.xmult2 end
-        card.ability.extra.stockpile = 0
+        if not context.blueprint then
+          card.ability.extra.stockpile = 0
+        end
         return {
           colour = G.C.XMULT,
           Xmult = xmult,

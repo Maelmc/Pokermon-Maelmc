@@ -847,6 +847,7 @@ return {
             maelmc_color_change = "Color Change",
             maelmc_clubs = "Clubs",
             maelmc_hearts = "Hearts",
+            maelmc_wild = "Wild",
             maelmc_ivy_cudgle_ex = "Ivy Cudgle!",
             maelmc_pokewalker_taken = "Taken",
             maelmc_pokewalker_walking = "Walking",
