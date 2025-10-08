@@ -296,7 +296,6 @@ local swalot={
   calculate = function(self, card, context)
     if context.setting_blind and not context.blueprint and card.ability.extra.stockpile < card.ability.extra.max_stockpile then
       card.ability.extra.stockpile = card.ability.extra.stockpile + 1
-      card.ability.extra.stockpile_count = card.ability.extra.stockpile_count + 1
       return {
         message = localize("maelmc_stockpile")
       }
