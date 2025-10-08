@@ -120,17 +120,17 @@ local gardevoir={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     --info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_black_hole'}
-    local xmult = 1
+    local Xmult = 1
     if (SMODS.Mods["Talisman"] or {}).can_load then
       for _, v in pairs(G.GAME.hands) do
-        xmult = xmult + (to_number(v.level) - 1) * card.ability.extra.Xmult_mod
+        Xmult = Xmult + (to_number(v.level) - 1) * card.ability.extra.Xmult_mod
       end
     else
       for _, v in pairs(G.GAME.hands) do
-        xmult = xmult + (v.level - 1) * card.ability.extra.Xmult_mod
+        Xmult = Xmult + (v.level - 1) * card.ability.extra.Xmult_mod
       end
     end
-    return {vars = {card.ability.extra.Xmult_mod, xmult}}
+    return {vars = {card.ability.extra.Xmult_mod, Xmult}}
   end,
   designer = "Foxthor, One Punch Idiot",
   rarity = "poke_safari",
@@ -144,20 +144,20 @@ local gardevoir={
   calculate = function(self, card, context)
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main then
-        local xmult = 1
+        local Xmult = 1
         if (SMODS.Mods["Talisman"] or {}).can_load then
           for _, v in pairs(G.GAME.hands) do
-            xmult = xmult + (to_number(v.level) - 1) * card.ability.extra.Xmult_mod
+            Xmult = Xmult + (to_number(v.level) - 1) * card.ability.extra.Xmult_mod
           end
         else
           for _, v in pairs(G.GAME.hands) do
-            xmult = xmult + (v.level - 1) * card.ability.extra.Xmult_mod
+            Xmult = Xmult + (v.level - 1) * card.ability.extra.Xmult_mod
           end
         end
-        if xmult > 1 then
+        if Xmult > 1 then
           return {
             colour = G.C.MULT,
-            xmult = xmult,
+            Xmult = Xmult,
             card = card
           }
         end
@@ -213,7 +213,7 @@ local gulpin={
   pos = PokemonSprites["gulpin"].base.pos,
   config = {extra = {stockpile = 0, max_stockpile = 3,
     money = 3, money1 = 8, money2 = 15,
-    xmult = 1.5, xmult1 = 3, xmult2 = 4.5,
+    Xmult = 1.5, Xmult1 = 3, Xmult2 = 4.5,
     volatile = "left", volatile2 = "right",
     stockpile_count = 0}, evo_rqmt = 5},
   loc_vars = function(self, info_queue, card)
@@ -222,7 +222,7 @@ local gulpin={
     info_queue[#info_queue+1] = {set = 'Other', key = 'volatile_both'}
     local abbr = card.ability.extra
     local stockpile_left = math.max(0, self.config.evo_rqmt - card.ability.extra.stockpile_count)
-    return {vars = {abbr.stockpile, abbr.money, abbr.money1, abbr.money2, abbr.xmult, abbr.xmult1, abbr.xmult2, stockpile_left}}
+    return {vars = {abbr.stockpile, abbr.money, abbr.money1, abbr.money2, abbr.Xmult, abbr.Xmult1, abbr.Xmult2, stockpile_left}}
   end,
   poke_custom_values_to_keep = {"stockpile"},
   rarity = 2,
@@ -242,17 +242,17 @@ local gulpin={
 
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main and volatile_active(self, card, card.ability.extra.volatile2) then
-        local xmult = 0
+        local Xmult = 0
         if card.ability.extra.stockpile == 0 then return nil
-        elseif card.ability.extra.stockpile == 1 then xmult = card.ability.extra.xmult
-        elseif card.ability.extra.stockpile == 2 then xmult =  card.ability.extra.xmult1
-        else xmult = card.ability.extra.xmult2 end
+        elseif card.ability.extra.stockpile == 1 then Xmult = card.ability.extra.Xmult
+        elseif card.ability.extra.stockpile == 2 then Xmult =  card.ability.extra.Xmult1
+        else Xmult = card.ability.extra.Xmult2 end
         if not context.blueprint then
           card.ability.extra.stockpile = 0
         end
         return {
           colour = G.C.XMULT,
-          Xmult = xmult,
+          Xmult = Xmult,
         }
       end
     end
@@ -278,14 +278,14 @@ local swalot={
   pos = PokemonSprites["swalot"].base.pos,
   config = {extra = {stockpile = 0, max_stockpile = 3,
     money = 5, money1 = 12, money2 = 21,
-    xmult = 2, xmult1 = 4, xmult2 = 6,
+    Xmult = 2, Xmult1 = 4, Xmult2 = 6,
     volatile = "left", volatile2 = "right"}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'stockpile'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'volatile_both'}
     local abbr = card.ability.extra
-    return {vars = {abbr.stockpile, abbr.money, abbr.money1, abbr.money2, abbr.xmult, abbr.xmult1, abbr.xmult2}}
+    return {vars = {abbr.stockpile, abbr.money, abbr.money1, abbr.money2, abbr.Xmult, abbr.Xmult1, abbr.Xmult2}}
   end,
   rarity = "poke_safari",
   cost = 8,
@@ -303,17 +303,17 @@ local swalot={
 
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main and volatile_active(self, card, card.ability.extra.volatile2) then
-        local xmult = 0
+        local Xmult = 0
         if card.ability.extra.stockpile == 0 then return nil
-        elseif card.ability.extra.stockpile == 1 then xmult = card.ability.extra.xmult
-        elseif card.ability.extra.stockpile == 2 then xmult =  card.ability.extra.xmult1
-        else xmult = card.ability.extra.xmult2 end
+        elseif card.ability.extra.stockpile == 1 then Xmult = card.ability.extra.Xmult
+        elseif card.ability.extra.stockpile == 2 then Xmult =  card.ability.extra.Xmult1
+        else Xmult = card.ability.extra.Xmult2 end
         if not context.blueprint then
           card.ability.extra.stockpile = 0
         end
         return {
           colour = G.C.XMULT,
-          Xmult = xmult,
+          Xmult = Xmult,
         }
       end
     end
