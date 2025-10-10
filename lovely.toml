@@ -228,8 +228,6 @@ position = "after"
 match_indent = true
 payload = '''set_ability = function(self, card, initial, delay_sprites)
     if G.GAME.modifiers.hazard_deck then
-      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-      print(card.config.card)
       card.ability.card_limit = 1
     end
   end,'''
