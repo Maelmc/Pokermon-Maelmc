@@ -409,7 +409,7 @@ local stakataka = {
       }
     end
 
-    if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint and context.beat_boss then
+    if (context.end_of_round and G.GAME.blind.boss) and not context.blueprint then
       card.ability.extra.beat_boss = true
     end
 
@@ -484,7 +484,7 @@ local blacephalon = {
       }
     end
 
-    if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint and context.beat_boss and card.ability.extra.amount_bought > 0 then
+    if (context.end_of_round and G.GAME.blind.boss) and not context.blueprint then
       card.ability.extra.amount_bought = 0
       return {
         message = localize('k_reset'),
