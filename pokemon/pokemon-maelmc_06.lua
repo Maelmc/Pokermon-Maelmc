@@ -37,7 +37,9 @@ local inkay={
     -- give mult per scored face down card
     if context.individual and context.cardarea == G.play and context.other_card.maelmc_flipped then
       if not context.end_of_round and not context.before and not context.after and not context.other_card.debuff then
-        card.ability.extra.flipped_triggered = card.ability.extra.flipped_triggered + 1
+        if not context.blueprint then
+          card.ability.extra.flipped_triggered = card.ability.extra.flipped_triggered + 1
+        end
         return {
           mult = card.ability.extra.mult ,
           card = card
