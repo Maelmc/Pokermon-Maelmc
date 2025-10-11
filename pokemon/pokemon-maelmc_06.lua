@@ -38,7 +38,10 @@ local inkay={
     if context.individual and context.cardarea == G.play and context.other_card.maelmc_flipped then
       if not context.end_of_round and not context.before and not context.after and not context.other_card.debuff then
         if not context.blueprint then
-          card.ability.extra.flipped_triggered = card.ability.extra.flipped_triggered + 1
+          G.E_MANAGER:add_event(Event({
+            func = function() 
+              card.ability.extra.flipped_triggered = card.ability.extra.flipped_triggered + 1
+          return true end }))
         end
         return {
           mult = card.ability.extra.mult ,
@@ -63,6 +66,35 @@ local inkay={
     return scaling_evo(self, card, context, "j_maelmc_malamar", card.ability.extra.flipped_triggered, self.config.evo_rqmt)
   end,
 }
+
+-- Credits to emmadenslemma for the idea and the code
+SMODS.DrawStep({
+  key = 'inkay_rotate',
+  order = -1001,
+  layers = { shadow = true, both = true },
+  func = function(self)
+    if not G.SETTINGS.paused and self.config.center.key == 'j_maelmc_inkay' then
+      -- Handle reloading Inkay
+      if self.flipped_registered == nil then self.flipped_registered = self.ability.extra.flipped_triggered end
+      -- Only rotate once when the card jiggles
+      -- -- Known issue: this also rotates once if you mouse over it while it's scoring
+      -- -- this should be done in Inkay's scoring code instead of here
+      if self.juice and not self.flip_juice_spent then
+        self.flipped_registered = math.min(self.flipped_registered + 1, self.ability.extra.flipped_triggered)
+        self.flip_juice_spent = true
+      end
+      if not self.juice and self.flip_juice_spent then
+        self.flip_juice_spent = false
+      end
+      -- Actual rotation part
+      local add_rot_amt = math.pi * math.min(self.flipped_registered / self.config.center.config.evo_rqmt, 1)
+      self.VT.r = self.VT.r + add_rot_amt
+      for _, v in pairs(self.children) do
+        v.VT.r = self.VT.r
+      end
+    end
+  end
+})
 
 -- Malamar 687
 local malamar={
