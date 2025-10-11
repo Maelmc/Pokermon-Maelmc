@@ -13,7 +13,7 @@ SMODS.Atlas({
 }):register()
 
 SMODS.Atlas({
-  key = "shiny_maelmc_jokers",
+  key = "maelmc_shiny_jokers",
   path = "maelmc_shiny_jokers.png",
   px = 71,
   py = 95
