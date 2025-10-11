@@ -127,7 +127,6 @@ local bouffalant = {
       G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
       
       local boss_name = card.ability.extra.boss_blind
-      print(boss_name)
       if (boss_name == "The Wall" or boss_name == "The Water" or boss_name == "The Manacle" or boss_name == "The Needle" or boss_name == "Amber Acorn" or boss_name == "Violet Vessel") and not G.GAME.blind.disabled then
         card.ability.extra.boss_trigger = card.ability.extra.boss_trigger + 1
       end
@@ -161,9 +160,17 @@ local bouffalant = {
             break
           end
         end
+        local forcedselection = false
+        for i = 1, #G.hand.highlighted do
+          if G.hand.highlighted[i].ability.bouffalant_forced_selection then
+            G.hand.highlighted[i].ability.bouffalant_forced_selection = nil
+            forcedselection = true
+          end
+        end
         if (boss_name == "The Hook" and (#G.hand.cards - #G.hand.highlighted) > 0) or
         boss_name == "The Tooth" or
-        ((boss_name == "Crimson Heart" or boss_name == "bl_poke_cgoose") and jokdebuff) then
+        ((boss_name == "Crimson Heart" or boss_name == "bl_poke_cgoose") and jokdebuff) or
+        (boss_name == "Cerulean Bell" and forcedselection) then
           boss_trigg = true
         end
       
@@ -172,7 +179,6 @@ local bouffalant = {
         for _, v in pairs(context.hand_drawn) do
           if v.facing == 'back' then
               facedown = true
-              break
           end
         end
         if boss_name == "okserpent" or

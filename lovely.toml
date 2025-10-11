@@ -329,3 +329,20 @@ payload = '''G.SHOP_SIGN = UIBox{
         bond = 'Weak'
       }
     }'''
+
+# Bouffalant working with Cerulean Bell
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''forced_card.ability.forced_selection = true'''
+position = "after"
+payload = '''forced_card.ability.bouffalant_forced_selection = true'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''v.ability.forced_selection = nil'''
+position = "after"
+payload = '''v.ability.bouffalant_forced_selection = nil'''
+match_indent = true

@@ -708,7 +708,7 @@ return {
                     "round, {C:money}+$#2#{} per times the",
                     "{C:attention}Boss Blind{} triggered",
                     "{C:inactive}(Currently {C:attention}#3#{C:inactive})",
-                    "{C:inactive,s:0.8}(Works with all Bosses except Cerulean Bell)"
+                    --"{C:inactive,s:0.8}(Works with all Bosses except Cerulean Bell)"
                 }
             },
             j_maelmc_gulpin = {
