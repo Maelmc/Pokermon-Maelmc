@@ -876,6 +876,7 @@ return {
             k_maelmc_ultra_beast = "Ultra Beast",
 
             background_color = "Custom Background on Main Menu?",
+            disable_beastball = "Disable Beast Ball?",
         },
         labels = {
             k_maelmc_ultra_beast = "Ultra Beast",

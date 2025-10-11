@@ -1,3 +1,4 @@
 return {
-    background_color = true
+    background_color = true,
+    disable_beastball = false,
 }
