@@ -258,7 +258,7 @@ local ogerpon_wellspring={
           break
         end
       end
-      if not bonus then
+      if not bonus and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
         return {
           extra = {focus = (context.blueprint_card or card), message = localize('poke_plus_pokeitem'), colour = G.ARGS.LOC_COLOURS.pink, func = function()
