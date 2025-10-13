@@ -109,6 +109,9 @@ local bouffalant = {
   config = {extra = {money = 10, boss_trigger = 0, blind_buff = 1.5, boss_blind = nil}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
+    if (SMODS.Mods["Multiplayer"] or {}).can_load and MP.LOBBY and MP.LOBBY.code and MP.LOBBY.enemy_id then
+      info_queue[#info_queue+1] = {set = 'Other', key = 'bouffalant_mp'}
+    end
     return {vars = {card.ability.extra.blind_buff, card.ability.extra.money, card.ability.extra.boss_trigger}}
   end,
   rarity = 2,
@@ -119,6 +122,17 @@ local bouffalant = {
   perishable_compat = true,
   blueprint_compat = false,
   eternal_compat = true,
+  update = function(self, card, dt)
+    if (SMODS.Mods["Multiplayer"] or {}).can_load and MP.LOBBY and MP.LOBBY.code and MP.LOBBY.enemy_id and MP.is_pvp_boss() then
+      if card.ability.extra.mp_hands == nil then
+        card.ability.extra.mp_hands = MP.GAME.enemies[MP.LOBBY.enemy_id].hands
+      elseif card.ability.extra.mp_hands ~= MP.GAME.enemies[MP.LOBBY.enemy_id].hands then
+        card.ability.extra.mp_hands = MP.GAME.enemies[MP.LOBBY.enemy_id].hands
+        card.ability.extra.boss_trigger = card.ability.extra.boss_trigger + 1
+        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("maelmc_reckless_ex"),})
+      end
+    end
+  end,
   calculate = function(self, card, context)
 
     if context.setting_blind and context.blind and context.blind.boss and not context.blueprint then

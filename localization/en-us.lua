@@ -816,6 +816,14 @@ return {
                 "{C:inactive}(Ignoring {C:attention}Volatile{C:inactive} Pokemon)"
               }
             },
+            bouffalant_mp = {
+              name = "Multiplayer",
+              text = {
+                "During PvP blind, triggers when",
+                "the remaining hands left for",
+                "your opponent updates"
+              }
+            },
         },
     },
     misc = {
