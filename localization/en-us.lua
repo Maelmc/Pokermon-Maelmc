@@ -883,8 +883,8 @@ return {
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",
 
-            background_color = "Custom Background on Main Menu?",
-            disable_beastball = "Disable Beast Ball?",
+            background_color = "Custom Background on Main Menu",
+            disable_spiritomb = "Disable Spiritomb",
         },
         labels = {
             k_maelmc_ultra_beast = "Ultra Beast",

@@ -131,9 +131,9 @@ SMODS.current_mod.config_tab = function()
           },
           nodes = {
             create_toggle({
-              label = localize("disable_beastball"),
+              label = localize("disable_spiritomb"),
               ref_table = maelmc_config,
-              ref_value = "disable_beastball",
+              ref_value = "disable_spiritomb",
             }),
           },
         }

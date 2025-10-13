@@ -522,13 +522,16 @@ local name = {
 
 ]]
 
+local list = {
+  gym_leader,
+  pokewalker,
+  pc,
+  photographer,
+}
+
+if not maelmc_config.disable_spiritomb then table.insert(list,2,odd_keystone) end
+
 return {
   name = "Maelmc's Jokers Other",
-  list = {
-    gym_leader,
-    odd_keystone,
-    pokewalker,
-    pc,
-    photographer,
-  },
+  list = list,
 }

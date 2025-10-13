@@ -546,14 +546,11 @@ local metronome = {
   end
 }
 
-local list = {
-  tealmask, wellspringmask, hearthflamemask, cornerstonemask,
-  meteorite, --fake_deoxys, fake_deoxys_attack, fake_deoxys_defense, fake_deoxys_speed,
-  metronome,
-}
-
-if not maelmc_config.disable_beastball then table.insert(list,beastball) end
-
 return {name = "Maelmc's Items",
-  list = list
+  list = {
+    tealmask, wellspringmask, hearthflamemask, cornerstonemask,
+    meteorite, --fake_deoxys, fake_deoxys_attack, fake_deoxys_defense, fake_deoxys_speed,
+    beastball,
+    metronome,
+  }
 }

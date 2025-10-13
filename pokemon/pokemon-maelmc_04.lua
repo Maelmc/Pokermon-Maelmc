@@ -318,10 +318,13 @@ local mega_garchomp={
   end
 }
 
+local list = {
+  gible, gabite, garchomp, mega_garchomp,
+}
+
+if not maelmc_config.disable_spiritomb then table.insert(list,spiritomb) end
+
 return {
   name = "Maelmc's Jokers Gen 4",
-  list = {
-    spiritomb, --spiritombl
-    gible, gabite, garchomp, mega_garchomp,
-  },
+  list = list
 }
