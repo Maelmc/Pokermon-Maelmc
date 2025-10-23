@@ -360,30 +360,27 @@ local pc = {
       for i = 1, #G.jokers.cards do
         if G.jokers.cards[i] == card then stored = G.jokers.cards[i+1] end
       end
-      if not stored then return end
-      if stored.config.center_key == "j_maelmc_pc" then return end
+      if stored and not (stored.config.center_key == "j_maelmc_pc") then
+        local slot = nil -- find which pc slot to store the joker in
+        if not card.ability.extra.joker_one_info.name then slot = "joker_one_info"
+        elseif not card.ability.extra.joker_two_info.name then slot = "joker_two_info"
+        elseif not card.ability.extra.joker_three_info.name then slot = "joker_three_info" end
+        if slot then
+          remove(self,stored,context)
 
-      local slot = nil -- find which pc slot to store the joker in
-      if not card.ability.extra.joker_one_info.name then slot = "joker_one_info"
-      elseif not card.ability.extra.joker_two_info.name then slot = "joker_two_info"
-      elseif not card.ability.extra.joker_three_info.name then slot = "joker_three_info" end
-      if not slot then return end
+          -- if it's a mega, devolve it
+          if stored.config.center.rarity == "poke_mega" then
+            local forced_key = get_previous_evo(stored, true)
+            poke_backend_evolve(stored, forced_key)
+          end
 
-      remove(self,stored,context)
+          card.ability.extra[slot].name = G.localization.descriptions["Joker"][stored.config.center_key]["name"]
+          card.ability.extra[slot].card = stored
 
-      -- if it's a mega, devolve it
-      if stored.config.center.rarity == "poke_mega" then
-        local forced_key = get_previous_evo(stored, true)
-        poke_backend_evolve(stored, forced_key)
+          card.ability.extra.just_stored = true
+          SMODS.calculate_effect({ message = localize("maelmc_stored") }, card)
+        end
       end
-
-      card.ability.extra[slot].name = G.localization.descriptions["Joker"][stored.config.center_key]["name"]
-      card.ability.extra[slot].card = stored
-
-      card.ability.extra.just_stored = true
-      return {
-        message = localize("maelmc_stored")
-      }
     end
 
     -- calculating stored jokers
