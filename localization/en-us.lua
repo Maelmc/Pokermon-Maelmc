@@ -792,10 +792,9 @@ return {
             pc_bug = {
                 name = "Known bug",
                 text = {
-                    "Storing a Joker, going",
-                    "back to main menu and",
+                    "Going back to main menu and",
                     "resuming the run will",
-                    "crash the game"
+                    "disable all stored Jokers"
                 }
             },
             stockpile = {

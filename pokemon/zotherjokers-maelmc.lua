@@ -387,9 +387,9 @@ local pc = {
     if not context.blueprint then
 
       local rets = {}
-      table.insert(rets, card.ability.extra.joker_one_info.name and Card.calculate_joker(card.ability.extra.joker_one_info.card, context) or false)
-      table.insert(rets, card.ability.extra.joker_two_info.name and Card.calculate_joker(card.ability.extra.joker_two_info.card, context) or false)
-      table.insert(rets, card.ability.extra.joker_three_info.name and Card.calculate_joker(card.ability.extra.joker_three_info.card, context) or false)
+      table.insert(rets, card.ability.extra.joker_one_info.card and card.ability.extra.joker_one_info.card.config and Card.calculate_joker(card.ability.extra.joker_one_info.card, context) or false)
+      table.insert(rets, card.ability.extra.joker_two_info.card and card.ability.extra.joker_two_info.card.config and Card.calculate_joker(card.ability.extra.joker_two_info.card, context) or false)
+      table.insert(rets, card.ability.extra.joker_three_info.card and card.ability.extra.joker_three_info.card.config and Card.calculate_joker(card.ability.extra.joker_three_info.card, context) or false)
       if not (rets[1]) and not (rets[2]) and not (rets[3]) then return end -- if no joker triggered, do nothing
 
       -- sum everything but the chips, mult and xmult of all jokers that triggered
@@ -428,9 +428,9 @@ local pc = {
   end,
   calc_dollar_bonus = function(self, card)
     local money = 0
-    money = money + ((card.ability.extra.joker_one_info.card and card.ability.extra.joker_one_info.card:calculate_dollar_bonus()) or 0)
-    money = money + ((card.ability.extra.joker_two_info.card and card.ability.extra.joker_two_info.card:calculate_dollar_bonus()) or 0)
-    money = money + ((card.ability.extra.joker_three_info.card and card.ability.extra.joker_three_info.card:calculate_dollar_bonus()) or 0)
+    money = money + ((card.ability.extra.joker_one_info.card and card.ability.extra.joker_one_info.card.config and card.ability.extra.joker_one_info.card:calculate_dollar_bonus()) or 0)
+    money = money + ((card.ability.extra.joker_two_info.card and card.ability.extra.joker_two_info.card.config and card.ability.extra.joker_two_info.card:calculate_dollar_bonus()) or 0)
+    money = money + ((card.ability.extra.joker_three_info.card and card.ability.extra.joker_three_info.card.config and card.ability.extra.joker_three_info.card:calculate_dollar_bonus()) or 0)
     return (money ~= 0 and ease_poke_dollars(card, "pc", money, true)) or nil
   end
 }
@@ -522,7 +522,7 @@ local name = {
 local list = {
   gym_leader,
   pokewalker,
-  pc,
+  --pc,
   photographer,
 }
 
