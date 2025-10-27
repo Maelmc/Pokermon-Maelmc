@@ -195,7 +195,7 @@ local malamar={
 local mega_malamar={
   name = "mega_malamar",
   pos = PokemonSprites["mega_malamar"] and PokemonSprites["mega_malamar"].base.pos or PokemonSprites["malamar"].base.pos,
-  soul_pos = {x = (PokemonSprites["mega_malamar"] and PokemonSprites["mega_malamar"].base.pos or PokemonSprites["malamar"].base.pos).x + 1, y = (PokemonSprites["mega_malamar"] and PokemonSprites["mega_malamar"].base.pos or PokemonSprites["malamar"].base.pos).y},
+  soul_pos = PokemonSprites["mega_malamar"] and PokemonSprites["mega_malamar"].base.soul_pos or {x = PokemonSprites["malamar"].base.pos.x + 1, y = PokemonSprites["malamar"].base.pos.y},
   config = {extra = {Xmult_multi = 2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -207,7 +207,7 @@ local mega_malamar={
   cost = 12,
   stage = "Mega",
   ptype = "Dark",
-  atlas = "AtlasJokersBasicNatdex",
+  atlas = PokemonSprites["mega_malamar"] and "AtlasJokersBasicGen06" or "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
