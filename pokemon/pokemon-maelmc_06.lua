@@ -275,16 +275,18 @@ local mega_malamar={
       if v.facing == 'back' then v:flip() end
     end
 
-    for _, v in ipairs(G.shop_vouchers.cards) do
-      if v.facing == 'back' then v:flip() end
-    end
+    if G.shop then
+      for _, v in ipairs(G.shop_vouchers.cards) do
+        if v.facing == 'back' then v:flip() end
+      end
 
-    for _, v in ipairs(G.shop_booster.cards) do
-      if v.facing == 'back' then v:flip() end
-    end
+      for _, v in ipairs(G.shop_booster.cards) do
+        if v.facing == 'back' then v:flip() end
+      end
 
-    for _, v in ipairs(G.shop_jokers.cards) do
-      if v.facing == 'back' then v:flip() end
+      for _, v in ipairs(G.shop_jokers.cards) do
+        if v.facing == 'back' then v:flip() end
+      end
     end
   end,
 }
