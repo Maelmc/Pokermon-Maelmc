@@ -246,7 +246,7 @@ return {
                 name = "Inkay",
                 text = {
                     "Cards have a {C:green}#1# in #2#{} chance to",
-                    "be drawn face down",
+                    "be drawn {C:attention}face down{}",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Played face down cards give",
                     "{C:red}+#3#{} Mult when scored",
@@ -256,7 +256,7 @@ return {
             j_maelmc_malamar = {
                 name = "Malamar",
                 text = {
-                    "All cards are drawn face down",
+                    "All cards are drawn {C:attention}face down{}",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Played face down cards give",
                     "{X:red,C:white}X#1#{} Mult when scored",
@@ -726,6 +726,18 @@ return {
                     "{C:attention}Stockpile{} when blind is selected {C:inactive}(#1#)",
                     "{C:attention}Volatile Left{}: Gain {C:money}$#2#{}, {C:money}$#3#{} or {C:money}$#4#{} at end of round",
                     "{C:attention}Volatile Right{}: {X:red,C:white}X#5#{}, {X:red,C:white}X#6#{} or {X:red,C:white}X#7#{} Mult",
+                }
+            },
+            j_maelmc_mega_malamar = {
+                name = "Mega Malamar",
+                text = {
+                    "Most cards besides this Joker,",
+                    "its {C:attention}Mega Stone{} and",
+                    "{C:attention}playing cards{} held in hand",
+                    "are {C:attention}face down{}",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    "Played cards give",
+                    "{X:red,C:white}X#1#{} Mult when scored",
                 }
             }
         },

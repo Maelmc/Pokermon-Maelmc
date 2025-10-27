@@ -121,6 +121,7 @@ local malamar={
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
+    info_queue[#info_queue+1] = {set = 'Other', key = 'mega_poke'}
     return {vars = {abbr.Xmult_multi}}
   end,
   rarity = "poke_safari",
@@ -185,6 +186,105 @@ local malamar={
           v.maelmc_flipped = nil
         end
       end
+    end
+  end,
+  megas = {"mega_malamar"}
+}
+
+-- Mega Malamar 687-1
+local mega_malamar={
+  name = "mega_malamar",
+  pos = PokemonSprites["mega_malamar"] and PokemonSprites["mega_malamar"].base.pos or PokemonSprites["malamar"].base.pos,
+  soul_pos = {x = (PokemonSprites["mega_malamar"] and PokemonSprites["mega_malamar"].base.pos or PokemonSprites["malamar"].base.pos).x + 1, y = (PokemonSprites["mega_malamar"] and PokemonSprites["mega_malamar"].base.pos or PokemonSprites["malamar"].base.pos).y},
+  config = {extra = {Xmult_multi = 2}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    return {vars = {abbr.Xmult_multi}}
+  end,
+  rarity = "poke_mega",
+  cost = 12,
+  stage = "Mega",
+  ptype = "Dark",
+  atlas = "AtlasJokersBasicNatdex",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+
+    -- scoring
+    if context.individual and context.cardarea == G.play then
+      if not context.end_of_round and not context.before and not context.after and not context.other_card.debuff then
+        return {
+          Xmult = card.ability.extra.Xmult_multi,
+          card = card
+        }
+      end
+    end
+    
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    if #find_joker("inkay") + #find_joker("malamar") == 0 then
+      if G.hand and G.hand.cards then
+      for i = 1, #G.hand.cards do
+        if G.hand.cards[i].facing == 'back' then
+            G.hand.cards[i]:flip()
+        end
+      end
+      end
+      for _, v in pairs(G.playing_cards) do
+        if v.maelmc_flipped then
+          v.maelmc_flipped = nil
+        end
+      end
+    end
+
+    G.jokers:unhighlight_all()
+    for _, v in ipairs(G.jokers.cards) do
+      if v ~= card then v:flip() end
+    end
+
+    for _, v in ipairs(G.consumeables.cards) do
+      if not (v.config.center.key == "c_poke_megastone" and v.ability.extra.used_on == card.config.center.key) then
+        v:flip()
+      end
+    end
+
+    if G.shop then
+      for _, v in ipairs(G.shop_vouchers.cards) do
+        v:flip()
+      end
+
+      for _, v in ipairs(G.shop_booster.cards) do
+        v:flip()
+      end
+
+      for _, v in ipairs(G.shop_jokers.cards) do
+        v:flip()
+      end
+    end
+
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    if not (G.GAME.blind and G.GAME.blind:get_type() == 'Boss' and G.GAME.blind.name == "Amber Acorn" and G.GAME.blind.disabled) then
+      for _, v in ipairs(G.jokers.cards) do
+        if v.facing == 'back' then v:flip() end
+      end
+    end
+
+    for _, v in ipairs(G.consumeables.cards) do
+      if v.facing == 'back' then v:flip() end
+    end
+
+    for _, v in ipairs(G.shop_vouchers.cards) do
+      if v.facing == 'back' then v:flip() end
+    end
+
+    for _, v in ipairs(G.shop_booster.cards) do
+      if v.facing == 'back' then v:flip() end
+    end
+
+    for _, v in ipairs(G.shop_jokers.cards) do
+      if v.facing == 'back' then v:flip() end
     end
   end,
 }
@@ -327,7 +427,7 @@ local barbaracle={
 return {
   name = "Maelmc's Jokers Gen 6",
   list = {
-    inkay, malamar,
+    inkay, malamar, mega_malamar,
     binacle, barbaracle,
   },
 }

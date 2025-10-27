@@ -16,7 +16,7 @@ pokermon.add_family({
   {key = "gym_leader", form = "Dragon"},
   {key = "gym_leader", form = "Earth"},
 })
-pokermon.add_family({"inkay","malamar"})
+pokermon.add_family({"inkay","malamar","mega_malamar"})
 pokermon.add_family({"binacle","barbaracle"})
 pokermon.add_family({"ralts","kirlia","gardevoir","mega_gardevoir"})
 pokermon.add_family({"gible","gabite","garchomp","mega_garchomp"})

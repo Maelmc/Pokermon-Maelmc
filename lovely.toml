@@ -346,3 +346,73 @@ pattern = '''v.ability.forced_selection = nil'''
 position = "after"
 payload = '''v.ability.bouffalant_forced_selection = nil'''
 match_indent = true
+
+## Mega Malamar gaming
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''for k, v in ipairs(G.jokers.cards) do
+        if v.facing == 'back' then v:flip() end
+    end'''
+position = "at"
+payload = '''if #find_joker("mega_malamar") == 0 then
+  for k, v in ipairs(G.jokers.cards) do
+        if v.facing == 'back' then v:flip() end
+    end
+  end'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "card.created_on_pause = nil"
+position = "after"
+match_indent = true
+payload = '''if #find_joker("mega_malamar") > 0 and not (card.facing == 'back') then
+      card.facing = 'back'
+      card.sprite_facing = 'back'
+    end'''
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "if not skip_materialize then card:start_materialize(colours, silent) end"
+position = "after"
+match_indent = true
+payload = '''if #find_joker("mega_malamar") > 0 and not (card.facing == 'back') then
+      card.facing = 'back'
+      card.sprite_facing = 'back'
+    end'''
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''end
+    return card'''
+position = "at"
+match_indent = true
+payload = '''end
+    if #find_joker("mega_malamar") > 0 and not (card.facing == 'back') then
+      card.facing = 'back'
+      card.sprite_facing = 'back'
+    end
+    return card'''
+
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''function CardArea:emplace(card, location, stay_flipped)'''
+position = "after"
+match_indent = true
+payload = '''    stay_flipped = stay_flipped or (self ~= G.hand and #find_joker("mega_malamar") > 0)'''
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''function create_shop_card_ui(card, type, area)'''
+position = "after"
+match_indent = true
+payload = ''' if #find_joker("mega_malamar") > 0 and not (card.facing == 'back') then
+      card.facing = 'back'
+      card.sprite_facing = 'back'
+    end'''
