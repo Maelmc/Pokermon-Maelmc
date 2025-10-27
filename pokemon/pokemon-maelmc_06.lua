@@ -65,6 +65,22 @@ local inkay={
     end
     return scaling_evo(self, card, context, "j_maelmc_malamar", card.ability.extra.flipped_triggered, self.config.evo_rqmt)
   end,
+  remove_from_deck = function(self, card, from_debuff)
+    if #find_joker("inkay") + #find_joker("malamar") == 0 then
+      if G.hand and G.hand.cards then
+      for i = 1, #G.hand.cards do
+        if G.hand.cards[i].facing == 'back' then
+            G.hand.cards[i]:flip()
+        end
+      end
+      end
+      for _, v in pairs(G.playing_cards) do
+        if v.maelmc_flipped then
+          v.maelmc_flipped = nil
+        end
+      end
+    end
+  end,
 }
 
 -- Credits to emmadenslemma for the idea and the code
@@ -147,6 +163,22 @@ local malamar={
         if G.hand.cards[i].facing == 'back' then
             G.hand.cards[i]:flip()
         end
+      end
+      for _, v in pairs(G.playing_cards) do
+        if v.maelmc_flipped then
+          v.maelmc_flipped = nil
+        end
+      end
+    end
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    if #find_joker("inkay") + #find_joker("malamar") == 0 then
+      if G.hand and G.hand.cards then
+      for i = 1, #G.hand.cards do
+        if G.hand.cards[i].facing == 'back' then
+            G.hand.cards[i]:flip()
+        end
+      end
       end
       for _, v in pairs(G.playing_cards) do
         if v.maelmc_flipped then
