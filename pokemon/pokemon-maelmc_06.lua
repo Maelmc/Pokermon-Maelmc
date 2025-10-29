@@ -457,7 +457,6 @@ local mega_barbaracle={
         retriggers = math.floor(card.ability.extra.retriggers/cards)
         remainder = card.ability.extra.retriggers % cards
         if pos <= remainder then retriggers = retriggers + 1 end
-        print(cards.." "..pos.." "..remainder.." "..retriggers)
         return {
           message = localize('k_again_ex'),
           repetitions = retriggers,
