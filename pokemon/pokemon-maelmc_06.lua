@@ -5,7 +5,6 @@ local inkay={
   config = {extra = {mult = 8, num = 1, dem = 2, flipped_triggered = 0}, evo_rqmt = 20},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
-    -- just to shorten function
     local abbr = card.ability.extra
     local num, dem = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.dem, 'inkay')
     return {vars = {num, dem, abbr.mult, math.max(0, self.config.evo_rqmt - abbr.flipped_triggered)}}
@@ -119,7 +118,6 @@ local malamar={
   config = {extra = {Xmult_multi = 1.5}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
-    -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = {set = 'Other', key = 'mega_poke'}
     return {vars = {abbr.Xmult_multi}}
@@ -199,7 +197,6 @@ local mega_malamar={
   config = {extra = {Xmult_multi = 2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
-    -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.Xmult_multi}}
   end,
@@ -295,10 +292,9 @@ local mega_malamar={
 local binacle={
   name = "binacle",
   pos = {x = 24, y = 45},
-  config = {extra = {value = "7", retriggers = 1, retrigger_hand = 2, retrigger_held = 2, retriggered_hand = 0, retriggered_held = 0, retriggered_held_end = 0, rounds = 4}},
+  config = {extra = {value = 7, retriggers = 1, retrigger_hand = 2, retrigger_held = 2, retriggered_hand = 0, retriggered_held = 0, retriggered_held_end = 0, rounds = 4}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
-    -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.value, abbr.retrigger_hand, abbr.retrigger_held, abbr.retriggers, abbr.rounds}}
   end,
@@ -318,7 +314,7 @@ local binacle={
       card.ability.extra.retriggered_held = 0
     end
 
-    if context.repetition and context.cardarea == G.play and context.other_card:get_id() == 7 and card.ability.extra.retriggered_hand < card.ability.extra.retrigger_hand then
+    if context.repetition and context.cardarea == G.play and context.other_card:get_id() == card.ability.extra.value and card.ability.extra.retriggered_hand < card.ability.extra.retrigger_hand then
       if not context.blueprint then
         card.ability.extra.retriggered_hand = card.ability.extra.retriggered_hand + 1
       end
@@ -329,7 +325,7 @@ local binacle={
       }
     end
 
-    if context.repetition and context.cardarea == G.hand and context.other_card:get_id() == 7 then
+    if context.repetition and context.cardarea == G.hand and context.other_card:get_id() == card.ability.extra.value then
       if context.end_of_round then
         if card.ability.extra.retriggered_held_end < card.ability.extra.retrigger_held then
           if not context.blueprint then
@@ -362,11 +358,11 @@ local binacle={
 local barbaracle={
   name = "barbaracle",
   pos = {x = 26, y = 45},
-  config = {extra = {value = "7", retriggers = 1, retrigger_hand = 7, retrigger_held = 7, retriggered_hand = 0, retriggered_held = 0, retriggered_held_end = 0}},
+  config = {extra = {value = 7, retriggers = 1, retrigger_hand = 7, retrigger_held = 7, retriggered_hand = 0, retriggered_held = 0, retriggered_held_end = 0}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
-    -- just to shorten function
     local abbr = card.ability.extra
+    info_queue[#info_queue+1] = {set = 'Other', key = 'mega_poke'}
     return {vars = {abbr.value, abbr.retrigger_hand, abbr.retrigger_held, abbr.retriggers}}
   end,
   rarity = "poke_safari",
@@ -386,7 +382,7 @@ local barbaracle={
     end
 
     if context.repetition and context.cardarea == G.play and card.ability.extra.retriggered_hand < card.ability.extra.retrigger_hand then
-      if (context.other_card:get_id() == 7) then
+      if (context.other_card:get_id() == card.ability.extra.value) then
         if not context.blueprint then
           card.ability.extra.retriggered_hand = card.ability.extra.retriggered_hand + 1
         end
@@ -398,7 +394,7 @@ local barbaracle={
       end
     end
 
-    if context.repetition and context.cardarea == G.hand and context.other_card:get_id() == 7 then
+    if context.repetition and context.cardarea == G.hand and context.other_card:get_id() == card.ability.extra.value then
       if context.end_of_round then
         if card.ability.extra.retriggered_held_end < card.ability.extra.retrigger_held then
           if not context.blueprint then
@@ -426,10 +422,81 @@ local barbaracle={
   end,
 }
 
+-- Mega Barbaracle 689-1
+local mega_barbaracle={
+  name = "mega_barbaracle",
+  pos = PokemonSprites["mega_barbaracle"] and PokemonSprites["mega_barbaracle"].base.pos or PokemonSprites["barbaracle"].base.pos,
+  soul_pos = PokemonSprites["mega_barbaracle"] and PokemonSprites["mega_barbaracle"].base.soul_pos or {x = PokemonSprites["barbaracle"].base.pos.x + 1, y = PokemonSprites["barbaracle"].base.pos.y},
+  config = {extra = {value = 7, retriggers = 11}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    local abbr = card.ability.extra
+    return {vars = {abbr.retriggers, abbr.value}}
+  end,
+  rarity = "poke_mega",
+  cost = 12,
+  stage = "Mega",
+  ptype = "Earth",
+  atlas = PokemonSprites["mega_barbaracle"] and "AtlasJokersBasicGen06" or "AtlasJokersBasicNatdex",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    if context.repetition and not context.end_of_round and context.cardarea == G.play then
+      if context.other_card:get_id() == card.ability.extra.value then
+        local cards = 0
+        local pos = -1
+        local remainder
+        local retriggers
+        for i=1, #context.scoring_hand do
+          if context.scoring_hand[i] == context.other_card and pos == -1 then
+            pos = i
+          end
+          if context.scoring_hand[i]:get_id() == card.ability.extra.value then
+            cards = cards + 1
+          end
+        end
+        retriggers = math.floor(card.ability.extra.retriggers/cards)
+        remainder = card.ability.extra.retriggers % cards
+        if pos <= remainder then retriggers = retriggers + 1 end
+        print(cards.." "..pos.." "..remainder.." "..retriggers)
+        return {
+          message = localize('k_again_ex'),
+          repetitions = retriggers,
+          card = card
+        }
+      end
+    end
+
+    if context.repetition and context.cardarea == G.hand then
+      if context.other_card:get_id() == card.ability.extra.value then
+        local cards = 0
+        local pos = -1
+        local remainder
+        local retriggers
+        for i=1, #G.hand.cards do
+          if G.hand.cards[i] == context.other_card and pos == -1 then
+            pos = i
+          end
+          if G.hand.cards[i]:get_id() == card.ability.extra.value then
+            cards = cards + 1
+          end
+        end
+        retriggers = math.floor(card.ability.extra.retriggers/cards)
+        remainder = card.ability.extra.retriggers % cards
+        if pos <= remainder then retriggers = retriggers + 1 end
+        return {
+          message = localize('k_again_ex'),
+          repetitions = retriggers,
+          card = card
+        }
+      end
+    end
+  end,
+}
+
 return {
   name = "Maelmc's Jokers Gen 6",
   list = {
     inkay, malamar, mega_malamar,
-    binacle, barbaracle,
+    binacle, barbaracle, mega_barbaracle,
   },
 }

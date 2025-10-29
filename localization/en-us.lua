@@ -739,7 +739,17 @@ return {
                     "Played cards give",
                     "{X:red,C:white}X#1#{} Mult when scored",
                 }
-            }
+            },
+            j_maelmc_mega_barbaracle = {
+                name = "Mega Barbaracle",
+                text = {
+                    "Retriggers {C:attention}#1#{} played {C:attention}#2#s{}",
+                    "{C:inactive,s:0.8}(Divided evenly between scoring {C:attention,s:0.8}#2#s{C:inactive,s:0.8}){}",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Retriggers {C:attention}#1#{} held in hand {C:attention}#2#s{}",
+                    "{C:inactive,s:0.8}(Divided evenly between held {C:attention,s:0.8}#2#s{C:inactive,s:0.8}){}",
+                } 
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
