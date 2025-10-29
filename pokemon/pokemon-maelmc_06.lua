@@ -420,6 +420,7 @@ local barbaracle={
     end
 
   end,
+  megas = {"mega_barbaracle"}
 }
 
 -- Mega Barbaracle 689-1

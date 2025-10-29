@@ -17,7 +17,7 @@ pokermon.add_family({
   {key = "gym_leader", form = "Earth"},
 })
 pokermon.add_family({"inkay","malamar","mega_malamar"})
-pokermon.add_family({"binacle","barbaracle"})
+pokermon.add_family({"binacle","barbaracle","mega_barbaracle"})
 pokermon.add_family({"ralts","kirlia","gardevoir","mega_gardevoir"})
 pokermon.add_family({"gible","gabite","garchomp","mega_garchomp"})
 pokermon.add_family({"ogerpon","ogerpon_wellspring","ogerpon_hearthflame","ogerpon_cornerstone"})
