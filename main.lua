@@ -165,6 +165,25 @@ else
   ui()
 end
 
+--Load stickers
+local pseals = NFS.getDirectoryItems(mod_dir.."stickers")
+
+for _, file in ipairs(pseals) do
+  sendDebugMessage ("The file is: "..file)
+  local sticker, load_error = SMODS.load_file("stickers/"..file)
+  if load_error then
+    sendDebugMessage ("The error is: "..load_error)
+  else
+    local curr_sticker = sticker()
+    if curr_sticker.init then curr_sticker:init() end
+    
+    for i, item in ipairs(curr_sticker.list) do
+      item.discovered = not pokermon_config.pokemon_discovery
+      SMODS.Sticker(item)
+    end
+  end
+end
+
 --Load pokemon file
 local pfiles = NFS.getDirectoryItems(mod_dir.."pokemon")
 

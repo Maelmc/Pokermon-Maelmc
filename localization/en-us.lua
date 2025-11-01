@@ -845,6 +845,16 @@ return {
                 "your opponent updates"
               }
             },
+            maelmc_pokerus = {
+                name = "Pokérus",
+                text = {
+                    "This Joker is always",
+                    "fully {C:pink}energized{}",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "{C:green}25%{} to spread",
+                    "at end of round"
+                }
+            }
         },
     },
     misc = {
@@ -909,6 +919,7 @@ return {
         },
         labels = {
             k_maelmc_ultra_beast = "Ultra Beast",
+            maelmc_pokerus = "Pokérus",
         },
         v_dictionary = {
             maelmc_discard = "+#1# Discard",

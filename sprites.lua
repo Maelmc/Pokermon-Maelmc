@@ -44,3 +44,15 @@ G.C.MAELMC = {
     ORANGE = HEX("EA6F22"),
     GREY = HEX("747474"),
 }
+
+SMODS.Atlas({
+    key = "maelmc_stickers",
+    path = "maelmc_stickers.png",
+    px = 71,
+    py = 95
+}):register()
+
+SMODS.Sound({
+    key = "pokerus_sound",
+    path = "pokerus_sound.wav"
+}):register()

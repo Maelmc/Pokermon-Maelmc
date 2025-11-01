@@ -416,3 +416,13 @@ payload = ''' if #find_joker("mega_malamar") > 0 and not (card.facing == 'back')
       card.facing = 'back'
       card.sprite_facing = 'back'
     end'''
+
+
+# Preventing pokerus from acting weirdly when evolving
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
+pattern = '''if card.ability.extra.energy_count or card.ability.extra.c_energy_count then'''
+position = "at"
+match_indent = true
+payload = '''if (card.ability.extra.energy_count or card.ability.extra.c_energy_count) and not card.ability.maelmc_pokerus then'''
