@@ -448,7 +448,7 @@ return {
                     "{C:inactive}(Currently walking {C:attention}#1#{C:inactive} for {C:attention}#2#{C:inactive} rounds)"
                 }
             },
-            j_maelmc_g_corsola = {
+            j_maelmc_galarian_corsola = {
                 name = "Galarian Corsola",
                 text = {
                     "Each {C:attention}Perishable{} Joker",
