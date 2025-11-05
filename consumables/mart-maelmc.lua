@@ -549,7 +549,7 @@ local metronome = {
 return {name = "Maelmc's Items",
   list = {
     tealmask, wellspringmask, hearthflamemask, cornerstonemask,
-    meteorite, --fake_deoxys, fake_deoxys_attack, fake_deoxys_defense, fake_deoxys_speed,
+    --meteorite, --fake_deoxys, fake_deoxys_attack, fake_deoxys_defense, fake_deoxys_speed,
     beastball,
     metronome,
   }

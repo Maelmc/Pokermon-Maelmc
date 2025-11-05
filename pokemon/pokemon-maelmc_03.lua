@@ -578,7 +578,7 @@ local deoxys = {
       card.ability.extra.in_round = false
     end
   end,
-  add_to_deck = function(self, card, from_debuff)
+  --[[add_to_deck = function(self, card, from_debuff)
     local ok = true
     for _, v in pairs(G.consumeables.cards) do
       if v.config.center.name == "meteorite" then
@@ -594,7 +594,7 @@ local deoxys = {
       G.consumeables:emplace(_card)
       card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('poke_plus_pokeitem'), colour = G.C.FILTER})
     end
-  end,
+  end,]]
 }
 
 local deoxys_attack = {
@@ -681,6 +681,52 @@ local deoxys_speed = {
     return false
   end,
 }
+
+-- Deoxys form change button
+-- Thanks Emma
+local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
+function G.UIDEF.use_and_sell_buttons(card)
+  local buttons = G_UIDEF_use_and_sell_buttons_ref(card)
+  if card.area == G.jokers and string.sub(card.config.center.key, 1, 15) == 'j_maelmc_deoxys' then
+    table.insert(buttons.nodes[1].nodes, { n = G.UIT.R, config = { align = "cl" }, nodes = {
+      { n = G.UIT.C, config = { align = "cr" }, nodes = {
+        { n = G.UIT.C, config = { ref_table = card, align = "cr", maxw = 1.6, padding = 0.1, r = 0.08, minw = 1.6, minh = 0.6, hover = true, shadow = true, colour = G.ARGS.LOC_COLOURS.psychic, button = 'deoxys_change_form' }, nodes = {
+          { n = G.UIT.T, config = { text = "CHANGE", colour = G.C.UI.TEXT_LIGHT, scale = 0.4, shadow = true }}
+        }}
+      }}
+    }})
+  end
+  return buttons
+end
+
+function G.FUNCS.deoxys_change_form(e)
+  local card = e.config.ref_table
+  if e.config.one_press then e.disable_button = false end
+  local deoxys_forms = { "j_maelmc_deoxys", "j_maelmc_deoxys_attack", "j_maelmc_deoxys_defense", "j_maelmc_deoxys_speed" }
+  for i, form in ipairs(deoxys_forms) do
+    if card.config.center.key == form then
+      local next_form_idx = i + 1
+      if next_form_idx > 4 then next_form_idx = 1 end
+      local next_form = deoxys_forms[next_form_idx]
+      poke_evolve(card, next_form)
+      return
+    end
+  end
+end
+
+-- Controller Support
+local G_UIDEF_card_focus_ui_ref = G.UIDEF.card_focus_ui
+function G.UIDEF.card_focus_ui(card)
+  local base_background = G_UIDEF_card_focus_ui_ref(card)
+  local base_attach = base_background:get_UIE_by_ID('ATTACH_TO_ME')
+  if card.area == G.jokers and string.sub(card.config.center.key, 1, 15) == 'j_maelmc_deoxys' then
+    base_attach.children.change_form = G.UIDEF.card_focus_button {
+      card = card, parent = base_attach, type = 'use',
+      button = 'deoxys_change_form', card_width = card.T.w
+    }
+  end
+  return base_background
+end
 
 return {
   name = "Maelmc's Jokers Gen 3",

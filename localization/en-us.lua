@@ -507,8 +507,8 @@ return {
             j_maelmc_deoxys = {
                 name = "Deoxys",
                 text = {
-                    "Holding {C:dark_edition}Negative {C:attention}Meteorite",
-                    "{br:3}ERROR - CONTACT STEAK",
+                    --"Holding {C:dark_edition}Negative {C:attention}Meteorite",
+                    --"{br:3}ERROR - CONTACT STEAK",
                     "When {C:attention}Blind{} is selected,",
                     "gain {C:chips}+#1#{} hand,",
                     "{C:red}+#2#{} discard and",
