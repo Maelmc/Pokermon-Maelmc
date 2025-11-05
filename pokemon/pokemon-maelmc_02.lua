@@ -1,6 +1,6 @@
 -- Galarian Corsola 222
-local g_corsola={
-  name = "g_corsola",
+local galarian_corsola={
+  name = "galarian_corsola",
   pos = {x = 8, y = 4},
   config = {extra = {Xmult_multi = 1.5, volatile = 'left', perish_rounds = 3, currently_perished = 0}, evo_rqmt = 2},
   loc_vars = function(self, info_queue, card)
@@ -82,6 +82,6 @@ local g_corsola={
 return {
   name = "Maelmc's Jokers Gen 2",
   list = {
-    g_corsola,
+    galarian_corsola,
   },
 }
