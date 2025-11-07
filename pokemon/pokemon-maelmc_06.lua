@@ -300,7 +300,7 @@ local binacle={
   end,
   rarity = 1,
   cost = 5,
-  stage = "Base",
+  stage = "Basic",
   ptype = "Earth",
   atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
