@@ -474,7 +474,7 @@ local ogerpon_cornerstone={
 }
 
 -- function that determines what card ogerpon hearthflame uses for the round, copied from The Idol
-local function reset_maelmc_hearthflame_card()
+function reset_maelmc_hearthflame_card()
     -- multiplayer crash fix
     if SMODS.Mods["Multiplayer"] and SMODS.Mods["Multiplayer"].can_load and MP.should_use_the_order() then
       G.GAME.current_round.maelmc_hearthflame_card = { rank = 'Ace', suit = 'Spades' }
@@ -553,10 +553,6 @@ local function reset_maelmc_hearthflame_card()
         G.GAME.current_round.maelmc_hearthflame_card.suit = hearthflame_card.base.suit
         G.GAME.current_round.maelmc_hearthflame_card.id = hearthflame_card.base.id
     end
-end
-
-function SMODS.current_mod.reset_game_globals(run_start)
-  reset_maelmc_hearthflame_card()
 end
 
 return {

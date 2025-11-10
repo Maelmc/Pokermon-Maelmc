@@ -59,3 +59,18 @@ function photographer_util(card)
     end
   end
 end
+
+function neighbor_ranks(rank)
+  local t = {rank}
+  if rank == 2 then
+    table.insert(t,14)
+    table.insert(t,3)
+  elseif rank == 14 then
+    table.insert(t,2)
+    table.insert(t,13)
+  else
+    table.insert(t,rank-1)
+    table.insert(t,rank+1)
+  end
+  return t
+end

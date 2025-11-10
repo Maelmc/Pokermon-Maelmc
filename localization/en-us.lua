@@ -750,6 +750,25 @@ return {
                     "{C:inactive,s:0.8}(Divided evenly between held {C:attention,s:0.8}#2#s{C:inactive,s:0.8}){}",
                 } 
             },
+            j_maelmc_wingull = {
+                name = "Wingull",
+                text = {
+                    "Earn {C:money}$#1#{} for each",
+                    "discarded {C:attention}#2#{}, rank",
+                    "changes every round",
+                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#3#{C:inactive,s:0.8} rounds)",
+                },
+            },
+            j_maelmc_pelipper = {
+                name = "Pelipper",
+                text = {
+                    "Earn {C:money}$#1#{} for each",
+                    "discarded {C:attention}#2#{} or",
+                    "{C:money}$#3#{} for discarded cards",
+                    "of {C:attention}adjacent ranks{}, rank",
+                    "changes every round",
+                },
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {

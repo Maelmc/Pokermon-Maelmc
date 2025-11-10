@@ -1,3 +1,104 @@
+-- Wingull 278
+-- mostly copied from vanilla remade
+local wingull={
+  name = "wingull",
+  stage = "Basic",
+  ptype = "Water",
+  atlas = "AtlasJokersBasicNatdex",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  rarity = 1,
+  cost = 4,
+  config = { extra = { money = 4, rounds = 4 } },
+  loc_vars = function(self, info_queue, card)
+      return { vars = { card.ability.extra.money, localize((G.GAME.current_round.maelmc_wingull_card or {}).rank or 'Ace', 'ranks'), card.ability.extra.rounds } }
+  end,
+  calculate = function(self, card, context)
+      if context.discard and not context.other_card.debuff and
+          context.other_card:get_id() == G.GAME.current_round.maelmc_wingull_card.id then
+          G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.money
+          return {
+              dollars = card.ability.extra.money,
+              func = function() -- This is for timing purposes, it runs after the dollar manipulation
+                  G.E_MANAGER:add_event(Event({
+                      func = function()
+                          G.GAME.dollar_buffer = 0
+                          return true
+                      end
+                  }))
+              end
+          }
+      end
+
+      return level_evo(self, card, context, "j_maelmc_pelipper")
+  end
+}
+
+function reset_maelmc_wingull_card()
+    G.GAME.current_round.maelmc_wingull_card = { rank = 'Ace' }
+    local valid_mail_cards = {}
+    for _, playing_card in ipairs(G.playing_cards) do
+        if not SMODS.has_no_rank(playing_card) then
+            valid_mail_cards[#valid_mail_cards + 1] = playing_card
+        end
+    end
+    local mail_card = pseudorandom_element(valid_mail_cards, 'maelmc_wingull' .. G.GAME.round_resets.ante)
+    if mail_card then
+        G.GAME.current_round.maelmc_wingull_card.rank = mail_card.base.value
+        G.GAME.current_round.maelmc_wingull_card.id = mail_card.base.id
+    end
+end
+
+-- Pelipper 279
+local pelipper={
+  name = "pelipper",
+  stage = "One",
+  ptype = "Water",
+  atlas = "AtlasJokersBasicNatdex",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  rarity = "poke_safari",
+  cost = 7,
+  config = { extra = { money = 4, money1 = 1 } },
+  loc_vars = function(self, info_queue, card)
+      return { vars = { card.ability.extra.money, localize((G.GAME.current_round.maelmc_pelipper_card or {}).rank or 'Ace', 'ranks'), card.ability.extra.money1 } }
+  end,
+  calculate = function(self, card, context)
+      if context.discard and not context.other_card.debuff and table.contains(neighbor_ranks(context.other_card:get_id()),G.GAME.current_round.maelmc_pelipper_card.id) then
+        local m = context.other_card:get_id() == G.GAME.current_round.maelmc_pelipper_card.id and card.ability.extra.money or card.ability.extra.money1
+        G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + m
+        return {
+            dollars = m,
+            func = function() -- This is for timing purposes, it runs after the dollar manipulation
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        G.GAME.dollar_buffer = 0
+                        return true
+                    end
+                }))
+            end
+        }
+      end
+  end
+}
+
+function reset_maelmc_pelipper_card()
+    G.GAME.current_round.maelmc_pelipper_card = { rank = 'Ace' }
+    local valid_mail_cards = {}
+    for _, playing_card in ipairs(G.playing_cards) do
+        if not SMODS.has_no_rank(playing_card) then
+            valid_mail_cards[#valid_mail_cards + 1] = playing_card
+        end
+    end
+    local mail_card = pseudorandom_element(valid_mail_cards, 'maelmc_pelipper' .. G.GAME.round_resets.ante)
+    if mail_card then
+        G.GAME.current_round.maelmc_pelipper_card.rank = mail_card.base.value
+        G.GAME.current_round.maelmc_pelipper_card.id = mail_card.base.id
+    end
+end
+
 -- Ralts 280
 local ralts={
   name = "ralts",
@@ -731,6 +832,7 @@ end
 return {
   name = "Maelmc's Jokers Gen 3",
   list = {
+    wingull, pelipper,
     ralts, kirlia, gardevoir, mega_gardevoir,
     gulpin, swalot,
     lunatone, solrock,

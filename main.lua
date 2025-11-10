@@ -25,6 +25,7 @@ pokermon.add_family({"galarian_corsola","cursola"})
 pokermon.add_family({"deoxys","deoxys_attack","deoxys_defense","deoxys_speed"})
 pokermon.add_family({"woobat","swoobat"})
 pokermon.add_family({"gulpin","swalot"})
+pokermon.add_family({"wingull","pelipper"})
 
 --Load Sprites file
 local sprite, load_error = SMODS.load_file("sprites.lua")
@@ -307,4 +308,10 @@ for _, file in ipairs(pchallenges) do
       SMODS.Challenge(item)
     end
   end
+end
+
+function SMODS.current_mod.reset_game_globals(run_start)
+  reset_maelmc_hearthflame_card()
+  reset_maelmc_wingull_card()
+  reset_maelmc_pelipper_card()
 end
