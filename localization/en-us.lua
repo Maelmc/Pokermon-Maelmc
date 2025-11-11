@@ -769,6 +769,15 @@ return {
                     "changes every round",
                 },
             },
+            j_maelmc_wonder_trade = {
+                name = "Wonder Trade",
+                text = {
+                    "At end of shop, trade",
+                    "a random Joker with",
+                    "your {X:purple,C:white}Nemesis{}",
+                    "{C:inactive,s:0.8}(Excluding {C:attention,s:0.8}Wonder Trade{C:inactive,s:0.8})",
+                },
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -872,6 +881,14 @@ return {
                     "{br:3}ERROR - CONTACT STEAK",
                     "{C:green}25%{} to spread",
                     "at end of round"
+                }
+            },
+            multiplayer_ex = {
+                name = "Multiplayer exclusive",
+                text = {
+                    "This Joker can only",
+                    "appear when using the",
+                    "{C:attention}Multiplayer{} mod"
                 }
             }
         },
