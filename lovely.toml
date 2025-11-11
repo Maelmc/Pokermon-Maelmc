@@ -498,3 +498,75 @@ payload = '''			elseif parsedAction.action == "wonderTrade" then
 				action_wonder_trade(parsedAction.key)
 			elseif parsedAction.action == "wonderTradeResponse" then
 				action_wonder_trade_response(parsedAction.key,parsedAction.sent)'''
+
+# Wonder Trade with NanoMultiplayer
+[[patches]]
+[patches.pattern]
+target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
+pattern = '''			end
+			return false
+		end
+	}))
+end'''
+position = "after"
+match_indent = true
+payload = '''local function action_wonder_trade(key)
+	local compat = {}
+	for i = 1, #G.jokers.cards do
+		if G.jokers.cards[i].config.center.key ~= "j_maelmc_wonder_trade" then
+			table.insert(compat,G.jokers.cards[i])
+		end
+	end
+	local tosend = pseudorandom_element(compat,"wonder_trade").config.center.key
+	if tosend then
+		for i = 1, #G.jokers.cards do
+			if G.jokers.cards[i].config.center.key == tosend then
+				G.jokers.cards[i]:remove()
+				break
+			end
+		end
+		local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
+		card:add_to_deck()
+		G.jokers:emplace(card)
+		MP.ACTIONS.wonder_trade_response(tosend,key)
+	end
+end
+
+local function action_wonder_trade_response(key,sent)
+	for i = 1, #G.jokers.cards do
+			if G.jokers.cards[i].config.center.key == sent then
+				G.jokers.cards[i]:remove()
+				break
+			end
+		end
+	local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
+	card:add_to_deck()
+	G.jokers:emplace(card)
+end'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
+pattern = '''function MP.ACTIONS.fail_timer()
+	Client.send("action:failTimer")
+end'''
+position = "after"
+match_indent = true
+payload = '''function MP.ACTIONS.wonder_trade(key)
+	Client.send("action:wonderTrade,key:"..key)
+end
+
+function MP.ACTIONS.wonder_trade_response(key,sent)
+	Client.send("action:wonderTradeResponse,key:"..key..",sent:"..sent)
+end'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
+pattern = '''				action_keep_alive()'''
+position = "after"
+match_indent = true
+payload = '''			elseif parsedAction.action == "wonderTrade" then
+				action_wonder_trade(parsedAction.key)
+			elseif parsedAction.action == "wonderTradeResponse" then
+				action_wonder_trade_response(parsedAction.key,parsedAction.sent)'''
