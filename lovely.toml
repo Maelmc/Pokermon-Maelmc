@@ -553,10 +553,12 @@ pattern = '''function MP.ACTIONS.fail_timer()'''
 position = "before"
 match_indent = true
 payload = '''function MP.ACTIONS.wonder_trade(key)
+  print("wonder_trade "..key)
 	Client.send("action:wonderTrade,key:"..key)
 end
 
 function MP.ACTIONS.wonder_trade_response(key,sent)
+  print("wonder_trade_response "..key.." "..sent)
 	Client.send("action:wonderTradeResponse,key:"..key..",sent:"..sent)
 end'''
 

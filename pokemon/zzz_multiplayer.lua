@@ -4,8 +4,10 @@ local wonder_trade = {
   pos = {x = 5, y = 1},
   config = {extra = {}},
   loc_vars = function(self, info_queue, card)
-    if next(SMODS.find_mod("Multiplayer")) or next(SMODS.find_mod("NanoMultiplayer")) then
+    if next(SMODS.find_mod("NanoMultiplayer")) then
       add_nemesis_info(info_queue)
+    elseif next(SMODS.find_mod("Multiplayer")) then
+      MP.UTILS.add_nemesis_info(info_queue)
     else
       info_queue[#info_queue+1] = {set = 'Other', key = 'multiplayer_ex'}
     end
@@ -47,7 +49,7 @@ local wonder_trade = {
   end,
   custom_pool_func = true,
   in_pool = function(self)
-    return (next(SMODS.find_mod("Multiplayer")) or next(SMODS.find_mod("NanoMultiplayer"))) and pokemon_in_pool(self)
+    return (next(SMODS.find_mod("Multiplayer")) or next(SMODS.find_mod("NanoMultiplayer"))) and MP.LOBBY.code and MP.LOBBY.config.multiplayer_jokers and pokemon_in_pool(self)
   end
 }
 
