@@ -56,6 +56,6 @@ local wonder_trade = {
 return {
   name = "Maelmc's Multiplayer Jokers",
   list = {
-    wonder_trade,
+    --wonder_trade,
   },
 }

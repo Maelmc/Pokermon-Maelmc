@@ -607,7 +607,7 @@ return {
                     "{C:attention}#2#{} more times",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{X:red,C:white}X#3#{} Mult per remaining hands",
-                    "on the {C:attention}first hand{} or round",
+                    "on the {C:attention}first hand{} of round",
                 }
             },
             j_maelmc_pheromosa = {
