@@ -513,8 +513,11 @@ pattern = '''local function enemyLocation(options)'''
 position = "before"
 match_indent = true
 payload = '''local function action_wonder_trade(msg)
-  local _ = string.gmatch(msg,"/")
-  local key = string.gmatch(msg,"/")
+  local tab = {}
+  for w in string.gmatch(msg,"/") do
+    table.insert(tab,w)
+  end
+  local key = tab[2]
 	print("action_wonder_trade")
   print("received "..key)
   local compat = {}
@@ -540,9 +543,12 @@ payload = '''local function action_wonder_trade(msg)
 end
 
 local function action_wonder_trade_response(msg)
-  local _ = string.gmatch(msg,"/")
-  local key = string.gmatch(msg,"/")
-  local sent = string.gmatch(msg,"/")
+  local tab = {}
+  for w in string.gmatch(msg,"/") do
+    table.insert(tab,w)
+  end
+  local key = tab[2]
+  local sent = tab[3]
   print("action_wonder_trade_response")
   print("sent "..sent)
 	for i = 1, #G.jokers.cards do
