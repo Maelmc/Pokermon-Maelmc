@@ -440,8 +440,6 @@ payload = '''local function action_wonder_trade(msg)
     table.insert(tab,w)
   end
   local key = tab[2]
-	print("action_wonder_trade")
-  print("received "..key)
   local compat = {}
 	for i = 1, #G.jokers.cards do
 		if G.jokers.cards[i].config.center.key ~= "j_maelmc_wonder_trade" then
@@ -450,8 +448,7 @@ payload = '''local function action_wonder_trade(msg)
 	end
 	local tosend = pseudorandom_element(compat,"wonder_trade").config.center.key
 	if tosend then
-    print("sending "..tosend)
-		for i = 1, #G.jokers.cards do
+    for i = 1, #G.jokers.cards do
 			if G.jokers.cards[i].config.center.key == tosend then
 				G.jokers.cards[i]:remove()
 				break
@@ -471,16 +468,13 @@ local function action_wonder_trade_response(msg)
   end
   local key = tab[2]
   local sent = tab[3]
-  print("action_wonder_trade_response")
-  print("sent "..sent)
-	for i = 1, #G.jokers.cards do
+  for i = 1, #G.jokers.cards do
     if G.jokers.cards[i].config.center.key == sent then
       G.jokers.cards[i]:remove()
       break
     end
   end
-  print("received"..key)
-	local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
+  local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
 	card:add_to_deck()
 	G.jokers:emplace(card)
 end'''
@@ -496,8 +490,7 @@ payload = '''function MP.ACTIONS.wonder_trade(key)
 end
 
 function MP.ACTIONS.wonder_trade_response(key,sent)
-  print("wonder_trade_response "..key.." "..sent)
-	Client.send("action:magnetResponse,key:WTANSWER/"..key.."/"..sent)
+  Client.send("action:magnetResponse,key:WTANSWER/"..key.."/"..sent)
 end'''
 
 [[patches]]
@@ -524,9 +517,7 @@ payload = '''local function action_wonder_trade(msg)
     table.insert(tab,w)
   end
   local key = tab[2]
-	print("action_wonder_trade")
-  print("received "..key)
-  local compat = {}
+	local compat = {}
 	for i = 1, #G.jokers.cards do
 		if G.jokers.cards[i].config.center.key ~= "j_maelmc_wonder_trade" then
 			table.insert(compat,G.jokers.cards[i])
@@ -534,8 +525,7 @@ payload = '''local function action_wonder_trade(msg)
 	end
 	local tosend = pseudorandom_element(compat,"wonder_trade").config.center.key
 	if tosend then
-    print("sending "..tosend)
-		for i = 1, #G.jokers.cards do
+    for i = 1, #G.jokers.cards do
 			if G.jokers.cards[i].config.center.key == tosend then
 				G.jokers.cards[i]:remove()
 				break
@@ -555,16 +545,13 @@ local function action_wonder_trade_response(msg)
   end
   local key = tab[2]
   local sent = tab[3]
-  print("action_wonder_trade_response")
-  print("sent "..sent)
-	for i = 1, #G.jokers.cards do
+  for i = 1, #G.jokers.cards do
     if G.jokers.cards[i].config.center.key == sent then
       G.jokers.cards[i]:remove()
       break
     end
   end
-  print("received"..key)
-	local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
+  local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
 	card:add_to_deck()
 	G.jokers:emplace(card)
 end'''
@@ -580,8 +567,7 @@ payload = '''function MP.ACTIONS.wonder_trade(key)
 end
 
 function MP.ACTIONS.wonder_trade_response(key,sent)
-  print("wonder_trade_response "..key.." "..sent)
-	Client.send("action:magnetResponse,key:WTANSWER/"..key.."/"..sent)
+  Client.send("action:magnetResponse,key:WTANSWER/"..key.."/"..sent)
 end'''
 
 [[patches]]
