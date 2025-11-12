@@ -482,24 +482,24 @@ position = "before"
 match_indent = true
 payload = '''function MP.ACTIONS.wonder_trade(key)
   print("wonder_trade "..key)
-	Client.send("action:wonderTrade,key:"..key)
+	Client.send("action:magnet,key:"..key)
 end
 
 function MP.ACTIONS.wonder_trade_response(key,sent)
   print("wonder_trade_response "..key.." "..sent)
-	Client.send("action:wonderTradeResponse,key:"..key..",sent:"..sent)
+	Client.send("action:magnet,key:"..key..",sent:"..sent)
 end'''
 
 [[patches]]
 [patches.pattern]
 target = '=[SMODS Multiplayer "networking/action_handlers.lua"]'
-pattern = '''action_keep_alive()'''
-position = "after"
+pattern = '''elseif parsedAction.action == "version" then'''
+position = "before"
 match_indent = true
-payload = '''elseif parsedAction.action == "wonderTrade" then
-	action_wonder_trade(parsedAction.key)
-elseif parsedAction.action == "wonderTradeResponse" then
-	action_wonder_trade_response(parsedAction.key,parsedAction.sent)'''
+payload = '''elseif parsedAction.action == "magnet" and parsedAction.sent then
+	action_wonder_trade_response(parsedAction.key,parsedAction.sent)
+elseif parsedAction.action == "magnet" and parsedAction.key then
+	action_wonder_trade(parsedAction.key)'''
 
 # Wonder Trade with NanoMultiplayer
 [[patches]]
@@ -555,22 +555,21 @@ pattern = '''function MP.ACTIONS.fail_timer()'''
 position = "before"
 match_indent = true
 payload = '''function MP.ACTIONS.wonder_trade(key)
-  print("wonder_trade "..key)
-	Client.send("action:wonderTrade,key:"..key)
+  Client.send("action:magnet,key:"..key)
 end
 
 function MP.ACTIONS.wonder_trade_response(key,sent)
   print("wonder_trade_response "..key.." "..sent)
-	Client.send("action:wonderTradeResponse,key:"..key..",sent:"..sent)
+	Client.send("action:magnet,key:"..key..",sent:"..sent)
 end'''
 
 [[patches]]
 [patches.pattern]
 target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
-pattern = '''action_keep_alive()'''
-position = "after"
+pattern = '''elseif parsedAction.action == "version" then'''
+position = "before"
 match_indent = true
-payload = '''elseif parsedAction.action == "wonderTrade" then
-	action_wonder_trade(parsedAction.key)
-elseif parsedAction.action == "wonderTradeResponse" then
-	action_wonder_trade_response(parsedAction.key,parsedAction.sent)'''
+payload = '''elseif parsedAction.action == "magnet" and parsedAction.sent then
+	action_wonder_trade_response(parsedAction.key,parsedAction.sent)
+elseif parsedAction.action == "magnet" and parsedAction.key then
+	action_wonder_trade(parsedAction.key)'''
