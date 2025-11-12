@@ -578,7 +578,7 @@ target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
 pattern = '''elseif parsedAction.action == "version" then'''
 position = "before"
 match_indent = true
-payload = '''elseif parsedAction.action == "magnet" and string.find(parsedAction.key,"WTREQUEST") then
+payload = '''elseif parsedAction.action == "magnetResponse" and string.find(parsedAction.key,"WTREQUEST") then
 	action_wonder_trade(parsedAction.key)
-elseif parsedAction.action == "magnet" and string.find(parsedAction.key,"WTANSWER") then
+elseif parsedAction.action == "magnetResponse" and string.find(parsedAction.key,"WTANSWER") then
 	action_wonder_trade_response(parsedAction.key)'''
