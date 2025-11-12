@@ -434,7 +434,9 @@ target = '=[SMODS Multiplayer "networking/action_handlers.lua"]'
 pattern = '''local function enemyLocation(options)'''
 position = "before"
 match_indent = true
-payload = '''local function action_wonder_trade(key)
+payload = '''local function action_wonder_trade(msg)
+  local _ = string.gmatch(msg,"/")
+  local key = string.gmatch(msg,"/")
 	print("action_wonder_trade")
   print("received "..key)
   local compat = {}
@@ -459,7 +461,10 @@ payload = '''local function action_wonder_trade(key)
 	end
 end
 
-local function action_wonder_trade_response(key,sent)
+local function action_wonder_trade_response(msg)
+  local _ = string.gmatch(msg,"/")
+  local key = string.gmatch(msg,"/")
+  local sent = string.gmatch(msg,"/")
   print("action_wonder_trade_response")
   print("sent "..sent)
 	for i = 1, #G.jokers.cards do
@@ -481,13 +486,12 @@ pattern = '''function MP.ACTIONS.fail_timer()'''
 position = "before"
 match_indent = true
 payload = '''function MP.ACTIONS.wonder_trade(key)
-  print("wonder_trade "..key)
-	Client.send("action:magnet,key:"..key)
+  Client.send("action:magnetResponse,key:WTREQUEST/"..key)
 end
 
 function MP.ACTIONS.wonder_trade_response(key,sent)
   print("wonder_trade_response "..key.." "..sent)
-	Client.send("action:magnet,key:"..key..",sent:"..sent)
+	Client.send("action:magnetResponse,key:WTANSWER/"..key.."/"..sent)
 end'''
 
 [[patches]]
@@ -496,10 +500,10 @@ target = '=[SMODS Multiplayer "networking/action_handlers.lua"]'
 pattern = '''elseif parsedAction.action == "version" then'''
 position = "before"
 match_indent = true
-payload = '''elseif parsedAction.action == "magnet" and parsedAction.sent then
-	action_wonder_trade_response(parsedAction.key,parsedAction.sent)
-elseif parsedAction.action == "magnet" and parsedAction.key then
-	action_wonder_trade(parsedAction.key)'''
+payload = '''elseif parsedAction.action == "magnet" and string.find(parsedAction.key,"WTREQUEST") then
+	action_wonder_trade(parsedAction.key)
+elseif parsedAction.action == "magnet" and string.find(parsedAction.key,"WTANSWER") then
+	action_wonder_trade_response(parsedAction.key)'''
 
 # Wonder Trade with NanoMultiplayer
 [[patches]]
@@ -508,7 +512,9 @@ target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
 pattern = '''local function enemyLocation(options)'''
 position = "before"
 match_indent = true
-payload = '''local function action_wonder_trade(key)
+payload = '''local function action_wonder_trade(msg)
+  local _ = string.gmatch(msg,"/")
+  local key = string.gmatch(msg,"/")
 	print("action_wonder_trade")
   print("received "..key)
   local compat = {}
@@ -533,7 +539,10 @@ payload = '''local function action_wonder_trade(key)
 	end
 end
 
-local function action_wonder_trade_response(key,sent)
+local function action_wonder_trade_response(msg)
+  local _ = string.gmatch(msg,"/")
+  local key = string.gmatch(msg,"/")
+  local sent = string.gmatch(msg,"/")
   print("action_wonder_trade_response")
   print("sent "..sent)
 	for i = 1, #G.jokers.cards do
@@ -555,12 +564,12 @@ pattern = '''function MP.ACTIONS.fail_timer()'''
 position = "before"
 match_indent = true
 payload = '''function MP.ACTIONS.wonder_trade(key)
-  Client.send("action:magnet,key:"..key)
+  Client.send("action:magnetResponse,key:WTREQUEST/"..key)
 end
 
 function MP.ACTIONS.wonder_trade_response(key,sent)
   print("wonder_trade_response "..key.." "..sent)
-	Client.send("action:magnet,key:"..key..",sent:"..sent)
+	Client.send("action:magnetResponse,key:WTANSWER/"..key.."/"..sent)
 end'''
 
 [[patches]]
@@ -569,7 +578,7 @@ target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
 pattern = '''elseif parsedAction.action == "version" then'''
 position = "before"
 match_indent = true
-payload = '''elseif parsedAction.action == "magnet" and parsedAction.sent then
-	action_wonder_trade_response(parsedAction.key,parsedAction.sent)
-elseif parsedAction.action == "magnet" and parsedAction.key then
-	action_wonder_trade(parsedAction.key)'''
+payload = '''elseif parsedAction.action == "magnet" and string.find(parsedAction.key,"WTREQUEST") then
+	action_wonder_trade(parsedAction.key)
+elseif parsedAction.action == "magnet" and string.find(parsedAction.key,"WTANSWER") then
+	action_wonder_trade_response(parsedAction.key)'''
