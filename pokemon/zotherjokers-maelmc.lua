@@ -486,7 +486,6 @@ local photographer = {
 
   end,
   add_to_deck = function(self, card, from_debuff)
-    local timeless_woods_available = get_timeless_woods_pokemon()
     for _, v in pairs(G.jokers.cards) do
       if table.contains(timeless_woods_available, v.config.center.name) then
         card.ability.extra.timeless_woods_found[#card.ability.extra.timeless_woods_found+1] = v.config.center_key
