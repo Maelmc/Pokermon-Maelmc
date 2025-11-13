@@ -440,7 +440,7 @@ payload = '''local function action_wonder_trade(msg)
     table.insert(tab,w)
   end
   local key = tab[2]
-  local compat = {}
+	local compat = {}
 	for i = 1, #G.jokers.cards do
 		if G.jokers.cards[i].config.center.key ~= "j_maelmc_wonder_trade" then
 			table.insert(compat,G.jokers.cards[i])
@@ -450,13 +450,23 @@ payload = '''local function action_wonder_trade(msg)
 	if tosend then
     for i = 1, #G.jokers.cards do
 			if G.jokers.cards[i].config.center.key == tosend then
-				G.jokers.cards[i]:remove()
+				G.E_MANAGER:add_event(Event({
+          func = function()
+            G.jokers.cards[i]:remove()
+            return true
+          end
+        }))
 				break
 			end
 		end
-		local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
-		card:add_to_deck()
-		G.jokers:emplace(card)
+		G.E_MANAGER:add_event(Event({
+      func = function()
+        local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
+        card:add_to_deck()
+        G.jokers:emplace(card)
+        return true
+      end
+    }))
 		MP.ACTIONS.wonder_trade_response(tosend,key)
 	end
 end
@@ -470,13 +480,23 @@ local function action_wonder_trade_response(msg)
   local sent = tab[3]
   for i = 1, #G.jokers.cards do
     if G.jokers.cards[i].config.center.key == sent then
-      G.jokers.cards[i]:remove()
+      G.E_MANAGER:add_event(Event({
+        func = function()
+          G.jokers.cards[i]:remove()
+          return true
+        end
+      }))
       break
     end
   end
-  local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
-	card:add_to_deck()
-	G.jokers:emplace(card)
+  G.E_MANAGER:add_event(Event({
+    func = function()
+      local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
+      card:add_to_deck()
+      G.jokers:emplace(card)
+      return true
+    end
+  }))
 end'''
 
 [[patches]]
@@ -527,13 +547,23 @@ payload = '''local function action_wonder_trade(msg)
 	if tosend then
     for i = 1, #G.jokers.cards do
 			if G.jokers.cards[i].config.center.key == tosend then
-				G.jokers.cards[i]:remove()
+				G.E_MANAGER:add_event(Event({
+          func = function()
+            G.jokers.cards[i]:remove()
+            return true
+          end
+        }))
 				break
 			end
 		end
-		local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
-		card:add_to_deck()
-		G.jokers:emplace(card)
+		G.E_MANAGER:add_event(Event({
+      func = function()
+        local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
+        card:add_to_deck()
+        G.jokers:emplace(card)
+        return true
+      end
+    }))
 		MP.ACTIONS.wonder_trade_response(tosend,key)
 	end
 end
@@ -547,13 +577,23 @@ local function action_wonder_trade_response(msg)
   local sent = tab[3]
   for i = 1, #G.jokers.cards do
     if G.jokers.cards[i].config.center.key == sent then
-      G.jokers.cards[i]:remove()
+      G.E_MANAGER:add_event(Event({
+        func = function()
+          G.jokers.cards[i]:remove()
+          return true
+        end
+      }))
       break
     end
   end
-  local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
-	card:add_to_deck()
-	G.jokers:emplace(card)
+  G.E_MANAGER:add_event(Event({
+    func = function()
+      local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
+      card:add_to_deck()
+      G.jokers:emplace(card)
+      return true
+    end
+  }))
 end'''
 
 [[patches]]

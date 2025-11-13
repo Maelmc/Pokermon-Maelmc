@@ -10,6 +10,13 @@ return {
                     "give {C:attention}+1{} hand size"
                 }
             },
+            b_maelmc_mysterydeck = {
+                name = "Mystery Deck",
+                text = {
+                    "Start with a {C:dark_edition}Negative",
+                    "and {C:attention}Eternal {C:purple,T:j_maelmc_wonder_trade}Wonder Trade",
+                }
+            },
         },
         Spectral = {
             c_maelmc_fake_deoxys = {
@@ -946,6 +953,7 @@ return {
             maelmc_shop_sign = "Shop sign",
             maelmc_hungry_dot = "Hungry...",
             maelmc_stockpile = "Stockpile",
+            maelmc_wondertrade = "Wonder Trade",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",

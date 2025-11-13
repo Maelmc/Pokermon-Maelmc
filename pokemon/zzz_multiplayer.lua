@@ -49,13 +49,20 @@ local wonder_trade = {
   end,
   custom_pool_func = true,
   in_pool = function(self)
-    return (next(SMODS.find_mod("Multiplayer")) or next(SMODS.find_mod("NanoMultiplayer"))) and MP.LOBBY.code and MP.LOBBY.config.multiplayer_jokers and pokemon_in_pool(self)
+    return MP.LOBBY.code and MP.LOBBY.config.multiplayer_jokers and pokemon_in_pool(self)
   end
 }
 
-return {
-  name = "Maelmc's Multiplayer Jokers",
-  list = {
-    wonder_trade,
-  },
-}
+if next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer')) then
+  return {
+    name = "Maelmc's Multiplayer Jokers",
+    list = {
+      wonder_trade,
+    },
+  }
+else
+  return {
+    name = "Maelmc's Multiplayer Jokers",
+    list = {},
+  }
+end

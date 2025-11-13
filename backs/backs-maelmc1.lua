@@ -27,9 +27,38 @@ local hazarddeck = {
   end
 }
 
-local dList = {hazarddeck}
+local mysterydeck = {
+	name = "mysterydeck",
+	key = "mysterydeck",
+  unlocked = true,
+  discovered = true,
+	config = {},
+  loc_vars = function(self, info_queue, center)
+    return {vars = {localize("maelmc_wondertrade")}}
+  end,
+	pos = { x = 2, y = 0 },
+	atlas = "maelmc_pokedeck",
+  apply = function(self)
+    G.E_MANAGER:add_event(Event({
+      func = function()
+        local card = create_card('Joker', G.jokers, nil, nil, nil, nil, 'j_maelmc_wonder_trade', nil)
+        card:add_to_deck()
+        card:set_edition({negative = true})
+        card:set_eternal(true)
+        G.jokers:emplace(card)
+        return true
+      end
+    }))
+  end
+}
+
+local list = { hazarddeck }
+
+if next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer')) then
+  table.insert(list, mysterydeck)
+end
 
 return {name = "Back",
   init = init,
-  list = dList
+  list = list,
 }
