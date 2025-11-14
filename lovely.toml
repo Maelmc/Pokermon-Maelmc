@@ -446,8 +446,9 @@ payload = '''local function action_wonder_trade(msg)
 			table.insert(compat,G.jokers.cards[i])
 		end
 	end
-	local tosend = pseudorandom_element(compat,"wonder_trade").config.center.key
-	if tosend then
+	local tosend_j = pseudorandom_element(compat,"wonder_trade")
+	if tosend_j then
+    local tosend = tosend_j.config.center.key
     for i = 1, #G.jokers.cards do
 			if G.jokers.cards[i].config.center.key == tosend then
 				G.E_MANAGER:add_event(Event({
@@ -543,8 +544,9 @@ payload = '''local function action_wonder_trade(msg)
 			table.insert(compat,G.jokers.cards[i])
 		end
 	end
-	local tosend = pseudorandom_element(compat,"wonder_trade").config.center.key
-	if tosend then
+	local tosend_j = pseudorandom_element(compat,"wonder_trade")
+	if tosend_j then
+    local tosend = tosend_j.config.center.key
     for i = 1, #G.jokers.cards do
 			if G.jokers.cards[i].config.center.key == tosend then
 				G.E_MANAGER:add_event(Event({
