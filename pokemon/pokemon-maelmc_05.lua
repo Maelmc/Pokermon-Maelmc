@@ -141,7 +141,9 @@ local bouffalant = {
       G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
       
       local boss_name = card.ability.extra.boss_blind
-      if (boss_name == "The Wall" or boss_name == "The Water" or boss_name == "The Manacle" or boss_name == "The Needle" or boss_name == "Amber Acorn" or boss_name == "Violet Vessel") and not G.GAME.blind.disabled then
+      if (boss_name == "The Wall" or boss_name == "The Water" or boss_name == "The Manacle" or
+          boss_name == "The Needle" or boss_name == "Amber Acorn" or boss_name == "Violet Vessel" or
+          boss_name == "bl_poke_mirror") and not G.GAME.blind.disabled then
         card.ability.extra.boss_trigger = card.ability.extra.boss_trigger + 1
       end
 
