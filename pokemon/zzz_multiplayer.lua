@@ -27,9 +27,9 @@ local wonder_trade = {
           table.insert(compat,G.jokers.cards[i])
         end
       end
-      local tosend = pseudorandom_element(compat,"wonder_trade").config.center.key
+      local tosend = pseudorandom_element(compat,"wonder_trade")
       if tosend then
-        MP.ACTIONS.wonder_trade(tosend)
+        MP.ACTIONS.wonder_trade(tosend.config.center.key)
       end
     end
   end,
