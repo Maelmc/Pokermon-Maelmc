@@ -813,6 +813,7 @@ return {
                     "{C:money}#3#",
                     "{C:money}#4#",
                     "{C:money}#5#",
+                    "{C:money}#6#",
                 }
             },
             fitem = {

@@ -627,7 +627,7 @@ local tropius = {
     return {vars = {num, dem}}
   end,
   rarity = 1,
-  cost = 7,
+  cost = 5,
   stage = "Basic",
   ptype = "Grass",
   atlas = "AtlasJokersBasicNatdex",
