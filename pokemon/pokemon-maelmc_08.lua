@@ -249,6 +249,7 @@ local bloodmoon_ursaluna = {
   aux_poke = true,
   custom_pool_func = true,
   blueprint_compat = true,
+  perishable_compat = false,
   calculate = function(self, card, context)
 
     if context.skipping_booster and not context.blueprint then
