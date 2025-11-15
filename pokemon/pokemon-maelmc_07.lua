@@ -511,7 +511,7 @@ local guzzlord = {
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.to_eat,card.ability.extra.unscalable_mult2 * card.ability.extra.to_eat,card.ability.extra.unscalable_mult,card.ability.extra.next_boost}}
+    return {vars = {card.ability.extra.to_eat,card.ability.extra.unscalable_mult2 * card.ability.extra.to_eat,card.ability.extra.unscalable_mult,card.ability.extra.next_boost - get_total_energy(card)}}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,

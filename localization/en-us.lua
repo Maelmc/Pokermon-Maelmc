@@ -699,7 +699,7 @@ return {
                 name = "Guzzlord",
                 text = {
                     "At the end of shop, eats",
-                    "{C:attention}#1#{} thing and gains",
+                    "{C:attention}#1#{} thing(s) and gains",
                     "{X:red,C:white}X#2#{} Mult {C:inactive}(Currently {X:red,C:white}X#3#{C:inactive})",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
