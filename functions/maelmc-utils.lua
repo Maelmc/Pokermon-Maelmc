@@ -76,3 +76,52 @@ function neighbor_ranks(rank)
   end
   return t
 end
+
+function wonder_trade_string_maker(card)
+  local msg = "key;" .. card.config.center.key
+  if get_total_energy(card) ~= 0 then
+    msg = msg .. "/energies;" .. get_total_energy(card)
+  end
+  if card.edition then
+    msg = msg .. "/edition;" .. card.edition.type
+  end
+  if card.ability and card.ability.extra and card.ability.extra.rounds then
+    msg = msg .. "/rounds;" .. card.ability.extra.rounds
+  end
+  return msg
+end
+
+function wonder_trade_joker_creation(key,rounds,energies,edition)
+  G.E_MANAGER:add_event(Event({
+    func = function()
+      local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
+      if rounds then
+        card.ability.extra.rounds = rounds
+      end
+      if energies then
+        for _ = 1, energies do
+            energize(card,nil,nil,true)
+            if card.ability.extra and type(card.ability.extra) == "table" then
+                if card.ability.extra.c_energy_count then
+                    card.ability.extra.c_energy_count = card.ability.extra.c_energy_count + 1
+                else
+                    card.ability.extra.c_energy_count = 1
+                end
+            else --if a base balatro joker
+                if card.ability.c_energy_count then
+                    card.ability.c_energy_count = card.ability.c_energy_count + 1
+                else
+                    card.ability.c_energy_count = 1
+                end
+            end
+        end
+      end
+      if edition then
+        card:set_edition("e_"..edition)
+      end
+      card:add_to_deck()
+      G.jokers:emplace(card)
+      return true
+    end
+  }))  
+end

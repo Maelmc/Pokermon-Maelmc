@@ -29,7 +29,8 @@ local wonder_trade = {
       end
       local tosend = pseudorandom_element(compat,"wonder_trade")
       if tosend then
-        MP.ACTIONS.wonder_trade(tosend.config.center.key)
+        local msg = wonder_trade_string_maker(tosend)
+        MP.ACTIONS.wonder_trade(msg)
       end
     end
   end,
