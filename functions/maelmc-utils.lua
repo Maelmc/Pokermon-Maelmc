@@ -96,10 +96,10 @@ function wonder_trade_joker_creation(key,rounds,energies,edition)
     func = function()
       local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
       if rounds then
-        card.ability.extra.rounds = rounds
+        card.ability.extra.rounds = tonumber(rounds)
       end
       if energies then
-        for _ = 1, energies do
+        for _ = 1, tonumber(energies) do
             energize(card,nil,nil,true)
             if card.ability.extra and type(card.ability.extra) == "table" then
                 if card.ability.extra.c_energy_count then

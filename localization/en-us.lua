@@ -14,7 +14,7 @@ return {
                 name = "Mystery Deck",
                 text = {
                     "Start with a {C:dark_edition}Negative",
-                    "and {C:attention}Eternal {C:purple,T:j_maelmc_wonder_trade}Wonder Trade",
+                    "and {C:attention}Eternal {C:attention,T:j_maelmc_wonder_trade}Wonder Trade",
                 }
             },
         },
