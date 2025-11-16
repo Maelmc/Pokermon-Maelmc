@@ -435,116 +435,11 @@ pattern = '''local function enemyLocation(options)'''
 position = "before"
 match_indent = true
 payload = '''local function action_wonder_trade(msg)
-  local tab = {}
-  for w in string.gmatch(msg,"[^/]+") do
-    table.insert(tab,w)
-  end
-  local key = tab[2]
-	local compat = {}
-	for i = 1, #G.jokers.cards do
-		if G.jokers.cards[i].config.center.key ~= "j_maelmc_wonder_trade" then
-			table.insert(compat,G.jokers.cards[i])
-		end
-	end
-	local tosend_j = pseudorandom_element(compat,"wonder_trade")
-	if tosend_j then
-    local tosend = tosend_j.config.center.key
-    for i = 1, #G.jokers.cards do
-			if G.jokers.cards[i].config.center.key == tosend then
-				G.E_MANAGER:add_event(Event({
-          func = function()
-            G.jokers.cards[i]:remove()
-            return true
-          end
-        }))
-				break
-			end
-		end
-		G.E_MANAGER:add_event(Event({
-      func = function()
-        local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
-        card:add_to_deck()
-        G.jokers:emplace(card)
-        return true
-      end
-    }))
-		MP.ACTIONS.wonder_trade_response(tosend,key)
-	end
-end
-
-local function action_wonder_trade_response(msg)
-  local tab = {}
-  for w in string.gmatch(msg,"[^/]+") do
-    table.insert(tab,w)
-  end
-  local key = tab[2]
-  local sent = tab[3]
-  for i = 1, #G.jokers.cards do
-    if G.jokers.cards[i].config.center.key == sent then
-      G.E_MANAGER:add_event(Event({
-        func = function()
-          G.jokers.cards[i]:remove()
-          return true
-        end
-      }))
-      break
-    end
-  end
-  G.E_MANAGER:add_event(Event({
-    func = function()
-      local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
-      card:add_to_deck()
-      G.jokers:emplace(card)
-      return true
-    end
-  }))
-end'''
-
-[[patches]]
-[patches.pattern]
-target = '=[SMODS Multiplayer "networking/action_handlers.lua"]'
-pattern = '''function MP.ACTIONS.fail_timer()'''
-position = "before"
-match_indent = true
-payload = '''function MP.ACTIONS.wonder_trade(key)
-  Client.send("action:magnetResponse,key:WTREQUEST/"..key)
-end
-
-function MP.ACTIONS.wonder_trade_response(key,sent)
-  Client.send("action:magnetResponse,key:WTANSWER/"..key.."/"..sent)
-end'''
-
-[[patches]]
-[patches.pattern]
-target = '=[SMODS Multiplayer "networking/action_handlers.lua"]'
-pattern = '''elseif parsedAction.action == "version" then'''
-position = "before"
-match_indent = true
-payload = '''elseif parsedAction.action == "magnetResponse" and string.find(parsedAction.key,"WTREQUEST") then
-	action_wonder_trade(parsedAction.key)
-elseif parsedAction.action == "magnetResponse" and string.find(parsedAction.key,"WTANSWER") then
-	action_wonder_trade_response(parsedAction.key)'''
-
-# Wonder Trade with NanoMultiplayer
-[[patches]]
-[patches.pattern]
-target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
-pattern = '''local function enemyLocation(options)'''
-position = "before"
-match_indent = true
-payload = '''local function action_wonder_trade(msg)
   local parsedMsg = MP.UTILS.string_to_table(msg, "/", ";")
   local key = parsedMsg["key"]
   local edition = parsedMsg["edition"]
   local energies = parsedMsg["energies"]
   local rounds = parsedMsg["rounds"]
-  if true then
-    print(parsedMsg)
-    print(key)
-    print(edition)
-    print(energies)
-    print(rounds)
-  end
 
 	local compat = {}
 	for i = 1, #G.jokers.cards do
@@ -581,14 +476,96 @@ local function action_wonder_trade_response(msg)
   local energies = parsedMsg["energies"]
   local rounds = parsedMsg["rounds"]
   local sent = parsedMsg["sent"]
-  if true then
-    print(parsedMsg)
-    print(key)
-    print(edition)
-    print(energies)
-    print(rounds)
-    print(sent)
+
+  for i = 1, #G.jokers.cards do
+    if G.jokers.cards[i].config.center.key == sent then
+      G.E_MANAGER:add_event(Event({
+        func = function()
+          G.jokers.cards[i]:remove()
+          return true
+        end
+      }))
+      break
+    end
   end
+  wonder_trade_joker_creation(key,rounds,energies,edition)
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Multiplayer "networking/action_handlers.lua"]'
+pattern = '''function MP.ACTIONS.fail_timer()'''
+position = "before"
+match_indent = true
+payload = '''function MP.ACTIONS.wonder_trade(msg)
+  Client.send("action:magnetResponse,key:reqType;WTREQUEST/"..msg)
+end
+
+function MP.ACTIONS.wonder_trade_response(msg,sent)
+  Client.send("action:magnetResponse,key:reqType;WTANSWER/"..msg.."/sent;"..sent)
+end'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Multiplayer "networking/action_handlers.lua"]'
+pattern = '''elseif parsedAction.action == "version" then'''
+position = "before"
+match_indent = true
+payload = '''elseif parsedAction.action == "magnetResponse" and string.find(parsedAction.key,"WTREQUEST") then
+	action_wonder_trade(parsedAction.key)
+elseif parsedAction.action == "magnetResponse" and string.find(parsedAction.key,"WTANSWER") then
+	action_wonder_trade_response(parsedAction.key)'''
+
+# Wonder Trade with NanoMultiplayer
+[[patches]]
+[patches.pattern]
+target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
+pattern = '''local function enemyLocation(options)'''
+position = "before"
+match_indent = true
+payload = '''local function action_wonder_trade(msg)
+  local parsedMsg = MP.UTILS.string_to_table(msg, "/", ";")
+  local key = parsedMsg["key"]
+  local edition = parsedMsg["edition"]
+  local energies = parsedMsg["energies"]
+  local rounds = parsedMsg["rounds"]
+
+	local compat = {}
+	for i = 1, #G.jokers.cards do
+		if G.jokers.cards[i].config.center.key ~= "j_maelmc_wonder_trade" then
+			table.insert(compat,G.jokers.cards[i])
+		end
+	end
+	local tosend_j = pseudorandom_element(compat,"wonder_trade")
+	if tosend_j then
+    local tosend = tosend_j.config.center.key
+    for i = 1, #G.jokers.cards do
+			if G.jokers.cards[i].config.center.key == tosend then
+				G.E_MANAGER:add_event(Event({
+          func = function()
+            G.jokers.cards[i]:remove()
+            return true
+          end
+        }))
+				break
+			end
+		end
+    
+		wonder_trade_joker_creation(key,rounds,energies,edition)
+
+    local msg_2 = wonder_trade_string_maker(tosend_j)
+		MP.ACTIONS.wonder_trade_response(msg_2,key)
+	end
+end
+
+local function action_wonder_trade_response(msg)
+  local parsedMsg = MP.UTILS.string_to_table(msg, "/", ";")
+  local key = parsedMsg["key"]
+  local edition = parsedMsg["edition"]
+  local energies = parsedMsg["energies"]
+  local rounds = parsedMsg["rounds"]
+  local sent = parsedMsg["sent"]
 
   for i = 1, #G.jokers.cards do
     if G.jokers.cards[i].config.center.key == sent then

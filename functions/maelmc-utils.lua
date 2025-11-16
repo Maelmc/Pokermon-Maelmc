@@ -118,6 +118,8 @@ function wonder_trade_joker_creation(key,rounds,energies,edition)
       end
       if edition then
         card:set_edition("e_"..edition)
+      else
+        card:set_edition()
       end
       card:add_to_deck()
       G.jokers:emplace(card)
