@@ -534,10 +534,10 @@ position = "before"
 match_indent = true
 payload = '''local function action_wonder_trade(msg)
   local parsedMsg = MP.UTILS.string_to_table(msg, "/", ";")
-  local key = parsedMsg[key]
-  local edition = parsedMsg[edition]
-  local energies = parsedMsg[energies]
-  local rounds = parsedMsg[rounds]
+  local key = parsedMsg["key"]
+  local edition = parsedMsg["edition"]
+  local energies = parsedMsg["energies"]
+  local rounds = parsedMsg["rounds"]
   if true then
     print(parsedMsg)
     print(key)
@@ -576,11 +576,11 @@ end
 
 local function action_wonder_trade_response(msg)
   local parsedMsg = MP.UTILS.string_to_table(msg, "/", ";")
-  local key = parsedMsg[key]
-  local edition = parsedMsg[edition]
-  local energies = parsedMsg[energies]
-  local rounds = parsedMsg[rounds]
-  local sent = parsedMsg[sent]
+  local key = parsedMsg["key"]
+  local edition = parsedMsg["edition"]
+  local energies = parsedMsg["energies"]
+  local rounds = parsedMsg["rounds"]
+  local sent = parsedMsg["sent"]
   if true then
     print(parsedMsg)
     print(key)
