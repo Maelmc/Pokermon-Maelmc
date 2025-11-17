@@ -1,31 +1,36 @@
 --Required by the pokemon family function (right click on a pokemon joker)
-pokermon.add_family({"glimmet", "glimmora"})
-pokermon.add_family({"cufant","copperajah","mega_copperajah"})
-pokermon.add_family({"odd_keystone","spiritomb"})
-pokermon.add_family({
-  {key = "gym_leader", form = "Grass"},
-  {key = "gym_leader", form = "Fire"},
-  {key = "gym_leader", form = "Water"},
-  {key = "gym_leader", form = "Lightning"},
-  {key = "gym_leader", form = "Psychic"},
-  {key = "gym_leader", form = "Fighting"},
-  {key = "gym_leader", form = "Colorless"},
-  {key = "gym_leader", form = "Darkness"},
-  {key = "gym_leader", form = "Metal"},
-  {key = "gym_leader", form = "Fairy"},
-  {key = "gym_leader", form = "Dragon"},
-  {key = "gym_leader", form = "Earth"},
-})
-pokermon.add_family({"inkay","malamar","mega_malamar"})
-pokermon.add_family({"binacle","barbaracle","mega_barbaracle"})
-pokermon.add_family({"ralts","kirlia","gardevoir","mega_gardevoir"})
-pokermon.add_family({"gible","gabite","garchomp","mega_garchomp"})
-pokermon.add_family({"ogerpon","ogerpon_wellspring","ogerpon_hearthflame","ogerpon_cornerstone"})
-pokermon.add_family({"galarian_corsola","cursola"})
-pokermon.add_family({"deoxys","deoxys_attack","deoxys_defense","deoxys_speed"})
-pokermon.add_family({"woobat","swoobat"})
-pokermon.add_family({"gulpin","swalot"})
-pokermon.add_family({"wingull","pelipper"})
+local name_lists = {{"glimmet", "glimmora"},
+  {"cufant","copperajah","mega_copperajah"},
+  {"odd_keystone","spiritomb"},
+  {
+    {key = "gym_leader", form = "Grass"},
+    {key = "gym_leader", form = "Fire"},
+    {key = "gym_leader", form = "Water"},
+    {key = "gym_leader", form = "Lightning"},
+    {key = "gym_leader", form = "Psychic"},
+    {key = "gym_leader", form = "Fighting"},
+    {key = "gym_leader", form = "Colorless"},
+    {key = "gym_leader", form = "Darkness"},
+    {key = "gym_leader", form = "Metal"},
+    {key = "gym_leader", form = "Fairy"},
+    {key = "gym_leader", form = "Dragon"},
+    {key = "gym_leader", form = "Earth"},
+  },
+  {"inkay","malamar","mega_malamar"},
+  {"binacle","barbaracle","mega_barbaracle"},
+  {"ralts","kirlia","gardevoir","mega_gardevoir"},
+  {"gible","gabite","garchomp","mega_garchomp"},
+  {"ogerpon","ogerpon_wellspring","ogerpon_hearthflame","ogerpon_cornerstone"},
+  {"galarian_corsola","cursola"},
+  {"deoxys","deoxys_attack","deoxys_defense","deoxys_speed"},
+  {"woobat","swoobat"},
+  {"gulpin","swalot"},
+  {"wingull","pelipper"},
+}
+
+for _, list in ipairs(name_lists) do
+  pokermon.add_family(list)
+end
 
 --Load Sprites file
 local sprite, load_error = SMODS.load_file("sprites.lua")
@@ -186,7 +191,7 @@ for _, file in ipairs(pfiles) do
     if curr_pokemon.init then curr_pokemon:init() end
     
     if curr_pokemon.list and #curr_pokemon.list > 0 then
-      for i, item in ipairs(curr_pokemon.list) do
+      for _, item in ipairs(curr_pokemon.list) do
         if string.find(item.atlas, "maelmc") then
           pokermon.Pokemon(item,"maelmc",true)
         else
@@ -196,6 +201,12 @@ for _, file in ipairs(pfiles) do
           end
           pokermon.Pokemon(item,"maelmc",false)
         end
+
+        -- Dex Ordering for Pokermon Dip
+        if (SMODS.Mods["NachosPokermonDip"] or {}).can_load and PkmnDip and PkmnDip.dex_order_groups and item.stage ~= "Other" then
+          PkmnDip.dex_order_groups[#PkmnDip.dex_order_groups+1] = {item.name}
+        end
+
       end
     end
   end
