@@ -30,14 +30,7 @@ local wonder_trade = {
       local tosend = pseudorandom_element(compat,"wonder_trade")
       if tosend then
         local msg = wonder_trade_string_maker(tosend)
-        local parsedMsg = MP.UTILS.string_to_table(msg, "/", ";")
-        local key = parsedMsg["key"]
-        local edition = parsedMsg["edition"]
-        local energies = parsedMsg["energies"]
-        local extra = parsedMsg["extra"]
-        wonder_trade_joker_creation(key,extra,energies,edition)
-        
-        --MP.ACTIONS.wonder_trade(msg)
+        MP.ACTIONS.wonder_trade(msg)
       end
     end
   end,
