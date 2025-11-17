@@ -462,7 +462,7 @@ payload = '''local function action_wonder_trade(msg)
 			end
 		end
     
-		wonder_trade_joker_creation(key,extra,energies,edition)
+		wonder_trade_joker_creation(key,extra,edition)
 
     local msg_2 = wonder_trade_string_maker(tosend_j)
 		MP.ACTIONS.wonder_trade_response(msg_2,key)
@@ -488,7 +488,7 @@ local function action_wonder_trade_response(msg)
       break
     end
   end
-  wonder_trade_joker_creation(key,extra,energies,edition)
+  wonder_trade_joker_creation(key,extra,edition)
 end
 '''
 
@@ -552,7 +552,7 @@ payload = '''local function action_wonder_trade(msg)
 			end
 		end
     
-		wonder_trade_joker_creation(key,extra,energies,edition)
+		wonder_trade_joker_creation(key,extra,edition)
 
     local msg_2 = wonder_trade_string_maker(tosend_j)
 		MP.ACTIONS.wonder_trade_response(msg_2,key)
@@ -578,7 +578,7 @@ local function action_wonder_trade_response(msg)
       break
     end
   end
-  wonder_trade_joker_creation(key,extra,energies,edition)
+  wonder_trade_joker_creation(key,extra,edition)
 end
 '''
 

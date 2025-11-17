@@ -79,9 +79,6 @@ end
 
 function wonder_trade_string_maker(card)
   local msg = "key;" .. card.config.center.key
-  if get_total_energy(card) ~= 0 then
-    msg = msg .. "/energies;" .. get_total_energy(card)
-  end
   if card.edition then
     msg = msg .. "/edition;" .. card.edition.type
   end
@@ -98,7 +95,7 @@ function wonder_trade_string_maker(card)
   return msg
 end
 
-function wonder_trade_joker_creation(key,extra,energies,edition)
+function wonder_trade_joker_creation(key,extra,edition)
   G.E_MANAGER:add_event(Event({
     func = function()
       local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
@@ -108,24 +105,6 @@ function wonder_trade_joker_creation(key,extra,energies,edition)
         extra = string.gsub(extra,"|",":")
         extra = string.gsub(extra,"ç",",")
         card.ability.extra = load(extra)()
-      end
-      if energies then
-        for _ = 1, tonumber(energies) do
-            energize(card,nil,nil,true)
-            if card.ability.extra and type(card.ability.extra) == "table" then
-                if card.ability.extra.c_energy_count then
-                    card.ability.extra.c_energy_count = card.ability.extra.c_energy_count + 1
-                else
-                    card.ability.extra.c_energy_count = 1
-                end
-            else --if a base balatro joker
-                if card.ability.c_energy_count then
-                    card.ability.c_energy_count = card.ability.c_energy_count + 1
-                else
-                    card.ability.c_energy_count = 1
-                end
-            end
-        end
       end
       if edition then
         card:set_edition("e_"..edition)
