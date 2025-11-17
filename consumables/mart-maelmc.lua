@@ -507,15 +507,7 @@ local metronome = {
   end,
   use = function(self, card, area, copier)
     set_spoon_item(card)
-    local text = card.ability.hand_played
-    local disp_text = localize(text,'poker_hands')
-    level_up_hand(card, text, nil, card.ability.level_by)
-    if G.STATE == G.STATES.SMODS_BOOSTER_OPENED or G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK
-      or G.STATE == G.STATES.STANDARD_PACK then
-      update_hand_text({nopulse = true, delay = 0.3}, {mult = 0, chips = 0, level = '', handname = ''})
-    else
-      update_hand_text({nopulse = nil, delay = 0.3}, {handname=disp_text, level=G.GAME.hands[text].level, mult = G.GAME.hands[text].mult, chips = G.GAME.hands[text].chips})
-    end
+    SMODS.smart_level_up_hand(card, card.ability.hand_played, false, 3)
   end,
   calculate = function(self, card, context)
     if context.cardarea == G.jokers and context.scoring_hand and context.joker_main then
