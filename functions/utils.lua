@@ -87,9 +87,12 @@ function wonder_trade_string_maker(card)
   end
   if card.ability and card.ability.extra then
     local extradump = DataDumper(card.ability.extra)
-    --extradump:gsub("{","µ") maybe mandatory depending on how messages are actually passed by multiplayer mod, need to test
-    --extradump:gsub("}","¤")
-    extradump:gsub(":","|")
+    extradump = string.gsub(extradump,"{","§") --maybe mandatory depending on how messages are actually passed by multiplayer mod, need to test
+    extradump = string.gsub(extradump,"}","¤")
+    extradump = string.gsub(extradump,":","|")
+    extradump = string.gsub(extradump,",","ç")
+    extradump = string.gsub(extradump,'\n',"")
+    extradump = string.gsub(extradump,'\r',"")
     msg = msg .. "/extra;" .. extradump
   end
   return msg
@@ -100,9 +103,10 @@ function wonder_trade_joker_creation(key,extra,energies,edition)
     func = function()
       local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
       if extra then
-        --extra:gsub("µ","{")
-        --extra:gsub("¤","}")
-        extra:gsub("|",":")
+        extra = string.gsub(extra,"§","{")
+        extra = string.gsub(extra,"¤","}")
+        extra = string.gsub(extra,"|",":")
+        extra = string.gsub(extra,"ç",",")
         card.ability.extra = load(extra)()
       end
       if energies then
