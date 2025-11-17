@@ -439,7 +439,7 @@ payload = '''local function action_wonder_trade(msg)
   local key = parsedMsg["key"]
   local edition = parsedMsg["edition"]
   local energies = parsedMsg["energies"]
-  local rounds = parsedMsg["rounds"]
+  local extra = parsedMsg["extra"]
 
 	local compat = {}
 	for i = 1, #G.jokers.cards do
@@ -462,7 +462,7 @@ payload = '''local function action_wonder_trade(msg)
 			end
 		end
     
-		wonder_trade_joker_creation(key,rounds,energies,edition)
+		wonder_trade_joker_creation(key,extra,energies,edition)
 
     local msg_2 = wonder_trade_string_maker(tosend_j)
 		MP.ACTIONS.wonder_trade_response(msg_2,key)
@@ -474,7 +474,7 @@ local function action_wonder_trade_response(msg)
   local key = parsedMsg["key"]
   local edition = parsedMsg["edition"]
   local energies = parsedMsg["energies"]
-  local rounds = parsedMsg["rounds"]
+  local extra = parsedMsg["extra"]
   local sent = parsedMsg["sent"]
 
   for i = 1, #G.jokers.cards do
@@ -488,7 +488,7 @@ local function action_wonder_trade_response(msg)
       break
     end
   end
-  wonder_trade_joker_creation(key,rounds,energies,edition)
+  wonder_trade_joker_creation(key,extra,energies,edition)
 end
 '''
 
@@ -529,7 +529,7 @@ payload = '''local function action_wonder_trade(msg)
   local key = parsedMsg["key"]
   local edition = parsedMsg["edition"]
   local energies = parsedMsg["energies"]
-  local rounds = parsedMsg["rounds"]
+  local extra = parsedMsg["extra"]
 
 	local compat = {}
 	for i = 1, #G.jokers.cards do
@@ -552,7 +552,7 @@ payload = '''local function action_wonder_trade(msg)
 			end
 		end
     
-		wonder_trade_joker_creation(key,rounds,energies,edition)
+		wonder_trade_joker_creation(key,extra,energies,edition)
 
     local msg_2 = wonder_trade_string_maker(tosend_j)
 		MP.ACTIONS.wonder_trade_response(msg_2,key)
@@ -564,7 +564,7 @@ local function action_wonder_trade_response(msg)
   local key = parsedMsg["key"]
   local edition = parsedMsg["edition"]
   local energies = parsedMsg["energies"]
-  local rounds = parsedMsg["rounds"]
+  local extra = parsedMsg["extra"]
   local sent = parsedMsg["sent"]
 
   for i = 1, #G.jokers.cards do
@@ -578,7 +578,7 @@ local function action_wonder_trade_response(msg)
       break
     end
   end
-  wonder_trade_joker_creation(key,rounds,energies,edition)
+  wonder_trade_joker_creation(key,extra,energies,edition)
 end
 '''
 

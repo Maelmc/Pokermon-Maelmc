@@ -142,28 +142,16 @@ SMODS.current_mod.config_tab = function()
     }
 end
 
---Load helper function files
-local helper, load_error = SMODS.load_file("functions/maelmc-utils.lua")
-if load_error then
-  sendDebugMessage ("The error is: "..load_error)
-else
-  helper()
-end
-
---Load Debuff logic
-local debuff, load_error = SMODS.load_file("functions/debuffs.lua")
-if load_error then
-  sendDebugMessage ("The error is: "..load_error)
-else
-  debuff()
-end
-
---Load UI stuff
-local ui, load_error = SMODS.load_file("functions/ui.lua")
-if load_error then
-  sendDebugMessage ("The error is: "..load_error)
-else
-  ui()
+--Load functions
+local pfunc = NFS.getDirectoryItems(mod_dir.."functions")
+for _, file in ipairs(pfunc) do
+  sendDebugMessage ("The file is: "..file)
+  local helper, load_error = SMODS.load_file("functions/"..file)
+  if load_error then
+    sendDebugMessage ("The error is: "..load_error)
+  else
+    helper()
+  end
 end
 
 --Load stickers

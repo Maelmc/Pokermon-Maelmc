@@ -85,18 +85,25 @@ function wonder_trade_string_maker(card)
   if card.edition then
     msg = msg .. "/edition;" .. card.edition.type
   end
-  if card.ability and card.ability.extra and card.ability.extra.rounds then
-    msg = msg .. "/rounds;" .. card.ability.extra.rounds
+  if card.ability and card.ability.extra then
+    local extradump = DataDumper(card.ability.extra)
+    --extradump:gsub("{","µ") maybe mandatory depending on how messages are actually passed by multiplayer mod, need to test
+    --extradump:gsub("}","¤")
+    extradump:gsub(":","|")
+    msg = msg .. "/extra;" .. extradump
   end
   return msg
 end
 
-function wonder_trade_joker_creation(key,rounds,energies,edition)
+function wonder_trade_joker_creation(key,extra,energies,edition)
   G.E_MANAGER:add_event(Event({
     func = function()
       local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
-      if rounds then
-        card.ability.extra.rounds = tonumber(rounds)
+      if extra then
+        --extra:gsub("µ","{")
+        --extra:gsub("¤","}")
+        extra:gsub("|",":")
+        card.ability.extra = load(extra)()
       end
       if energies then
         for _ = 1, tonumber(energies) do
