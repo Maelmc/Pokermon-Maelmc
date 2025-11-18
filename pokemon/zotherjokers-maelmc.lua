@@ -438,10 +438,10 @@ local pc = {
 local photographer = {
   name = "photographer",
   pos = {x = 4, y = 1},
-  config = {extra = {timeless_woods_found = {}, mult_mod = 5, generated_bloodmoon = 0}},
+  config = {extra = {found = {}, to_snap = 10, --[[mult_mod = 5,]] generated_bloodmoon = 0, joker = 1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
-    return {vars = {card.ability.extra.mult_mod, card.ability.extra.mult_mod * #card.ability.extra.timeless_woods_found}}
+    return {vars = {card.ability.extra.joker, card.ability.extra.to_snap, #card.ability.extra.found --[[card.ability.extra.mult_mod, card.ability.extra.mult_mod * #card.ability.extra.found]]}}
   end,
   rarity = 3,
   cost = 8,
@@ -450,10 +450,10 @@ local photographer = {
   blueprint_compat = true,
   calculate = function(self, card, context)
 
-    -- scoring
+    --[[scoring
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main then
-        local mult = #card.ability.extra.timeless_woods_found * card.ability.extra.mult_mod
+        local mult = #card.ability.extra.found * card.ability.extra.mult_mod
         if mult > 0 then
           return {
             colour = G.C.MULT,
@@ -462,33 +462,43 @@ local photographer = {
           }
         end
       end
-    end
+    end]]
 
     -- generating bloodmoon ursaluna in the next shop when you reach 10 photos
-    if context.reroll_shop and (not context.blueprint) and (#card.ability.extra.timeless_woods_found >= 10) and (card.ability.extra.generated_bloodmoon < 2) then
-      if card.ability.extra.generated_bloodmoon == 0 and context.reroll_shop then card.ability.extra.generated_bloodmoon = 1
-      else 
-        card.ability.extra.generated_bloodmoon = 2
-        local temp_card = {set = "Joker", area = G.shop_jokers, key = "j_maelmc_bloodmoon_ursaluna"}
-        local add_card = SMODS.create_card(temp_card)
-        poke_add_shop_card(add_card, card)
+    if context.reroll_shop or context.starting_shop and (not context.blueprint) then
+      local temp_card = nil
+
+      if (#card.ability.extra.found >= card.ability.extra.to_snap) and (card.ability.extra.generated_bloodmoon < 2) then
+        if context.starting_shop or (card.ability.extra.generated_bloodmoon == 0 and context.reroll_shop) then
+          card.ability.extra.generated_bloodmoon = (context.starting_shop and 2) or 1
+          temp_card = {set = "Joker", area = G.shop_jokers}
+        else 
+          card.ability.extra.generated_bloodmoon = 2
+          temp_card = {set = "Joker", area = G.shop_jokers, key = "j_maelmc_bloodmoon_ursaluna"}
+        end
+      else
+        temp_card = {set = "Joker", area = G.shop_jokers}
       end
+
+      local add_card = SMODS.create_card(temp_card)
+      if card.ability.extra.generated_bloodmoon == 2 then add_card.ability.couponed = true end
+      poke_add_shop_card(add_card, card)
     end
 
-    if context.starting_shop and (not context.blueprint) and (#card.ability.extra.timeless_woods_found >= 10) and (card.ability.extra.generated_bloodmoon < 2) then
+    --[[
+    if context.starting_shop and (not context.blueprint) and (#card.ability.extra.found >= 10) and (card.ability.extra.generated_bloodmoon < 2) then
       card.ability.extra.generated_bloodmoon = 2
       local temp_card = {set = "Joker", area = G.shop_jokers, key = "j_maelmc_bloodmoon_ursaluna"}
       local add_card = SMODS.create_card(temp_card)
-      poke_add_shop_card(add_card, card)
       add_card.ability.couponed = true
-      add_card:set_cost()
-    end
+      poke_add_shop_card(add_card, card)
+    end]]
 
   end,
   add_to_deck = function(self, card, from_debuff)
     for _, v in pairs(G.jokers.cards) do
       if table.contains(timeless_woods_available, v.config.center.name) then
-        card.ability.extra.timeless_woods_found[#card.ability.extra.timeless_woods_found+1] = v.config.center_key
+        card.ability.extra.found[#card.ability.extra.found+1] = v.config.center_key
         card:juice_up()
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("maelmc_photo_ex")})
       end

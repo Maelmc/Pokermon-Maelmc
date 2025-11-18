@@ -571,13 +571,16 @@ return {
             j_maelmc_photographer = {
                 name = "Photographer",
                 text = {
-                    "Gains {C:red}+#1#{} Mult for each",
+                    --[["Gains {C:red}+#1#{} Mult for each",
                     "Pokémon from the",
-                    "Timeless Woods encountered",
-                    "{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
-                    " ",
-                    '"Snap photos of {C:red}10 species{}!"',
-                    "{C:inactive,s:0.8}(Right-click to see your photos)",
+                    "{C:attention}Timeless Woods{} encountered",
+                    "{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",]]
+                    "{C:attention}+#1# Joker{} available in shop",
+                    "{br:2}ERROR - CONTACT STEAK",
+                    '"Snap photos of {C:red}#2# species{} from',
+                    'the {C:attention}Timeless Woods{}!"',
+                    "{C:inactive}(Currently #3#)",
+                    "{C:inactive,s:0.8}(Right-click to see remaining eligible species)",
 
                 }
             },

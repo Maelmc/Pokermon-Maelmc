@@ -93,8 +93,10 @@ position = "after"
 match_indent = true
 payload = '''
 if cardname == "photographer" then
-    for k, v in pairs(card.ability.extra.timeless_woods_found) do
-        table.insert(keys, v)
+    for _, v in ipairs(timeless_woods_keys) do
+        if not card.ability.extra.found[v] then
+          table.insert(keys, v)
+        end
     end
 end
 '''
