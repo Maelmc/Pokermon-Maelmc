@@ -68,85 +68,6 @@ if (SMODS.Mods["Pokermon"] or {}).can_load then
     pokermon_config = SMODS.Mods["Pokermon"].config
 end
 
-SMODS.current_mod.config_tab = function() 
-    return {
-      n = G.UIT.ROOT,
-      config = {
-        align = "cm",
-        padding = 0.05,
-        colour = G.C.CLEAR,
-      },
-      nodes = {
-        {
-          n = G.UIT.R,
-          config = {
-            padding = 0.05,
-            align = "cm"
-          },
-          nodes = {
-            {
-              n = G.UIT.T,
-              config = {
-                text = localize("poke_settings_header_norequired"),
-                shadow = true,
-                scale = 0.75 * 0.8,
-                colour = HEX("ED533A")
-              }
-            }
-          },
-        },
-        {
-          n = G.UIT.R,
-          config = {
-              align = "cm",
-              padding = 0.25,
-              colour = G.C.CLEAR,
-          },
-          nodes = {
-            create_toggle({
-              label = localize("background_color"),
-              ref_table = maelmc_config,
-              ref_value = "background_color",
-            })
-          },
-        },
-        {
-          n = G.UIT.R,
-          config = {
-            padding = 0.05,
-            align = "cm"
-          },
-          nodes = {
-            {
-              n = G.UIT.T,
-              config = {
-                text = localize("poke_settings_header_required"),
-                shadow = true,
-                scale = 0.75 * 0.8,
-                colour = HEX("ED533A")
-              }
-            }
-          },
-        },
-        {
-          n = G.UIT.R,
-          config = {
-              align = "cm",
-              padding = 0.25,
-              colour = G.C.CLEAR,
-          },
-          nodes = {
-            create_toggle({
-              label = localize("disable_spiritomb"),
-              ref_table = maelmc_config,
-              ref_value = "disable_spiritomb",
-            }),
-          },
-        }
-      }
-    }
-end
-
 --Load functions
 local pfunc = NFS.getDirectoryItems(mod_dir.."functions")
 for _, file in ipairs(pfunc) do
@@ -195,7 +116,10 @@ for _, file in ipairs(pfiles) do
         if string.find(item.atlas, "maelmc") then
           pokermon.Pokemon(item,"maelmc",true)
         else
-          if not (string.find(item.name,"deoxys") or string.find(item.name,"ogerpon")) then
+          if not (string.find(item.name,"deoxys") 
+          or string.find(item.name,"ogerpon")
+          or item.name == "mega_malamar"
+          or item.name == "mega_barbaracle") then
             poke_load_atlas(item)
             poke_load_sprites(item)
           end

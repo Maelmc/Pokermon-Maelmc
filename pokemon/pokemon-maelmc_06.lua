@@ -192,8 +192,9 @@ local malamar={
 -- Mega Malamar 687-1
 local mega_malamar={
   name = "mega_malamar",
-  pos = PokemonSprites["mega_malamar"] and PokemonSprites["mega_malamar"].base.pos or PokemonSprites["malamar"].base.pos,
-  soul_pos = PokemonSprites["mega_malamar"] and PokemonSprites["mega_malamar"].base.soul_pos or {x = PokemonSprites["malamar"].base.pos.x + 1, y = PokemonSprites["malamar"].base.pos.y},
+  pos = {x = 6, y = 1},
+  soul_pos = {x = 7, y = 1},
+  artist = "KingOfThe-X-Roads",
   config = {extra = {Xmult_multi = 2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -204,7 +205,7 @@ local mega_malamar={
   cost = 12,
   stage = "Mega",
   ptype = "Dark",
-  atlas = PokemonSprites["mega_malamar"] and "AtlasJokersBasicGen06" or "AtlasJokersBasicNatdex",
+  atlas = "maelmc_jokers",
   blueprint_compat = true,
   calculate = function(self, card, context)
 
@@ -426,8 +427,9 @@ local barbaracle={
 -- Mega Barbaracle 689-1
 local mega_barbaracle={
   name = "mega_barbaracle",
-  pos = PokemonSprites["mega_barbaracle"] and PokemonSprites["mega_barbaracle"].base.pos or PokemonSprites["barbaracle"].base.pos,
-  soul_pos = PokemonSprites["mega_barbaracle"] and PokemonSprites["mega_barbaracle"].base.soul_pos or {x = PokemonSprites["barbaracle"].base.pos.x + 1, y = PokemonSprites["barbaracle"].base.pos.y},
+  pos = {x = 8, y = 1},
+  soul_pos = {x = 9, y = 1},
+  artist = "KingOfThe-X-Roads",
   config = {extra = {value = 7, retriggers = 11}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -438,7 +440,7 @@ local mega_barbaracle={
   cost = 12,
   stage = "Mega",
   ptype = "Earth",
-  atlas = PokemonSprites["mega_barbaracle"] and "AtlasJokersBasicGen06" or "AtlasJokersBasicNatdex",
+  atlas = "maelmc_jokers",
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.repetition and not context.end_of_round and context.cardarea == G.play then

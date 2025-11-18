@@ -18,3 +18,82 @@ function Game:main_menu(change_context)
 
     return ret
 end
+
+SMODS.current_mod.config_tab = function() 
+    return {
+      n = G.UIT.ROOT,
+      config = {
+        align = "cm",
+        padding = 0.05,
+        colour = G.C.CLEAR,
+      },
+      nodes = {
+        {
+          n = G.UIT.R,
+          config = {
+            padding = 0.05,
+            align = "cm"
+          },
+          nodes = {
+            {
+              n = G.UIT.T,
+              config = {
+                text = localize("poke_settings_header_norequired"),
+                shadow = true,
+                scale = 0.75 * 0.8,
+                colour = HEX("ED533A")
+              }
+            }
+          },
+        },
+        {
+          n = G.UIT.R,
+          config = {
+              align = "cm",
+              padding = 0.25,
+              colour = G.C.CLEAR,
+          },
+          nodes = {
+            create_toggle({
+              label = localize("background_color"),
+              ref_table = maelmc_config,
+              ref_value = "background_color",
+            })
+          },
+        },
+        {
+          n = G.UIT.R,
+          config = {
+            padding = 0.05,
+            align = "cm"
+          },
+          nodes = {
+            {
+              n = G.UIT.T,
+              config = {
+                text = localize("poke_settings_header_required"),
+                shadow = true,
+                scale = 0.75 * 0.8,
+                colour = HEX("ED533A")
+              }
+            }
+          },
+        },
+        {
+          n = G.UIT.R,
+          config = {
+              align = "cm",
+              padding = 0.25,
+              colour = G.C.CLEAR,
+          },
+          nodes = {
+            create_toggle({
+              label = localize("disable_spiritomb"),
+              ref_table = maelmc_config,
+              ref_value = "disable_spiritomb",
+            }),
+          },
+        }
+      }
+    }
+end
