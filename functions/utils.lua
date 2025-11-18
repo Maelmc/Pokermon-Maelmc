@@ -78,33 +78,34 @@ function neighbor_ranks(rank)
 end
 
 function wonder_trade_string_maker(card)
-  local msg = "key;" .. card.config.center.key
+  local key = card.config.center.key
+  local msg = "key;" .. key
   if card.edition then
     msg = msg .. "/edition;" .. card.edition.type
   end
-  if card.ability and card.ability.extra then
-    local extradump = DataDumper(card.ability.extra)
-    extradump = string.gsub(extradump,"{","§") --maybe mandatory depending on how messages are actually passed by multiplayer mod, need to test
-    extradump = string.gsub(extradump,"}","¤")
-    extradump = string.gsub(extradump,":","|")
-    extradump = string.gsub(extradump,",","ç")
-    extradump = string.gsub(extradump,'\n',"")
-    extradump = string.gsub(extradump,'\r',"")
-    msg = msg .. "/extra;" .. extradump
+  if card.ability and card.ability and key ~= "j_poke_smeargle" and key ~= "j_nacho_passimian" then
+    local ability = DataDumper(card.ability)
+    ability = string.gsub(ability,"{","§") --maybe mandatory depending on how messages are actually passed by multiplayer mod, need to test
+    ability = string.gsub(ability,"}","¤")
+    ability = string.gsub(ability,":","|")
+    ability = string.gsub(ability,",","ç")
+    ability = string.gsub(ability,'\n',"")
+    ability = string.gsub(ability,'\r',"")
+    msg = msg .. "/extra;" .. ability
   end
   return msg
 end
 
-function wonder_trade_joker_creation(key,extra,edition)
+function wonder_trade_joker_creation(key,ability,edition)
   G.E_MANAGER:add_event(Event({
     func = function()
       local card = create_card("Joker", G.jokers, false, nil, nil, nil, key)
-      if extra then
-        extra = string.gsub(extra,"§","{")
-        extra = string.gsub(extra,"¤","}")
-        extra = string.gsub(extra,"|",":")
-        extra = string.gsub(extra,"ç",",")
-        card.ability.extra = load(extra)()
+      if ability then
+        ability = string.gsub(ability,"§","{")
+        ability = string.gsub(ability,"¤","}")
+        ability = string.gsub(ability,"|",":")
+        ability = string.gsub(ability,"ç",",")
+        card.ability = load(ability)()
       end
       if edition then
         card:set_edition("e_"..edition)
