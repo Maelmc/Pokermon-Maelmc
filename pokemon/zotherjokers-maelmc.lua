@@ -441,7 +441,9 @@ local photographer = {
   config = {extra = {found = {}, to_snap = 10, --[[mult_mod = 5,]] generated_bloodmoon = 0, joker = 1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
-    return {vars = {card.ability.extra.joker, card.ability.extra.to_snap, #card.ability.extra.found --[[card.ability.extra.mult_mod, card.ability.extra.mult_mod * #card.ability.extra.found]]}}
+    local count = 0
+    for _ in pairs(card.ability.extra.found) do count = count + 1 end
+    return {vars = {card.ability.extra.joker, card.ability.extra.to_snap, count --[[card.ability.extra.mult_mod, card.ability.extra.mult_mod * #card.ability.extra.found]]}}
   end,
   rarity = 3,
   cost = 8,
@@ -467,8 +469,10 @@ local photographer = {
     -- generating bloodmoon ursaluna in the next shop when you reach 10 photos
     if context.reroll_shop or context.starting_shop and (not context.blueprint) then
       local temp_card = nil
+      local count = 0
+      for _ in pairs(card.ability.extra.found) do count = count + 1 end
 
-      if (#card.ability.extra.found >= card.ability.extra.to_snap) and (card.ability.extra.generated_bloodmoon < 2) then
+      if (count >= card.ability.extra.to_snap) and (card.ability.extra.generated_bloodmoon < 2) then
         if context.starting_shop or (card.ability.extra.generated_bloodmoon == 0 and context.reroll_shop) then
           card.ability.extra.generated_bloodmoon = (context.starting_shop and 2) or 1
           temp_card = {set = "Joker", area = G.shop_jokers}
@@ -498,10 +502,15 @@ local photographer = {
   add_to_deck = function(self, card, from_debuff)
     for _, v in pairs(G.jokers.cards) do
       if table.contains(timeless_woods_available, v.config.center.name) then
-        card.ability.extra.found[#card.ability.extra.found+1] = v.config.center_key
+        v.ability.extra.found[v.config.center_key] = true
         card:juice_up()
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("maelmc_photo_ex")})
       end
+    end
+    if G.shop_jokers then
+      local temp_card = {set = "Joker", area = G.shop_jokers}
+      local add_card = SMODS.create_card(temp_card)
+      poke_add_shop_card(add_card, card)
     end
   end
 }
