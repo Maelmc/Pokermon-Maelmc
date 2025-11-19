@@ -334,6 +334,7 @@ local gulpin={
   ptype = "Dark",
   atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
+  volatile = true,
   calculate = function(self, card, context)
     if context.setting_blind and not context.blueprint and card.ability.extra.stockpile < card.ability.extra.max_stockpile then
       card.ability.extra.stockpile = card.ability.extra.stockpile + 1
@@ -396,6 +397,7 @@ local swalot={
   ptype = "Dark",
   atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
+  volatile = true,
   calculate = function(self, card, context)
     if context.setting_blind and not context.blueprint and card.ability.extra.stockpile < card.ability.extra.max_stockpile then
       card.ability.extra.stockpile = card.ability.extra.stockpile + 1
