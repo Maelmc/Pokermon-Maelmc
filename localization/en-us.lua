@@ -753,11 +753,16 @@ return {
             j_maelmc_mega_barbaracle = {
                 name = "Mega Barbaracle",
                 text = {
+                    "{C:attention}+#1#{} card selection limit",
+                    "{C:attention}+#2#{} hand size",
+                    "Debuffs all cards but {C:attention}#3#s",
+                    --[[ OLD EFFECT
                     "Retriggers {C:attention}#1#{} played {C:attention}#2#s{}",
                     "{C:inactive,s:0.8}(Divided evenly between scoring {C:attention,s:0.8}#2#s{C:inactive,s:0.8}){}",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Retriggers {C:attention}#1#{} held in hand {C:attention}#2#s{}",
                     "{C:inactive,s:0.8}(Divided evenly between held {C:attention,s:0.8}#2#s{C:inactive,s:0.8}){}",
+                    ]]
                 } 
             },
             j_maelmc_wingull = {
@@ -968,6 +973,30 @@ return {
         labels = {
             k_maelmc_ultra_beast = "Ultra Beast",
             maelmc_pokerus = "Pokérus",
+        },
+        poker_hands = {
+            ["Six of a Kind"] = "Six of a Kind",
+            ["Seven of a Kind"] = "Seven of a Kind",
+            ["Eight of a Kind"] = "Eight of a Kind",
+            ["Nine of a Kind"] = "Nine of a Kind",
+            ["Ten of a Kind"] = "Ten of a Kind",
+            ["Eleven of a Kind"] = "Eleven of a Kind",
+            ["Twelve of a Kind"] = "Twelve of a Kind",
+            ["Thirteen of a Kind"] = "Thirteen of a Kind",
+            ["Flush Six"] = "Flush Six",
+            ["Flush Seven"] = "Flush Seven",
+            ["Flush Eight"] = "Flush Eight",
+            ["Flush Nine"] = "Flush Nine",
+            ["Flush Ten"] = "Flush Ten",
+            ["Flush Eleven"] = "Flush Eleven",
+            ["Flush Twelve"] = "Flush Twelve",
+            ["Flush Thirteen"] = "Flush Thirteen",
+            ["Barbarakind"] = "Barbarakind",
+            ["Barbaraflush"] = "Barbaraflush",
+            ["Mega Barbarakind"] = "Mega Barbarakind",
+            ["Mega Barbaraflush"] = "Mega Barbaraflush",
+            ["Laxing Mega Barbarakind"] = "Laxing Mega Barbarakind",
+            ["Laxing Mega Barbaraflush"] = "Laxing Mega Barbaraflush",
         },
         v_dictionary = {
             maelmc_discard = "+#1# Discard",

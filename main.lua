@@ -232,9 +232,3 @@ for _, file in ipairs(pchallenges) do
     end
   end
 end
-
-function SMODS.current_mod.reset_game_globals(run_start)
-  reset_maelmc_hearthflame_card()
-  reset_maelmc_wingull_card()
-  reset_maelmc_pelipper_card()
-end

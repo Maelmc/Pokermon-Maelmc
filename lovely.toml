@@ -608,3 +608,25 @@ payload = '''elseif parsedAction.action == "magnetResponse" and string.find(pars
 	action_wonder_trade(parsedAction.key)
 elseif parsedAction.action == "magnetResponse" and string.find(parsedAction.key,"WTANSWER") then
 	action_wonder_trade_response(parsedAction.key)'''
+
+# Removing Agarmon 5oak/f5 ownership
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Agarmons "src/pokemon/gmax/143_snorlax.lua"]'
+pattern = '''  SMODS.PokerHand:take_ownership("Five of a Kind", {'''
+position = "before"
+match_indent = true
+payload = '''
+if not next(SMODS.find_mod('PokermonMaelmc')) then
+'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Agarmons "src/pokemon/gmax/143_snorlax.lua"]'
+pattern = '''return {
+  name = "Agarmons G-Max Snorlax",'''
+position = "before"
+match_indent = true
+payload = '''
+end
+'''

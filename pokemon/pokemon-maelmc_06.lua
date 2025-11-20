@@ -430,11 +430,11 @@ local mega_barbaracle={
   pos = {x = 8, y = 1},
   soul_pos = {x = 9, y = 1},
   artist = "KingOfThe-X-Roads",
-  config = {extra = {value = 7, retriggers = 11}},
+  config = {extra = {value = 7, selection_limit_mod = 6, h_size = 3 --[[, retriggers = 11]]}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     local abbr = card.ability.extra
-    return {vars = {abbr.retriggers, abbr.value}}
+    return {vars = {abbr.selection_limit_mod, abbr.h_size --[[, abbr.retriggers]], abbr.value}}
   end,
   rarity = "poke_mega",
   cost = 12,
@@ -443,6 +443,19 @@ local mega_barbaracle={
   atlas = "maelmc_jokers",
   blueprint_compat = true,
   calculate = function(self, card, context)
+    --[[if context.setting_blind then
+      local add = function(v) return not v:get_id() == card.ability.extra.value end
+      local modify = function(v) SMODS.debuff_card(v, true, card) end
+      local args = {array = G.playing_cards, amt = #G.playing_cards, seed = 'mega_barbaracle', add_con = add, mod_func = modify}
+      pseudorandom_multi(args)
+    end
+
+    if context.end_of_round and not context.individual and not context.repetition then
+      for _, v in pairs(G.playing_cards) do
+        SMODS.debuff_card(v,'reset', card)
+      end
+    end]]
+    --[[ THE OLD EFFECT
     if context.repetition and not context.end_of_round and context.cardarea == G.play then
       if context.other_card:get_id() == card.ability.extra.value then
         local cards = 0
@@ -491,7 +504,29 @@ local mega_barbaracle={
           card = card
         }
       end
+    end]]
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    SMODS.change_play_limit(card.ability.extra.selection_limit_mod)
+    SMODS.change_discard_limit(card.ability.extra.selection_limit_mod)
+    G.hand:change_size(card.ability.extra.h_size)
+    --[[if G.GAME.blind.in_blind then
+      local add = function(v) return not v:get_id() == card.ability.extra.value end
+      local modify = function(v) SMODS.debuff_card(v, true, card) end
+      local args = {array = G.playing_cards, amt = #G.playing_cards, seed = 'mega_barbaracle', add_con = add, mod_func = modify}
+      pseudorandom_multi(args)
+    end]]
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    SMODS.change_play_limit(-card.ability.extra.selection_limit_mod)
+    SMODS.change_discard_limit(-card.ability.extra.selection_limit_mod)
+    G.hand:change_size(-card.ability.extra.h_size)
+    if not G.GAME.before_play_buffer then
+      G.hand:unhighlight_all()
     end
+    --[[for _, v in pairs(G.playing_cards) do
+      SMODS.debuff_card(v,'reset', card)
+    end]]
   end,
 }
 

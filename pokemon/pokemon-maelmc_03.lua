@@ -36,21 +36,6 @@ local wingull={
   end
 }
 
-function reset_maelmc_wingull_card()
-  G.GAME.current_round.maelmc_wingull_card = { rank = 'Ace' }
-  local valid_mail_cards = {}
-  for _, playing_card in ipairs(G.playing_cards) do
-    if not SMODS.has_no_rank(playing_card) then
-        valid_mail_cards[#valid_mail_cards + 1] = playing_card
-    end
-  end
-  local mail_card = pseudorandom_element(valid_mail_cards, 'maelmc_wingull' .. G.GAME.round_resets.ante)
-  if mail_card then
-    G.GAME.current_round.maelmc_wingull_card.rank = mail_card.base.value
-    G.GAME.current_round.maelmc_wingull_card.id = mail_card.base.id
-  end
-end
-
 -- Pelipper 279
 local pelipper={
   name = "pelipper",
@@ -85,21 +70,6 @@ local pelipper={
     end
   end
 }
-
-function reset_maelmc_pelipper_card()
-  G.GAME.current_round.maelmc_pelipper_card = { rank = 'Ace' }
-  local valid_mail_cards = {}
-  for _, playing_card in ipairs(G.playing_cards) do
-    if not SMODS.has_no_rank(playing_card) then
-      valid_mail_cards[#valid_mail_cards + 1] = playing_card
-    end
-  end
-  local mail_card = pseudorandom_element(valid_mail_cards, 'maelmc_pelipper' .. G.GAME.round_resets.ante)
-  if mail_card then
-    G.GAME.current_round.maelmc_pelipper_card.rank = mail_card.base.value
-    G.GAME.current_round.maelmc_pelipper_card.id = mail_card.base.id
-  end
-end
 
 -- Ralts 280
 local ralts={
