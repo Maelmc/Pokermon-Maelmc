@@ -571,10 +571,18 @@ local kecleon={
       Earth = {x = 10, y = 0},
     }
     local type = get_type(card) or "Colorless"
-    if type == "Colorless" and card.children.center.atlas.name ~= "poke_AtlasJokersBasicNatdex" then
-      card.children.center.atlas = G.ASSET_ATLAS["poke_AtlasJokersBasicNatdex"]
-    elseif type ~= "Colorless" and card.children.center.atlas.name ~= "poke_AtlasJokersBasicGen03" then
-      card.children.center.atlas = G.ASSET_ATLAS["poke_AtlasJokersBasicGen03"]
+    if type == "Colorless" then
+      if card.edition and card.edition.poke_shiny and card.children.center.atlas.name ~= "poke_AtlasJokersBasicNatdexShiny" then
+        card.children.center.atlas = G.ASSET_ATLAS["poke_AtlasJokersBasicNatdexShiny"]
+      elseif card.children.center.atlas.name ~= "poke_AtlasJokersBasicNatdex" then
+        card.children.center.atlas = G.ASSET_ATLAS["poke_AtlasJokersBasicNatdex"]
+      end
+    elseif type ~= "Colorless" then
+      if card.edition and card.edition.poke_shiny and card.children.center.atlas.name ~= "poke_AtlasJokersBasicGen03Shiny" then
+        card.children.center.atlas = G.ASSET_ATLAS["poke_AtlasJokersBasicGen03Shiny"]
+      elseif card.children.center.atlas.name ~= "poke_AtlasJokersBasicGen03" then
+        card.children.center.atlas = G.ASSET_ATLAS["poke_AtlasJokersBasicGen03"]
+    end
     end
     card.children.center:set_sprite_pos(type_table[type])
   end,
