@@ -536,14 +536,19 @@ local pokemoncenter = {
       for i = 1, #G.jokers.cards do
         if G.jokers.cards[i].ability and G.jokers.cards[i].ability.set == "Joker" then
           local ab = G.jokers.cards[i].ability
-          if ab.perishable or ab.rental or ab.eternal or ab.sonfive_weakened then
+          if ab.perishable or ab.rental or ab.eternal or ab.sonfive_weakened or G.jokers.cards[i].debuff then
             G.E_MANAGER:add_event(Event({
               func = (function()
-                ab.maelmc_pokerus = false
                 ab.perishable = false
+                ab.perish_tally = nil
                 ab.eternal = false
                 ab.rental = false
                 ab.sonfive_weakened = false
+                ab.fainted = nil
+                if G.jokers.cards[i].config.center_key == "j_agar_regigigas" then
+                  ab.extra.rounds = ab.slow_start_rounds
+                end
+                G.jokers.cards[i]:set_debuff(false)
                 card_eval_status_text(G.jokers.cards[i], 'extra', nil, nil, nil, {message = localize("maelmc_healed_ex")})
                 return true
               end)

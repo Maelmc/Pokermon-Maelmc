@@ -800,6 +800,8 @@ return {
                     "all {C:attention}detrimental stickers",
                     "from your Jokers",
                     "{C:inactive,s:0.8}(Only works with compatible stickers)",
+                    "and {C:attention}un-debuff{} them",
+                    "{C:inactive,s:0.8}(Might get debuffed right back)",
                 },
             },
         },
