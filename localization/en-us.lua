@@ -793,6 +793,15 @@ return {
                     "{C:inactive,s:0.8}(Excluding {C:attention,s:0.8}Wonder Trade{C:inactive,s:0.8})",
                 },
             },
+            j_maelmc_pokemoncenter = {
+                name = "Pokémon Center",
+                text = {
+                    "Sell this card to remove",
+                    "all {C:attention}detrimental stickers",
+                    "from your Jokers",
+                    "{C:inactive,s:0.8}(Only works with compatible stickers)",
+                },
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -963,6 +972,7 @@ return {
             maelmc_hungry_dot = "Hungry...",
             maelmc_stockpile = "Stockpile",
             maelmc_wondertrade = "Wonder Trade",
+            maelmc_healed_ex = "Healed!",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",

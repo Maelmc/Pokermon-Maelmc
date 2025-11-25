@@ -515,6 +515,59 @@ local photographer = {
   end
 }
 
+local pokemoncenter = {
+  name = "pokemoncenter",
+  poke_custom_prefix = "maelmc",
+  designer = "Gem",
+  pos = {x = 10, y = 1},
+  config = {extra = {}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return {vars = {}}
+  end,
+  rarity = 3,
+  cost = 8,
+  stage = "Other",
+  atlas = "maelmc_jokers",
+  blueprint_compat = true,
+  eternal_compat = false,
+  calculate = function(self, card, context)
+    if context.selling_self then
+      for i = 1, #G.jokers.cards do
+        if G.jokers.cards[i].ability and G.jokers.cards[i].ability.set == "Joker" then
+          local ab = G.jokers.cards[i].ability
+          if ab.perishable or ab.rental or ab.eternal or ab.sonfive_weakened then
+            G.E_MANAGER:add_event(Event({
+              func = (function()
+                ab.maelmc_pokerus = false
+                ab.perishable = false
+                ab.eternal = false
+                ab.rental = false
+                ab.sonfive_weakened = false
+                card_eval_status_text(G.jokers.cards[i], 'extra', nil, nil, nil, {message = localize("maelmc_healed_ex")})
+                return true
+              end)
+            }))
+          end
+        end
+      end
+    end
+  end,
+  in_pool = function(self)
+    local ok = false
+    for i = 1, #G.jokers.cards do
+      if G.jokers.cards[i].ability and G.jokers.cards[i].ability.set == "Joker" then
+        local ab = G.jokers.cards[i].ability
+        if ab.perishable or ab.rental or ab.eternal or ab.sonfive_weakened then
+          ok = true
+          break
+        end
+      end
+    end
+    return ok and pokemon_in_pool(self)
+  end
+}
+
 --[[
 
 local name = {
@@ -530,6 +583,8 @@ local name = {
   stage = "Other",
   ptype = "Earth",
   atlas = "maelmc_jokers",
+  perishable_compat = true,
+  eternal_compat = true,
   blueprint_compat = true,
   calculate = function(self, card, context)
   end,
@@ -542,6 +597,7 @@ local list = {
   pokewalker,
   --pc,
   photographer,
+  pokemoncenter,
 }
 
 if not maelmc_config.disable_spiritomb then table.insert(list,2,odd_keystone) end
