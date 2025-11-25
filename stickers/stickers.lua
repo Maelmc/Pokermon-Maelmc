@@ -81,7 +81,7 @@ local pokerus =  {
         if not context.repetition and not context.individual and context.end_of_round and not context.blueprint and pseudorandom("spread_pokerus") < 1/4 then
             local valid = {}
             for i = 1, #G.jokers.cards do
-                if not (G.jokers.cards[i].ability.maelmc_pokerus) then
+                if G.jokers.cards[i].ability and G.jokers.cards[i].ability.set == "Joker" and not (G.jokers.cards[i].ability.maelmc_pokerus) then
                     table.insert(valid,G.jokers.cards[i])
                 end
             end

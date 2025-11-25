@@ -571,6 +571,7 @@ local kecleon={
       Earth = {x = 10, y = 0},
     }
     local type = get_type(card) or "Colorless"
+    if not type_table[type] then type = "Colorless" end
     if type == "Colorless" then
       if card.edition and card.edition.poke_shiny and card.children.center.atlas.name ~= "poke_AtlasJokersBasicNatdexShiny" then
         card.children.center.atlas = G.ASSET_ATLAS["poke_AtlasJokersBasicNatdexShiny"]
