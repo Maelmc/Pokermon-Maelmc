@@ -653,7 +653,7 @@ return {
                     "{br:2}ERROR - CONTACT STEAK",
                     "When {C:attention}Blind{} is selected,",
                     "gains {X:red,C:white}X#3#{} Mult per",
-                    "empty consumeable slot",
+                    "empty consumable slot",
                     "{C:inactive}(Currently {X:red,C:white}X#4#{C:inactive})",
                 }
             },
