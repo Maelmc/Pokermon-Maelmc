@@ -59,7 +59,7 @@ local cursola={
 local cufant = {
   name = "cufant",
   pos = {x = 14, y = 58},
-  config = {extra = {hazards = 4, to_steel = 1, reset_steel = 1, rounds = 5, all_hazard = {}, hazard_to_steel = {}}},
+  config = {extra = {hazards = 4, done = false, to_steel = 1, rounds = 5}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -68,7 +68,7 @@ local cufant = {
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
     info_queue[#info_queue+1] = G.P_CENTERS.m_steel
 
-    return {vars = {abbr.hazards, abbr.reset_steel, abbr.rounds}}
+    return {vars = {abbr.hazards, abbr.to_steel, abbr.rounds}}
   end,
   rarity = 3,
   cost = 7,
@@ -79,43 +79,35 @@ local cufant = {
   calculate = function(self, card, context)
     if context.setting_blind then
       poke_set_hazards(card.ability.extra.hazards)
+      card.ability.extra.done = false
     end
-    
-    -- this is not super clean code, there are probably better ways to do this
-    if context.end_of_round and context.cardarea == G.hand then
-      -- find all hazard cards in hand
-      card.ability.extra.hazard_to_steel = {}
-      card.ability.extra.all_hazard = {}
+
+    if context.end_of_round and context.cardarea == G.hand and not card.ability.extra.done then
       local count = 0
+      local all_hazards = {}
       for _, v in pairs(G.hand.cards) do
         count = count + 1
-        if SMODS.has_enhancement(v, "m_poke_hazard") then
-          table.insert(card.ability.extra.all_hazard,v)
+        if SMODS.has_enhancement(v, "m_poke_hazard") and not v.destroyed and not v.shattered then
+          table.insert(all_hazards,v)
         end
       end
 
-      -- get 3 of them
-      if #card.ability.extra.all_hazard <= card.ability.extra.reset_steel then
-        --print("3 or less")
-        card.ability.extra.hazard_to_steel = card.ability.extra.all_hazard
-      else 
-        for i = 1,card.ability.extra.reset_steel do
-          -- get one to hazard_to_steel and remove it from pos
-          local tmp_hazard = math.random(#card.ability.extra.all_hazard)
-          card.ability.extra.hazard_to_steel[#card.ability.extra.hazard_to_steel+1]=card.ability.extra.all_hazard[tmp_hazard]
-          table.remove(card.ability.extra.all_hazard,tmp_hazard)
+      if #all_hazards <= card.ability.extra.to_steel then
+        for _, v in pairs(all_hazards) do
+          v:set_ability(G.P_CENTERS.m_steel,nil,true)
+           card_eval_status_text(v, 'extra', nil, nil, nil, {message = localize("maelmc_steel_ex"), colour = G.C.GREY})
+        end
+      else
+        for _ = 1, card.ability.extra.to_steel do
+          local i = pseudorandom("cufant",1,#all_hazards)
+          all_hazards[i]:set_ability(G.P_CENTERS.m_steel,nil,true)
+          card_eval_status_text(all_hazards[i], 'extra', nil, nil, nil, {message = localize("maelmc_steel_ex"), colour = G.C.GREY})
+          table.remove(all_hazards,i)
         end
       end
-
-      -- turn them into steel
-      if context.individual and table.contains(card.ability.extra.hazard_to_steel,context.other_card) then
-        context.other_card:set_ability(G.P_CENTERS.m_steel,nil,true)
-        return {
-          message = localize("maelmc_steel_ex"),
-          colour = G.C.GREY
-        }
-      end
+      card.ability.extra.done = true
     end
+    
     return level_evo(self, card, context, "j_maelmc_copperajah")
   end,
 }
@@ -124,7 +116,7 @@ local cufant = {
 local copperajah = {
   name = "copperajah",
   pos = {x = 16, y = 58},
-  config = {extra = {hazards = 4, reset_steel = 3, all_hazard = {}, hazard_to_steel = {}}},
+  config = {extra = {hazards = 4, done = false, to_steel = 3}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -134,7 +126,7 @@ local copperajah = {
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
     info_queue[#info_queue+1] = G.P_CENTERS.m_steel
 
-    return {vars = {abbr.hazards, abbr.reset_steel}}
+    return {vars = {abbr.hazards, abbr.to_steel}}
   end,
   rarity = "poke_safari",
   cost = 9,
@@ -145,41 +137,33 @@ local copperajah = {
   calculate = function(self, card, context)
     if context.setting_blind then
       poke_set_hazards(card.ability.extra.hazards)
+      card.ability.extra.done = false
     end
-    
-    -- this is not super clean code, there are probably better ways to do this
-    if context.end_of_round and context.cardarea == G.hand then
-      -- find all hazard cards in hand
-      card.ability.extra.hazard_to_steel = {}
-      card.ability.extra.all_hazard = {}
+
+    if context.end_of_round and context.cardarea == G.hand and not card.ability.extra.done then
       local count = 0
+      local all_hazards = {}
       for _, v in pairs(G.hand.cards) do
         count = count + 1
-        if SMODS.has_enhancement(v, "m_poke_hazard") then
-          table.insert(card.ability.extra.all_hazard,v)
+        if SMODS.has_enhancement(v, "m_poke_hazard") and not v.destroyed and not v.shattered then
+          table.insert(all_hazards,v)
         end
       end
 
-      -- get 3 of them
-      if #card.ability.extra.all_hazard <= card.ability.extra.reset_steel then
-        card.ability.extra.hazard_to_steel = card.ability.extra.all_hazard
-      else 
-        for i = 1,card.ability.extra.reset_steel do
-          -- get one to hazard_to_steel and remove it from pos
-          local tmp_hazard = math.random(#card.ability.extra.all_hazard)
-          card.ability.extra.hazard_to_steel[#card.ability.extra.hazard_to_steel+1]=card.ability.extra.all_hazard[tmp_hazard]
-          table.remove(card.ability.extra.all_hazard,tmp_hazard)
+      if #all_hazards <= card.ability.extra.to_steel then
+        for _, v in pairs(all_hazards) do
+          v:set_ability(G.P_CENTERS.m_steel,nil,true)
+           card_eval_status_text(v, 'extra', nil, nil, nil, {message = localize("maelmc_steel_ex"), colour = G.C.GREY})
+        end
+      else
+        for _ = 1, card.ability.extra.to_steel do
+          local i = pseudorandom("cufant",1,#all_hazards)
+          all_hazards[i]:set_ability(G.P_CENTERS.m_steel,nil,true)
+          card_eval_status_text(all_hazards[i], 'extra', nil, nil, nil, {message = localize("maelmc_steel_ex"), colour = G.C.GREY})
+          table.remove(all_hazards,i)
         end
       end
-
-      -- turn them into steel
-      if context.individual and table.contains(card.ability.extra.hazard_to_steel,context.other_card) then
-        context.other_card:set_ability(G.P_CENTERS.m_steel,nil,true)
-        return {
-          message = localize("maelmc_steel_ex"),
-          colour = G.C.GREY
-        }
-      end
+      card.ability.extra.done = true
     end
   end,
   megas = {"mega_copperajah"}

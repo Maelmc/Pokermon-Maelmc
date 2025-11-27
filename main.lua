@@ -125,12 +125,6 @@ for _, file in ipairs(pfiles) do
           end
           pokermon.Pokemon(item,"maelmc",false)
         end
-
-        -- Dex Ordering for Pokermon Dip
-        if (SMODS.Mods["NachosPokermonDip"] or {}).can_load and PkmnDip and PkmnDip.dex_order_groups and item.stage ~= "Other" then
-          PkmnDip.dex_order_groups[#PkmnDip.dex_order_groups+1] = {item.name}
-        end
-
       end
     end
   end
