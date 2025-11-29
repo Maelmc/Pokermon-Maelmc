@@ -93,7 +93,7 @@ local gible={
   name = "gible",
   --poke_custom_prefix = "maelmc",
   pos = {x = 14, y = 29},
-  config = {extra = {retriggers = 1, rightmost = 2, mult = 2, retriggered = 0}, evo_rqmt = 16},
+  config = {extra = {retriggers = 1, rightmost = 2, mult = 2, retriggered = 0}, evo_rqmt = 26},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -153,7 +153,7 @@ local gabite={
   name = "gabite",
   --poke_custom_prefix = "maelmc",
   pos = {x = 16, y = 29},
-  config = {extra = {retriggers = 1, rightmost = 4, mult = 3, retriggered = 0}, evo_rqmt = 40},
+  config = {extra = {retriggers = 1, rightmost = 4, mult = 3, retriggered = 0}, evo_rqmt = 64},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
