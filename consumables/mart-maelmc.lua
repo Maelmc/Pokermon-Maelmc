@@ -336,126 +336,6 @@ local meteorite = {
   end
 }
 
-local fake_deoxys = {
-  name = "fake_deoxys",
-  key = "fake_deoxys",
-  set = "Spectral",
-  pos = {x = 6, y = 14},
-  soul_pos = { x = 0, y = 15},
-  config = {},
-  loc_vars = function(self, info_queue, center)
-    return {vars = {}}
-  end,
-  atlas = "Pokedex3",
-  unlocked = true,
-  discovered = true,
-  no_collection = true,
-  can_use = function(self, card)
-    return true
-  end,
-  use = function(self, card, area, copier)
-    for _,poke in pairs(G.jokers.cards) do
-      if string.find(poke.config.center.name,"deoxys") then
-        poke_evolve(poke, "j_maelmc_deoxys")
-        return
-      end
-    end
-  end,
-  in_pool = function(self)
-    return false
-  end
-}
-
-local fake_deoxys_attack = {
-  name = "fake_deoxys_attack",
-  key = "fake_deoxys_attack",
-  set = "Spectral",
-  pos = {x = 6, y = 14},
-  soul_pos = { x = 1, y = 15},
-  config = {},
-  loc_vars = function(self, info_queue, center)
-    return {vars = {}}
-  end,
-  atlas = "Pokedex3",
-  unlocked = true,
-  discovered = true,
-  no_collection = true,
-  can_use = function(self, card)
-    return true
-  end,
-  use = function(self, card, area, copier)
-    for _,poke in pairs(G.jokers.cards) do
-      if string.find(poke.config.center.name,"deoxys") then
-        poke_evolve(poke, "j_maelmc_deoxys_attack")
-        return
-      end
-    end
-  end,
-  in_pool = function(self)
-    return false
-  end
-}
-
-local fake_deoxys_defense = {
-  name = "fake_deoxys_defense",
-  key = "fake_deoxys_defense",
-  set = "Spectral",
-  pos = {x = 6, y = 14},
-  soul_pos = { x = 2, y = 15},
-  config = {},
-  loc_vars = function(self, info_queue, center)
-    return {vars = {}}
-  end,
-  atlas = "Pokedex3",
-  unlocked = true,
-  discovered = true,
-  no_collection = true,
-  can_use = function(self, card)
-    return true
-  end,
-  use = function(self, card, area, copier)
-    for _,poke in pairs(G.jokers.cards) do
-      if string.find(poke.config.center.name,"deoxys") then
-        poke_evolve(poke, "j_maelmc_deoxys_defense")
-        return
-      end
-    end
-  end,
-  in_pool = function(self)
-    return false
-  end
-}
-
-local fake_deoxys_speed = {
-  name = "fake_deoxys_speed",
-  key = "fake_deoxys_speed",
-  set = "Spectral",
-  pos = {x = 6, y = 14},
-  soul_pos = { x = 3, y = 15},
-  config = {},
-  loc_vars = function(self, info_queue, center)
-    return {vars = {}}
-  end,
-  atlas = "Pokedex3",
-  unlocked = true,
-  discovered = true,
-  no_collection = true,
-  can_use = function(self, card)
-    return true
-  end,
-  use = function(self, card, area, copier)
-    for _,poke in pairs(G.jokers.cards) do
-      if string.find(poke.config.center.name,"deoxys") then
-        poke_evolve(poke, "j_maelmc_deoxys_speed")
-        return
-      end
-    end
-  end,
-  in_pool = function(self)
-    return false
-  end
-}
-
 local beastball = {
   name = "beastball",
   key = "beastball",
@@ -541,7 +421,7 @@ local metronome = {
 return {name = "Maelmc's Items",
   list = {
     tealmask, wellspringmask, hearthflamemask, cornerstonemask,
-    --meteorite, --fake_deoxys, fake_deoxys_attack, fake_deoxys_defense, fake_deoxys_speed,
+    --meteorite,
     beastball,
     metronome,
   }

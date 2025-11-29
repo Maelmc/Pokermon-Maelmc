@@ -639,10 +639,10 @@ local deoxys = {
   name = "deoxys",
   pos = {x = 2, y = 3},
   soul_pos = { x = 3, y = 3},
-  config = {extra = {hands = 1, d_size = 1, h_size = 1}},
-  loc_vars = function(self, info_queue, center)
-    type_tooltip(self, info_queue, center)
-		return {vars = {center.ability.extra.hands, center.ability.extra.d_size, center.ability.extra.h_size}}
+  config = {extra = {allow_dna = false, copy = 2 --[[hands = 1, d_size = 1, h_size = 1]]}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+		return {vars = {card.ability.extra.copy}}
   end,
   rarity = 4,
   cost = 20,
@@ -651,34 +651,64 @@ local deoxys = {
   atlas = "AtlasJokersBasicGen03",
   blueprint_compat = false,
   calculate = function(self,card,context)
-    if context.setting_blind then
-      ease_hands_played(card.ability.extra.hands)
-      ease_discard(card.ability.extra.d_size)
-      G.hand:change_size(card.ability.extra.h_size)
-      G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + card.ability.extra.h_size
+    if context.setting_blind and not context.blueprint then
+      card.ability.extra.allow_dna = true
     end
-    if context.end_of_round and card.ability.extra.in_round then
-      G.hand:change_size(-card.ability.extra.h_size)
-      card.ability.extra.in_round = false
+
+    -- copied from vanillaremade's DNA
+    if context.first_hand_drawn and not context.blueprint then
+      local eval = function() return card.ability.extra.allow_dna and G.GAME.current_round.hands_played == 0 and not G.RESET_JIGGLES end
+      juice_card_until(card, eval, true)
+    end
+
+    if context.before and card.ability.extra.allow_dna and G.GAME.current_round.hands_played == 0 and #context.full_hand == 1 then
+      if not context.blueprint then
+        G.E_MANAGER:add_event(Event({
+          func = function()
+            card.ability.extra.allow_dna = false
+            return true
+          end
+        }))
+      end
+      local cards_copied = {}
+      G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+      for i = 1, card.ability.extra.copy, 1 do
+        local card_copied = copy_card(context.full_hand[1], nil, nil, G.playing_card)
+        table.insert(cards_copied,card_copied)
+        card_copied:add_to_deck()
+        G.deck.config.card_limit = G.deck.config.card_limit + 1
+        table.insert(G.playing_cards, card_copied)
+        G.hand:emplace(card_copied)
+        card_copied.states.visible = nil
+
+        G.E_MANAGER:add_event(Event({
+          func = function()
+            card_copied:start_materialize()
+            return true
+          end
+        }))
+      end
+      return {
+        message = localize('k_copied_ex'),
+        colour = G.C.CHIPS,
+        func = function() -- This is for timing purposes, it runs after the message
+          G.E_MANAGER:add_event(Event({
+            func = function()
+              SMODS.calculate_context({ playing_card_added = true, cards = cards_copied })
+              return true
+            end
+          }))
+        end
+      }
+    end
+
+    if context.end_of_round and not context.blueprint then
+      card.ability.extra.allow_dna = false
     end
   end,
-  --[[add_to_deck = function(self, card, from_debuff)
-    local ok = true
-    for _, v in pairs(G.consumeables.cards) do
-      if v.config.center.name == "meteorite" then
-        ok = false
-        break
-      end
-    end
-    if ok then
-      local _card = create_card("Item", G.consumeables, nil, nil, nil, nil, "c_maelmc_meteorite")
-      local edition = {negative = true}
-      _card:set_edition(edition, true)
-      _card:add_to_deck()
-      G.consumeables:emplace(_card)
-      card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('poke_plus_pokeitem'), colour = G.C.FILTER})
-    end
-  end,]]
+  add_to_deck = function(self, card, from_debuff)
+    card.ability.extra.allow_dna = false
+  end,
 }
 
 local deoxys_attack = {

@@ -19,34 +19,6 @@ return {
             },
         },
         Spectral = {
-            c_maelmc_fake_deoxys = {
-                name = "Normal Form",
-                text = {
-                    "Return to {C:attention}Normal",
-                    "{C:inactive,s:0.8}(Applies to leftmost Deoxys)"
-                },
-            },
-            c_maelmc_fake_deoxys_attack = {
-                name = "Attack Form",
-                text = {
-                    "Focus toward {C:attention}Attack",
-                    "{C:inactive,s:0.8}(Applies to leftmost Deoxys)"
-                },
-            },
-            c_maelmc_fake_deoxys_defense = {
-                name = "Defense Form",
-                text = {
-                    "Focus toward {C:attention}Defense",
-                    "{C:inactive,s:0.8}(Applies to leftmost Deoxys)"
-                },
-            },
-            c_maelmc_fake_deoxys_speed = {
-                name = "Speed Form",
-                text = {
-                    "Focus toward {C:attention}Speed",
-                    "{C:inactive,s:0.8}(Applies to leftmost Deoxys)"
-                },
-            },
             c_maelmc_beastball = {
                 name = "Beast Ball",
                 text = {
@@ -516,10 +488,17 @@ return {
                 text = {
                     --"Holding {C:dark_edition}Negative {C:attention}Meteorite",
                     --"{br:3}ERROR - CONTACT STEAK",
-                    "When {C:attention}Blind{} is selected,",
-                    "gain {C:chips}+#1#{} hand,",
-                    "{C:red}+#2#{} discard and",
-                    "{C:attention}+#3#{} hand size",
+                    --"When {C:attention}Blind{} is selected,",
+                    --"gain {C:chips}+#1#{} hand,",
+                    --"{C:red}+#2#{} discard and",
+                    --"{C:attention}+#3#{} hand size",
+                    "If in this form",
+                    "when {C:attention}Blind{} is selected,",
+                    "if {C:attention}first hand{} of round",
+                    "has only {C:attention}1{} card, add #1#",
+                    "permanent copies to deck",
+                    "and draw them to {C:attention}hand",
+
                 }
             },
             j_maelmc_deoxys_attack = {
