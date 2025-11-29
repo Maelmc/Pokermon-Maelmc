@@ -649,7 +649,7 @@ local deoxys = {
   stage = "Legendary",
   ptype = "Psychic",
   atlas = "AtlasJokersBasicGen03",
-  blueprint_compat = false,
+  blueprint_compat = true,
   calculate = function(self,card,context)
     if context.setting_blind and not context.blueprint then
       card.ability.extra.allow_dna = true
