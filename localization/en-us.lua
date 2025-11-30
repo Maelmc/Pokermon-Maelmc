@@ -28,6 +28,16 @@ return {
                 }
             }
         },
+        Tag = {
+            tag_maelmc_shadow_tag = {
+                name = "Shadow Tag",
+                text = {
+                    "{C:inactive}(Currently does nothing)",
+                    "Add a {C:attention}Trapped{} card",
+                    "to your deck",
+                }
+            }
+        },
         Item = {
             c_maelmc_tealmask = {
                 name = "Teal Mask",
@@ -889,10 +899,18 @@ return {
                     "at end of round"
                 }
             },
-            multiplayer_ex = {
+            multiplayer_ex_jok = {
                 name = "Multiplayer exclusive",
                 text = {
                     "This Joker can only",
+                    "appear when using the",
+                    "{C:attention}Multiplayer{} mod"
+                }
+            },
+            multiplayer_ex_tag = {
+                name = "Multiplayer exclusive",
+                text = {
+                    "This Tag can only",
                     "appear when using the",
                     "{C:attention}Multiplayer{} mod"
                 }

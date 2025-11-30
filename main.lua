@@ -92,14 +92,33 @@ for _, file in ipairs(pseals) do
     local curr_sticker = sticker()
     if curr_sticker.init then curr_sticker:init() end
     
-    for i, item in ipairs(curr_sticker.list) do
+    for _, item in ipairs(curr_sticker.list) do
       item.discovered = not pokermon_config.pokemon_discovery
       SMODS.Sticker(item)
     end
   end
 end
 
---Load pokemon file
+--Load tags
+local tags = NFS.getDirectoryItems(mod_dir.."tags")
+
+for _, file in ipairs(tags) do
+  sendDebugMessage ("The file is: "..file)
+  local tag, load_error = SMODS.load_file("tags/"..file)
+  if load_error then
+    sendDebugMessage ("The error is: "..load_error)
+  else
+    local curr_tag = tag()
+    if curr_tag.init then curr_tag:init() end
+    
+    for _, item in ipairs(curr_tag.list) do
+      item.discovered = not pokermon_config.pokemon_discovery
+      SMODS.Tag(item)
+    end
+  end
+end
+
+--Load jokers
 local pfiles = NFS.getDirectoryItems(mod_dir.."pokemon")
 
 for _, file in ipairs(pfiles) do
@@ -142,7 +161,7 @@ for _, file in ipairs(pconsumables) do
     local curr_consumable = consumable()
     if curr_consumable.init then curr_consumable:init() end
     
-    for i, item in ipairs(curr_consumable.list) do
+    for _, item in ipairs(curr_consumable.list) do
       if not (item.pokeball and not pokermon_config.pokeballs) then
         item.discovered = not pokermon_config.pokemon_discovery
         SMODS.Consumable(item)
@@ -163,7 +182,7 @@ for _, file in ipairs(pboosters) do
     local curr_booster = booster()
     if curr_booster.init then curr_booster:init() end
     
-    for i, item in ipairs(curr_booster.list) do
+    for _, item in ipairs(curr_booster.list) do
       item.discovered = not pokermon_config.pokemon_discovery
       SMODS.Booster(item)
     end
@@ -182,7 +201,7 @@ for _, file in ipairs(vouchers) do
     local curr_voucher = voucher()
     if curr_voucher.init then curr_voucher:init() end
     
-    for i, item in ipairs(curr_voucher.list) do
+    for _, item in ipairs(curr_voucher.list) do
       item.discovered = not pokermon_config.pokemon_discovery
       SMODS.Voucher(item)
     end
@@ -202,7 +221,7 @@ if (SMODS.Mods["Pokermon"] or {}).can_load and SMODS.Mods["Pokermon"] and not po
       local curr_back = back()
       if curr_back.init then curr_back:init() end
       
-      for i, item in ipairs(curr_back.list) do
+      for _, item in ipairs(curr_back.list) do
         SMODS.Back(item)
       end
     end
@@ -220,7 +239,7 @@ for _, file in ipairs(pchallenges) do
     local curr_challenge = challenge()
     if curr_challenge.init then curr_challenge:init() end
     
-    for i, item in ipairs(curr_challenge.list) do
+    for _, item in ipairs(curr_challenge.list) do
       item.button_colour = HEX('EA6F22')
       SMODS.Challenge(item)
     end

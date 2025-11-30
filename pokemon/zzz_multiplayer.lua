@@ -9,7 +9,7 @@ local wonder_trade = {
     elseif next(SMODS.find_mod("Multiplayer")) then
       MP.UTILS.add_nemesis_info(info_queue)
     else
-      info_queue[#info_queue+1] = {set = 'Other', key = 'multiplayer_ex'}
+      info_queue[#info_queue+1] = {set = 'Other', key = 'multiplayer_ex_jok'}
     end
     type_tooltip(self, info_queue, card)
     return {vars = {}}
@@ -52,20 +52,13 @@ local wonder_trade = {
   end,
   custom_pool_func = true,
   in_pool = function(self)
-    return MP.LOBBY.code and MP.LOBBY.config.multiplayer_jokers and pokemon_in_pool(self)
+    return next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer')) and MP.LOBBY.code and MP.LOBBY.config.multiplayer_jokers and pokemon_in_pool(self)
   end
 }
 
-if next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer')) then
-  return {
-    name = "Maelmc's Multiplayer Jokers",
-    list = {
-      wonder_trade,
-    },
-  }
-else
-  return {
-    name = "Maelmc's Multiplayer Jokers",
-    list = {},
-  }
-end
+return {
+  name = "Maelmc's Multiplayer Jokers",
+  list = {
+    wonder_trade,
+  },
+}
