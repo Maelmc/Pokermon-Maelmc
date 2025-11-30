@@ -1,41 +1,41 @@
 SMODS.Atlas({
   key = "modicon",
-  path = "maelmc_icon.png",
+  path = "icon.png",
   px = 32,
   py = 32
 }):register()
 
 SMODS.Atlas({
   key = "maelmc_jokers",
-  path = "maelmc_jokers.png",
+  path = "jokers.png",
   px = 71,
   py = 95
 }):register()
 
 SMODS.Atlas({
   key = "maelmc_shiny_jokers",
-  path = "maelmc_shiny_jokers.png",
+  path = "shiny_jokers.png",
   px = 71,
   py = 95
 }):register()
 
 SMODS.Atlas({
   key = "maelmc_mart",
-  path = "maelmc_mart.png",
+  path = "mart.png",
   px = 71,
   py = 95
 }):register()
 
 SMODS.Atlas({
   key = "maelmc_vouchers",
-  path = "maelmc_vouchers.png",
+  path = "vouchers.png",
   px = 71,
   py = 95
 }):register()
 
 SMODS.Atlas({
   key = "maelmc_pokedeck",
-  path = "maelmc_pokedeck.png",
+  path = "pokedeck.png",
   px = 71,
   py = 95,
 }):register()
@@ -47,7 +47,7 @@ G.C.MAELMC = {
 
 SMODS.Atlas({
     key = "maelmc_stickers",
-    path = "maelmc_stickers.png",
+    path = "stickers.png",
     px = 71,
     py = 95
 }):register()
@@ -55,4 +55,11 @@ SMODS.Atlas({
 SMODS.Sound({
     key = "pokerus_sound",
     path = "pokerus_sound.wav"
+}):register()
+
+SMODS.Atlas({
+    key = "maelmc_tags",
+    path = "tags.png",
+    px = 34,
+    py = 34
 }):register()
