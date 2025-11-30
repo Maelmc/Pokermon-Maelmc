@@ -64,6 +64,7 @@ SMODS.PokerHand:take_ownership("Flush Five", {
   end
 }, true)
 
+-- Wingull & Pelipper functions to determine their card
 local function reset_maelmc_wingull_card()
   G.GAME.current_round.maelmc_wingull_card = { rank = 'Ace' }
   local valid_mail_cards = {}
@@ -180,4 +181,77 @@ function SMODS.current_mod.reset_game_globals(run_start)
   reset_maelmc_hearthflame_card()
   reset_maelmc_wingull_card()
   reset_maelmc_pelipper_card()
+end
+
+-- Ogerpon Cornestone "Stones have a rank"
+local gid = Card.get_id
+function Card:get_id()
+  local ogerpons_cornerstone = find_joker('ogerpon_cornerstone')
+  if #ogerpons_cornerstone > 0 and self.ability.effect == 'Stone Card' then
+      return SMODS.Ranks["maelmc_Ogerpon"].id
+  end
+  return gid(self)
+end
+
+-- Trapped cards cannot change enhancement
+-- also hazard deck effect
+local card_set_ability_ref = Card.set_ability
+function Card:set_ability(center, initial, delay_sprites)
+  if self.config and self.config.center and (self.config.center.key == 'm_maelmc_trapped' ) and not initial then
+    return
+  end
+  if G.GAME.modifiers.hazard_deck and self.config.center_key == "m_poke_hazard" and self.ability.card_limit then
+    self.ability.card_limit = 0
+  end
+  return card_set_ability_ref(self, center, initial, delay_sprites)
+end
+
+-- Trapped cards cannot be destroyed
+local destr = SMODS.destroy_cards
+function SMODS.destroy_cards(cards, bypass_eternal, immediate, skip_anim)
+  local cards2 = {}
+  for _, v in pairs(cards) do
+    if SMODS.has_enhancement(v,"m_maelmc_trapped") then
+      v.getting_sliced = nil
+    else
+      table.insert(cards2,v)
+    end
+  end
+  return destr(cards2, bypass_eternal, immediate, skip_anim)
+end
+
+local prc = poke_remove_card
+poke_remove_card = function(target, card, trigger)
+  if SMODS.has_enhancement(target,"m_maelmc_trapped") then
+    target.getting_sliced = nil
+    target.shattered = nil
+    target.destroyed = nil
+    return
+  else
+    return prc(target, card, trigger)
+  end
+end
+
+local sht = Card.shatter
+function Card:shatter()
+  if SMODS.has_enhancement(self,"m_maelmc_trapped") then
+    self.getting_sliced = nil
+    self.shattered = nil
+    self.destroyed = nil
+    return
+  else
+    return sht(self)
+  end
+end
+
+local dis = Card.start_dissolve
+function Card:start_dissolve()
+  if SMODS.has_enhancement(self,"m_maelmc_trapped") then
+    self.getting_sliced = nil
+    self.shattered = nil
+    self.destroyed = nil
+    return
+  else
+    return dis(self)
+  end
 end

@@ -18,6 +18,17 @@ return {
                 }
             },
         },
+        Enhanced = {
+            m_maelmc_trapped = {
+                name = "Trapped Card",
+                text = {
+                    "no rank or suit",
+                    "does not score when played",
+                    "cannot be destroyed",
+                    "enhancement cannot be changed",
+                },
+            },
+        },
         Spectral = {
             c_maelmc_beastball = {
                 name = "Beast Ball",
@@ -32,8 +43,7 @@ return {
             tag_maelmc_shadow_tag = {
                 name = "Shadow Tag",
                 text = {
-                    "{C:inactive}(Currently does nothing)",
-                    "Add a {C:attention}Trapped{} card",
+                    "Add a {C:attention}#1#",
                     "to your deck",
                 }
             }
@@ -914,6 +924,14 @@ return {
                     "appear when using the",
                     "{C:attention}Multiplayer{} mod"
                 }
+            },
+            multiplayer_ex_enh = {
+                name = "Multiplayer exclusive",
+                text = {
+                    "This Enhancement can only",
+                    "appear when using the",
+                    "{C:attention}Multiplayer{} mod"
+                }
             }
         },
     },
@@ -972,6 +990,7 @@ return {
             maelmc_stockpile = "Stockpile",
             maelmc_wondertrade = "Wonder Trade",
             maelmc_healed_ex = "Healed!",
+            maelmc_trapped_ex = "Trapped!",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",
