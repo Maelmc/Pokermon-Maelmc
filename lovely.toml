@@ -620,3 +620,79 @@ match_indent = true
 payload = '''
 end
 '''
+
+# Mean Look
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Multiplayer "networking/action_handlers.lua"]'
+pattern = '''local function enemyLocation(options)'''
+position = "before"
+match_indent = true
+payload = '''local function action_mean_look()
+  G.E_MANAGER:add_event(Event({
+      func = (function()
+          add_tag(Tag('tag_maelmc_shadow_tag'))
+          play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+          play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+          return true
+      end)
+  }))
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Multiplayer "networking/action_handlers.lua"]'
+pattern = '''function MP.ACTIONS.fail_timer()'''
+position = "before"
+match_indent = true
+payload = '''function MP.ACTIONS.mean_look()
+  Client.send("action:magnetResponse,key:MEANLOOK")
+end'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Multiplayer "networking/action_handlers.lua"]'
+pattern = '''elseif parsedAction.action == "version" then'''
+position = "before"
+match_indent = true
+payload = '''elseif parsedAction.action == "magnetResponse" and string.find(parsedAction.key,"MEANLOOK") then
+	action_mean_look()'''
+
+# Mean Look with Nano Multiplayer
+[[patches]]
+[patches.pattern]
+target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
+pattern = '''local function enemyLocation(options)'''
+position = "before"
+match_indent = true
+payload = '''local function action_mean_look()
+  G.E_MANAGER:add_event(Event({
+    func = (function()
+      add_tag(Tag('tag_maelmc_shadow_tag'))
+      play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+      play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+      return true
+    end)
+  }))
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
+pattern = '''function MP.ACTIONS.fail_timer()'''
+position = "before"
+match_indent = true
+payload = '''function MP.ACTIONS.mean_look()
+  Client.send("action:magnetResponse,key:MEANLOOK")
+end'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
+pattern = '''elseif parsedAction.action == "version" then'''
+position = "before"
+match_indent = true
+payload = '''elseif parsedAction.action == "magnetResponse" and string.find(parsedAction.key,"MEANLOOK") then
+	action_mean_look()'''

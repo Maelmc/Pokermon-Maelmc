@@ -56,9 +56,44 @@ local wonder_trade = {
   end
 }
 
+local mean_look = {
+  name = "mean_look",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 11, y = 1},
+  config = {extra = {}},
+  loc_vars = function(self, info_queue, card)
+    if next(SMODS.find_mod("NanoMultiplayer")) then
+      add_nemesis_info(info_queue)
+    elseif next(SMODS.find_mod("Multiplayer")) then
+      MP.UTILS.add_nemesis_info(info_queue)
+    else
+      info_queue[#info_queue+1] = {set = 'Other', key = 'multiplayer_ex_jok'}
+    end
+    type_tooltip(self, info_queue, card)
+    return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_shadow_tag" }}}
+  end,
+  rarity = 2,
+  cost = 5,
+  stage = "Other",
+  atlas = "maelmc_jokers",
+  perishable_compat = false,
+  blueprint_compat = true,
+  eternal_compat = true,
+  calculate = function(self, card, context)
+    if context.selling_self then
+      MP.ACTIONS.mean_look()
+    end
+  end,
+  custom_pool_func = true,
+  in_pool = function(self)
+    return next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer')) and MP.LOBBY.code and MP.LOBBY.config.multiplayer_jokers and pokemon_in_pool(self)
+  end
+}
+
 return {
   name = "Maelmc's Multiplayer Jokers",
   list = {
     wonder_trade,
+    mean_look
   },
 }

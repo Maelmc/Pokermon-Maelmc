@@ -18,7 +18,7 @@ local shadow_tag = {
 		return { vars = {localize { type = 'name_text', set = 'Enhanced', key = "m_maelmc_trapped" }} }
 	end,
 	apply = function(self, tag, context)
-		if context and context.type == "eval" then
+		if context and context.type == "new_blind_choice" then
 			tag:yep(localize("maelmc_trapped_ex"), G.C.DARK_EDITION,
 				function ()
 					local _card = create_playing_card({

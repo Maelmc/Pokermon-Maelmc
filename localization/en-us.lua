@@ -803,6 +803,15 @@ return {
                     "{C:inactive,s:0.8}(Might get debuffed right back)",
                 },
             },
+            j_maelmc_mean_look = {
+                name = "Mean Look",
+                text={
+                    "Sell this card to",
+                    "create a free",
+                    "{C:attention}#1#",
+                    "for your {X:purple,C:white}Nemesis{}"
+                },
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
