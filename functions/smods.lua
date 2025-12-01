@@ -209,6 +209,9 @@ end
 -- Trapped cards cannot be destroyed
 local destr = SMODS.destroy_cards
 function SMODS.destroy_cards(cards, bypass_eternal, immediate, skip_anim)
+  if cards:is(Card) then
+    cards = {cards}
+  end
   local cards2 = {}
   for _, v in pairs(cards) do
     if SMODS.has_enhancement(v,"m_maelmc_trapped") then
