@@ -121,7 +121,6 @@ local copperajah = {
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'mega_poke'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {abbr.hazards}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
     info_queue[#info_queue+1] = G.P_CENTERS.m_steel

@@ -119,7 +119,6 @@ local malamar={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'mega_poke'}
     return {vars = {abbr.Xmult_multi}}
   end,
   rarity = "poke_safari",
@@ -363,7 +362,6 @@ local barbaracle={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'mega_poke'}
     return {vars = {abbr.value, abbr.retrigger_hand, abbr.retrigger_held, abbr.retriggers}}
   end,
   rarity = "poke_safari",
