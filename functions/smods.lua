@@ -51,7 +51,7 @@ SMODS.PokerHand:take_ownership("Flush Five", {
       if cards[1]:get_id() == 7 then
         return "Mega Barbaraflush"
       end
-      return "Eleven of a Kind"
+      return "Flush Eleven"
     -- with emma's gmax snorlax
     elseif #scoring_hand == 12 then
       return "Flush Twelve"
