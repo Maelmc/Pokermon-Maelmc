@@ -7,8 +7,8 @@ local sinistea={
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_cleanse_tag', set = 'Tag' }
     return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_cleanse_tag" }, card.ability.extra.rounds}}
   end,
-  rarity = 1,
-  cost = 5,
+  rarity = 2,
+  cost = 6,
   stage = "Basic",
   ptype = "Psychic",
   atlas = "AtlasJokersBasicNatdex",
@@ -43,7 +43,7 @@ local polteageist={
     return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_cleanse_tag" },localize { type = 'name_text', set = 'Tag', key = "tag_ethereal" }}}
   end,
   rarity = "poke_safari",
-  cost = 6,
+  cost = 8,
   stage = "One",
   ptype = "Psychic",
   atlas = "AtlasJokersBasicNatdex",
