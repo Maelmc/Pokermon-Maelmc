@@ -46,7 +46,15 @@ return {
                     "Add a {C:attention}#1#",
                     "to your deck",
                 }
-            }
+            },
+            tag_maelmc_cleanse_tag = {
+                name = "Cleanse Tag",
+                text = {
+                    "Protects from the",
+                    "detrimental effect of",
+                    "{C:attention}1 {C:spectral}Spectral{} card",
+                }
+            },
         },
         Item = {
             c_maelmc_tealmask = {
@@ -812,6 +820,25 @@ return {
                     "for your {X:purple,C:white}Nemesis{}"
                 },
             },
+            j_maelmc_sinistea = {
+                name = "Sinistea",
+                text={
+                    "Sell this card to",
+                    "create a free",
+                    "{C:attention}#1#",
+                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#2#{C:inactive,s:0.8} rounds)",
+                },
+            },
+            j_maelmc_polteageist = {
+                name = "Polteageist",
+                text={
+                    "Sell this card to",
+                    "create a free",
+                    "{C:attention}#1#",
+                    "and a free",
+                    "{C:attention}#2#",
+                },
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -1000,6 +1027,7 @@ return {
             maelmc_wondertrade = "Wonder Trade",
             maelmc_healed_ex = "Healed!",
             maelmc_trapped_ex = "Trapped!",
+            maelmc_safe = "Safe",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",

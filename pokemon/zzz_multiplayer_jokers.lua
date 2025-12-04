@@ -70,6 +70,7 @@ local mean_look = {
       info_queue[#info_queue+1] = {set = 'Other', key = 'multiplayer_ex_jok'}
     end
     type_tooltip(self, info_queue, card)
+    info_queue[#info_queue + 1] = { key = 'tag_maelmc_shadow_tag', set = 'Tag' }
     return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_shadow_tag" }}}
   end,
   rarity = 2,

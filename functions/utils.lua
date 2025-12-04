@@ -93,3 +93,19 @@ function wonder_trade_joker_creation(key,ability,edition)
     end
   }))  
 end
+
+function should_cleanse_tag()
+  for i = 1, #G.GAME.tags do
+    if G.GAME.tags[i].key == "tag_maelmc_cleanse_tag" then
+      local fake_context = {cleanse_tag = true}
+      G.E_MANAGER:add_event(Event({
+        func = function()
+          G.GAME.tags[i]:apply_to_run(fake_context)
+          return true
+        end
+      }))
+      return true
+    end
+  end
+  return false
+end
