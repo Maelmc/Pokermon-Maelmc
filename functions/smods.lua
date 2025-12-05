@@ -209,8 +209,12 @@ end
 -- Trapped cards cannot be destroyed
 local destr = SMODS.destroy_cards
 function SMODS.destroy_cards(cards, bypass_eternal, immediate, skip_anim)
-  if cards:is(Card) then
-    cards = {cards}
+  if not cards[1] then
+    if Object.is(cards, Card) then
+      cards = {cards}
+    else
+      return
+    end
   end
   local cards2 = {}
   for _, v in pairs(cards) do
