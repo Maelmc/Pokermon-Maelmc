@@ -837,6 +837,44 @@ return {
                     "{C:attention}#2#",
                 },
             },
+            j_maelmc_shuppet = {
+                name = "Shuppet",
+                text = {
+                    "{X:red,C:white} X#1# {} Mult for each",
+                    "empty {C:attention}Joker{} slot",
+                    "{s:0.8}Shuppet and evolutions included",
+                    "{C:inactive}(Currently {X:red,C:white} X#2# {C:inactive})",
+                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#3#{C:inactive,s:0.8} rounds)",
+                }
+            },
+            j_maelmc_banette = {
+                name = "Banette",
+                text = {
+                    "{X:red,C:white} X#1# {} Mult for each",
+                    "empty {C:attention}Joker{} slot",
+                    "{s:0.8}Shuppet and evolutions included",
+                    "{C:inactive}(Currently {X:red,C:white} X#2# {C:inactive})",
+                }
+            },
+            j_maelmc_mega_banette = {
+                name = "Mega Banette",
+                text = {
+                    "{X:red,C:white} X#1# {} Mult",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "When {C:attention}Blind{} is selected,",
+                    "fill {C:attention}Joker{} slots with",
+                    "weaker copies of this Joker"
+                }
+            },
+            j_maelmc_fake_mega_banette = {
+                name = "Mega Banette...?",
+                text = {
+                    "{X:red,C:white} X#1# {} Mult",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "{S:1.1,C:red,E:2}self destructs",
+                    "at end of round"
+                }
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {

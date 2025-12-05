@@ -597,6 +597,151 @@ local kecleon={
   end,
 }
 
+-- Shuppet
+local shuppet={
+  name = "shuppet",
+  stage = "Basic",
+  ptype = "Psychic",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  rarity = 2,
+  cost = 7,
+  config = { extra = { Xmult_mod = 0.75, rounds = 5 } },
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return { vars = { card.ability.extra.Xmult_mod,
+            G.jokers and math.max(1, ((G.jokers.config.card_limit - #G.jokers.cards)
+            + #SMODS.find_card("j_maelmc_shuppet", true)
+            + #SMODS.find_card("j_maelmc_banette", true)
+            + #SMODS.find_card("j_maelmc_mega_banette", true)
+            + #SMODS.find_card("j_maelmc_fake_mega_banette", true)) * card.ability.extra.Xmult_mod) or 1,
+            card.ability.extra.rounds} }
+  end,
+  calculate = function(self, card, context)
+    if context.joker_main then
+      return {
+        xmult = math.max(1,
+            ((G.jokers.config.card_limit - #G.jokers.cards) 
+            + #SMODS.find_card("j_maelmc_shuppet", true)
+            + #SMODS.find_card("j_maelmc_banette", true)
+            + #SMODS.find_card("j_maelmc_mega_banette", true)
+            + #SMODS.find_card("j_maelmc_fake_mega_banette", true)) * card.ability.extra.Xmult_mod)
+      }
+    end
+
+    return level_evo(self, card, context, "j_maelmc_banette")
+  end
+}
+
+-- Banette
+local banette={
+  name = "banette",
+  stage = "One",
+  ptype = "Psychic",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  rarity = "poke_safari",
+  cost = 10,
+  config = { extra = { Xmult_mod = 1.25 } },
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return { vars = { card.ability.extra.Xmult_mod,
+            G.jokers and math.max(1, ((G.jokers.config.card_limit - #G.jokers.cards)
+            + #SMODS.find_card("j_maelmc_shuppet", true)
+            + #SMODS.find_card("j_maelmc_banette", true)
+            + #SMODS.find_card("j_maelmc_mega_banette", true)
+            + #SMODS.find_card("j_maelmc_fake_mega_banette", true)) * card.ability.extra.Xmult_mod) or 1 } }
+  end,
+  calculate = function(self, card, context)
+    if context.joker_main then
+      return {
+        xmult = math.max(1,
+            ((G.jokers.config.card_limit - #G.jokers.cards) 
+            + #SMODS.find_card("j_maelmc_shuppet", true)
+            + #SMODS.find_card("j_maelmc_banette", true)
+            + #SMODS.find_card("j_maelmc_mega_banette", true)
+            + #SMODS.find_card("j_maelmc_fake_mega_banette", true)) * card.ability.extra.Xmult_mod)
+      }
+    end
+  end,
+  megas = {"mega_banette"}
+}
+
+local mega_banette={
+  name = "mega_banette",
+  stage = "Mega",
+  ptype = "Psychic",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  rarity = "poke_mega",
+  cost = 12,
+  config = { extra = { Xmult = 2 } },
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return { vars = { card.ability.extra.Xmult } }
+  end,
+  calculate = function(self, card, context)
+    if context.setting_blind then
+      local empty_slots = G.jokers.config.card_limit - #G.jokers.cards
+      for _ = 1, empty_slots do
+        local _fmb = SMODS.add_card({key = "j_maelmc_fake_mega_banette", edition = card.edition or nil})
+        for _ = 1, get_total_energy(card) do
+          energize(_fmb,nil,nil,true)
+          if _fmb.ability.extra.c_energy_count then
+              _fmb.ability.extra.c_energy_count = _fmb.ability.extra.c_energy_count + 1
+          else
+              _fmb.ability.extra.c_energy_count = 1
+          end
+        end
+      end
+    end
+
+    if context.joker_main then
+      return {
+        xmult = card.ability.extra.Xmult
+      }
+    end
+  end
+}
+
+local fake_mega_banette={
+  name = "fake_mega_banette",
+  poke_custom_prefix = "maelmc",
+  atlas = "maelmc_jokers",
+  pos = {x = 12, y = 1},
+  soul_pos = {x = 13, y = 1},
+  stage = "Mega",
+  ptype = "Psychic",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  aux_poke = true,
+  no_collection = true,
+  rarity = "poke_safari",
+  cost = 2,
+  config = { extra = { Xmult = 1.5 } },
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return { vars = { card.ability.extra.Xmult } }
+  end,
+  calculate = function(self, card, context)
+    if context.joker_main then
+      return {
+        xmult = card.ability.extra.Xmult
+      }
+    end
+  end,
+  calc_dollar_bonus = function(self, card)
+    remove(self,card,nil,true)
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
 -- Tropius 357
 local tropius = {
   name = "tropius",
@@ -850,6 +995,7 @@ return {
     gulpin, swalot,
     lunatone, solrock,
     kecleon,
+    shuppet, banette, mega_banette, fake_mega_banette,
     tropius,
     deoxys, deoxys_attack, deoxys_defense, deoxys_speed
   },
