@@ -8,7 +8,13 @@ local nihilego = {
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.h_size, card.ability.extra.next_boost - get_total_energy(card), card.ability.extra.unscalable_chips, card.ability.extra.unscalable_chips * ((G.deck and G.deck.cards) and #G.deck.cards or 52)}}
+    return {vars = {
+              card.ability.extra.h_size,
+              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.unscalable_chips,
+              card.ability.extra.unscalable_chips * ((G.deck and G.deck.cards) and #G.deck.cards or 52),
+              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+            }}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,
@@ -57,7 +63,12 @@ local buzzwole = {
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.hands, card.ability.extra.next_boost - get_total_energy(card), card.ability.extra.unscalable_mult}}
+    return {vars = {
+              card.ability.extra.hands,
+              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.unscalable_mult,
+              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+            }}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,
@@ -114,7 +125,12 @@ local pheromosa = {
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.d_size, card.ability.extra.next_boost - get_total_energy(card), card.ability.extra.unscalable_dollars}}
+    return {vars = {
+              card.ability.extra.d_size,
+              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.unscalable_dollars,
+              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+            }}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,
@@ -183,7 +199,13 @@ local xurkitree = {
         end
       end
     end
-    return {vars = {card.ability.extra.energy_bonus, card.ability.extra.next_boost - get_total_energy(card), card.ability.extra.unscalable_dollars, card.ability.extra.unscalable_dollars * energy_usable}}
+    return {vars = {
+              card.ability.extra.energy_bonus,
+              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.unscalable_dollars,
+              card.ability.extra.unscalable_dollars * energy_usable,
+              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+            }}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,
@@ -242,7 +264,13 @@ local celesteela = {
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.card_limit, card.ability.extra.next_boost - get_total_energy(card), card.ability.extra.unscalable_mult2, card.ability.extra.unscalable_mult}}
+    return {vars = {
+              card.ability.extra.card_limit,
+              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.unscalable_mult2,
+              card.ability.extra.unscalable_mult,
+              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+            }}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,
@@ -305,7 +333,13 @@ local kartana = {
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.booster_choice_mod, card.ability.extra.next_boost - get_total_energy(card), card.ability.extra.unscalable_mult2, card.ability.extra.unscalable_mult}}
+    return {vars = {
+              card.ability.extra.booster_choice_mod,
+              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.unscalable_mult2,
+              card.ability.extra.unscalable_mult,
+              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+            }}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,
@@ -377,7 +411,13 @@ local stakataka = {
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.voucher_slots, card.ability.extra.next_boost - get_total_energy(card), card.ability.extra.unscalable_dollars, card.ability.extra.unscalable_dollars * (1 + (G.GAME.modifiers.extra_vouchers or 0) - card.ability.extra.voucher_bought)}}
+    return {vars = {
+              card.ability.extra.voucher_slots,
+              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.unscalable_dollars,
+              card.ability.extra.unscalable_dollars * (1 + (G.GAME.modifiers.extra_vouchers or 0) - card.ability.extra.voucher_bought),
+              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+            }}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,
@@ -444,9 +484,14 @@ local blacephalon = {
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.card_slots, card.ability.extra.next_boost - get_total_energy(card),
-    card.ability.extra.unscalable_mult, card.ability.extra.unscalable_negative_mult,
-    card.ability.extra.unscalable_mult * (G.GAME.shop.joker_max or 3) - card.ability.extra.unscalable_negative_mult * card.ability.extra.amount_bought}}
+    return {vars = {
+              card.ability.extra.card_slots,
+              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.unscalable_mult,
+              card.ability.extra.unscalable_negative_mult,
+              card.ability.extra.unscalable_mult * (G.GAME.shop.joker_max or 3) - card.ability.extra.unscalable_negative_mult * card.ability.extra.amount_bought,
+              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+            }}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,
@@ -511,7 +556,14 @@ local guzzlord = {
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
-    return {vars = {card.ability.extra.to_eat,card.ability.extra.unscalable_mult2 * card.ability.extra.to_eat,card.ability.extra.unscalable_mult,card.ability.extra.next_boost - get_total_energy(card)}}
+    return {vars = {
+              card.ability.extra.to_eat,
+              card.ability.extra.unscalable_mult2 * card.ability.extra.to_eat,
+              card.ability.extra.unscalable_mult,
+              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.to_eat <= 1 and "" or "s",
+              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+            }}
   end,
   rarity = "maelmc_ultra_beast",
   cost = 15,

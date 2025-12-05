@@ -567,8 +567,8 @@ return {
                 text = {
                     "If scored hand only contains",
                     "{C:hearts}Hearts{} cards, {C:green}#1# in #2#{} chance",
-                    "to add a {C:attention}red seal{} to each",
-                    "{C:hearts}Hearts{} card held in hand",
+                    "for each {C:hearts}Hearts{} card held in hand",
+                    "to get a {C:attention}red seal",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:hearts}Hearts{C:attention} with a red seal",
                     "{C:attention}can't{} be debuffed"
@@ -609,7 +609,7 @@ return {
                 text = {
                     "{C:attention}+#1#{} hand size",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times",
+                    "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:chips}+#3#{} Chips for each",
                     "remaining card in {C:attention}deck",
@@ -621,7 +621,7 @@ return {
                 text = {
                     "{C:chips}+#1#{} hands",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times",
+                    "{C:attention}#2#{} more time#4#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{X:red,C:white}X#3#{} Mult per remaining hands",
                     "on the {C:attention}first hand{} of round",
@@ -632,7 +632,7 @@ return {
                 text = {
                     "{C:red}+#1#{} discards",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times",
+                    "{C:attention}#2#{} more time#4#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "Earn {C:money}$#3#{} per discard",
                     "if {C:attention}poker hand{} is a",
@@ -644,7 +644,7 @@ return {
                 text = {
                     "{C:pink}+#1#{} Energy Limit",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times",
+                    "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "Earn {C:money}$#3#{} at end of round per",
                     "{C:pink}Energy{} usable on other Jokers",
@@ -656,7 +656,7 @@ return {
                 text = {
                     "{C:attention}+#1#{} consumable slots",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times",
+                    "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "When {C:attention}Blind{} is selected,",
                     "gains {X:red,C:white}X#3#{} Mult per",
@@ -669,7 +669,7 @@ return {
                 text = {
                     "{C:attention}+#1#{} card selection in Boosters",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times",
+                    "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "This Joker gains {C:mult}+#3#{} Mult per",
                     "{C:attention}remaining{} card selection when",
@@ -682,7 +682,7 @@ return {
                 text = {
                     "{C:attention}+#1#{} Voucher slot available in shop",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times",
+                    "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "Earn {C:money}$#3#{} at end of round",
                     "per Voucher slot, {C:money}-$#3#",
@@ -696,7 +696,7 @@ return {
                 text = {
                     "{C:attention}+#1#{} card slot available in shop",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#2#{} more times",
+                    "{C:attention}#2#{} more time#6#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:red}+#3#{} Mult per card slot in shop",
                     "{C:red}-#4#{} Mult per card bought",
@@ -709,11 +709,11 @@ return {
                 name = "Guzzlord",
                 text = {
                     "At the end of shop, eats",
-                    "{C:attention}#1#{} thing(s) and gains",
+                    "{C:attention}#1#{} thing#5# and gains",
                     "{X:red,C:white}X#2#{} Mult {C:inactive}(Currently {X:red,C:white}X#3#{C:inactive})",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:dark_edition}Beast Boost{} when {C:pink}energized",
-                    "{C:attention}#4#{} more times",
+                    "{C:attention}#4#{} more time#6#",
                 }
             },
             j_maelmc_bouffalant = {
@@ -806,9 +806,7 @@ return {
                     "Sell this card to remove",
                     "all {C:attention}detrimental stickers",
                     "from your Jokers",
-                    "{C:inactive,s:0.8}(Only works with compatible stickers)",
                     "and {C:attention}un-debuff{} them",
-                    "{C:inactive,s:0.8}(Might get debuffed right back)",
                 },
             },
             j_maelmc_mean_look = {
