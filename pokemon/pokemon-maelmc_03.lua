@@ -615,7 +615,7 @@ local shuppet={
             + #SMODS.find_card("j_maelmc_shuppet", true)
             + #SMODS.find_card("j_maelmc_banette", true)
             + #SMODS.find_card("j_maelmc_mega_banette", true)
-            + #SMODS.find_card("j_maelmc_fake_mega_banette", true)) * card.ability.extra.Xmult_mod) or 1,
+            + #SMODS.find_card("j_maelmc_fake_mega_banette", true)) * card.ability.extra.Xmult_mod) or math.max(1,card.ability.extra.Xmult_mod),
             card.ability.extra.rounds} }
   end,
   calculate = function(self, card, context)
@@ -652,7 +652,7 @@ local banette={
             + #SMODS.find_card("j_maelmc_shuppet", true)
             + #SMODS.find_card("j_maelmc_banette", true)
             + #SMODS.find_card("j_maelmc_mega_banette", true)
-            + #SMODS.find_card("j_maelmc_fake_mega_banette", true)) * card.ability.extra.Xmult_mod) or 1 } }
+            + #SMODS.find_card("j_maelmc_fake_mega_banette", true)) * card.ability.extra.Xmult_mod) or math.max(1,card.ability.extra.Xmult_mod) } }
   end,
   calculate = function(self, card, context)
     if context.joker_main then
