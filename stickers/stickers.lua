@@ -8,75 +8,23 @@ local pokerus =  {
     end,
     apply = function(self, card, val)
         card.ability[self.key] = val
-        if G.deck then -- just to prevent crashing in the collection
-            if card.ability.extra and type(card.ability.extra) == "table" then
-                G.E_MANAGER:add_event(Event({
-                    trigger = "after",
-                    time = 0.2,
-                    func = function()
-                        for _ = 1, energy_max + (G.GAME.energy_plus or 0) do
-                            if can_increase_energy(card) then
-                                energize(card,nil,nil,true)
-                                if card.ability.extra.c_energy_count then
-                                    card.ability.extra.c_energy_count = card.ability.extra.c_energy_count + 1
-                                else
-                                    card.ability.extra.c_energy_count = 1
-                                end
-                            else
-                                break
-                            end
-                        end
-                        play_sound('maelmc_pokerus_sound', 1, 0.2)
-                        card:juice_up(1, 0.5)
-                        return true
-                    end
-                }))
-            else
-                G.E_MANAGER:add_event(Event({
-                    trigger = "after",
-                    time = 0.2,
-                    func = function()
-                        for _ = 1, energy_max + (G.GAME.energy_plus or 0) do
-                            if can_increase_energy(card) then
-                                energize(card,nil,nil,true)
-                                if card.ability.c_energy_count then
-                                    card.ability.c_energy_count = card.ability.c_energy_count + 1
-                                else
-                                    card.ability.c_energy_count = 1
-                                end
-                            else
-                                break
-                            end
-                        end
-                        play_sound('maelmc_pokerus_sound', 1, 0.2)
-                        card:juice_up(1, 0.5)
-                        return true
-                    end
-                }))
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            time = 0.2,
+            func = function()
+                energy_increase(card, get_type(card), (energy_max + (G.GAME.energy_plus or 0) +
+                    (type(card.ability.extra) == "table" and card.ability.extra.e_limit_up or 0)) - get_total_energy(card), true)
+                play_sound('maelmc_pokerus_sound', 1, 0.2)
+                card:juice_up(1, 0.5)
+                return true
             end
-        end
+        }))
     end,
     calculate = function(self, card, context)
         -- at any time, energize to max
-        for _ = 1, energy_max + (G.GAME.energy_plus or 0) - get_total_energy(card) do
-            if can_increase_energy(card) then
-                energize(card,nil,nil,true)
-                if card.ability.extra and type(card.ability.extra) == "table" then
-                    if card.ability.extra.c_energy_count then
-                        card.ability.extra.c_energy_count = card.ability.extra.c_energy_count + 1
-                    else
-                        card.ability.extra.c_energy_count = 1
-                    end
-                else --if a base balatro joker
-                    if card.ability.c_energy_count then
-                        card.ability.c_energy_count = card.ability.c_energy_count + 1
-                    else
-                        card.ability.c_energy_count = 1
-                    end
-                end
-            else
-                break
-            end
+        if not (get_total_energy(card) > (energy_max + (G.GAME.energy_plus or 0) + (type(card.ability.extra) == "table" and card.ability.extra.e_limit_up or 0))) then
+            energy_increase(card, get_type(card), energy_max + (G.GAME.energy_plus or 0) +
+                (type(card.ability.extra) == "table" and card.ability.extra.e_limit_up or 0) - get_total_energy(card), true)
         end
 
         -- spread

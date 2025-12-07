@@ -347,11 +347,7 @@ SMODS.Consumable:take_ownership('wraith', {
 SMODS.Consumable:take_ownership('poke_double_rainbow_energy', {
   use = function(self, card, area, copier)
     for i = 1, 2 do
-      if not G.jokers.highlighted or #G.jokers.highlighted ~= 1 then
-        energy_use(self, card, area, copier, true)
-      else
-        highlighted_energy_use(self, card, area, copier, true)
-      end
+      energy_use(self, card, area, copier, true)
     end
     if (not G.GAME.modifiers.no_interest) and (not should_cleanse_tag()) then
       G.GAME.modifiers.reset_no_interest = true
