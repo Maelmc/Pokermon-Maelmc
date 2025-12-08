@@ -611,7 +611,7 @@ local shuppet={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     return { vars = { card.ability.extra.Xmult_mod,
-            G.jokers and math.max(1, ((G.jokers.config.card_limit - #G.jokers.cards)
+            G.jokers and math.max(card.ability.extra.Xmult_mod, ((G.jokers.config.card_limit - #G.jokers.cards)
             + #SMODS.find_card("j_maelmc_shuppet", true)
             + #SMODS.find_card("j_maelmc_banette", true)
             + #SMODS.find_card("j_maelmc_mega_banette", true)
@@ -621,7 +621,7 @@ local shuppet={
   calculate = function(self, card, context)
     if context.joker_main then
       return {
-        xmult = math.max(1,
+        xmult = math.max(card.ability.extra.Xmult_mod,
             ((G.jokers.config.card_limit - #G.jokers.cards) 
             + #SMODS.find_card("j_maelmc_shuppet", true)
             + #SMODS.find_card("j_maelmc_banette", true)
@@ -648,7 +648,7 @@ local banette={
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     return { vars = { card.ability.extra.Xmult_mod,
-            G.jokers and math.max(1, ((G.jokers.config.card_limit - #G.jokers.cards)
+            G.jokers and math.max(card.ability.extra.Xmult_mod, ((G.jokers.config.card_limit - #G.jokers.cards)
             + #SMODS.find_card("j_maelmc_shuppet", true)
             + #SMODS.find_card("j_maelmc_banette", true)
             + #SMODS.find_card("j_maelmc_mega_banette", true)
@@ -657,7 +657,7 @@ local banette={
   calculate = function(self, card, context)
     if context.joker_main then
       return {
-        xmult = math.max(1,
+        xmult = math.max(card.ability.extra.Xmult_mod,
             ((G.jokers.config.card_limit - #G.jokers.cards) 
             + #SMODS.find_card("j_maelmc_shuppet", true)
             + #SMODS.find_card("j_maelmc_banette", true)
