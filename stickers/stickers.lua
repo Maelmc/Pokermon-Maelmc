@@ -22,7 +22,7 @@ local pokerus =  {
     end,
     calculate = function(self, card, context)
         -- at any time, energize to max
-        if not (get_total_energy(card) > (energy_max + (G.GAME.energy_plus or 0) + (type(card.ability.extra) == "table" and card.ability.extra.e_limit_up or 0))) then
+        if get_total_energy(card) < (energy_max + (G.GAME.energy_plus or 0) + (type(card.ability.extra) == "table" and card.ability.extra.e_limit_up or 0)) then
             energy_increase(card, get_type(card), energy_max + (G.GAME.energy_plus or 0) +
                 (type(card.ability.extra) == "table" and card.ability.extra.e_limit_up or 0) - get_total_energy(card), true)
         end
