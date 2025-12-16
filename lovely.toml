@@ -696,3 +696,34 @@ position = "before"
 match_indent = true
 payload = '''elseif parsedAction.action == "magnetResponse" and string.find(parsedAction.key,"MEANLOOK") then
 	action_mean_look()'''
+
+
+# Sepia for Meloetta
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+position = "after"
+match_indent = true
+pattern = '''love.graphics.setCanvas(G.AA_CANVAS)'''
+payload = '''if G.GAME.maelmc_sepia then
+  if not G.MAELMC_SEPIA then
+    G.MAELMC_SEPIA = love.graphics.newCanvas(love.graphics.getDimensions())
+    G.MAELMC_SEPIA:setFilter("linear","linear")
+  end
+  love.graphics.setCanvas(G.MAELMC_SEPIA)
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+position = "at"
+match_indent = true
+pattern = '''love.graphics.setCanvas()'''
+payload = '''
+love.graphics.setCanvas()
+if G.GAME.maelmc_sepia then
+  love.graphics.setShader(G.SHADERS['maelmc_sepia'])
+  love.graphics.draw(G.MAELMC_SEPIA, 0, 0)
+end
+'''

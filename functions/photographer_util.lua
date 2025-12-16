@@ -46,3 +46,52 @@ function photographer_util(card)
     end
   end
 end
+
+function set_sepia_quest(self,card)
+  local card_drag_orig = card.drag
+
+  local shake_rqmt = 25
+
+  card.drag = function(self, offset)
+    card_drag_orig(self, offset)
+    
+    -- Set a starting point if we've just started dragging
+    if not card.ability.extra.prev_drag_x or card.ability.extra.prev_drag_x == 0 then card.ability.extra.prev_drag_x = self.T.x end
+    if not card.ability.extra.prev_drag_y or card.ability.extra.prev_drag_y == 0 then card.ability.extra.prev_drag_y = self.T.y end
+
+    local x1, x2 = card.ability.extra.prev_drag_x, self.T.x
+    local y1, y2 = card.ability.extra.prev_drag_y, self.T.y
+    local distance = math.sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+
+    card.ability.extra.prev_drag_x = self.T.x
+    card.ability.extra.prev_drag_y = self.T.y
+    card.ability.extra.dist_dragged = distance + (card.ability.extra.dist_dragged or 0)
+
+    if card.ability.extra.dist_dragged > shake_rqmt and not card.ability.extra.meloetta_generated then
+      play_sound('timpani')
+      SMODS.add_card({ set = 'Joker', key = "j_maelmc_meloetta" })
+      card:juice_up(0.3, 0.5)
+      card.ability.extra.prev_drag_x = 0
+      card.ability.extra.prev_drag_y = 0
+      card.ability.extra.dist_dragged = 0
+      card.ability.extra.meloetta_generated = true
+
+      local remove_sep = true
+      for _, v in pairs(SMODS.find_card("j_maelmc_photographer",true)) do
+        if not v.ability.extra.meloetta_generated then
+          remove_sep = false
+          break
+        end
+      end
+      if remove_sep then G.GAME.maelmc_sepia = false end
+    end
+  end
+
+  local card_stop_drag_orig = card.stop_drag
+  card.stop_drag = function(self)
+    card_stop_drag_orig(self)
+    card.ability.extra.prev_drag_x = 0
+    card.ability.extra.prev_drag_y = 0
+    card.ability.extra.dist_dragged = 0
+  end
+end

@@ -64,6 +64,21 @@ SMODS.current_mod.config_tab = function()
         {
           n = G.UIT.R,
           config = {
+              align = "cm",
+              padding = 0.25,
+              colour = G.C.CLEAR,
+          },
+          nodes = {
+            create_toggle({
+              label = localize("meloetta_sings"),
+              ref_table = maelmc_config,
+              ref_value = "meloetta_sings",
+            })
+          },
+        },
+        {
+          n = G.UIT.R,
+          config = {
             padding = 0.05,
             align = "cm"
           },

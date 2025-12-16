@@ -397,7 +397,7 @@ return {
                     "{br:3}ERROR - CONTACT STEAK",
                     "Retriggers all {C:attention}Lucky{} cards",
                     "{C:attention}#3#{} additional time",
-                    "{C:inactive,s:0.8}(Changes form using a {C:attention,s:0.8}Mask{C:inactive,s:0.8})",
+                    "{s:0.8}Changes form using a {C:attention,s:0.8}Mask",
                 }
             },
             j_maelmc_ogerpon_wellspring = {
@@ -412,7 +412,7 @@ return {
                     "If scoring hand contains",
                     "no {C:attention}Bonus{} card,",
                     "create a {C:item}Water Stone",
-                    "{C:inactive,s:0.8}(Changes form using a {C:attention,s:0.8}Mask{C:inactive,s:0.8})",
+                    "{s:0.8}Changes form using a {C:attention,s:0.8}Mask",
                 }
             },
             j_maelmc_ogerpon_hearthflame = {
@@ -427,7 +427,7 @@ return {
                     "{br:3}ERROR - CONTACT STEAK",
                     "If {C:attention}first played hand{} has exactly {C:attention}1{} card,",
                     "{C:attention}destroy #4#{} random non-{C:attention}Mult{} cards held in hand",
-                    "{C:inactive,s:0.8}(Changes form using a {C:attention,s:0.8}Mask{C:inactive,s:0.8})",
+                    "{s:0.8}Changes form using a {C:attention,s:0.8}Mask",
                 }
             },
             j_maelmc_ogerpon_cornerstone = {
@@ -440,7 +440,7 @@ return {
                     "{br:3}ERROR - CONTACT STEAK",
                     "Scored {C:attention}Stone{} cards give {C:red}+{} Mult",
                     "equal to {C:attention}#1#/#2#{} of their total chips",
-                    "{C:inactive,s:0.8}(Changes form using a {C:attention,s:0.8}Mask{C:inactive,s:0.8})",
+                    "{s:0.8}Changes form using a {C:attention,s:0.8}Mask",
                 }
             },
             j_maelmc_pokewalker = {
@@ -875,6 +875,22 @@ return {
                     "at end of round"
                 }
             },
+            j_maelmc_meloetta = {
+                name = "Meloetta",
+                text = {
+                    "Played cards earn",
+                    "{C:money}$#1#{} when scored",
+                    "{s:0.8}Changes form after discarding",
+                }
+            },
+            j_maelmc_meloetta_pirouette = {
+                name = "Meloetta",
+                text = {
+                    "Played cards give",
+                    "{X:red,C:white}X#1#{} Mult when scored",
+                    "{s:0.8}Changes form after discarding",
+                }
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -1069,6 +1085,7 @@ return {
             k_maelmc_ultra_beast = "Ultra Beast",
 
             background_color = "Custom Background on Main Menu",
+            meloetta_sings = "Meloetta sings Relic Song",
             disable_spiritomb = "Disable Spiritomb",
         },
         labels = {

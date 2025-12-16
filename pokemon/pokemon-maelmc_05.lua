@@ -225,10 +225,104 @@ local bouffalant = {
   end
 }
 
+-- Meloetta
+local meloetta = {
+  name = "meloetta",
+  atlas = "AtlasJokersBasicGen05",
+  pos = { x = 4, y = 6 },
+  soul_pos = { x = 5, y = 6 },
+  stage = "Legendary",
+  ptype = "Psychic",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  rarity = 4,
+  cost = 20,
+  config = { extra = {money_mod = 3} },
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return { vars = {card.ability.extra.money_mod} }
+  end,
+  calculate = function(self, card, context)
+    if context.individual and context.cardarea == G.play then
+      if not context.end_of_round and not context.before and not context.after and not context.other_card.debuff then
+        G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.money_mod
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                G.GAME.dollar_buffer = 0
+                return true
+            end
+        }))
+        local earned = ease_poke_dollars(card, "meloetta", card.ability.extra.money_mod, true)
+        return {
+          mult = card.ability.extra.mult,
+          dollars = earned,
+          card = card
+        }
+      end
+    end
+
+    if context.post_discard and not context.recursive and not context.blueprint then
+      G.E_MANAGER:add_event(Event({
+        func = function()
+          poke_evolve(card, "j_maelmc_meloetta_pirouette")
+          return true
+        end
+      }))
+    end
+  end
+}
+
+local meloetta_pirouette = {
+  name = "meloetta_pirouette",
+  atlas = "AtlasJokersBasicGen05",
+  pos = { x = 6, y = 6 },
+  soul_pos = { x = 7, y = 6 },
+  stage = "Legendary",
+  ptype = "Fighting",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = true,
+  rarity = 4,
+  cost = 20,
+  aux_poke = true,
+  custom_pool_func = true,
+  no_collection = true,
+  config = { extra = {Xmult_multi = 1.5} },
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return { vars = {card.ability.extra.Xmult_multi} }
+  end,
+  calculate = function(self, card, context)
+
+    if context.individual and context.cardarea == G.play then
+      if not context.end_of_round and not context.before and not context.after and not context.other_card.debuff then
+        return {
+          Xmult = card.ability.extra.Xmult_multi,
+          card = context.blueprint_card or card
+        }
+      end
+    end
+
+    if context.post_discard and not context.recursive and not context.blueprint then
+      G.E_MANAGER:add_event(Event({
+        func = function()
+          poke_evolve(card, "j_maelmc_meloetta")
+          return true
+        end
+      }))
+    end
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
 return {
   name = "Maelmc's Jokers Gen 5",
   list = {
     woobat, swoobat,
     bouffalant,
+    meloetta, meloetta_pirouette,
   },
 }

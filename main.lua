@@ -28,6 +28,7 @@ local name_lists = {{"glimmet", "glimmora"},
   {"wingull","pelipper"},
   {"sinistea","polteageist"},
   {"shuppet","banette","mega_banette"},
+  {"meloetta","meloetta_pirouette"},
 }
 
 extended_family["shuppet"] = {"fake_mega_banette"}
@@ -38,12 +39,12 @@ for _, list in ipairs(name_lists) do
   pokermon.add_family(list)
 end
 
---Load Sprites file
-local sprite, load_error = SMODS.load_file("sprites.lua")
+--Load Assets file
+local asset, load_error = SMODS.load_file("assets.lua")
 if load_error then
   sendDebugMessage ("The error is: "..load_error)
 else
-  sprite()
+  asset()
 end
 
 SMODS.Rank {
@@ -163,7 +164,8 @@ for _, file in ipairs(pfiles) do
           if not (string.find(item.name,"deoxys") 
           or string.find(item.name,"ogerpon")
           or item.name == "mega_malamar"
-          or item.name == "mega_barbaracle") then
+          or item.name == "mega_barbaracle"
+          or item.name == "meloetta") then
             poke_load_atlas(item)
             poke_load_sprites(item)
           end
