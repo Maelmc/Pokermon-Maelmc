@@ -165,7 +165,8 @@ for _, file in ipairs(pfiles) do
           or string.find(item.name,"ogerpon")
           or item.name == "mega_malamar"
           or item.name == "mega_barbaracle"
-          or item.name == "meloetta") then
+          or item.name == "meloetta"
+          or item.name == "mega_garchomp_z") then
             poke_load_atlas(item)
             poke_load_sprites(item)
           end

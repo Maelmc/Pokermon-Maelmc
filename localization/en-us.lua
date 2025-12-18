@@ -377,10 +377,9 @@ return {
                     "{C:attention}+#1#{} hand size",
                     "{br:3}ERROR - CONTACT STEAK",
                     "If played hand is a {C:attention}Pair{},",
-                    "retriggers all cards held in hand",
-                    "of the same rank as the {C:attention}Pair",
-                    "{C:attention}#2#{} additional time",
-                    "and they give {X:red,C:white}X#3#{} Mult each",
+                    "all cards held in hand of",
+                    "the same rank as the {C:attention}Pair",
+                    "give {X:red,C:white}X#2#{} Mult each",
                 }
             },
             j_maelmc_ogerpon = {
@@ -889,6 +888,17 @@ return {
                     "Played cards give",
                     "{X:red,C:white}X#1#{} Mult when scored",
                     "{s:0.8}Changes form after discarding",
+                }
+            },
+            j_maelmc_mega_garchomp_z = {
+                name = "Mega Garchomp Z",
+                text = {
+                    "{C:attention}+#1#{} hand size",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "If played hand is a {C:attention}Pair{},",
+                    "retriggers all cards held in",
+                    "hand of the same rank as",
+                    "the {C:attention}Pair #2#{} additional times",
                 }
             },
         },

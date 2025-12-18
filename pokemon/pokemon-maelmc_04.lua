@@ -252,20 +252,19 @@ local garchomp={
   remove_from_deck = function(self, card, from_debuff)
     G.hand:change_size(-card.ability.extra.h_size)
   end,
-  megas = {"mega_garchomp"}
+  megas = {"mega_garchomp","mega_garchomp_z"}
 }
 
 local mega_garchomp={
   name = "mega_garchomp",
-  --poke_custom_prefix = "maelmc",
   pos = {x = 2, y = 7},
   soul_pos = {x = 3, y = 7},
-  config = {extra = {retriggers = 1, Xmult_multi = 1.5, h_size = 2}},
+  config = {extra = {Xmult_multi = 1.5, h_size = 2}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    return {vars = {abbr.h_size, abbr.retriggers, abbr.Xmult_multi}}
+    return {vars = {abbr.h_size, abbr.Xmult_multi}}
   end,
   rarity = "poke_mega",
   cost = 12,
@@ -291,6 +290,34 @@ local mega_garchomp={
         }
       end
     end
+
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    G.hand:change_size(card.ability.extra.h_size)
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.hand:change_size(-card.ability.extra.h_size)
+  end
+}
+
+local mega_garchomp_z={
+  name = "mega_garchomp_z",
+  pos = {x = 2, y = 7},
+  soul_pos = {x = 3, y = 7},
+  config = {extra = {retriggers = 2, h_size = 2}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    return {vars = {abbr.h_size, abbr.retriggers}}
+  end,
+  rarity = "poke_mega",
+  cost = 12,
+  stage = "Mega",
+  ptype = "Dragon",
+  atlas = "AtlasJokersBasicGen04",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
 
     if context.repetition and context.cardarea == G.hand and context.scoring_name == "Pair" then
       local pair_of = nil
@@ -319,7 +346,7 @@ local mega_garchomp={
 }
 
 local list = {
-  gible, gabite, garchomp, mega_garchomp,
+  gible, gabite, garchomp, mega_garchomp, mega_garchomp_z,
 }
 
 if not maelmc_config.disable_spiritomb then table.insert(list,spiritomb) end
