@@ -188,7 +188,7 @@ local bouffalant = {
         end
         if (boss_name == "The Hook" and (#G.hand.cards - #G.hand.highlighted) > 0) or
         boss_name == "The Tooth" or boss_name == "bl_poke_gray_godfather" or
-        ((boss_name == "Crimson Heart" or boss_name == "bl_poke_cgoose") and jokdebuff) or
+        ((boss_name == "Crimson Heart" or boss_name == "bl_poke_star" or boss_name == "bl_poke_iridescent_hacker") and jokdebuff) or
         (boss_name == "Cerulean Bell" and forcedselection) then
           boss_trigg = true
         end

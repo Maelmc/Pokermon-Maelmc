@@ -52,7 +52,7 @@ local wonder_trade = {
   end,
   custom_pool_func = true,
   in_pool = function(self)
-    return next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer')) and MP.LOBBY.code and MP.LOBBY.config.multiplayer_jokers and pokemon_in_pool(self)
+    return (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code and MP.LOBBY.config.multiplayer_jokers and pokemon_in_pool(self)
   end
 }
 
@@ -87,7 +87,7 @@ local mean_look = {
   end,
   custom_pool_func = true,
   in_pool = function(self)
-    return next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer')) and MP.LOBBY.code and MP.LOBBY.config.multiplayer_jokers and pokemon_in_pool(self)
+    return (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code and MP.LOBBY.config.multiplayer_jokers and pokemon_in_pool(self)
   end
 }
 
