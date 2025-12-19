@@ -471,7 +471,10 @@ local photographer = {
       end
 
       local add_card = SMODS.create_card(temp_card)
-      if card.ability.extra.generated_bloodmoon == 2 then add_card.ability.couponed = true end
+      if card.ability.extra.generated_bloodmoon == 2 then
+        add_card.ability.couponed = true
+        card.ability.extra.generated_bloodmoon = 3
+      end
       poke_add_shop_card(add_card, card)
     end
 
