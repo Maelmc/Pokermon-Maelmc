@@ -267,8 +267,8 @@ end
 local use_consumeable = Card.use_consumeable
 function Card:use_consumeable(area, copier)
 	local ret = use_consumeable(self, area, copier)
-  print(self.config.center.set)
-  if self.config.center.set == "Spectral" then
+  local keep = (self.config.center.keep_on_use and type(self.config.center.keep_on_use) == 'function' and self.config.center:keep_on_use(self)) or false
+  if self.config.center.set == "Spectral" and not keep then
     for i = 1, #G.GAME.tags do
       if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
         if G.GAME.tags[i].key == "tag_maelmc_spell_tag" then
