@@ -129,6 +129,82 @@ local glimmora={
   end,
 }
 
+-- Poltchageist
+local poltchageist = {
+  name = "poltchageist",
+  config = { extra = { rounds = 5 } },
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue + 1] = { key = 'tag_maelmc_spell_tag', set = 'Tag' }
+    return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_spell_tag" }, card.ability.extra.rounds}}
+  end,
+  rarity = 2,
+  cost = 6,
+  stage = "Basic",
+  ptype = "Grass",
+  atlas = "AtlasJokersBasicNatdex",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = false,
+  calculate = function(self, card, context)
+    if context.selling_self then
+      G.E_MANAGER:add_event(Event({
+        func = (function()
+          add_tag(Tag('tag_maelmc_spell_tag'))
+          play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+          play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+          return true
+        end)
+      }))
+      return nil, true -- This is for Joker retrigger purposes
+    end
+
+    return level_evo(self, card, context, "j_maelmc_sinistcha")
+  end,
+}
+
+-- Sinistcha
+local sinistcha = {
+  name = "sinistcha",
+  config = {},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue + 1] = { key = 'tag_maelmc_spell_tag', set = 'Tag' }
+    info_queue[#info_queue + 1] = { key = 'tag_ethereal', set = 'Tag' }
+    return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_spell_tag" },localize { type = 'name_text', set = 'Tag', key = "tag_ethereal" }}}
+  end,
+  rarity = "poke_safari",
+  cost = 8,
+  stage = "One",
+  ptype = "Grass",
+  atlas = "AtlasJokersBasicNatdex",
+  perishable_compat = true,
+  blueprint_compat = true,
+  eternal_compat = false,
+  calculate = function(self, card, context)
+    if context.selling_self then
+      G.E_MANAGER:add_event(Event({
+        func = (function()
+          add_tag(Tag('tag_maelmc_spell_tag'))
+          play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+          play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+          return true
+        end)
+      }))
+
+      G.E_MANAGER:add_event(Event({
+        func = (function()
+          add_tag(Tag('tag_ethereal'))
+          play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+          play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+          return true
+        end)
+      }))
+      return nil, true -- This is for Joker retrigger purposes
+    end
+  end,
+}
+
 local ogerpon={
   name = "ogerpon", 
   pos = {x = 4, y = 4},
@@ -477,6 +553,7 @@ return {
   name = "Maelmc's Jokers Gen 9",
   list = {
     glimmet, glimmora,
+    poltchageist, sinistcha,
     ogerpon, ogerpon_wellspring, ogerpon_hearthflame, ogerpon_cornerstone,
   },
 }

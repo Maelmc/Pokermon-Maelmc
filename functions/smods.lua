@@ -262,3 +262,31 @@ function Card:start_dissolve()
     return dis(self)
   end
 end
+
+-- Spell tag dupping spectral cards
+local use_consumeable = Card.use_consumeable
+function Card:use_consumeable(area, copier)
+	local ret = use_consumeable(self, area, copier)
+  print(self.config.center.set)
+  if self.config.center.set == "Spectral" then
+    for i = 1, #G.GAME.tags do
+      if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+        if G.GAME.tags[i].key == "tag_maelmc_spell_tag" then
+          G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+          local fake_context = {spell_tag = true}
+          G.E_MANAGER:add_event(Event({
+            func = function()
+              local _card = create_card('Spectral',G.consumeables, nil, nil, nil, nil,self.config.center.key)
+              _card:add_to_deck()
+              G.consumeables:emplace(_card)
+              G.GAME.consumeable_buffer = 0
+              G.GAME.tags[i]:apply_to_run(fake_context)
+              return true
+            end
+          }))
+        end
+      else break end
+    end
+  end
+	return ret
+end

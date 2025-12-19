@@ -55,6 +55,14 @@ return {
                     "{C:attention}1 {C:spectral}Spectral{} card",
                 }
             },
+            tag_maelmc_spell_tag = {
+                name = "Spell Tag",
+                text = {
+                    "Create a copy of",
+                    "the next used",
+                    "{C:spectral}Spectral{} card",
+                }
+            },
         },
         Item = {
             c_maelmc_tealmask = {
@@ -900,6 +908,25 @@ return {
                     "hand of the same rank as",
                     "the {C:attention}Pair #2#{} additional times",
                 }
+            },
+            j_maelmc_poltchageist = {
+                name = "Poltchageist",
+                text={
+                    "Sell this card to",
+                    "create a free",
+                    "{C:attention}#1#",
+                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#2#{C:inactive,s:0.8} rounds)",
+                },
+            },
+            j_maelmc_sinistcha = {
+                name = "Sinistcha",
+                text={
+                    "Sell this card to",
+                    "create a free",
+                    "{C:attention}#1#",
+                    "and a free",
+                    "{C:attention}#2#",
+                },
             },
         },
         Voucher = {
