@@ -83,13 +83,8 @@ photographer_util(card)
 [[patches]]
 [patches.pattern]
 target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
-pattern = '''if cardname == "ruins_of_alph" then
-    for k, v in pairs(card.ability.extra.forms) do
-      local form = {key = "j_poke_unown", form = v}
-      table.insert(keys, form)
-    end
-  end'''
-position = "after"
+pattern = '''local evo_item_keys = get_evo_item_keys(card, prefix)'''
+position = "before"
 match_indent = true
 payload = '''
 if cardname == "photographer" then
