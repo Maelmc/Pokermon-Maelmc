@@ -379,3 +379,69 @@ SMODS.Consumable:take_ownership('poke_nightmare', {
     if not should_cleanse_tag() then remove(self, choice) end
   end,
 }, true)
+
+-- Stolen from Emma hehe
+-- Changing the hand text for 5oak/f5 with mega barbaracle
+SMODS.PokerHand:take_ownership("Five of a Kind", {
+  modify_display_text = function(self, cards, scoring_hand)
+    if #scoring_hand == 6 then
+      return "Six of a Kind"
+    elseif #scoring_hand == 7 then
+      if cards[1]:get_id() == 7 then
+        return "Barbarakind"
+      end
+      return "Seven of a Kind"
+    elseif #scoring_hand == 8 then
+      return "Eight of a Kind"
+    elseif #scoring_hand == 9 then
+      return "Nine of a Kind"
+    elseif #scoring_hand == 10 then
+      return "Ten of a Kind"
+    elseif #scoring_hand == 11 then
+      if cards[1]:get_id() == 7 then
+        return "Mega Barbarakind"
+      end
+      return "Eleven of a Kind"
+    -- with emma's gmax snorlax
+    elseif #scoring_hand == 12 then
+      return "Twelve of a Kind"
+    elseif #scoring_hand == 13 then
+      if cards[1]:get_id() == 7 then
+        return "Laxing Mega Barbarakind"
+      end
+      return "Thirteen of a Kind"
+    end
+  end
+}, true)
+
+SMODS.PokerHand:take_ownership("Flush Five", {
+  modify_display_text = function(self, cards, scoring_hand)
+    if #scoring_hand == 6 then
+      return "Flush Six"
+    elseif #scoring_hand == 7 then
+      if cards[1]:get_id() == 7 then
+        return "Barbaraflush"
+      end
+      return "Flush Seven"
+    elseif #scoring_hand == 8 then
+      return "Flush Eight"
+    elseif #scoring_hand == 9 then
+      return "Flush Nine"
+    elseif #scoring_hand == 10 then
+      return "Flush Ten"
+    elseif #scoring_hand == 11 then
+      if cards[1]:get_id() == 7 then
+        return "Mega Barbaraflush"
+      end
+      return "Flush Eleven"
+    -- with emma's gmax snorlax
+    elseif #scoring_hand == 12 then
+      return "Flush Twelve"
+    elseif #scoring_hand == 13 then
+      if cards[1]:get_id() == 7 then
+        return "Laxing Mega Barbaraflush"
+      end
+      return "Flush Thirteen"
+    end
+  end
+}, true)

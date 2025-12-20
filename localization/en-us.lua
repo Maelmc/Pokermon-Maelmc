@@ -24,6 +24,7 @@ return {
                 text = {
                     "no rank or suit",
                     "does not score when played",
+                    "cannot be discarded",
                     "cannot be destroyed",
                     "enhancement cannot be changed",
                 },
