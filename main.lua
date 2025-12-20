@@ -162,12 +162,8 @@ for _, file in ipairs(pfiles) do
         if item.atlas and string.find(item.atlas, "maelmc") then
           pokermon.Pokemon(item,"maelmc",true)
         else
-          if not (item.name == "mega_malamar"
-          or item.name == "mega_barbaracle"
-          or item.name == "mega_garchomp_z") then
-            poke_load_atlas(item)
-            poke_load_sprites(item)
-          end
+          poke_load_atlas(item)
+          poke_load_sprites(item)
           pokermon.Pokemon(item,"maelmc",false)
         end
       end
