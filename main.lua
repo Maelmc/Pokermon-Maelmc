@@ -29,6 +29,7 @@ local name_lists = {{"glimmet", "glimmora"},
   {"sinistea","polteageist"},
   {"shuppet","banette","mega_banette"},
   {"meloetta","meloetta_pirouette"},
+  {"poltchageist","sinistcha"}
 }
 
 extended_family["shuppet"] = {"fake_mega_banette"}
