@@ -1,5 +1,5 @@
 --Required by the pokemon family function (right click on a pokemon joker)
-local name_lists = {{"glimmet", "glimmora"},
+local name_lists = {{"glimmet", "glimmora","mega_glimmora"},
   {"cufant","copperajah","mega_copperajah"},
   {"odd_keystone","spiritomb"},
   {
@@ -19,7 +19,7 @@ local name_lists = {{"glimmet", "glimmora"},
   {"inkay","malamar","mega_malamar"},
   {"binacle","barbaracle","mega_barbaracle"},
   {"ralts","kirlia","gardevoir","mega_gardevoir"},
-  {"gible","gabite","garchomp","mega_garchomp"},
+  {"gible","gabite","garchomp","mega_garchomp","mega_garchomp_z"},
   {"ogerpon","ogerpon_wellspring","ogerpon_hearthflame","ogerpon_cornerstone"},
   {"galarian_corsola","cursola"},
   {"deoxys","deoxys_attack","deoxys_defense","deoxys_speed"},

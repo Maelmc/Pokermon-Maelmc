@@ -929,6 +929,16 @@ return {
                     "{C:attention}#2#",
                 },
             },
+            j_maelmc_mega_glimmora = {
+                name = "Mega Glimmora",
+                text = {
+                    "{C:purple}+Inf Hazards {C:inactive}",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "{C:chips}+#1#{} Chips for every {C:attention}Hazard",
+                    "{C:attention}Card{} in your full deck",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+                }
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {

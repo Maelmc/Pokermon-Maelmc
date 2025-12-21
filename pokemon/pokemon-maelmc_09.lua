@@ -66,7 +66,8 @@ local glimmet={
 local glimmora={
   name = "glimmora",
   pos = {x = 18, y = 64},
-  config = {extra = {hazards = 4, chips = 20, base_increase = 25, req_increase = 5, increase_in = 25, increase_by = 1}},
+  config = {extra = {hazards = 4, chips = 20, base_increase = 25, req_increase = 5, increase_in = 25, increase_by = 1, chips_mod = 15}},
+  poke_custom_values_to_keep = {"hazards", "chips", "chips_mod", "base_increase", "req_increase", "increase_in", "increase_by"},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -124,6 +125,60 @@ local glimmora={
               chips = hazard_count * card.ability.extra.chips,
               card = card
           }
+      end
+    end
+  end,
+  megas = {"mega_glimmora"},
+}
+
+local mega_glimmora={
+  name = "mega_glimmora",
+  pos = {x = 0, y = 2},
+  soul_pos = {x = 1, y = 2},
+  config = {extra = {chips_mod = 15, hazards = 0, chips = 0, base_increase = 0, req_increase = 0, increase_in = 0, increase_by = 0}},
+  poke_custom_values_to_keep = {"hazards", "chips", "chips_mod", "base_increase", "req_increase", "increase_in", "increase_by"},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    -- just to shorten function
+    local abbr = card.ability.extra
+    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {"Inf"}}
+    info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
+    local hazard_count = 0
+    if G.playing_cards then
+      for _, v in pairs(G.playing_cards) do
+        if SMODS.has_enhancement(v, "m_poke_hazard") then
+          hazard_count = hazard_count + 1
+        end
+      end
+    else
+      hazard_count = 52
+    end
+    return {vars = {abbr.chips_mod, abbr.chips_mod * hazard_count}}
+  end,
+  rarity = "poke_safari",
+  cost = 6,
+  stage = "One",
+  ptype = "Earth",
+  atlas = "maelmc_jokers",
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    -- adding hazards
+    if context.setting_blind then
+      poke_set_hazards(#G.playing_cards)
+    end
+
+    -- scoring hazards
+    if context.cardarea == G.jokers and context.scoring_hand then
+      if context.joker_main then
+        local hazard_count = 0
+        for _, v in pairs(G.playing_cards) do
+          if SMODS.has_enhancement(v, "m_poke_hazard") then
+            hazard_count = hazard_count + 1
+          end
+        end
+        return {
+          chips = hazard_count * card.ability.extra.chips_mod
+        }
       end
     end
   end,
@@ -552,7 +607,7 @@ local ogerpon_cornerstone={
 return {
   name = "Maelmc's Jokers Gen 9",
   list = {
-    glimmet, glimmora,
+    glimmet, glimmora, mega_glimmora,
     poltchageist, sinistcha,
     ogerpon, ogerpon_wellspring, ogerpon_hearthflame, ogerpon_cornerstone,
   },
