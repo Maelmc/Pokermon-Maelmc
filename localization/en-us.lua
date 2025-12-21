@@ -1079,7 +1079,7 @@ return {
             c_maelmc_hearthflame = "Hearthflame Mask",
             c_maelmc_cornerstone = "Cornerstone Mask",]]
             c_maelmc_gym_challenge = "Gym Challenge",
-            c_maelmc_tildeathdouspart = "'Til Death Do Us Part",
+            c_maelmc_tilldeathdouspart = "Till Death Do Us Part",
         },
         dictionary = {
             maelmc_steel_ex = "Steel!",

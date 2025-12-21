@@ -80,9 +80,9 @@ local gym_challenge = {
     }
 }
 
-local tildeathdouspart = {
+local tilldeathdouspart = {
     object_type = "Challenge",
-    key = "tildeathdouspart",
+    key = "tilldeathdouspart",
     rules = {
         custom = {
             --{id = 'maelmc_perish_3'},
@@ -274,7 +274,7 @@ local tildeathdouspart = {
 return {name = "Challenges",
         list = {
             gym_challenge,
-            tildeathdouspart,
+            tilldeathdouspart,
             --[[glimmora,
             copperajah,
             spiritomb,
