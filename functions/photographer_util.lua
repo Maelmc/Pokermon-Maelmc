@@ -67,7 +67,7 @@ function set_sepia_quest(self,card)
     card.ability.extra.prev_drag_y = self.T.y
     card.ability.extra.dist_dragged = distance + (card.ability.extra.dist_dragged or 0)
 
-    if card.ability.extra.dist_dragged > shake_rqmt and not card.ability.extra.meloetta_generated then
+    if G.GAME.maelmc_sepia and card.ability.extra.dist_dragged > shake_rqmt and not card.ability.extra.meloetta_generated then
       play_sound('timpani')
       SMODS.add_card({ set = 'Joker', key = "j_maelmc_meloetta" })
       card:juice_up(0.3, 0.5)
