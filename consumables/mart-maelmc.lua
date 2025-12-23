@@ -340,8 +340,8 @@ local beastball = {
   name = "beastball",
   key = "beastball",
   set = "Spectral",
-  pos = { x = 6, y = 0 },
-  --soul_pos = { x = 0, y = 0},
+  pos = { x = 4, y = 0 },
+  soul_pos = { x = 5, y = 0},
   atlas = "maelmc_mart",
   cost = 4,
   pokeball = true,
@@ -376,7 +376,7 @@ local metronome = {
   loc_vars = function(self, info_queue, card)
     return {vars = {card.ability.use_at, card.ability.level_by, (card.ability.hand_played and localize(card.ability.hand_played, 'poker_hands') or localize('poke_none')), card.ability.hand_times}}
   end,
-  pos = { x = 7, y = 0 },
+  pos = { x = 6, y = 0 },
   atlas = "maelmc_mart",
   cost = 4,
   unlocked = true,
