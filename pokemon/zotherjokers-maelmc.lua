@@ -481,6 +481,7 @@ local photographer = {
     if context.setting_blind and context.blind and context.blind.boss and not context.blueprint then
       if context.blind.name == "The Mouth" and not card.ability.extra.meloetta_generated then
         G.GAME.maelmc_sepia = true
+        card:speak("maelmc_sepia_surprise",4,4*G.SETTINGS.GAMESPEED)
       end
     end
 
@@ -490,6 +491,12 @@ local photographer = {
 
   end,
   add_to_deck = function(self, card, from_debuff)
+    G.E_MANAGER:add_event(Event({
+      func = (function()
+        card:speak("maelmc_perrin_entry"..math.random(1, 5),4,4*G.SETTINGS.GAMESPEED)
+        return true
+      end)
+    }))
     for _, v in pairs(G.jokers.cards) do
       if table.contains(timeless_woods_available, v.config.center.name) then
         v.ability.extra.found[v.config.center_key] = true

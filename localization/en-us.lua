@@ -1164,6 +1164,24 @@ return {
             ["Laxing Mega Barbarakind"] = "Laxing Mega Barbarakind",
             ["Laxing Mega Barbaraflush"] = "Laxing Mega Barbaraflush",
         },
+        quips = {
+          maelmc_perrin_entry1 = {
+            "I could snap",
+            "a perfect shot!",},
+          maelmc_perrin_entry2 = {
+            "I'll take photos that",
+            "I want to keep forever!",},
+          maelmc_perrin_entry3 = {
+            "Good ol' Perrin is",
+            "still kicking around too!",},
+          maelmc_perrin_entry4 = {
+            "Give me a",
+            "nice expression!",},
+          maelmc_perrin_entry5 = {
+            "There's so much",
+            "good stuff to capture!",},
+          maelmc_sepia_surprise = {"What is","this song?"},
+        },
         v_dictionary = {
             maelmc_discard = "+#1# Discard",
             maelmc_dollars_minus = "-$#1#",
