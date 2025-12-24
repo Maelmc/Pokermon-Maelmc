@@ -85,7 +85,7 @@ SMODS.Consumable:take_ownership('ouija', {
 SMODS.Consumable:take_ownership('grim', {
     use = function(self, card, area, copier)
         local used_tarot = copier or card
-        local cleanse = not should_cleanse_tag()
+        local cleanse = should_cleanse_tag()
         local destroyed_cards = (not cleanse) and random_destroy(used_tarot) or nil
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -119,7 +119,7 @@ SMODS.Consumable:take_ownership('grim', {
 SMODS.Consumable:take_ownership('familiar', {
     use = function(self, card, area, copier)
         local used_tarot = copier or card
-        local cleanse = not should_cleanse_tag()
+        local cleanse = should_cleanse_tag()
         local destroyed_cards = (not cleanse) and random_destroy(used_tarot) or nil
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -159,7 +159,7 @@ SMODS.Consumable:take_ownership('familiar', {
 SMODS.Consumable:take_ownership('incantation', {
     use = function(self, card, area, copier)
         local used_tarot = copier or card
-        local cleanse = not should_cleanse_tag()
+        local cleanse = should_cleanse_tag()
         local destroyed_cards = (not cleanse) and random_destroy(used_tarot) or nil
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
