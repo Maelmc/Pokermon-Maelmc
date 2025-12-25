@@ -155,9 +155,9 @@ local mega_glimmora={
     end
     return {vars = {abbr.chips_mod, abbr.chips_mod * hazard_count}}
   end,
-  rarity = "poke_safari",
-  cost = 6,
-  stage = "One",
+  rarity = "poke_mega",
+  cost = 12,
+  stage = "Mega",
   ptype = "Earth",
   atlas = "maelmc_jokers",
   blueprint_compat = true,
