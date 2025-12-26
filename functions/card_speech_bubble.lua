@@ -71,6 +71,7 @@ function Card:move(dt)
     end
 end
 
+-- text key, amount of "voices", duration of the text bubble in seconds
 function Card:speak(key,voice_amount,duration)
   self:add_speech_bubble(key,nil,{quip = true})
   self:say_stuff(voice_amount)

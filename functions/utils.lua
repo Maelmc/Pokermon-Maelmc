@@ -108,3 +108,44 @@ function get_atlas_and_pos(name)
   local soul_pos = sprite_info.base.soul_pos
   return {atlas = atlas, pos = pos, soul_pos = soul_pos}
 end
+
+function set_next_boss(key,force_next_ante,allow_during_boss,reset_chips)
+  if force_next_ante or ((not allow_during_boss) and G.GAME and G.GAME.blind and G.GAME.blind.boss) then
+    G.GAME.perscribed_bosses[G.GAME.round_resets.ante + 1] = key
+    return
+  end
+
+  if (G.GAME and G.GAME.blind and G.GAME.blind.boss) and allow_during_boss then
+    G.GAME.blind:set_blind(G.P_BLINDS[key])
+    ease_background_colour_blind(G.STATE)
+    if reset_chips then G.GAME.chips = 0 end
+    return
+  end
+
+  G.E_MANAGER:add_event(Event({
+    blocking = false,
+    blockable = false,
+    func = function()
+      if not G.blind_select then return false end
+      local par = G.blind_select_opts.boss.parent
+      G.GAME.round_resets.blind_choices.Boss = key
+      G.blind_select_opts.boss = UIBox{
+        T = {par.T.x, 0, 0, 0, },
+        definition =
+        {n=G.UIT.ROOT, config={align = "cm", colour = G.C.CLEAR}, nodes={
+            UIBox_dyn_container({create_UIBox_blind_choice('Boss')},false,get_blind_main_colour('Boss'), mix_colours(G.C.BLACK, get_blind_main_colour('Boss'), 0.8))
+        }},
+        config = {align="bmi",
+          offset = {x=0,y=G.ROOM.T.y + 9},
+          major = par,
+          xy_bond = 'Weak'
+        }
+      }
+      par.config.object = G.blind_select_opts.boss
+      par.config.object:recalculate()
+      G.blind_select_opts.boss.parent = par
+      G.blind_select_opts.boss.alignment.offset.y = 0
+      return true
+    end
+  }))
+end

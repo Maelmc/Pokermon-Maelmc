@@ -41,6 +41,15 @@ function photographer_util(card)
           v.ability.extra.found[card.config.center_key] = true
           v:juice_up()
           card_eval_status_text(v, 'extra', nil, nil, nil, {message = localize("maelmc_photo_ex")})
+
+          -- set bloodmoon quest
+          local count = 0
+          for _, _ in pairs(v.ability.extra.found) do count = count + 1 end
+          if (count >= v.ability.extra.to_snap) and not G.GAME.bloodmoon_beast_quest_completed then
+            set_next_boss("bl_maelmc_bloodmoon_beast")
+            G.GAME.bloodmoon_beast_quest_completed = "in_progress"
+            v:speak("maelmc_announce_bloodmoon",4,7*G.SETTINGS.GAMESPEED)
+          end
         end
       end
     end
@@ -68,9 +77,7 @@ function set_sepia_quest(self,card)
     card.ability.extra.dist_dragged = distance + (card.ability.extra.dist_dragged or 0)
 
     if (G.GAME and G.GAME.blind and G.GAME.blind.name == "The Mouth") and card.ability.extra.dist_dragged > shake_rqmt and not G.GAME.sepia_quest_complete then
-      G.GAME.blind:set_blind(G.P_BLINDS["bl_maelmc_sepia"])
-      ease_background_colour_blind(G.STATE)
-      G.GAME.chips = 0
+      set_next_boss("bl_maelmc_sepia",false,true,true)
     end
   end
 

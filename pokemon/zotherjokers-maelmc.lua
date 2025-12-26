@@ -438,7 +438,7 @@ local pc = {
 local photographer = {
   name = "photographer",
   pos = {x = 4, y = 1},
-  config = {extra = {found = {}, to_snap = 10, generated_bloodmoon = 0, joker = 1}},
+  config = {extra = {found = {}, to_snap = 10, joker = 1}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     local count = 0
@@ -452,29 +452,9 @@ local photographer = {
   blueprint_compat = true,
   calculate = function(self, card, context)
 
-    -- generating bloodmoon ursaluna in the next shop when you reach 10 photos
     if context.reroll_shop or context.starting_shop and (not context.blueprint) then
-      local temp_card = nil
-      local count = 0
-      for _ in pairs(card.ability.extra.found) do count = count + 1 end
-
-      if (count >= card.ability.extra.to_snap) and (card.ability.extra.generated_bloodmoon < 2) then
-        if context.starting_shop or (card.ability.extra.generated_bloodmoon == 0 and context.reroll_shop) then
-          card.ability.extra.generated_bloodmoon = (context.starting_shop and 2) or 1
-          temp_card = {set = "Joker", area = G.shop_jokers}
-        else 
-          card.ability.extra.generated_bloodmoon = 2
-          temp_card = {set = "Joker", area = G.shop_jokers, key = "j_maelmc_bloodmoon_ursaluna"}
-        end
-      else
-        temp_card = {set = "Joker", area = G.shop_jokers}
-      end
-
+      local temp_card = {set = "Joker", area = G.shop_jokers}
       local add_card = SMODS.create_card(temp_card)
-      if card.ability.extra.generated_bloodmoon == 2 then
-        add_card.ability.couponed = true
-        card.ability.extra.generated_bloodmoon = 3
-      end
       poke_add_shop_card(add_card, card)
     end
 
@@ -482,6 +462,9 @@ local photographer = {
       if context.blind.name == "The Mouth" and not card.ability.extra.meloetta_generated then
         G.GAME.play_sepia_song = true
         card:speak("maelmc_sepia_surprise",4,4*G.SETTINGS.GAMESPEED)
+      end
+      if context.blind.name == "bl_maelmc_bloodmoon_beast" then
+        card:speak("maelmc_find_bloodmoon",4,7*G.SETTINGS.GAMESPEED)
       end
     end
 

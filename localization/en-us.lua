@@ -26,6 +26,13 @@ return {
                     "when a card is scored"
                 }, 
             },
+            bl_maelmc_bloodmoon_beast = {
+                name = "The Bloodmoon Beast",
+                text = {
+                    "All Heart cards and",
+                    "consumables are debuffed"
+                }, 
+            },
         },
         Enhanced = {
             m_maelmc_trapped = {
@@ -1153,6 +1160,13 @@ return {
             sepia_blind = "Fight The Mouth",
             sepia_no_blind = "Fight a certain Boss Blind",
             sepia_spin = "Spin!",
+
+            bloodmoon_beast_quest_name = "Creatures of the Timeless Woods",
+            bloodmoon_beast_photo = "Perrin will help you!",
+            bloodmoon_beast_no_photo = "Someone would like your help",
+            bloodmoon_beast_species = "Complete her request",
+            bloodmoon_beast_next = "The Beast awaits...",
+            bloodmoon_beast_done = "You defeated the Bloodmoon Beast!",
         },
         labels = {
             k_maelmc_ultra_beast = "Ultra Beast",
@@ -1183,22 +1197,40 @@ return {
             ["Laxing Mega Barbaraflush"] = "Laxing Mega Barbaraflush",
         },
         quips = {
-          maelmc_perrin_entry1 = {
-            "I could snap",
-            "a perfect shot!",},
-          maelmc_perrin_entry2 = {
-            "I'll take photos that",
-            "I want to keep forever!",},
-          maelmc_perrin_entry3 = {
-            "Good ol' Perrin is",
-            "still kicking around too!",},
-          maelmc_perrin_entry4 = {
-            "Give me a",
-            "nice expression!",},
-          maelmc_perrin_entry5 = {
-            "There's so much",
-            "good stuff to capture!",},
-          maelmc_sepia_surprise = {"What is","this song?"},
+            maelmc_perrin_entry1 = {
+                "I could snap",
+                "a perfect shot!",
+            },
+            maelmc_perrin_entry2 = {
+                "I'll take photos that",
+                "I want to keep forever!",
+            },
+            maelmc_perrin_entry3 = {
+                "Good ol' Perrin is",
+                "still kicking around too!",
+            },
+            maelmc_perrin_entry4 = {
+                "Give me a",
+                "nice expression!",
+            },
+            maelmc_perrin_entry5 = {
+                "There's so much",
+                "good stuff to capture!",
+            },
+            maelmc_sepia_surprise = {
+                "What is",
+                "this song?"
+            },
+            maelmc_announce_bloodmoon = {
+                "Are those footsteps?",
+                "Whatever's making them",
+                "must be huge..."
+            },
+            maelmc_find_bloodmoon = {
+                "It's the Bloodmoon Beast!",
+                "It's... it's real!",
+                "We actually found it!"
+            },
         },
         v_dictionary = {
             maelmc_discard = "+#1# Discard",
