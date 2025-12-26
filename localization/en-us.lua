@@ -1162,7 +1162,7 @@ return {
             sepia_spin = "Spin!",
 
             bloodmoon_beast_quest_name = "Creatures of the Timeless Woods",
-            bloodmoon_beast_photo = "Perrin will help you!",
+            bloodmoon_beast_photo = "Perrin is here!",
             bloodmoon_beast_no_photo = "Someone would like your help",
             bloodmoon_beast_species = "Complete her request",
             bloodmoon_beast_next = "The Beast awaits...",
