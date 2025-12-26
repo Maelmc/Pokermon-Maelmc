@@ -700,7 +700,7 @@ target = "game.lua"
 position = "after"
 match_indent = true
 pattern = '''love.graphics.setCanvas(G.AA_CANVAS)'''
-payload = '''if G.GAME.maelmc_sepia then
+payload = '''if G.GAME.play_sepia_song and (G.GAME and G.GAME.blind and G.GAME.blind.name == "The Mouth") then
   if not G.MAELMC_SEPIA then
     G.MAELMC_SEPIA = love.graphics.newCanvas(love.graphics.getDimensions())
     G.MAELMC_SEPIA:setFilter("linear","linear")
@@ -717,8 +717,68 @@ match_indent = true
 pattern = '''love.graphics.setCanvas()'''
 payload = '''
 love.graphics.setCanvas()
-if G.GAME.maelmc_sepia then
+if G.GAME.play_sepia_song and (G.GAME and G.GAME.blind and G.GAME.blind.name == "The Mouth") then
   love.graphics.setShader(G.SHADERS['maelmc_sepia'])
   love.graphics.draw(G.MAELMC_SEPIA, 0, 0)
 end
 '''
+
+# Changing PokeDisplayCard to allow for multiple lines of text
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "functions/displaycard.lua"]'
+pattern = '''if self.display_text then
+    table.insert(h_popup_nodes, {
+      n = G.UIT.R, config = { align = "cm" }, nodes = {
+        {
+          n = G.UIT.T,
+          config = {
+            text = self.display_text,
+            colour = G.C.UI.TEXT_LIGHT,
+            scale = 0.55 - 0.004 * #self.display_text,
+            shadow = true
+          }
+        }
+      }
+    })
+  end'''
+position = "at"
+match_indent = true
+payload = '''if self.display_text then
+    local disp = self.display_text
+    if type(disp) == "string" then
+      table.insert(h_popup_nodes, {
+        n = G.UIT.R, config = { align = "cm" }, nodes = {
+          {
+            n = G.UIT.T,
+            config = {
+              text = self.display_text,
+              colour = G.C.UI.TEXT_LIGHT,
+              scale = 0.55 - 0.004 * #self.display_text,
+              shadow = true
+            }
+          }
+        }
+      })
+    elseif type(disp) == "table" then
+      local disp_scale = 0
+      for _, v in ipairs(disp) do
+        disp_scale = math.max(0.55 - 0.004 * #v,disp_scale)
+      end
+      for k, v in ipairs(disp) do
+        table.insert(h_popup_nodes, {
+        n = G.UIT.R, config = { align = "cm" }, nodes = {
+          {
+            n = G.UIT.T,
+            config = {
+              text = v,
+              colour = G.C.UI.TEXT_LIGHT,
+              scale = k == 1 and disp_scale or 0.40,
+              shadow = true
+            }
+          }
+        }
+      })
+      end
+    end
+  end'''

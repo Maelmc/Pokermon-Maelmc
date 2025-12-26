@@ -18,6 +18,15 @@ return {
                 }
             },
         },
+        Blind = {
+            bl_maelmc_sepia = {
+                name = "The Sepia-Toned",
+                text = {
+                    "Lose {C:money}$1{} and {X:red,C:white}X0.9",
+                    "when a card is scored"
+                }, 
+            },
+        },
         Enhanced = {
             m_maelmc_trapped = {
                 name = "Trapped Card",
@@ -1128,6 +1137,8 @@ return {
             maelmc_healed_ex = "Healed!",
             maelmc_trapped_ex = "Trapped!",
             maelmc_safe = "Safe",
+            maelmc_quest = "Pokémon Quests",
+            maelmc_qm = "???",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",
@@ -1135,6 +1146,13 @@ return {
             background_color = "Custom Background on Main Menu",
             meloetta_sings = "Meloetta sings Relic Song",
             disable_spiritomb = "Disable Spiritomb",
+
+            sepia_quest_name = "A Sepia-Toned Song",
+            sepia_photo = "Have Photographer",
+            sepia_no_photo = "Have a certain Rare Joker",
+            sepia_blind = "Fight The Mouth",
+            sepia_no_blind = "Fight a certain Boss Blind",
+            sepia_spin = "Spin!",
         },
         labels = {
             k_maelmc_ultra_beast = "Ultra Beast",

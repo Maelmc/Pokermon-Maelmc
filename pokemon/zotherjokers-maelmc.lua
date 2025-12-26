@@ -480,13 +480,13 @@ local photographer = {
 
     if context.setting_blind and context.blind and context.blind.boss and not context.blueprint then
       if context.blind.name == "The Mouth" and not card.ability.extra.meloetta_generated then
-        G.GAME.maelmc_sepia = true
+        G.GAME.play_sepia_song = true
         card:speak("maelmc_sepia_surprise",4,4*G.SETTINGS.GAMESPEED)
       end
     end
 
     if context.end_of_round then
-      G.GAME.maelmc_sepia = false
+      G.GAME.play_sepia_song = false
     end
 
   end,
@@ -511,16 +511,15 @@ local photographer = {
     end
     set_sepia_quest(self, card)
     if G.GAME and G.GAME.blind and G.GAME.blind.name == "The Mouth" then
-      G.GAME.maelmc_sepia = true
+      G.GAME.play_sepia_song = true
     end
   end,
   remove_from_deck = function(self, card, from_debuff)
-    for _, v in pairs(SMODS.find_card("j_maelmc_photographer",true)) do
-      if not v.ability.extra.meloetta_generated then
-        return
-      end
+    if (not G.GAME.sepia_quest_complete) then
+      if G.GAME and G.GAME.blind and G.GAME.blind.name == "The Mouth" and (not next(SMODS.find_card("j_maelmc_photographer",true))) then return end
+      if G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_sepia" then return end
     end
-    G.GAME.maelmc_sepia = false
+    G.GAME.play_sepia_song = false
   end,
   load = function(self, card, from_debuff)
     set_sepia_quest(self, card)

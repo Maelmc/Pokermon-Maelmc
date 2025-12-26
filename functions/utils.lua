@@ -98,3 +98,13 @@ function should_cleanse_tag()
   end
   return false
 end
+
+function get_atlas_and_pos(name)
+  local sprite_info = PokemonSprites[name]
+  if not sprite_info then return {} end
+  local atlas_prefix = poke_get_atlas_prefix(name, sprite_info)
+  local atlas = "poke_"..poke_get_atlas_string(atlas_prefix, sprite_info.gen_atlas, sprite_info.others_atlas)
+  local pos = sprite_info.base.pos
+  local soul_pos = sprite_info.base.soul_pos
+  return {atlas = atlas, pos = pos, soul_pos = soul_pos}
+end

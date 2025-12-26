@@ -62,6 +62,22 @@ SMODS.Atlas({
     py = 95
 }):register()
 
+SMODS.Atlas({
+    key = "maelmc_quests",
+    path = "quests.png",
+    px = 71,
+    py = 95
+}):register()
+
+SMODS.Atlas({
+    key = "maelmc_boss_blinds",
+    atlas_table = "ANIMATION_ATLAS",
+    path = "boss_blinds.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+}):register()
+
 -- Colors
 G.C.MAELMC = {
     ORANGE = HEX("EA6F22"),
@@ -81,7 +97,7 @@ SMODS.Sound({
     if maelmc_config.meloetta_sings and (next(SMODS.find_card("j_maelmc_meloetta",true)) or next(SMODS.find_card("j_maelmc_meloetta_pirouette",true))) then
       return 999999999
     end
-    if G.GAME.maelmc_sepia then
+    if G.GAME.play_sepia_song then
       return 999999999
     end
 	end,

@@ -67,23 +67,10 @@ function set_sepia_quest(self,card)
     card.ability.extra.prev_drag_y = self.T.y
     card.ability.extra.dist_dragged = distance + (card.ability.extra.dist_dragged or 0)
 
-    if G.GAME.maelmc_sepia and card.ability.extra.dist_dragged > shake_rqmt and not card.ability.extra.meloetta_generated then
-      play_sound('timpani')
-      SMODS.add_card({ set = 'Joker', key = "j_maelmc_meloetta" })
-      card:juice_up(0.3, 0.5)
-      card.ability.extra.prev_drag_x = 0
-      card.ability.extra.prev_drag_y = 0
-      card.ability.extra.dist_dragged = 0
-      card.ability.extra.meloetta_generated = true
-
-      local remove_sep = true
-      for _, v in pairs(SMODS.find_card("j_maelmc_photographer",true)) do
-        if not v.ability.extra.meloetta_generated then
-          remove_sep = false
-          break
-        end
-      end
-      if remove_sep then G.GAME.maelmc_sepia = false end
+    if (G.GAME and G.GAME.blind and G.GAME.blind.name == "The Mouth") and card.ability.extra.dist_dragged > shake_rqmt and not G.GAME.sepia_quest_complete then
+      G.GAME.blind:set_blind(G.P_BLINDS["bl_maelmc_sepia"])
+      ease_background_colour_blind(G.STATE)
+      G.GAME.chips = 0
     end
   end
 
