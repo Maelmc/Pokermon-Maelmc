@@ -782,3 +782,12 @@ payload = '''if self.display_text then
       end
     end
   end'''
+
+# SMODS 1016c crash fix
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = '''if G.GAME.blind then t[#t + 1] = { object = G.GAME.blind, scored_card = G.GAME.blind.children.animatedSprite } end'''
+position = "at"
+match_indent = true
+payload = '''if G.GAME.blind and G.GAME.blind.children and G.GAME.blind.children.animatedSprite then t[#t + 1] = { object = G.GAME.blind, scored_card = G.GAME.blind.children.animatedSprite } end'''
