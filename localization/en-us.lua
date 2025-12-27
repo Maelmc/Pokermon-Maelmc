@@ -33,6 +33,34 @@ return {
                     "consumables are debuffed"
                 }, 
             },
+            bl_maelmc_hearthflame_mask = {
+                name = "The Hearthflame Mask",
+                text = {
+                    "All Mult cards and",
+                    "Fire Jokers are debuffed"
+                }, 
+            },
+            bl_maelmc_wellspring_mask = {
+                name = "The Wellspring Mask",
+                text = {
+                    "All Bonus cards and",
+                    "Water Jokers are debuffed"
+                }, 
+            },
+            bl_maelmc_cornerstone_mask = {
+                name = "The Cornerstone Mask",
+                text = {
+                    "All Stone cards and",
+                    "Earth Jokers are debuffed"
+                }, 
+            },
+            bl_maelmc_teal_mask = {
+                name = "The Teal Mask",
+                text = {
+                    "All Lucky cards and",
+                    "Grass Jokers are debuffed"
+                }, 
+            },
         },
         Enhanced = {
             m_maelmc_trapped = {
@@ -1167,6 +1195,15 @@ return {
             bloodmoon_beast_species = "Complete her request",
             bloodmoon_beast_next = "The Beast awaits...",
             bloodmoon_beast_done = "You defeated the Bloodmoon Beast!",
+
+            kitikami_ogre_quest_name = "The Ogre of Kitikami",
+            kitikami_ogre_enhancements = "Collect enhancements",
+            kitikami_ogre_bonus = "Deck is composed at 20% of Bonus Cards",
+            kitikami_ogre_mult = "Deck is composed at 20% of Mult Cards",
+            kitikami_ogre_stone = "Deck is composed at 20% of Stone Cards",
+            kitikami_ogre_lucky = "Deck is composed at 20% of Lucky Cards",
+            kitikami_ogre_next = "The Ogre awaits...",
+            kitikami_ogre_done = "You defeated the Ogre!",
         },
         labels = {
             k_maelmc_ultra_beast = "Ultra Beast",

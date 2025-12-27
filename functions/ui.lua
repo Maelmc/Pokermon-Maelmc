@@ -122,7 +122,7 @@ function create_UIBox_options()
   local t_node = base.nodes[1].nodes[1].nodes[1].nodes
   for _,v in pairs(t_node) do
       if v.nodes[1].nodes[1].config then
-          if v.nodes[1].nodes[1].config.minw > minw then
+          if v.nodes[1].nodes[1].config.minw and v.nodes[1].nodes[1].config.minw > minw then
               minw = v.nodes[1].nodes[1].config.minw
           end
       end

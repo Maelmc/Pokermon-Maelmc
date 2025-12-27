@@ -10,6 +10,7 @@ end
 
 -- Trapped cards cannot change enhancement
 -- also hazard deck effect
+-- also kitikami ogre quest
 local card_set_ability_ref = Card.set_ability
 function Card:set_ability(center, initial, delay_sprites)
   if self.config and self.config.center and (self.config.center.key == 'm_maelmc_trapped' ) and not initial then
@@ -18,7 +19,9 @@ function Card:set_ability(center, initial, delay_sprites)
   if G.GAME.modifiers.hazard_deck and self.config.center_key == "m_poke_hazard" and self.ability.card_limit then
     self.ability.card_limit = 0
   end
-  return card_set_ability_ref(self, center, initial, delay_sprites)
+  local ret = card_set_ability_ref(self, center, initial, delay_sprites)
+  SMODS.calculate_context({kitikami_ogre_check = true})
+  return ret
 end
 
 -- Trapped cards cannot be destroyed

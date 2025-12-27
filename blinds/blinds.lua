@@ -100,10 +100,187 @@ local bloodmoon_beast={
   end,
 }
 
+local hearthflame_mask={
+  key = "hearthflame_mask",
+  dollars = 0,
+  mult = 1,
+  boss = { showdown = false, min = 1, max = 80 },
+  boss_colour = HEX("D73F00"),
+  pos = { x = 0, y = 2 },
+  atlas = "maelmc_boss_blinds",
+  artist = "baronessfaron",
+  discovered = false,
+  debuff = { },
+  config = {disabled = false},
+  set_blind = function(self)
+    G.GAME.kitikami_ogre_quest_completed = "fighting hearthflame"
+  end,
+  calculate = function(self, blind, context)
+    local beat = false
+    if (SMODS.Mods["Talisman"] or {}).can_load and to_big(G.GAME.chips) >= G.GAME.blind.chips then
+      beat = true
+    elseif not (SMODS.Mods["Talisman"] or {}).can_load and G.GAME.chips >= G.GAME.blind.chips then
+      beat = true
+    end
+    if beat then
+      G.GAME.chips = 0
+      if not blind.prep_next then
+        blind.prep_next = true
+        G.E_MANAGER:add_event(Event({
+          func = function()
+            set_next_boss("bl_maelmc_wellspring_mask",false,true,true)
+            blind.prep_next = false
+            return true
+          end
+        }))
+      end
+    end
+  end,
+  defeat = function(self)
+  end,
+  disable = function(self)
+    self.config.disabled = true
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
+local wellspring_mask={
+  key = "wellspring_mask",
+  dollars = 0,
+  mult = 1,
+  boss = { showdown = false, min = 1, max = 80 },
+  boss_colour = HEX("006DC6"),
+  pos = { x = 0, y = 3 },
+  atlas = "maelmc_boss_blinds",
+  artist = "baronessfaron",
+  discovered = false,
+  debuff = { },
+  config = {disabled = false},
+  set_blind = function(self)
+    G.GAME.kitikami_ogre_quest_completed = "fighting wellspring"
+    ease_hands_played(1)
+  end,
+  calculate = function(self, blind, context)
+    local beat = false
+    if (SMODS.Mods["Talisman"] or {}).can_load and to_big(G.GAME.chips) >= G.GAME.blind.chips then
+      beat = true
+    elseif not (SMODS.Mods["Talisman"] or {}).can_load and G.GAME.chips >= G.GAME.blind.chips then
+      beat = true
+    end
+    if beat then
+      G.GAME.chips = 0
+      if not blind.prep_next then
+        blind.prep_next = true
+        G.E_MANAGER:add_event(Event({
+          func = function()
+            set_next_boss("bl_maelmc_cornerstone_mask",false,true,true)
+            blind.prep_next = false
+            return true
+          end
+        }))
+      end
+    end
+  end,
+  defeat = function(self)
+  end,
+  disable = function(self)
+    self.config.disabled = true
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
+local cornerstone_mask={
+  key = "cornerstone_mask",
+  dollars = 0,
+  mult = 1,
+  boss = { showdown = false, min = 1, max = 80 },
+  boss_colour = HEX("757A7A"),
+  pos = { x = 0, y = 4 },
+  atlas = "maelmc_boss_blinds",
+  artist = "baronessfaron",
+  discovered = false,
+  debuff = { },
+  config = {disabled = false},
+  set_blind = function(self)
+    G.GAME.kitikami_ogre_quest_completed = "fighting cornerstone"
+    ease_hands_played(1)
+  end,
+  calculate = function(self, blind, context)
+    local beat = false
+    if (SMODS.Mods["Talisman"] or {}).can_load and to_big(G.GAME.chips) >= G.GAME.blind.chips then
+      beat = true
+    elseif not (SMODS.Mods["Talisman"] or {}).can_load and G.GAME.chips >= G.GAME.blind.chips then
+      beat = true
+    end
+    if beat then
+      G.GAME.chips = 0
+      if not blind.prep_next then
+        blind.prep_next = true
+        G.E_MANAGER:add_event(Event({
+          func = function()
+            set_next_boss("bl_maelmc_teal_mask",false,true,true)
+            blind.prep_next = false
+            return true
+          end
+        }))
+      end
+    end
+  end,
+  defeat = function(self)
+  end,
+  disable = function(self)
+    self.config.disabled = true
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
+local teal_mask={
+  key = "teal_mask",
+  dollars = 10,
+  mult = 1,
+  boss = { showdown = false, min = 1, max = 80 },
+  boss_colour = HEX("5FB727"),
+  pos = { x = 0, y = 5 },
+  atlas = "maelmc_boss_blinds",
+  artist = "baronessfaron",
+  discovered = false,
+  debuff = { },
+  config = {disabled = false},
+  set_blind = function(self)
+    G.GAME.kitikami_ogre_quest_completed = "fighting teal"
+    ease_hands_played(1)
+  end,
+  calculate = function(self, blind, context)
+  end,
+  defeat = function(self)
+    G.GAME.kitikami_ogre_quest_completed = true
+    G.E_MANAGER:add_event(Event({
+      func = function()
+        play_sound('timpani')
+        SMODS.add_card({ set = 'Joker', key = "j_maelmc_ogerpon" })
+        return true
+      end
+    }))
+  end,
+  disable = function(self)
+    self.config.disabled = true
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
 return {
   name = "Blinds",
   list = {
     sepia,
     bloodmoon_beast,
+    hearthflame_mask, wellspring_mask, cornerstone_mask, teal_mask
   }
 }
