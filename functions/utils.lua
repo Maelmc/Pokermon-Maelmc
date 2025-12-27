@@ -123,8 +123,8 @@ function set_next_boss(key,force_next_ante,allow_during_boss,reset_chips)
   end
 
   G.E_MANAGER:add_event(Event({
+    trigger = "condition",
     blocking = false,
-    blockable = false,
     func = function()
       if not G.blind_select then return false end
       local par = G.blind_select_opts.boss.parent
