@@ -109,8 +109,12 @@ function get_atlas_and_pos(name)
   return {atlas = atlas, pos = pos, soul_pos = soul_pos}
 end
 
-function set_next_boss(key,force_next_ante,allow_during_boss,reset_chips)
-  if force_next_ante or ((not allow_during_boss) and G.GAME and G.GAME.blind and G.GAME.blind.boss) then
+function set_next_boss(key,force_next_ante,override_showdown,allow_during_boss,reset_chips)
+  if (not allow_during_boss) and G.GAME and G.GAME.blind and G.GAME.blind.boss then
+    force_next_ante = true
+  end
+
+  if force_next_ante and override_showdown then
     G.GAME.perscribed_bosses[G.GAME.round_resets.ante + 1] = key
     return
   end
@@ -122,11 +126,14 @@ function set_next_boss(key,force_next_ante,allow_during_boss,reset_chips)
     return
   end
 
+  local ante = G.GAME.round_resets.ante
   G.E_MANAGER:add_event(Event({
     trigger = "condition",
     blocking = false,
     func = function()
       if not G.blind_select then return false end
+      if force_next_ante and G.GAME.round_resets.ante < ante + 1 then return false end
+      if not override_showdown and G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss].boss.showdown then return false end
       local par = G.blind_select_opts.boss.parent
       G.GAME.round_resets.blind_choices.Boss = key
       G.blind_select_opts.boss = UIBox{

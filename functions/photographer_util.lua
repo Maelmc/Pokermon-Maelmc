@@ -86,7 +86,7 @@ function set_sepia_quest(self,card)
     card.ability.extra.dist_dragged = distance + (card.ability.extra.dist_dragged or 0)
 
     if (G.GAME and G.GAME.blind and G.GAME.blind.name == "The Mouth") and card.ability.extra.dist_dragged > shake_rqmt and not G.GAME.sepia_quest_complete then
-      set_next_boss("bl_maelmc_sepia",false,true,true)
+      set_next_boss("bl_maelmc_sepia",false,false,true,true)
     end
   end
 
