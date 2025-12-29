@@ -99,8 +99,17 @@ SMODS.current_mod.calculate = function(self, context)
       end
     end
     if (bonus/#G.playing_cards >= 0.2) and (mult/#G.playing_cards >= 0.2) and (stone/#G.playing_cards >= 0.2) and (lucky/#G.playing_cards >= 0.2) then
-      set_next_boss("bl_maelmc_hearthflame_mask")
       G.GAME.kitikami_ogre_quest_completed = "set"
+      G.E_MANAGER:add_event(Event({
+        trigger = "condition",
+        blocking = false,
+        func = function()
+          if G.GAME.maelmc_quest_set then return false end
+          set_next_boss("bl_maelmc_hearthflame_mask")
+          G.GAME.maelmc_quest_set = true
+          return true
+        end
+      }))
     end
   end
 end

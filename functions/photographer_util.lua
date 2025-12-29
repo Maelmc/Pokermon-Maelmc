@@ -46,9 +46,18 @@ function photographer_util(card)
           local count = 0
           for _, _ in pairs(v.ability.extra.found) do count = count + 1 end
           if (count >= v.ability.extra.to_snap) and not G.GAME.bloodmoon_beast_quest_completed then
-            set_next_boss("bl_maelmc_bloodmoon_beast")
-            G.GAME.bloodmoon_beast_quest_completed = "in_progress"
-            v:speak("maelmc_announce_bloodmoon",4,7*G.SETTINGS.GAMESPEED)
+            G.GAME.bloodmoon_beast_quest_completed = "in progress"
+            G.E_MANAGER:add_event(Event({
+              trigger = "condition",
+              blocking = false,
+              func = function()
+                if G.GAME.maelmc_quest_set then return false end
+                set_next_boss("bl_maelmc_bloodmoon_beast")
+                G.GAME.maelmc_quest_set = true
+                v:speak("maelmc_announce_bloodmoon",4,7*G.SETTINGS.GAMESPEED)
+                return true
+              end
+            }))
           end
         end
       end

@@ -68,6 +68,7 @@ local bloodmoon_beast={
     for i = 1, #G.consumeables.cards do
       G.consumeables.cards[i]:set_debuff(true)
     end
+    G.GAME.maelmc_quest_set = false
   end,
   calculate = function(self, blind, context)
     for i = 1, #G.consumeables.cards do
@@ -114,6 +115,7 @@ local hearthflame_mask={
   config = {disabled = false},
   set_blind = function(self)
     G.GAME.kitikami_ogre_quest_completed = "fighting hearthflame"
+    G.GAME.maelmc_quest_set = false
   end,
   calculate = function(self, blind, context)
     local beat = false
