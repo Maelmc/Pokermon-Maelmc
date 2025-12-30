@@ -31,6 +31,24 @@ SMODS.current_mod.config_tab = function()
         {
           n = G.UIT.R,
           config = {
+            padding = 0.25,
+            align = "cm"
+          },
+          nodes = {
+            {
+              n = G.UIT.T,
+              config = {
+                text = localize("maelmc_quest_keybind"),
+                shadow = true,
+                scale = 0.4,
+                colour = G.C.WHITE
+              }
+            }
+          },
+        },
+        {
+          n = G.UIT.R,
+          config = {
             padding = 0.05,
             align = "cm"
           },
@@ -55,7 +73,7 @@ SMODS.current_mod.config_tab = function()
           },
           nodes = {
             create_toggle({
-              label = localize("background_color"),
+              label = localize("maelmc_background_color"),
               ref_table = maelmc_config,
               ref_value = "background_color",
             })
@@ -70,7 +88,7 @@ SMODS.current_mod.config_tab = function()
           },
           nodes = {
             create_toggle({
-              label = localize("meloetta_sings"),
+              label = localize("maelmc_meloetta_sings"),
               ref_table = maelmc_config,
               ref_value = "meloetta_sings",
             })
@@ -103,7 +121,7 @@ SMODS.current_mod.config_tab = function()
           },
           nodes = {
             create_toggle({
-              label = localize("disable_spiritomb"),
+              label = localize("maelmc_disable_spiritomb"),
               ref_table = maelmc_config,
               ref_value = "disable_spiritomb",
             }),
@@ -135,4 +153,4 @@ local function quest_keybind()
   G.FUNCS.maelmc_quest({no_back = true})
 end
 
-SMODS.Keybind({ key = "openPokemonQuests", key_pressed = "q", action = quest_keybind })
+SMODS.Keybind({ key = "openPokemonQuests", key_pressed = "g", action = quest_keybind })

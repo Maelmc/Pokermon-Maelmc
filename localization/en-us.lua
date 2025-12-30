@@ -1178,9 +1178,10 @@ return {
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",
 
-            background_color = "Custom Background on Main Menu",
-            meloetta_sings = "Meloetta sings Relic Song",
-            disable_spiritomb = "Disable Spiritomb",
+            maelmc_background_color = "Custom Background on Main Menu",
+            maelmc_meloetta_sings = "Meloetta sings Relic Song",
+            maelmc_disable_spiritomb = "Disable Spiritomb",
+            maelmc_quest_keybind = "Press G to open the Quest menu",
 
             sepia_quest_name = "A Sepia-Toned Song",
             sepia_photo = "Have Photographer",
