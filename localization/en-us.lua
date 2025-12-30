@@ -22,7 +22,7 @@ return {
             bl_maelmc_sepia = {
                 name = "The Sepia-Toned",
                 text = {
-                    "Lose {C:money}$1{} and {X:red,C:white}X0.9",
+                    "Lose $1 and X0.9 Mult",
                     "when a card is scored"
                 }, 
             },
@@ -182,15 +182,15 @@ return {
                     "gives {C:chips}+#2#{} Chips for every {C:attention}Hazard",
                     "{C:attention}Card{} in your full deck",
                     "{C:inactive}(Currently {C:chips}+#3#{C:inactive} Chips)",
-                    "{C:inactive,s:0.8}(Evolves after triggering held {C:purple,s:0.8}Hazard Cards{} {C:attention,s:0.8}#4#{C:inactive,s:0.8} times)"
+                    "{C:inactive,s:0.8}(Evolves after triggering {C:attention,s:0.8}held {C:purple,s:0.8}Hazard Cards{} {C:attention,s:0.8}#4#{C:inactive,s:0.8} times)"
                 }
             },
             j_maelmc_glimmora = {
                 name = "Glimmora",
                 text = {
                     "{C:purple}+#1# Hazards {C:inactive}",
-                    "Increases hazards set by #2#",
-                    "after triggering {C:attention}#3#{} held {C:purple}Hazard Cards{}",
+                    "Increase {C:purple}Hazards{} set by #2#",
+                    "after triggering {C:attention}#3#{} held {C:attention}Hazard Cards{}",
                     "{C:inactive,s:0.8}(Requirement increases by #4# after each increase)",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
@@ -206,7 +206,7 @@ return {
                     "{br:3}ERROR - CONTACT STEAK",
                     "Enhance {C:purple}#2# Hazard{} card in hand",
                     "into a {C:attention}Steel{} card",
-                    "at the end of round",
+                    "at end of round",
                     "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#3#{C:inactive,s:0.8} rounds)"
                 }
             },
@@ -217,7 +217,7 @@ return {
                     "{br:3}ERROR - CONTACT STEAK",
                     "Enhance {C:purple}#2# Hazards{} cards in hand",
                     "into {C:attention}Steel{} cards",
-                    "at the end of round",
+                    "at end of round",
                 }
             },
             j_maelmc_mega_copperajah = {
@@ -270,7 +270,7 @@ return {
                     "{C:attention}Nature: #1#",
                     "Creates a {C:attention}tag{} and an {C:pink}Energy{} card",
                     "matching the {C:attention}Nature{}'s type",
-                    "after clearing a {C:attention}Boss Blind{}",
+                    "when {C:attention}Boss Blind{} is defeated",
                 } 
             },
             j_maelmc_kecleon = {
@@ -285,17 +285,17 @@ return {
                 name = "Lunatone",
                 text = {
                     "{C:green}#1# in #2#{} chance for each",
-                    "card in poker hand to become {C:clubs}#3#",
+                    "card in {C:attention}poker hand{} to become {C:clubs}#3#",
                     "{br:3}ERROR - CONTACT STEAK",
                     "{C:green}#4# in #5#{} chance to upgrade",
-                    "level of played poker hand"
+                    "level of played {C:attention}poker hand{}"
                 } 
             },
             j_maelmc_solrock = {
                 name = "Solrock",
                 text = {
                     "{C:green}#1# in #2#{} chance for each",
-                    "card in poker hand to become {C:hearts}#3#",
+                    "card in {C:attention}poker hand{} to become {C:hearts}#3#",
                     "{br:3}ERROR - CONTACT STEAK",
                     "If a non-{C:hearts}Hearts{} card didn't",
                     "become {C:hearts}Hearts{}, {C:green}#4# in #5#{} chance",
@@ -325,10 +325,10 @@ return {
             j_maelmc_binacle = {
                 name = "Binacle",
                 text = {
-                    "Retriggers {C:attention}first #2# #1#s{} scored",
+                    "Retrigger {C:attention}first #2# #1#s{} scored",
                     "{C:attention}#4#{} additional time",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Retriggers {C:attention}first #3# #1#s{} held in hand",
+                    "Retrigger {C:attention}first #3# #1#s{} held in hand",
                     "{C:attention}#4#{} additional time",
                     "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#5#{C:inactive,s:0.8} rounds)"
                 } 
@@ -336,10 +336,10 @@ return {
             j_maelmc_barbaracle = {
                 name = "Barbaracle",
                 text = {
-                    "Retriggers {C:attention}first #2# #1#s{} scored",
+                    "Retrigger {C:attention}first #2# #1#s{} scored",
                     "{C:attention}#4#{} additional time",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Retriggers {C:attention}first #3# #1#s{} held in hand",
+                    "Retrigger {C:attention}first #3# #1#s{} held in hand",
                     "{C:attention}#4#{} additional time",
                 } 
             },
@@ -397,8 +397,8 @@ return {
                 name = "Gible",
                 text = {
                     "If played hand is a {C:attention}Pair{},",
-                    "retriggers rightmost #1# cards",
-                    "held in hand {C:attention}#2#{} additional time",
+                    "retrigger rightmost {C:attention}#1#{} cards",
+                    "{C:attention}held in hand #2#{} additional time",
                     "and they give {C:red}+#3#{} Mult each",
                     "{C:inactive,s:0.8}(Evolves after retriggering {C:attention,s:0.8}#4#{C:inactive,s:0.8} cards)",
                 }
@@ -407,8 +407,8 @@ return {
                 name = "Gabite",
                 text = {
                     "If played hand is a {C:attention}Pair{},",
-                    "retriggers rightmost #1# cards",
-                    "held in hand {C:attention}#2#{} additional time",
+                    "retrigger rightmost {C:attention}#1#{} cards",
+                    "{C:attention}held in hand #2#{} additional time",
                     "and they give {C:red}+#3#{} Mult each",
                     "{C:inactive,s:0.8}(Evolves after retriggering {C:attention,s:0.8}#4#{C:inactive,s:0.8} cards)",
                 }
@@ -419,7 +419,7 @@ return {
                     "{C:attention}+#1#{} hand size",
                     "{br:3}ERROR - CONTACT STEAK",
                     "If played hand is a {C:attention}Pair{},",
-                    "retriggers all cards held in hand",
+                    "retrigger all cards {C:attention}held in hand",
                     "{C:attention}#2#{} additional time",
                     "and they give {C:red}+#3#{} Mult each",
                 }
@@ -430,7 +430,7 @@ return {
                     "{C:attention}+#1#{} hand size",
                     "{br:3}ERROR - CONTACT STEAK",
                     "If played hand is a {C:attention}Pair{},",
-                    "all cards held in hand of",
+                    "all cards {C:attention}held in hand{} of",
                     "the same rank as the {C:attention}Pair",
                     "give {X:red,C:white}X#2#{} Mult each",
                 }
@@ -447,8 +447,8 @@ return {
                     "Resets when {C:attention}Boss Blind{} is",
                     "defeated {C:inactive}(Currently {C:money}$#2#{C:inactive})",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Retriggers all {C:attention}Lucky{} cards",
-                    "{C:attention}#3#{} additional time",
+                    "Retrigger each played",
+                    "{C:attention}Lucky{} card {C:attention}#3#{} additional time",
                     "{s:0.8}Changes form using a {C:attention,s:0.8}Mask",
                 }
             },
@@ -464,6 +464,7 @@ return {
                     "If scoring hand contains",
                     "no {C:attention}Bonus{} card,",
                     "create a {C:item}Water Stone",
+                    "{C:inactive}(Must have room)",
                     "{s:0.8}Changes form using a {C:attention,s:0.8}Mask",
                 }
             },
@@ -498,8 +499,7 @@ return {
             j_maelmc_pokewalker = {
                 name = "Pokéwalker",
                 text = {
-                    "Sell a {C:attention}Joker{} to take it",
-                    "for a walk",
+                    "Sell a {C:attention}Joker{} to take it for a walk",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Sell this card to retrieve",
                     "the Joker sold and {C:pink}Energize{} it",
@@ -510,21 +510,20 @@ return {
             j_maelmc_galarian_corsola = {
                 name = "Galarian Corsola",
                 text = {
-                    "Each {C:attention}Perishable{} Joker",
-                    "gives {X:mult,C:white}X#1#{} Mult",
+                    "{C:attention}Perishable{} Jokers each give {X:mult,C:white}X#1#{} Mult",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:attention}Volatile Left{}",
-                    "When {C:attention}Blind{} is selected",
-                    "add {C:attention}#2# rounds of Perishable{}",
-                    "to rightmost Joker",
-                    "{C:inactive,s:0.8}(Evolves when you have {C:attention,s:0.8}#3#{C:inactive,s:0.8}/#4# perished Jokers)",
+                    "When {C:attention}Blind{} is selected, add {C:attention}#2#{} rounds",
+                    "of {C:attention}Perishable{} to rightmost Joker",
+                    "if it's not already {C:attention}Perishable",
+                    "{C:inactive,s:0.8}(Evolves when you have {C:attention,s:0.8}#3#{C:inactive,s:0.8}/#4# {C:attention,s:0.8}Perished{C:inactive,s:0.8} Jokers)",
                 }
             },
             j_maelmc_cursola = {
                 name = "Cursola",
                 text = {
-                    "Other {C:attention}Perishable{} Jokers each give {X:mult,C:white}X#1#{} Mult",
-                    "Other {C:attention}Perished{} Jokers each give {X:mult,C:white}X#2#{} Mult",
+                    "{C:attention}Perishable{} Jokers each give {X:mult,C:white}X#1#{} Mult",
+                    "{C:attention}Perished{} Jokers each give {X:mult,C:white}X#2#{} Mult",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:attention}Volatile Left{}",
                     "When {C:attention}Blind{} is selected, add {C:attention}#3#{} rounds of",
@@ -759,7 +758,7 @@ return {
             j_maelmc_guzzlord = {
                 name = "Guzzlord",
                 text = {
-                    "At the end of shop, eats",
+                    "At the end of {C:attention}shop{}, eats",
                     "{C:attention}#1#{} thing#5# and gains",
                     "{X:red,C:white}X#2#{} Mult {C:inactive}(Currently {X:red,C:white}X#3#{C:inactive})",
                     "{br:2}ERROR - CONTACT STEAK",
@@ -782,7 +781,7 @@ return {
             j_maelmc_gulpin = {
                 name = "Gulpin",
                 text = {
-                    "{C:attention}Stockpile{} when blind is selected {C:inactive}(#1#)",
+                    "{C:attention}Stockpile{} when {C:attention,s:0.8}Blind{} is selected {C:inactive}(#1#)",
                     "{C:attention}Volatile Left{}: Gain {C:money}$#2#{}, {C:money}$#3#{} or {C:money}$#4#{} at end of round",
                     "{C:attention}Volatile Right{}: {X:red,C:white}X#5#{}, {X:red,C:white}X#6#{} or {X:red,C:white}X#7#{} Mult",
                     "{C:inactive,s:0.8}(Evolves after stockpiling {C:attention,s:0.8}#8# {C:inactive,s:0.8}times)"
@@ -791,7 +790,7 @@ return {
             j_maelmc_swalot = {
                 name = "Swalot",
                 text = {
-                    "{C:attention}Stockpile{} when blind is selected {C:inactive}(#1#)",
+                    "{C:attention}Stockpile{} when {C:attention,s:0.8}Blind{} is selected {C:inactive}(#1#)",
                     "{C:attention}Volatile Left{}: Gain {C:money}$#2#{}, {C:money}$#3#{} or {C:money}$#4#{} at end of round",
                     "{C:attention}Volatile Right{}: {X:red,C:white}X#5#{}, {X:red,C:white}X#6#{} or {X:red,C:white}X#7#{} Mult",
                 }
@@ -845,8 +844,8 @@ return {
             j_maelmc_wonder_trade = {
                 name = "Wonder Trade",
                 text = {
-                    "At end of shop, trade",
-                    "a random Joker with",
+                    "At the end of {C:attention}shop{},",
+                    "{C:attention}trade{} a random Joker with",
                     "your {X:purple,C:white}Nemesis{}",
                     "{C:inactive,s:0.8}(Excluding {C:attention,s:0.8}Wonder Trade{C:inactive,s:0.8})",
                 },
@@ -948,8 +947,8 @@ return {
                     "{C:attention}+#1#{} hand size",
                     "{br:3}ERROR - CONTACT STEAK",
                     "If played hand is a {C:attention}Pair{},",
-                    "retriggers all cards held in",
-                    "hand of the same rank as",
+                    "retrigger all cards {C:attention}held in",
+                    "{C:attention}hand{} of the same rank as",
                     "the {C:attention}Pair #2#{} additional times",
                 }
             },
