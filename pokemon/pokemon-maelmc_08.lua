@@ -78,13 +78,13 @@ local polteageist={
 local cursola={
   name = "cursola",
   pos = {x = 16, y = 57},
-  config = {extra = {Xmult_multi = 2, volatile = 'left', perish_rounds = 3}},
+  config = {extra = {Xmult_multi = 1.5, Xmult_multi1 = 2, volatile = 'left', perish_rounds = 3}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     if pokermon_config.detailed_tooltips then
       info_queue[#info_queue+1] = {set = 'Other', key = 'poke_volatile_'..card.ability.extra.volatile}
     end
-    return {vars = {card.ability.extra.Xmult_multi, card.ability.extra.perish_rounds}}
+    return {vars = {card.ability.extra.Xmult_multi, card.ability.extra.Xmult_multi1, card.ability.extra.perish_rounds}}
   end,
   rarity = "poke_safari",
   cost = 9,
@@ -115,18 +115,26 @@ local cursola={
     end
 
     -- xmult on each perishable
-    if context.other_joker and context.other_joker.ability and context.other_joker.ability.perishable and context.other_joker.ability.perish_tally > 0 then
+    if context.other_joker and context.other_joker.ability and context.other_joker.ability.perishable then
       G.E_MANAGER:add_event(Event({
         func = function()
             context.other_joker:juice_up(0.5, 0.5)
             return true
         end
       })) 
-      return {
-        message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.Xmult_multi}}, 
-        colour = G.C.XMULT,
-        Xmult_mod = card.ability.extra.Xmult_multi
-      }
+      if context.other_joker.ability.perish_tally > 0 then
+        return {
+          message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.Xmult_multi}}, 
+          colour = G.C.XMULT,
+          Xmult_mod = card.ability.extra.Xmult_multi
+        }
+      else
+        return {
+          message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.Xmult_multi1}}, 
+          colour = G.C.XMULT,
+          Xmult_mod = card.ability.extra.Xmult_multi1
+        }
+      end
     end
   end,
 }

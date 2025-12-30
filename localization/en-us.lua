@@ -270,7 +270,7 @@ return {
                     "{C:attention}Nature: #1#",
                     "Creates a {C:attention}tag{} and an {C:pink}Energy{} card",
                     "matching the {C:attention}Nature{}'s type",
-                    "after clearing a Boss Blind",
+                    "after clearing a {C:attention}Boss Blind{}",
                 } 
             },
             j_maelmc_kecleon = {
@@ -523,13 +523,12 @@ return {
             j_maelmc_cursola = {
                 name = "Cursola",
                 text = {
-                    "Each {C:attention}Perishable{} Joker",
-                    "gives {X:mult,C:white}X#1#{} Mult",
+                    "Other {C:attention}Perishable{} Jokers each give {X:mult,C:white}X#1#{} Mult",
+                    "Other {C:attention}Perished{} Jokers each give {X:mult,C:white}X#2#{} Mult",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:attention}Volatile Left{}",
-                    "When {C:attention}Blind{} is selected",
-                    "add {C:attention}#2# rounds of Perishable{}",
-                    "to all other Jokers",
+                    "When {C:attention}Blind{} is selected, add {C:attention}#3#{} rounds of",
+                    "{C:attention}Perishable{} to all other non-{C:attention}Perishable{} Jokers",
                 }
             },
             --[[j_maelmc_guzzlord = {
