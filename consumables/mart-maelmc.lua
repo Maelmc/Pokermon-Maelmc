@@ -14,7 +14,8 @@ local tealmask = {
   unlocked = true,
   discovered = true,
   can_use = function(self, card)
-    if G.hand.highlighted and #G.hand.highlighted >= self.config.min_highlighted and #G.hand.highlighted <= self.config.max_highlighted then
+    if G.hand.highlighted then
+      if #G.hand.highlighted >= self.config.min_highlighted and #G.hand.highlighted <= self.config.max_highlighted then
         if G.jokers.highlighted and #G.jokers.highlighted == 1 then
             if string.find(G.jokers.highlighted[1].config.center.name,"ogerpon") and not (G.jokers.highlighted[1].config.center.name == "ogerpon") then
                 return true
@@ -24,7 +25,19 @@ local tealmask = {
         else
             return true
         end
+      elseif #G.hand.highlighted > self.config.max_highlighted then
+        return false
+      end
     end
+
+    local target = poke_find_leftmost_or_highlighted(function(joker) 
+      return (
+        string.find(joker.config.center.name,"ogerpon")
+        and not (joker.config.center.name == "ogerpon")
+      ) and not (joker.debuff) end
+    )
+    if target then return true end
+
     return false
   end,
   use = function(self, card, area, copier)
@@ -37,26 +50,15 @@ local tealmask = {
       end
       juice_flip(card, true)
       poke_unhighlight_cards()
-      evo_item_use_total(self, card, area, copier)
-    else
-      highlighted_evo_item(self, card, area, copier)
     end
 
-    local target = nil
-    if G.jokers.highlighted and #G.jokers.highlighted == 1 and 
-        (string.find(G.jokers.highlighted[1].config.center.name,"ogerpon") and not (G.jokers.highlighted[1].config.center.name == "ogerpon")) and
-       not (G.jokers.highlighted[1].debuff) then
-      target = G.jokers.highlighted[1]
-    else
-      for _, poke in pairs(G.jokers.cards) do
-        if (string.find(poke.config.center.name,"ogerpon") and not (poke.config.center.name == "ogerpon") and not (poke.debuff)) then
-          target = poke
-          break
-        end
-      end
-    end
+    local target = poke_find_leftmost_or_highlighted(function(joker) return (
+      string.find(joker.config.center.name,"ogerpon")
+      and not (joker.config.center.name == "ogerpon"))
+      and not (joker.debuff) end
+    )
     if target then
-        poke_evolve(target, "j_maelmc_ogerpon")
+      poke_evolve(target, "j_maelmc_ogerpon")
     end
   end,
   in_pool = function(self)
@@ -80,7 +82,8 @@ local wellspringmask = {
   unlocked = true,
   discovered = true,
   can_use = function(self, card)
-    if G.hand.highlighted and #G.hand.highlighted >= self.config.min_highlighted and #G.hand.highlighted <= self.config.max_highlighted then
+    if G.hand.highlighted then
+      if #G.hand.highlighted >= self.config.min_highlighted and #G.hand.highlighted <= self.config.max_highlighted then
         if G.jokers.highlighted and #G.jokers.highlighted == 1 then
             if string.find(G.jokers.highlighted[1].config.center.name,"ogerpon") and not (G.jokers.highlighted[1].config.center.name == "ogerpon_wellspring") then
                 return true
@@ -90,7 +93,19 @@ local wellspringmask = {
         else
             return true
         end
+      elseif #G.hand.highlighted > self.config.max_highlighted then
+        return false
+      end
     end
+
+    local target = poke_find_leftmost_or_highlighted(function(joker) 
+      return (
+        string.find(joker.config.center.name,"ogerpon")
+        and not (joker.config.center.name == "ogerpon_wellspring")
+      ) and not (joker.debuff) end
+    )
+    if target then return true end
+
     return false
   end,
   use = function(self, card, area, copier)
@@ -103,26 +118,16 @@ local wellspringmask = {
       end
       juice_flip(card, true)
       poke_unhighlight_cards()
-      evo_item_use_total(self, card, area, copier)
-    else
-      highlighted_evo_item(self, card, area, copier)
     end
 
-    local target = nil
-    if G.jokers.highlighted and #G.jokers.highlighted == 1 and 
-        (string.find(G.jokers.highlighted[1].config.center.name,"ogerpon") and not (G.jokers.highlighted[1].config.center.name == "ogerpon_wellspring")) and
-       not (G.jokers.highlighted[1].debuff) then
-      target = G.jokers.highlighted[1]
-    else
-      for _, poke in pairs(G.jokers.cards) do
-        if (string.find(poke.config.center.name,"ogerpon") and not (poke.config.center.name == "ogerpon_wellspring") and not (poke.debuff)) then
-          target = poke
-          break
-        end
-      end
-    end
+    local target = poke_find_leftmost_or_highlighted(function(joker) 
+      return (
+        string.find(joker.config.center.name,"ogerpon")
+        and not (joker.config.center.name == "ogerpon_wellspring")
+      ) and not (joker.debuff) end
+    )
     if target then
-        poke_evolve(target, "j_maelmc_ogerpon_wellspring")
+      poke_evolve(target, "j_maelmc_ogerpon_wellspring")
     end
   end,
   in_pool = function(self)
@@ -146,7 +151,8 @@ local hearthflamemask = {
   unlocked = true,
   discovered = true,
   can_use = function(self, card)
-    if G.hand.highlighted and #G.hand.highlighted >= self.config.min_highlighted and #G.hand.highlighted <= self.config.max_highlighted then
+    if G.hand.highlighted then
+      if #G.hand.highlighted >= self.config.min_highlighted and #G.hand.highlighted <= self.config.max_highlighted then
         if G.jokers.highlighted and #G.jokers.highlighted == 1 then
             if string.find(G.jokers.highlighted[1].config.center.name,"ogerpon") and not (G.jokers.highlighted[1].config.center.name == "ogerpon_hearthflame") then
                 return true
@@ -156,7 +162,19 @@ local hearthflamemask = {
         else
             return true
         end
+      elseif #G.hand.highlighted > self.config.max_highlighted then
+        return false
+      end
     end
+
+    local target = poke_find_leftmost_or_highlighted(function(joker) 
+      return (
+        string.find(joker.config.center.name,"ogerpon")
+        and not (joker.config.center.name == "ogerpon_hearthflame")
+      ) and not (joker.debuff) end
+    )
+    if target then return true end
+
     return false
   end,
   use = function(self, card, area, copier)
@@ -169,26 +187,15 @@ local hearthflamemask = {
       end
       juice_flip(card, true)
       poke_unhighlight_cards()
-      evo_item_use_total(self, card, area, copier)
-    else
-      highlighted_evo_item(self, card, area, copier)
     end
 
-    local target = nil
-    if G.jokers.highlighted and #G.jokers.highlighted == 1 and 
-        (string.find(G.jokers.highlighted[1].config.center.name,"ogerpon") and not (G.jokers.highlighted[1].config.center.name == "ogerpon_hearthflame")) and
-       not (G.jokers.highlighted[1].debuff) then
-      target = G.jokers.highlighted[1]
-    else
-      for _, poke in pairs(G.jokers.cards) do
-        if (string.find(poke.config.center.name,"ogerpon") and not (poke.config.center.name == "ogerpon_hearthflame") and not (poke.debuff)) then
-          target = poke
-          break
-        end
-      end
-    end
+    local target = poke_find_leftmost_or_highlighted(function(joker) return (
+      string.find(joker.config.center.name,"ogerpon")
+      and not (joker.config.center.name == "ogerpon_hearthflame"))
+      and not (joker.debuff) end
+    )
     if target then
-        poke_evolve(target, "j_maelmc_ogerpon_hearthflame")
+      poke_evolve(target, "j_maelmc_ogerpon_hearthflame")
     end
   end,
   in_pool = function(self)
@@ -212,7 +219,8 @@ local cornerstonemask = {
   unlocked = true,
   discovered = true,
   can_use = function(self, card)
-    if G.hand.highlighted and #G.hand.highlighted >= self.config.min_highlighted and #G.hand.highlighted <= self.config.max_highlighted then
+    if G.hand.highlighted then
+      if #G.hand.highlighted >= self.config.min_highlighted and #G.hand.highlighted <= self.config.max_highlighted then
         if G.jokers.highlighted and #G.jokers.highlighted == 1 then
             if string.find(G.jokers.highlighted[1].config.center.name,"ogerpon") and not (G.jokers.highlighted[1].config.center.name == "ogerpon_cornerstone") then
                 return true
@@ -222,7 +230,19 @@ local cornerstonemask = {
         else
             return true
         end
+      elseif #G.hand.highlighted > self.config.max_highlighted then
+        return false
+      end
     end
+
+    local target = poke_find_leftmost_or_highlighted(function(joker) 
+      return (
+        string.find(joker.config.center.name,"ogerpon")
+        and not (joker.config.center.name == "ogerpon_cornerstone")
+      ) and not (joker.debuff) end
+    )
+    if target then return true end
+
     return false
   end,
   use = function(self, card, area, copier)
@@ -235,26 +255,15 @@ local cornerstonemask = {
       end
       juice_flip(card, true)
       poke_unhighlight_cards()
-      evo_item_use_total(self, card, area, copier)
-    else
-      highlighted_evo_item(self, card, area, copier)
     end
 
-    local target = nil
-    if G.jokers.highlighted and #G.jokers.highlighted == 1 and 
-        (string.find(G.jokers.highlighted[1].config.center.name,"ogerpon") and not (G.jokers.highlighted[1].config.center.name == "ogerpon_cornerstone")) and
-       not (G.jokers.highlighted[1].debuff) then
-      target = G.jokers.highlighted[1]
-    else
-      for _, poke in pairs(G.jokers.cards) do
-        if (string.find(poke.config.center.name,"ogerpon") and not (poke.config.center.name == "ogerpon_cornerstone") and not (poke.debuff)) then
-          target = poke
-          break
-        end
-      end
-    end
+    local target = poke_find_leftmost_or_highlighted(function(joker) return (
+      string.find(joker.config.center.name,"ogerpon")
+      and not (joker.config.center.name == "ogerpon_cornerstone"))
+      and not (joker.debuff) end
+    )
     if target then
-        poke_evolve(target, "j_maelmc_ogerpon_cornerstone")
+      poke_evolve(target, "j_maelmc_ogerpon_cornerstone")
     end
   end,
   in_pool = function(self)
@@ -418,11 +427,66 @@ local metronome = {
   end
 }
 
+local mint = {
+  name = "mint",
+  key = "mint",
+  set = "Item",
+  config = {},
+  loc_vars = function(self, info_queue, card)
+    return {vars = {}}
+  end,
+  pos = { x = 7, y = 0 },
+  atlas = "maelmc_mart",
+  cost = 4,
+  unlocked = true,
+  discovered = true,
+  can_use = function(self, card)
+    local target = poke_find_leftmost_or_highlighted(function(joker) return joker.config.center.set_nature end)
+    if target then return true end
+    return false
+  end,
+  use = function(self, card, area, copier)
+    set_spoon_item(card)
+    local target = poke_find_leftmost_or_highlighted(function(joker) return joker.config.center.set_nature end)
+    target.config.center:set_nature(target)
+    local text = ""
+    for _, v in pairs(target.ability.extra.targets) do
+      for k, w in pairs(v) do
+        if k == "suit" then
+          text = text..localize(w, 'suits_plural')
+        elseif k == "value" then
+          text = text..localize(w, 'ranks')
+        elseif k == "type" then
+          if w == "Darkness" then
+            text = text..localize(string.lower("poke_dark_badge"))
+          else
+            text = text..localize(string.lower("poke_"..w.."_badge"))
+          end
+        elseif k ~= "id" and (type(w) == "string" or type(w) == "number") then
+          text = text..w
+        end
+        if k ~= "id" then text = text..", " end
+      end
+    end
+    text = string.sub(text,1,string.len(text)-2)
+    SMODS.calculate_effect({message = text}, target)
+  end,
+  in_pool = function(self)
+    for _, v in pairs(G.jokers.cards) do
+      if v.config.center.set_nature then
+        return true
+      end
+    end
+    return false
+  end
+}
+
 return {name = "Maelmc's Items",
   list = {
     tealmask, wellspringmask, hearthflamemask, cornerstonemask,
     --meteorite,
     beastball,
     metronome,
+    mint,
   }
 }

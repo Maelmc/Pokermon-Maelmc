@@ -171,6 +171,13 @@ return {
                     "{C:attention}#2#{} levels {C:inactive}(Hand: {C:attention}#3# #4#{C:inactive} times)"
                 },
             },
+            c_maelmc_mint = {
+                name = "Mint",
+                text = {
+                    "Reroll leftmost or",
+                    "selected Joker's {C:attention}Nature"
+                },
+            },
         },
         Joker = {
             j_maelmc_glimmet = {

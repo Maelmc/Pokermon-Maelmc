@@ -10,10 +10,16 @@ local gym_leader={
     info_queue[#info_queue+1] = {set = 'Other', key = 'nature', vars = {"Type"}}
     info_queue[#info_queue+1] = {set = 'Other', key = 'gym_leader_tag_pool', vars = {'Uncommon', 'Rare', 'Buffoon', 'Handy', 'Garbage', 'Investment'}}
     local cname = localize('maelmc_gym_leader_name')
-    if card.ability.extra.form == "Fairy" then
+    if abbr.form == "Fairy" then
       cname = localize('maelmc_trial_captain_name')
     end
-    return {vars = {abbr.form, cname}}
+    local typename = nil
+    if abbr.form == "Darkness" then
+      typename = localize(string.lower("poke_dark_badge"))
+    else
+      typename=  localize(string.lower("poke_"..abbr.form.."_badge"))
+    end
+    return {vars = {typename, cname}}
   end,
   rarity = 1,
   cost = 5,
