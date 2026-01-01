@@ -447,8 +447,23 @@ local mint = {
   end,
   use = function(self, card, area, copier)
     set_spoon_item(card)
+    
     local target = poke_find_leftmost_or_highlighted(function(joker) return joker.config.center.set_nature end)
-    target.config.center:set_nature(target)
+    local prev_nature = target.ability.extra.targets
+    local changed = false
+    while not changed do
+      target.config.center:set_nature(target)
+      for k, v in pairs(target.ability.extra.targets) do
+        for l, w in pairs(v) do
+          if prev_nature[k][l] ~= w then
+            changed = true
+            break
+          end
+        end
+        if changed then break end
+      end
+    end
+
     local text = ""
     for _, v in pairs(target.ability.extra.targets) do
       for k, w in pairs(v) do
