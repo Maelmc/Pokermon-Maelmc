@@ -2,7 +2,7 @@
 local gym_leader={
   name = "gym_leader",
   pos = {x = 1, y = 0},
-  config = {extra = {form = "Earth"}},
+  config = {extra = {form = "Earth", targets = {{type = "Earth"}}}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
@@ -24,7 +24,7 @@ local gym_leader={
     
     -- Gym Challenge challenge management
     -- Applying perish to cards in shop and boosters is definied in the lovely patch, the rest is here
-    if G.GAME.modifiers.maelmc_gym_challenge and not G.GAME.maelmc_gym_leader_type then
+    if G.GAME.modifiers.maelmc_gym_challenge and not G.GAME.maelmc_gym_leader_type and not context.blueprint then
       if card.ability.extra.form == "Darkness" then
         G.GAME.maelmc_gym_leader_type = "Dark"
       else
@@ -33,7 +33,7 @@ local gym_leader={
       G.GAME.perishable_rounds = 3
     end
 
-    if G.GAME.modifiers.maelmc_gym_challenge then
+    if G.GAME.modifiers.maelmc_gym_challenge and not context.blueprint then
       for _, v in ipairs(G.jokers.cards) do
         if not (v == card) then 
           if not (v.ability.perishable) and not (get_type(v) == G.GAME.maelmc_gym_leader_type) then
@@ -47,7 +47,7 @@ local gym_leader={
     end
 
     -- Regular actions
-    if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint and context.beat_boss then
+    if context.end_of_round and context.game_over == false and context.main_eval and context.beat_boss then
       local tag = ''
       local tag_choice = pseudorandom('gymleader')
       if tag_choice < 1/6 then
@@ -68,11 +68,23 @@ local gym_leader={
       play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
 
       if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-        local energy_name = string.lower("c_poke_"..card.ability.extra.form.."_energy")
-        local energy = create_card("Energy", G.pack_cards, nil, nil, nil, nil, energy_name, nil)
-        energy:add_to_deck()
-        G.consumeables:emplace(energy)
-        card_eval_status_text(energy, 'extra', nil, nil, nil, {message = localize("poke_plus_energy"), colour = G.ARGS.LOC_COLOURS["pink"]})
+        G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+        return {
+          extra = {focus = (context.blueprint_card or card), message = localize('poke_plus_energy'), colour = G.ARGS.LOC_COLOURS.pink, func = function()
+            G.E_MANAGER:add_event(Event({
+              trigger = 'before',
+              delay = 0.0,
+              func = function()
+                local energy_name = string.lower("c_poke_"..card.ability.extra.targets[1].type.."_energy")
+                local energy = create_card("Energy", G.pack_cards, nil, nil, nil, nil, energy_name, nil)
+                energy:add_to_deck()
+                G.consumeables:emplace(energy)
+                G.GAME.consumeable_buffer = 0
+                return true
+              end
+            }))
+          end}
+        }
       end
 
       return {
@@ -85,10 +97,14 @@ local gym_leader={
   end,
   set_ability = function(self, card, initial, delay_sprites)
     if initial and G.playing_cards then
-      local poketype_list = {"Grass", "Fire", "Water", "Lightning", "Psychic", "Fighting", "Colorless", "Darkness", "Metal", "Fairy", "Dragon", "Earth"}
-      card.ability.extra.form = pseudorandom_element(poketype_list, pseudoseed("gym_leader"))
-      self:set_sprites(card)
+      self:set_nature(card)
     end
+  end,
+  set_nature = function(self,card)
+    local poketype_list = {"Grass", "Fire", "Water", "Lightning", "Psychic", "Fighting", "Colorless", "Darkness", "Metal", "Fairy", "Dragon", "Earth"}
+    card.ability.extra.form = pseudorandom_element(poketype_list, pseudoseed("gym_leader"))
+    card.ability.extra.targets = {{type = card.ability.extra.form}}
+    self:set_sprites(card)
   end,
   set_sprites = function(self, card, front)
     local leader_table = {
