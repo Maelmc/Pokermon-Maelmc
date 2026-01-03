@@ -988,6 +988,14 @@ return {
                     "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
                 }
             },
+            j_maelmc_safarizone = {
+                name = "Safari Zone",
+                text = {
+                    "Create a {C:attention}#1#",
+                    "when {C:attention}Small Blind{} or",
+                    "{C:attention}Big Blind{} is defeated",
+                },
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {

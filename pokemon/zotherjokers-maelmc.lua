@@ -589,6 +589,36 @@ local pokemoncenter = {
   end
 }
 
+local safarizone = {
+  name = "safarizone",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 2, y = 2},
+  config = {extra = {}},
+  loc_vars = function(self, info_queue, card)
+    info_queue[#info_queue + 1] = { key = 'tag_poke_safari_tag', set = 'Tag' }
+    return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_poke_safari_tag" }}}
+  end,
+  rarity = 2,
+  cost = 6,
+  stage = "Other",
+  atlas = "maelmc_jokers",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    if context.end_of_round and context.game_over == false and context.main_eval and (G.GAME.blind.name == 'Small Blind' or G.GAME.blind.name == 'Big Blind') then
+      G.E_MANAGER:add_event(Event({
+        func = (function()
+          add_tag(Tag('tag_poke_safari_tag'))
+          play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+          play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+          return true
+        end)
+      }))
+    end
+  end,
+}
+
 --[[
 
 local name = {
@@ -619,6 +649,7 @@ local list = {
   --pc,
   photographer,
   pokemoncenter,
+  safarizone,
 }
 
 if not maelmc_config.disable_spiritomb then table.insert(list,2,odd_keystone) end
