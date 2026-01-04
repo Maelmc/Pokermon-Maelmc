@@ -585,7 +585,7 @@ local pokemoncenter = {
         end
       end
     end
-    return ok and pokemon_in_pool(self)
+    return ok
   end
 }
 
