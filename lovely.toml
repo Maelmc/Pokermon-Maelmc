@@ -791,3 +791,14 @@ pattern = '''if G.GAME.blind then t[#t + 1] = { object = G.GAME.blind, scored_ca
 position = "at"
 match_indent = true
 payload = '''if G.GAME.blind and G.GAME.blind.children and G.GAME.blind.children.animatedSprite then t[#t + 1] = { object = G.GAME.blind, scored_card = G.GAME.blind.children.animatedSprite } end'''
+
+# Prevent Seed cards from growing with Cherrim
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "enhancements/enhancement1.lua"]'
+pattern = '''if context.main_scoring and context.cardarea == G.play then
+       card.ability.extra.level = card.ability.extra.level + 1'''
+position = 'at'
+match_indent = true
+payload = '''if context.main_scoring and context.cardarea == G.play and (not next(SMODS.find_card("j_maelmc_cherrim"))) then
+       card.ability.extra.level = card.ability.extra.level + 1'''

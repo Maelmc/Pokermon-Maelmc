@@ -1,3 +1,177 @@
+local cherubi = {
+  name = "cherubi",
+  config = {extra = {seed_req = 2, rounds = 4}},
+  loc_vars = function(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_poke_seed
+    return {vars = {card.ability.extra.seed_req, card.ability.extra.rounds}}
+  end,
+  rarity = 1,
+  cost = 4,
+  stage = "Basic",
+  ptype = "Grass",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  enhancement_gate = 'm_poke_seed',
+  calculate = function(self, card, context)
+    if context.before then
+      local convertable = {}
+      local seed_count = 0
+      for _, scored_card in ipairs(context.scoring_hand) do
+        if SMODS.has_enhancement(scored_card,"m_poke_seed") then
+          seed_count = seed_count + 1
+        else
+          convertable[#convertable+1] = scored_card
+        end
+      end
+      if seed_count >= card.ability.extra.seed_req then
+        local to_convert = pseudorandom_element(convertable,"cherubi")
+        to_convert:set_ability("m_poke_seed",nil,true)
+        G.E_MANAGER:add_event(Event({
+          func = function()
+            to_convert:juice_up()
+            return true
+          end
+        }))
+      end
+    end
+
+    if #find_pokemon_type("Fire") >= 1 then
+      return level_evo(self, card, context, "j_maelmc_cherrim_sunshine")
+    else
+      return level_evo(self, card, context, "j_maelmc_cherrim")
+    end
+  end,
+}
+
+local cherrim = {
+  name = "cherrim",
+  config = {extra = {}},
+  loc_vars = function(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_poke_seed
+    info_queue[#info_queue+1] = G.P_CENTERS.m_poke_flower
+    return {vars = {}}
+  end,
+  rarity = "poke_safari",
+  cost = 6,
+  stage = "One",
+  ptype = "Grass",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  enhancement_gate = 'm_poke_seed',
+  calculate = function(self, card, context)
+    if context.before then
+      local convertable = {}
+      local seed_count = 0
+      for _, scored_card in ipairs(context.scoring_hand) do
+        if SMODS.has_enhancement(scored_card,"m_poke_seed") then
+          seed_count = seed_count + 1
+        elseif SMODS.has_enhancement(scored_card,"m_poke_flower") then
+          seed_count = seed_count + 1
+          scored_card:set_ability("m_poke_seed",nil,true)
+          scored_card.ability.extra.level = 4
+          G.E_MANAGER:add_event(Event({
+            func = function()
+              scored_card:juice_up()
+              return true
+            end
+          }))
+        else
+          convertable[#convertable+1] = scored_card
+        end
+      end
+      for _ = 1, seed_count do
+        local to_convert = pseudorandom_element(convertable,"cherubi")
+        if to_convert then
+          for i, v in ipairs(convertable) do
+            if v == to_convert then table.remove(convertable,i)
+              break
+            end
+          end
+          to_convert:set_ability("m_poke_seed",nil,true)
+          G.E_MANAGER:add_event(Event({
+            func = function()
+              to_convert:juice_up()
+              return true
+            end
+          }))
+        end
+      end
+    end
+
+    return scaling_evo(self, card, context, "j_maelmc_cherrim_sunshine", #find_pokemon_type("Fire"), 1)
+  end,
+  in_pool = function(self)
+    return #find_pokemon_type("Fire") <= 0
+  end
+}
+
+local cherrim_sunshine = {
+  name = "cherrim_sunshine",
+  config = {extra = {Xmult_multi = 1.5, Xmult_mod = 0.05}},
+  loc_vars = function(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_poke_flower
+    local flower_count = 0
+    if G.playing_cards then
+      for _, v in pairs(G.playing_cards) do
+        if SMODS.has_enhancement(v, "m_poke_flower") then
+          flower_count = flower_count + 1
+        end
+      end
+    end
+    return {vars = {card.ability.extra.Xmult_multi, card.ability.extra.Xmult_mod, card.ability.extra.Xmult_multi + card.ability.extra.Xmult_mod * flower_count}}
+  end,
+  atlas = "AtlasJokersBasicGen04",
+  pos = {x = 2, y = 1},
+  rarity = "poke_safari",
+  cost = 6,
+  stage = "One",
+  ptype = "Grass",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  enhancement_gate = 'm_poke_flower',
+  no_collection = true,
+  calculate = function(self, card, context)
+    if context.other_joker and not context.blueprint then
+      local pos = 0
+      for i = 1, #G.jokers.cards do
+        if G.jokers.cards[i] == card then
+          pos = i
+          break
+        end
+      end
+      if context.other_joker == G.jokers.cards[pos-1] or context.other_joker == G.jokers.cards[pos+1] then
+        G.E_MANAGER:add_event(Event({
+          func = function()
+            context.other_joker:juice_up(0.5, 0.5)
+            return true
+          end
+        }))
+        local flower_count = 0
+        for _, v in pairs(G.playing_cards) do
+          if SMODS.has_enhancement(v, "m_poke_flower") then
+            flower_count = flower_count + 1
+          end
+        end
+        return {
+          message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.Xmult_multi + card.ability.extra.Xmult_mod * flower_count}},
+          colour = G.C.XMULT,
+          Xmult = card.ability.extra.Xmult_multi + card.ability.extra.Xmult_mod * flower_count
+        }
+      end
+    end
+
+    local not_fire = 0
+    if #find_pokemon_type("Fire") <= 1 then not_fire = 1 end
+    return scaling_evo(self, card, context, "j_maelmc_cherrim", not_fire, 1)
+  end,
+  in_pool = function(self)
+    return #find_pokemon_type("Fire") >= 1
+  end
+}
+
 -- Spiritomb 442
 local spiritomb={
   name = "spiritomb",
@@ -346,6 +520,7 @@ local mega_garchomp_z={
 }
 
 local list = {
+  cherubi, cherrim, cherrim_sunshine,
   gible, gabite, garchomp, mega_garchomp, mega_garchomp_z,
 }
 

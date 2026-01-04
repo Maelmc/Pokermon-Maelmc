@@ -623,7 +623,6 @@ local safarizone = {
 
 local name = {
   name = "name",
-  poke_custom_prefix = "maelmc",
   pos = {x = 0, y = 0},
   config = {extra = {}},
   loc_vars = function(self, info_queue, card)

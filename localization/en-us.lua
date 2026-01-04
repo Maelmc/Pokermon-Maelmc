@@ -996,6 +996,40 @@ return {
                     "{C:attention}Big Blind{} is defeated",
                 },
             },
+            j_maelmc_cherubi = {
+                name = "Cherubi",
+                text = {
+                    "If poker hand contains",
+                    "#1# {C:attention}Seed Cards{}, convert an",
+                    "unenhanced card in poker hand",
+                    "into a {C:attention}Seed Card",
+                    "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#2#{C:inactive,s:0.8} rounds)",
+                },
+            },
+            j_maelmc_cherrim = {
+                name = "Cherrim",
+                text = {
+                    "{C:attention}Seed Cards{} can't grow",
+                    "{C:attention}Flower Cards{} in poker hand",
+                    "become stage 4 {C:attention}Seed Cards{}",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Convert an unenhanced card in",
+                    "poker hand into a {C:attention}Seed Cards{}",
+                    "for each {C:attention}Flower Card{} and",
+                    "{C:attention}Seed Card{} in poker hand",
+                    "{s:0.8}Changes form with a {X:fire,C:white,s:0.8}Fire{} Joker",
+                },
+            },
+            j_maelmc_cherrim_sunshine = {
+                name = "Cherrim",
+                text = {
+                    "Adjacent Jokers give {X:mult,C:white}X#1#{} Mult",
+                    "plus {X:mult,C:white}X#2#{} Mult for each",
+                    "{C:attention}Flower Card{} in your {C:attention}full deck",
+                    "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive})",
+                    "{s:0.8}Changes form without a {X:fire,C:white,s:0.8}Fire{} Joker",
+                },
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
