@@ -4,7 +4,7 @@ local pokerus =  {
     atlas = "maelmc_stickers",
     pos = { x = 0, y = 0 },
     should_apply = function(self, card, center, area, bypass_roll)
-        return (not (pokermon_config.unlimited_energy or card.config.center.no_energy_limit)) and card.ability.set == "Joker" and pseudorandom("pokerus") < 1/500
+        return (not (pokermon_config.unlimited_energy or card.config.center.no_energy_limit)) and card.ability.set == "Joker" and pseudorandom("pokerus") < 1/4096
     end,
     apply = function(self, card, val)
         card.ability[self.key] = val
