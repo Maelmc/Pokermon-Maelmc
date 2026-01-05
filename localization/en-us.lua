@@ -1017,7 +1017,7 @@ return {
                     "poker hand into a {C:attention}Seed Cards{}",
                     "for each {C:attention}Flower Card{} and",
                     "{C:attention}Seed Card{} in poker hand",
-                    "{s:0.8}Changes form with a {X:fire,C:white,s:0.8}Fire{} Joker",
+                    "{s:0.8}Changes form with a {X:fire,C:white,s:0.8}Fire{s:0.8} Joker",
                 },
             },
             j_maelmc_cherrim_sunshine = {
@@ -1027,7 +1027,7 @@ return {
                     "plus {X:mult,C:white}X#2#{} Mult for each",
                     "{C:attention}Flower Card{} in your {C:attention}full deck",
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive})",
-                    "{s:0.8}Changes form without a {X:fire,C:white,s:0.8}Fire{} Joker",
+                    "{s:0.8}Changes form without a {X:fire,C:white,s:0.8}Fire{s:0.8} Joker",
                 },
             },
         },
