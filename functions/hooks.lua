@@ -140,3 +140,17 @@ function Card:use_consumeable(area, copier)
   end
 	return ret
 end
+
+-- Right-click on Photographer to see all Pokémon taken in photo
+local gfk = get_family_keys
+get_family_keys = function(card)
+  local ret = gfk(card)
+  if card.config.center.name == "photographer" then
+    for _, v in ipairs(timeless_woods_keys) do
+        if not card.ability.extra.found[v] then
+          table.insert(ret, v)
+        end
+    end
+  end
+  return ret
+end

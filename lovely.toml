@@ -79,23 +79,6 @@ payload = '''
 photographer_util(card)
 '''
 
-# Right-click on Photographer to see all Pokémon taken in photo
-[[patches]]
-[patches.pattern]
-target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
-pattern = '''local evo_item_keys = get_evo_item_keys(card, prefix)'''
-position = "before"
-match_indent = true
-payload = '''
-if cardname == "photographer" then
-    for _, v in ipairs(timeless_woods_keys) do
-        if not card.ability.extra.found[v] then
-          table.insert(keys, v)
-        end
-    end
-end
-'''
-
 # maelmc_ban_no_perish banishing non perish jokers
 [[patches]]
 [patches.pattern]
