@@ -1000,7 +1000,7 @@ return {
                 name = "Cherubi",
                 text = {
                     "If poker hand contains",
-                    "#1# {C:attention}Seed Cards{}, convert an",
+                    "#1# {C:attention}Seed{} cards, convert an",
                     "unenhanced card in poker hand",
                     "into a {C:attention}Seed Card",
                     "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#2#{C:inactive,s:0.8} rounds)",
@@ -1009,12 +1009,12 @@ return {
             j_maelmc_cherrim = {
                 name = "Cherrim",
                 text = {
-                    "{C:attention}Seed Cards{} can't grow",
-                    "{C:attention}Flower Cards{} in poker hand",
-                    "become stage 4 {C:attention}Seed Cards{}",
+                    "{C:attention}Seed{} cards can't grow",
+                    "{C:attention}Flower{} cards in poker hand",
+                    "become {C:attention}Seed{} cards with {C:attention}4 growths",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Convert an unenhanced card in",
-                    "poker hand into a {C:attention}Seed Cards{}",
+                    "poker hand into a {C:attention}Seed{} card",
                     "for each {C:attention}Flower Card{} and",
                     "{C:attention}Seed Card{} in poker hand",
                     "{s:0.8}Changes form with a {X:fire,C:white,s:0.8}Fire{s:0.8} Joker",
