@@ -2,6 +2,7 @@ local cherubi = {
   name = "cherubi",
   config = {extra = {seed_req = 2, rounds = 4}},
   loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_seed
     return {vars = {card.ability.extra.seed_req, card.ability.extra.rounds}}
   end,
@@ -48,6 +49,7 @@ local cherrim = {
   name = "cherrim",
   config = {extra = {}},
   loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_seed
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_flower
     return {vars = {}}
@@ -111,6 +113,7 @@ local cherrim_sunshine = {
   name = "cherrim_sunshine",
   config = {extra = {Xmult_multi = 1.5, Xmult_mod = 0.05}},
   loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_flower
     local flower_count = 0
     if G.playing_cards then
