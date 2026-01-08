@@ -621,7 +621,7 @@ local guzzlord = {
           SMODS.calculate_effect({message = localize("maelmc_hungry_dot")}, card)
         else
           card.ability.extra.unscalable_mult = card.ability.extra.unscalable_mult + card.ability.extra.unscalable_mult2
-          local rng = weighted_random(pool,"guzzlord")
+          local rng = maelmc_weighted_random(pool,"guzzlord")
           local result = rng["name"]
 
           if result == "money" then

@@ -1118,6 +1118,14 @@ return {
                 "{C:inactive}(Ignoring {C:attention}Volatile{C:inactive} Pokemon)"
               }
             },
+            bouffalant_compat = {
+              name = "Compatibility",
+              text = {
+                "All vanilla and Pokermon",
+                "{C:attention}Boss Blinds{} can trigger",
+                "this ability"
+              }
+            },
             bouffalant_mp = {
               name = "Multiplayer",
               text = {

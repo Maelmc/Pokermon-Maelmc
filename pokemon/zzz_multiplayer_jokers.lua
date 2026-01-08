@@ -31,7 +31,7 @@ local wonder_trade = {
       end
       local tosend = pseudorandom_element(compat,"wonder_trade")
       if tosend then
-        local msg = wonder_trade_string_maker(tosend)
+        local msg = maelmc_wonder_trade_string_maker(tosend)
         MP.ACTIONS.wonder_trade(msg)
       end
     end

@@ -514,7 +514,7 @@ local photographer = {
       local add_card = SMODS.create_card(temp_card)
       poke_add_shop_card(add_card, card)
     end
-    set_sepia_quest(self, card)
+    maelmc_set_sepia_quest(self, card)
     if G.GAME and G.GAME.blind and G.GAME.blind.name == "The Mouth" then
       G.GAME.play_sepia_song = true
     end

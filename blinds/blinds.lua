@@ -130,7 +130,7 @@ local hearthflame_mask={
         blind.prep_next = true
         G.E_MANAGER:add_event(Event({
           func = function()
-            set_next_boss("bl_maelmc_wellspring_mask",false,false,true,true)
+            maelmc_set_next_boss("bl_maelmc_wellspring_mask",false,false,true,true)
             blind.prep_next = false
             return true
           end
@@ -177,7 +177,7 @@ local wellspring_mask={
         blind.prep_next = true
         G.E_MANAGER:add_event(Event({
           func = function()
-            set_next_boss("bl_maelmc_cornerstone_mask",false,false,true,true)
+            maelmc_set_next_boss("bl_maelmc_cornerstone_mask",false,false,true,true)
             blind.prep_next = false
             return true
           end
@@ -224,7 +224,7 @@ local cornerstone_mask={
         blind.prep_next = true
         G.E_MANAGER:add_event(Event({
           func = function()
-            set_next_boss("bl_maelmc_teal_mask",false,false,true,true)
+            maelmc_set_next_boss("bl_maelmc_teal_mask",false,false,true,true)
             blind.prep_next = false
             return true
           end

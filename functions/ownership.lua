@@ -65,7 +65,7 @@ SMODS.Consumable:take_ownership('ouija', {
                 end
             }))
         end
-        if not should_cleanse_tag() then
+        if not maelmc_should_cleanse_tag() then
           G.hand:change_size(-1)
         end
         for i = 1, #G.hand.cards do
@@ -85,7 +85,7 @@ SMODS.Consumable:take_ownership('ouija', {
 SMODS.Consumable:take_ownership('grim', {
     use = function(self, card, area, copier)
         local used_tarot = copier or card
-        local cleanse = should_cleanse_tag()
+        local cleanse = maelmc_should_cleanse_tag()
         local destroyed_cards = (not cleanse) and random_destroy(used_tarot) or nil
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -119,7 +119,7 @@ SMODS.Consumable:take_ownership('grim', {
 SMODS.Consumable:take_ownership('familiar', {
     use = function(self, card, area, copier)
         local used_tarot = copier or card
-        local cleanse = should_cleanse_tag()
+        local cleanse = maelmc_should_cleanse_tag()
         local destroyed_cards = (not cleanse) and random_destroy(used_tarot) or nil
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -159,7 +159,7 @@ SMODS.Consumable:take_ownership('familiar', {
 SMODS.Consumable:take_ownership('incantation', {
     use = function(self, card, area, copier)
         local used_tarot = copier or card
-        local cleanse = should_cleanse_tag()
+        local cleanse = maelmc_should_cleanse_tag()
         local destroyed_cards = (not cleanse) and random_destroy(used_tarot) or nil
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -208,7 +208,7 @@ SMODS.Consumable:take_ownership('hex', {
               local eligible_card = pseudorandom_element(editionless_jokers, 'hex')
               eligible_card:set_edition({ polychrome = true })
 
-              if not should_cleanse_tag() then
+              if not maelmc_should_cleanse_tag() then
                 local _first_dissolve = nil
                 for _, joker in pairs(G.jokers.cards) do
                     if joker ~= eligible_card and not SMODS.is_eternal(joker, card) then
@@ -235,7 +235,7 @@ SMODS.Consumable:take_ownership('ectoplasm', {
                 local eligible_card = pseudorandom_element(editionless_jokers, 'ectoplasm')
                 eligible_card:set_edition({ negative = true })
 
-                if not should_cleanse_tag() then
+                if not maelmc_should_cleanse_tag() then
                   G.GAME.ecto_minus = G.GAME.ecto_minus or 1
                   G.hand:change_size(-G.GAME.ecto_minus)
                   G.GAME.ecto_minus = G.GAME.ecto_minus + 1
@@ -274,7 +274,7 @@ SMODS.Consumable:take_ownership('immolate', {
             end
         }))
 
-        if not should_cleanse_tag() then SMODS.destroy_cards(destroyed_cards) end
+        if not maelmc_should_cleanse_tag() then SMODS.destroy_cards(destroyed_cards) end
 
         delay(0.5)
         ease_dollars(card.ability.extra.dollars)
@@ -291,7 +291,7 @@ SMODS.Consumable:take_ownership('ankh', {
 
         local chosen_joker = pseudorandom_element(G.jokers.cards, 'ankh_choice')
         local _first_dissolve = nil
-        if not should_cleanse_tag() then
+        if not maelmc_should_cleanse_tag() then
           G.E_MANAGER:add_event(Event({
               trigger = 'before',
               delay = 0.75,
@@ -333,7 +333,7 @@ SMODS.Consumable:take_ownership('wraith', {
                 play_sound('timpani')
                 SMODS.add_card({ set = 'Joker', rarity = 'Rare' })
                 card:juice_up(0.3, 0.5)
-                if (not should_cleanse_tag()) and G.GAME.dollars ~= 0 then
+                if (not maelmc_should_cleanse_tag()) and G.GAME.dollars ~= 0 then
                     ease_dollars(-G.GAME.dollars, true)
                 end
                 return true
@@ -349,7 +349,7 @@ SMODS.Consumable:take_ownership('poke_double_rainbow_energy', {
     for i = 1, 2 do
       energy_use(self, card, area, copier, true)
     end
-    if (not G.GAME.modifiers.no_interest) and (not should_cleanse_tag()) then
+    if (not G.GAME.modifiers.no_interest) and (not maelmc_should_cleanse_tag()) then
       G.GAME.modifiers.reset_no_interest = true
       G.GAME.modifiers.no_interest = true
     end
@@ -376,7 +376,7 @@ SMODS.Consumable:take_ownership('poke_nightmare', {
         G.consumeables:emplace(_card)
       end
     end
-    if not should_cleanse_tag() then remove(self, choice) end
+    if not maelmc_should_cleanse_tag() then remove(self, choice) end
   end,
 }, true)
 

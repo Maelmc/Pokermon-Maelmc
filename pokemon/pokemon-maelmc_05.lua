@@ -106,9 +106,10 @@ local swoobat = {
 local bouffalant = {
   name = "bouffalant",
   pos = PokemonSprites["bouffalant"].base.pos,
-  config = {extra = {money = 10, boss_trigger = 0, blind_buff = 1.5, boss_blind = nil}},
+  config = {extra = {money = 8, boss_trigger = 0, blind_buff = 1.5, boss_blind = nil}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'bouffalant_compat'}
     if (SMODS.Mods["Multiplayer"] or {}).can_load and MP.LOBBY and MP.LOBBY.code and MP.LOBBY.enemy_id then
       info_queue[#info_queue+1] = {set = 'Other', key = 'bouffalant_mp'}
     end
@@ -140,10 +141,11 @@ local bouffalant = {
       G.GAME.blind.chips = G.GAME.blind.chips * card.ability.extra.blind_buff
       G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
       
+      -- Setting blind
       local boss_name = card.ability.extra.boss_blind
       if (boss_name == "The Wall" or boss_name == "The Water" or boss_name == "The Manacle" or
           boss_name == "The Needle" or boss_name == "Amber Acorn" or boss_name == "Violet Vessel" or
-          boss_name == "bl_poke_mirror" or boss_name == "bl_poke_white_executive") and not G.GAME.blind.disabled then
+          boss_name == "bl_poke_mirror" or boss_name == "bl_poke_white_executive" or boss_name == "bl_sonfive_darkrai_boss") and not G.GAME.blind.disabled then
         card.ability.extra.boss_trigger = card.ability.extra.boss_trigger + 1
       end
 
@@ -152,64 +154,11 @@ local bouffalant = {
       }
     end
       
-    if card.ability.extra.boss_blind then
+    if card.ability.extra.boss_blind and not G.GAME.blind.disabled then
       local boss_name = card.ability.extra.boss_blind
-      local boss_trigg = false
+      local boss_trigg = maelmc_blind_trigger(card,context,boss_name)
 
-      -- window, head, club, goad, plant, pillar, flint, eye, mouth, psychic, arm, ox, leaf
-      if context.debuffed_hand or context.joker_main then
-        if G.GAME.blind.triggered then
-          boss_trigg = true
-        end
-
-      elseif context.first_hand_drawn and boss_name == "The House" then
-        boss_trigg = true
-      
-      elseif (context.press_play or context.pre_discard) and boss_name == "The Serpent" and #G.hand.highlighted > 3 then
-        card.ability.extra.boss_blind = "okserpent"
-      
-      elseif context.pre_discard and boss_name == "bl_poke_gray_godfather" then
-        boss_trigg = true
-      
-      elseif context.press_play then
-        local jokdebuff = false
-        for i = 1, #G.jokers.cards do
-          if G.jokers.cards[i].debuff then
-            jokdebuff = true
-            break
-          end
-        end
-        local forcedselection = false
-        for i = 1, #G.hand.highlighted do
-          if G.hand.highlighted[i].ability.bouffalant_forced_selection then
-            G.hand.highlighted[i].ability.bouffalant_forced_selection = nil
-            forcedselection = true
-          end
-        end
-        if (boss_name == "The Hook" and (#G.hand.cards - #G.hand.highlighted) > 0) or
-        boss_name == "The Tooth" or boss_name == "bl_poke_gray_godfather" or
-        ((boss_name == "Crimson Heart" or boss_name == "bl_poke_star" or boss_name == "bl_poke_iridescent_hacker") and jokdebuff) or
-        (boss_name == "Cerulean Bell" and forcedselection) then
-          boss_trigg = true
-        end
-      
-      elseif context.hand_drawn then
-        local facedown = false
-        for _, v in pairs(context.hand_drawn) do
-          if v.facing == 'back' then
-              facedown = true
-          end
-        end
-        if boss_name == "okserpent" or
-        ((boss_name == "The Wheel" or boss_name == "The Mark" or boss_name == "The Fish") and facedown) then
-          boss_trigg = true
-          -- first set the flag when hand is played or discarded, then
-          -- only apply boss_trigg when the hand is drawn
-          if boss_name == "okserpent" then card.ability.extra.boss_blind = "The Serpent" end
-        end
-      end
-
-      if boss_trigg and not G.GAME.blind.disabled then
+      if boss_trigg then
         card.ability.extra.boss_trigger = card.ability.extra.boss_trigger + 1
         return {
           message = localize('maelmc_reckless_ex')

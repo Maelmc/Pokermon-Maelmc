@@ -53,7 +53,7 @@ local pelipper={
     return { vars = { card.ability.extra.money, localize((G.GAME.current_round.maelmc_pelipper_card or {}).rank or 'Ace', 'ranks'), card.ability.extra.money1 } }
   end,
   calculate = function(self, card, context)
-    if context.discard and not context.other_card.debuff and table.contains(neighbor_ranks(context.other_card:get_id()),G.GAME.current_round.maelmc_pelipper_card.id) then
+    if context.discard and not context.other_card.debuff and table.contains(maelmc_neighbor_ranks(context.other_card:get_id()),G.GAME.current_round.maelmc_pelipper_card.id) then
       local m = context.other_card:get_id() == G.GAME.current_round.maelmc_pelipper_card.id and card.ability.extra.money or card.ability.extra.money1
       G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + m
       return {

@@ -105,7 +105,7 @@ SMODS.current_mod.calculate = function(self, context)
         blocking = false,
         func = function()
           if G.GAME.maelmc_quest_set then return false end
-          set_next_boss("bl_maelmc_hearthflame_mask")
+          maelmc_set_next_boss("bl_maelmc_hearthflame_mask")
           G.GAME.maelmc_quest_set = true
           return true
         end

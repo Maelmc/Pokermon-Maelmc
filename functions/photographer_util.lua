@@ -32,7 +32,7 @@ G.E_MANAGER:add_event(Event({
   end,
 }))
 
-function photographer_util(card)
+function maelmc_photographer_util(card)
   local photographers = find_joker("photographer")
   if #photographers > 0 then
     if timeless_woods_available[card.config.center.name] then
@@ -52,7 +52,7 @@ function photographer_util(card)
               blocking = false,
               func = function()
                 if G.GAME.maelmc_quest_set then return false end
-                set_next_boss("bl_maelmc_bloodmoon_beast")
+                maelmc_set_next_boss("bl_maelmc_bloodmoon_beast")
                 G.GAME.maelmc_quest_set = true
                 v:speak("maelmc_announce_bloodmoon",4,7*G.SETTINGS.GAMESPEED)
                 return true
@@ -65,7 +65,7 @@ function photographer_util(card)
   end
 end
 
-function set_sepia_quest(self,card)
+function maelmc_set_sepia_quest(self,card)
   local card_drag_orig = card.drag
 
   local shake_rqmt = 25
@@ -86,7 +86,7 @@ function set_sepia_quest(self,card)
     card.ability.extra.dist_dragged = distance + (card.ability.extra.dist_dragged or 0)
 
     if (G.GAME and G.GAME.blind and G.GAME.blind.name == "The Mouth") and card.ability.extra.dist_dragged > shake_rqmt and not G.GAME.sepia_quest_complete then
-      set_next_boss("bl_maelmc_sepia",false,false,true,true)
+      maelmc_set_next_boss("bl_maelmc_sepia",false,false,true,true)
     end
   end
 

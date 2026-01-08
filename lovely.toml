@@ -62,7 +62,7 @@ payload = '''
 if _type == 'Joker' then
     if G.GAME.modifiers.maelmc_gym_challenge and not (get_type(card) == G.GAME.maelmc_gym_leader_type) then card:set_perishable(true) end
     if G.GAME.modifiers.maelmc_perish_3 then card:set_perishable(true) end
-    photographer_util(card)
+    maelmc_photographer_util(card)
 end
 '''
 
@@ -76,7 +76,7 @@ pattern = '''G.P_CENTERS.e_poke_shiny.on_load(card)
 position = "after"
 match_indent = true
 payload = '''
-photographer_util(card)
+maelmc_photographer_util(card)
 '''
 
 # maelmc_ban_no_perish banishing non perish jokers
@@ -306,7 +306,7 @@ payload = '''G.SHOP_SIGN = UIBox{
 target = "blind.lua"
 pattern = '''forced_card.ability.forced_selection = true'''
 position = "after"
-payload = '''forced_card.ability.bouffalant_forced_selection = true'''
+payload = '''forced_card.ability.maelmc_forced_selection = true'''
 match_indent = true
 
 [[patches]]
@@ -314,7 +314,7 @@ match_indent = true
 target = "blind.lua"
 pattern = '''v.ability.forced_selection = nil'''
 position = "after"
-payload = '''v.ability.bouffalant_forced_selection = nil'''
+payload = '''v.ability.maelmc_forced_selection = nil'''
 match_indent = true
 
 ## Mega Malamar gaming
@@ -432,9 +432,9 @@ payload = '''local function action_wonder_trade(msg)
 			end
 		end
     
-		wonder_trade_joker_creation(key,extra,edition)
+		maelmc_wonder_trade_joker_creation(key,extra,edition)
 
-    local msg_2 = wonder_trade_string_maker(tosend_j)
+    local msg_2 = maelmc_wonder_trade_string_maker(tosend_j)
 		MP.ACTIONS.wonder_trade_response(msg_2,key)
 	end
 end
@@ -458,7 +458,7 @@ local function action_wonder_trade_response(msg)
       break
     end
   end
-  wonder_trade_joker_creation(key,extra,edition)
+  maelmc_wonder_trade_joker_creation(key,extra,edition)
 end
 '''
 
@@ -522,9 +522,9 @@ payload = '''local function action_wonder_trade(msg)
 			end
 		end
     
-		wonder_trade_joker_creation(key,extra,edition)
+		maelmc_wonder_trade_joker_creation(key,extra,edition)
 
-    local msg_2 = wonder_trade_string_maker(tosend_j)
+    local msg_2 = maelmc_wonder_trade_string_maker(tosend_j)
 		MP.ACTIONS.wonder_trade_response(msg_2,key)
 	end
 end
@@ -548,7 +548,7 @@ local function action_wonder_trade_response(msg)
       break
     end
   end
-  wonder_trade_joker_creation(key,extra,edition)
+  maelmc_wonder_trade_joker_creation(key,extra,edition)
 end
 '''
 
