@@ -788,7 +788,7 @@ return {
             j_maelmc_gulpin = {
                 name = "Gulpin",
                 text = {
-                    "{C:attention}Stockpile{} when {C:attention,s:0.8}Blind{} is selected {C:inactive}(#1#)",
+                    "{C:attention}Stockpile{} when {C:attention}Blind{} is selected {C:inactive}(#1#)",
                     "{C:attention}Volatile Left{}: Gain {C:money}$#2#{}, {C:money}$#3#{} or {C:money}$#4#{} at end of round",
                     "{C:attention}Volatile Right{}: {X:red,C:white}X#5#{}, {X:red,C:white}X#6#{} or {X:red,C:white}X#7#{} Mult",
                     "{C:inactive,s:0.8}(Evolves after stockpiling {C:attention,s:0.8}#8# {C:inactive,s:0.8}times)"
@@ -797,7 +797,7 @@ return {
             j_maelmc_swalot = {
                 name = "Swalot",
                 text = {
-                    "{C:attention}Stockpile{} when {C:attention,s:0.8}Blind{} is selected {C:inactive}(#1#)",
+                    "{C:attention}Stockpile{} when {C:attention}Blind{} is selected {C:inactive}(#1#)",
                     "{C:attention}Volatile Left{}: Gain {C:money}$#2#{}, {C:money}$#3#{} or {C:money}$#4#{} at end of round",
                     "{C:attention}Volatile Right{}: {X:red,C:white}X#5#{}, {X:red,C:white}X#6#{} or {X:red,C:white}X#7#{} Mult",
                 }
