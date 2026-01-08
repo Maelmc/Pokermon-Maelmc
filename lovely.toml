@@ -3,20 +3,6 @@ version = "1.0.0"
 dump_lua = true
 priority = 0
 
-# Ogerpon Cornestone "Stones have a rank"
-[[patches]]
-[patches.pattern]
-target = 'card.lua'
-pattern = "function Card:get_id()"
-position = 'after'
-match_indent = true
-payload = '''
-    local ogerpons_cornerstone = find_joker('ogerpon_cornerstone')
-    if #ogerpons_cornerstone > 0 and self.ability.effect == 'Stone Card' then
-        return SMODS.Ranks["maelmc_Ogerpon"].id
-    end
-'''
-
 # Prevent Sun Stone from rolling Ogerpon rank
 [[patches]]
 [patches.pattern]
@@ -637,7 +623,7 @@ match_indent = true
 payload = '''elseif parsedAction.action == "magnetResponse" and string.find(parsedAction.key,"MEANLOOK") then
 	action_mean_look()'''
 
-# Mean Look with Nano Multiplayer
+# Mean Look with NanoMultiplayer
 [[patches]]
 [patches.pattern]
 target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
