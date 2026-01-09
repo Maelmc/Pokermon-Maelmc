@@ -4,8 +4,8 @@ return {
             b_maelmc_hazarddeck = {
                 name = "Hazard Deck",
                 text = {
-                    "At the start of blind,",
-                    "{C:purple,T:m_poke_hazard}+#1# Hazards{}",
+                    "{C:purple}+#1#{} hazard level",
+                    "{C:purple}+#2#{} hazard level limit",
                     "Hazards held in hand",
                     "give {C:attention}+1{} hand size"
                 }
@@ -183,33 +183,33 @@ return {
             j_maelmc_glimmet = {
                 name = "Glimmet",
                 text = {
-                    "{C:purple}+#1# Hazards {C:inactive}",
+                    "{C:purple}+#1#{} hazard level",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
-                    "gives {C:chips}+#2#{} Chips for every {C:attention}Hazard",
-                    "{C:attention}Card{} in your full deck",
+                    "gives {C:chips}+#2#{} Chips for every",
+                    "{C:attention}Hazard Cards{} held in hand",
                     "{C:inactive}(Currently {C:chips}+#3#{C:inactive} Chips)",
-                    "{C:inactive,s:0.8}(Evolves after triggering {C:attention,s:0.8}held {C:purple,s:0.8}Hazard Cards{} {C:attention,s:0.8}#4#{C:inactive,s:0.8} times)"
+                    "{C:inactive,s:0.8}(Evolves after triggering {C:attention,s:0.8}#4#{C:inactive,s:0.8} times)"
                 }
             },
             j_maelmc_glimmora = {
                 name = "Glimmora",
                 text = {
-                    "{C:purple}+#1# Hazards {C:inactive}",
-                    "Increase {C:purple}Hazards{} set by #2#",
-                    "after triggering {C:attention}#3#{} held {C:attention}Hazard Cards{}",
-                    "{C:inactive,s:0.8}(Requirement increases by #4# after each increase)",
+                    "{C:purple}+#1#{} hazard level, {C:purple}+#2#{} hazard level limit",
+                    "Increase hazard level and limit by #3#",
+                    "after triggering {C:attention}#4#{} held {C:attention}Hazard Cards{}",
+                    "{C:inactive,s:0.8}(Requirement increases by #5# after each increase)",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
-                    "gives {C:chips}+#5#{} Chips for every {C:attention}Hazard",
-                    "{C:attention}Card{} in your full deck",
-                    "{C:inactive}(Currently {C:chips}+#6#{C:inactive} Chips)",
+                    "gives {C:chips}+#6#{} Chips for every",
+                    "{C:attention}Hazard Cards{} card held in hand",
+                    "{C:inactive}(Currently {C:chips}+#7#{C:inactive} Chips)",
                 }
             },
             j_maelmc_cufant = {
                 name = "Cufant",
                 text = {
-                    "{C:purple}+#1# Hazards {C:inactive}",
+                    "{C:purple}+#1#{} hazard level",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Enhance {C:purple}#2# Hazard{} card in hand",
                     "into a {C:attention}Steel{} card",
@@ -220,7 +220,7 @@ return {
             j_maelmc_copperajah = {
                 name = "Copperajah",
                 text = {
-                    "{C:purple}+#1# Hazards {C:inactive}",
+                    "{C:purple}+#1#{} hazard level",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Enhance {C:purple}#2# Hazards{} cards in hand",
                     "into {C:attention}Steel{} cards",
@@ -981,11 +981,13 @@ return {
             j_maelmc_mega_glimmora = {
                 name = "Mega Glimmora",
                 text = {
-                    "{C:purple}+Inf Hazards {C:inactive}",
+                    "{C:purple}+#1#{} hazard level, {C:purple}+#2#{} hazard level limit",
+                    "When round begins, draw",
+                    "all your {C:attention}Hazard{} cards",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "{C:chips}+#1#{} Chips for every {C:attention}Hazard",
+                    "{C:chips}+#3#{} Chips for every {C:attention}Hazard",
                     "{C:attention}Card{} in your full deck",
-                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+                    "{C:inactive}(Currently {C:chips}+#4#{C:inactive} Chips)",
                 }
             },
             j_maelmc_safarizone = {

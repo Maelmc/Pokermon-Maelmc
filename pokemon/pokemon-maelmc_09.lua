@@ -4,12 +4,12 @@ local glimmet={
   gen = 9,
   poke_custom_prefix = "maelmc",
   pos = {x = 16, y = 64},
-  config = {extra = {hazards = 4, chips = 10, hazard_triggered = 0}, evo_rqmt = 25},
+  config = {extra = {hazard_level = 1, chips = 20, hazard_triggered = 0}, evo_rqmt = 10},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {abbr.hazards}}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = poke_get_hazard_level_vars()}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
     local hazard_count = 0
     if G.playing_cards then
@@ -18,10 +18,8 @@ local glimmet={
           hazard_count = hazard_count + 1
         end
       end
-    else
-      hazard_count = abbr.hazards
     end
-    return {vars = {abbr.hazards, abbr.chips, hazard_count * abbr.chips, math.max(0, self.config.evo_rqmt - abbr.hazard_triggered)}}
+    return {vars = {abbr.hazard_level, abbr.chips, hazard_count * abbr.chips, math.max(0, self.config.evo_rqmt - abbr.hazard_triggered)}}
   end,
   rarity = 1,
   cost = 5,
@@ -30,11 +28,6 @@ local glimmet={
   atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
-    -- adding hazards
-    if context.setting_blind then
-      poke_set_hazards(card.ability.extra.hazards)
-    end
-
     -- scoring hazards
     if context.individual and not context.end_of_round and context.cardarea == G.hand and SMODS.has_enhancement(context.other_card, "m_poke_hazard") then
       if context.other_card.debuff then
@@ -48,7 +41,7 @@ local glimmet={
             card.ability.extra.hazard_triggered = card.ability.extra.hazard_triggered + 1
           end
           local hazard_count = 0
-          for _, v in pairs(G.playing_cards) do
+          for _, v in pairs(G.hand.cards) do
             if SMODS.has_enhancement(v, "m_poke_hazard") then
               hazard_count = hazard_count + 1
             end
@@ -61,6 +54,14 @@ local glimmet={
     end
     return scaling_evo(self, card, context, "j_maelmc_glimmora", card.ability.extra.hazard_triggered, self.config.evo_rqmt)
   end,
+  add_to_deck = function(self, card, from_debuff)
+    poke_change_hazard_max(card.ability.extra.hazard_max)
+    poke_change_hazard_level(card.ability.extra.hazard_level)
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    poke_change_hazard_max(-card.ability.extra.hazard_max)
+    poke_change_hazard_level(-card.ability.extra.hazard_level)
+  end,
 }
 
 -- Glimmora 970
@@ -68,13 +69,13 @@ local glimmora={
   name = "glimmora",
   gen = 9,
   pos = {x = 18, y = 64},
-  config = {extra = {hazards = 4, chips = 20, base_increase = 25, req_increase = 5, increase_in = 25, increase_by = 1, chips_mod = 15}},
-  poke_custom_values_to_keep = {"hazards", "chips", "chips_mod", "base_increase", "req_increase", "increase_in", "increase_by"},
+  config = {extra = {hazard_level = 1, hazard_max = 1, chips = 20, base_increase = 25, req_increase = 5, increase_in = 20, increase_by = 1}},
+  poke_custom_values_to_keep = {"hazard_level", "hazard_max", "chips", "base_increase", "req_increase", "increase_in", "increase_by"},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {abbr.hazards}}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = poke_get_hazard_level_vars()}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
     local hazard_count = 0
     if G.playing_cards then
@@ -83,10 +84,8 @@ local glimmora={
           hazard_count = hazard_count + 1
         end
       end
-    else
-      hazard_count = abbr.hazards
     end
-    return {vars = {abbr.hazards, abbr.increase_by, abbr.increase_in, abbr.req_increase, abbr.chips, abbr.chips * hazard_count}}
+    return {vars = {abbr.hazard_level, abbr.hazard_max, abbr.increase_by, abbr.increase_in, abbr.req_increase, abbr.chips, abbr.chips * hazard_count}}
   end,
   rarity = "poke_safari",
   cost = 6,
@@ -95,11 +94,6 @@ local glimmora={
   atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
-    -- adding hazards
-    if context.setting_blind then
-      poke_set_hazards(card.ability.extra.hazards)
-    end
-
     -- scoring hazards
     if context.individual and not context.end_of_round and context.cardarea == G.hand and SMODS.has_enhancement(context.other_card, "m_poke_hazard") then
       if context.other_card.debuff then
@@ -114,11 +108,14 @@ local glimmora={
             if card.ability.extra.increase_in <= 0 then
               card.ability.extra.base_increase = card.ability.extra.base_increase + card.ability.extra.req_increase
               card.ability.extra.increase_in = card.ability.extra.base_increase
-              card.ability.extra.hazards = card.ability.extra.hazards + card.ability.extra.increase_by
+              card.ability.extra.hazard_level = card.ability.extra.hazard_level + card.ability.extra.increase_by
+              card.ability.extra.hazard_max = card.ability.extra.hazard_max + card.ability.extra.increase_by
+              poke_change_hazard_max(1)
+              poke_change_hazard_level(1)
             end
           end
           local hazard_count = 0
-          for _, v in pairs(G.playing_cards) do
+          for _, v in pairs(G.hand.cards) do
             if SMODS.has_enhancement(v, "m_poke_hazard") then
               hazard_count = hazard_count + 1
             end
@@ -130,6 +127,25 @@ local glimmora={
       end
     end
   end,
+  add_to_deck = function(self, card, from_debuff)
+    G.E_MANAGER:add_event(Event({
+      func = (function()
+        for k, v in pairs(card.ability.extra) do
+          if k == "hazard_max" then
+            poke_change_hazard_max(v)
+          end
+          if k == "hazard_level" then
+            poke_change_hazard_level(v)
+          end
+        end
+        return true
+      end)
+    }))
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    poke_change_hazard_max(-card.ability.extra.hazard_max)
+    poke_change_hazard_level(-card.ability.extra.hazard_level)
+  end,
   megas = {"mega_glimmora"},
 }
 
@@ -138,13 +154,13 @@ local mega_glimmora={
   gen = 9,
   pos = {x = 0, y = 2},
   soul_pos = {x = 1, y = 2},
-  config = {extra = {chips_mod = 15, hazards = 0, chips = 0, base_increase = 0, req_increase = 0, increase_in = 0, increase_by = 0}},
-  poke_custom_values_to_keep = {"hazards", "chips", "chips_mod", "base_increase", "req_increase", "increase_in", "increase_by"},
+  config = {extra = {chips_mod = 50, hazard_level = 1, hazard_max = 1, chips = 0, base_increase = 0, req_increase = 0, increase_in = 0, increase_by = 0}},
+  poke_custom_values_to_keep = {"hazard_level", "hazard_max", "chips", "base_increase", "req_increase", "increase_in", "increase_by"},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {"Inf"}}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = poke_get_hazard_level_vars()}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
     local hazard_count = 0
     if G.playing_cards then
@@ -153,10 +169,8 @@ local mega_glimmora={
           hazard_count = hazard_count + 1
         end
       end
-    else
-      hazard_count = 52
     end
-    return {vars = {abbr.chips_mod, abbr.chips_mod * hazard_count}}
+    return {vars = {abbr.hazard_level, abbr.hazard_max, abbr.chips_mod, abbr.chips_mod * hazard_count}}
   end,
   rarity = "poke_mega",
   cost = 12,
@@ -165,11 +179,18 @@ local mega_glimmora={
   atlas = "maelmc_jokers",
   blueprint_compat = true,
   calculate = function(self, card, context)
-    -- adding hazards
-    if context.setting_blind then
-      poke_set_hazards(#G.playing_cards)
+    if context.first_hand_drawn then
+      local to_draw = {}
+      for _, v in pairs(G.deck.cards) do
+        if SMODS.has_enhancement(v, "m_poke_hazard") then
+          to_draw[#to_draw+1] = v
+        end
+      end
+      SMODS.calculate_context({drawing_cards = true, amount = #to_draw})
+      for k, v in pairs(to_draw) do
+        draw_card(G.deck,G.hand, k*100/#to_draw,'up', true, v)
+      end
     end
-
     -- scoring hazards
     if context.cardarea == G.jokers and context.scoring_hand then
       if context.joker_main then
@@ -185,13 +206,32 @@ local mega_glimmora={
       end
     end
   end,
+  add_to_deck = function(self, card, from_debuff)
+    G.E_MANAGER:add_event(Event({
+      func = (function()
+        for k, v in pairs(card.ability.extra) do
+          if k == "hazard_max" then
+            poke_change_hazard_max(v)
+          end
+          if k == "hazard_level" then
+            poke_change_hazard_level(v)
+          end
+        end
+        return true
+      end)
+    }))
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    poke_change_hazard_max(-card.ability.extra.hazard_max)
+    poke_change_hazard_level(-card.ability.extra.hazard_level)
+  end,
 }
 
 -- Poltchageist
 local poltchageist = {
   name = "poltchageist",
   gen = 9,
-  config = { extra = { rounds = 5 } },
+  config = { extra = { rounds = 4 } },
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_spell_tag', set = 'Tag' }

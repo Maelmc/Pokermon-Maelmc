@@ -2,7 +2,7 @@
 local sinistea={
   name = "sinistea",
   gen = 8,
-  config = { extra = { rounds = 3 } },
+  config = { extra = { rounds = 4 } },
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_cleanse_tag', set = 'Tag' }
@@ -147,26 +147,25 @@ local cufant = {
   name = "cufant",
   gen = 8,
   pos = {x = 14, y = 58},
-  config = {extra = {hazards = 4, done = false, to_steel = 1, rounds = 5}},
+  config = {extra = {hazard_level = 1, done = false, to_steel = 1, rounds = 5}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {abbr.hazards}}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = poke_get_hazard_level_vars()}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
     info_queue[#info_queue+1] = G.P_CENTERS.m_steel
 
-    return {vars = {abbr.hazards, abbr.to_steel, abbr.rounds}}
+    return {vars = {abbr.hazard_level, abbr.to_steel, abbr.rounds}}
   end,
-  rarity = 3,
-  cost = 7,
+  rarity = 2,
+  cost = 6,
   stage = "Basic",
   ptype = "Metal",
   atlas = "AtlasJokersBasicNatdex",
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.setting_blind then
-      poke_set_hazards(card.ability.extra.hazards)
       card.ability.extra.done = false
     end
 
@@ -198,6 +197,12 @@ local cufant = {
     
     return level_evo(self, card, context, "j_maelmc_copperajah")
   end,
+  add_to_deck = function(self, card, from_debuff)
+    poke_change_hazard_level(card.ability.extra.hazard_level)
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    poke_change_hazard_level(-card.ability.extra.hazard_level)
+  end,
 }
 
 -- Copperajah
@@ -205,16 +210,16 @@ local copperajah = {
   name = "copperajah",
   gen = 8,
   pos = {x = 16, y = 58},
-  config = {extra = {hazards = 4, done = false, to_steel = 3}},
+  config = {extra = {hazard_level = 1, done = false, to_steel = 3}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'poke_hazards', vars = {abbr.hazards}}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = poke_get_hazard_level_vars()}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
     info_queue[#info_queue+1] = G.P_CENTERS.m_steel
 
-    return {vars = {abbr.hazards, abbr.to_steel}}
+    return {vars = {abbr.hazard_level, abbr.to_steel}}
   end,
   rarity = "poke_safari",
   cost = 9,
@@ -224,7 +229,6 @@ local copperajah = {
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.setting_blind then
-      poke_set_hazards(card.ability.extra.hazards)
       card.ability.extra.done = false
     end
 
@@ -253,6 +257,12 @@ local copperajah = {
       end
       card.ability.extra.done = true
     end
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    poke_change_hazard_level(card.ability.extra.hazard_level)
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    poke_change_hazard_level(-card.ability.extra.hazard_level)
   end,
   megas = {"gmax_copperajah"}
 }
