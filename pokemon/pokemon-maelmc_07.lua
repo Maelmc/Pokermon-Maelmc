@@ -1,6 +1,7 @@
 -- Nihilego 793
 local nihilego = {
   name = "nihilego",
+  gen = 7,
   pos = PokemonSprites["nihilego"].base.pos,
   soul_pos = {x = PokemonSprites["nihilego"].base.pos.x + 1, y = PokemonSprites["nihilego"].base.pos.y},
   config = {extra = {h_size = 3, chips = 1, next_boost = 1, next_increase = 1, unscalable_chips = 7}},
@@ -56,6 +57,7 @@ local nihilego = {
 -- Buzzwole 794
 local buzzwole = {
   name = "buzzwole",
+  gen = 7,
   pos = PokemonSprites["buzzwole"].base.pos,
   soul_pos = {x = PokemonSprites["buzzwole"].base.pos.x + 1, y = PokemonSprites["buzzwole"].base.pos.y},
   config = {extra = {hands = 2, chips = 1, next_boost = 1, next_increase = 1, unscalable_mult = 1}},
@@ -118,6 +120,7 @@ local buzzwole = {
 -- Pheromosa 795
 local pheromosa = {
   name = "pheromosa",
+  gen = 7,
   pos = PokemonSprites["pheromosa"].base.pos,
   soul_pos = {x = PokemonSprites["pheromosa"].base.pos.x + 1, y = PokemonSprites["pheromosa"].base.pos.y},
   config = {extra = {d_size = 4, chips = 1, next_boost = 1, next_increase = 1, unscalable_dollars = 2, poker_hands = {"Flush Five","Flush House","Five of a Kind","Straight Flush","Four of a Kind"}}},
@@ -184,6 +187,7 @@ local pheromosa = {
 -- Xurkitree 796
 local xurkitree = {
   name = "xurkitree",
+  gen = 7,
   pos = PokemonSprites["xurkitree"].base.pos,
   soul_pos = {x = PokemonSprites["xurkitree"].base.pos.x + 1, y = PokemonSprites["xurkitree"].base.pos.y},
   config = {extra = {energy_bonus = 2, chips = 1, next_boost = 1, next_increase = 1, unscalable_dollars = 1}},
@@ -257,6 +261,7 @@ local xurkitree = {
 -- Celesteela 797
 local celesteela = {
   name = "celesteela",
+  gen = 7,
   pos = PokemonSprites["celesteela"].base.pos,
   soul_pos = {x = PokemonSprites["celesteela"].base.pos.x + 1, y = PokemonSprites["celesteela"].base.pos.y},
   config = {extra = {card_limit = 1, chips = 1, next_boost = 2, next_increase = 2, unscalable_mult = 1, unscalable_mult2 = 0.2}},
@@ -326,6 +331,7 @@ local celesteela = {
 -- Kartana 798
 local kartana = {
   name = "kartana",
+  gen = 7,
   pos = PokemonSprites["kartana"].base.pos,
   soul_pos = {x = PokemonSprites["kartana"].base.pos.x + 1, y = PokemonSprites["kartana"].base.pos.y},
   config = {extra = {booster_choice_mod = 1, chips = 1, next_boost = 3, next_increase = 3, unscalable_mult = 0, unscalable_mult2 = 5, size_of_booster = 0}},
@@ -404,6 +410,7 @@ local kartana = {
 -- Stakataka 805
 local stakataka = {
   name = "stakataka",
+  gen = 7,
   pos = PokemonSprites["stakataka"].base.pos,
   soul_pos = {x = PokemonSprites["stakataka"].base.pos.x + 1, y = PokemonSprites["stakataka"].base.pos.y},
   config = {extra = {voucher_slots = 1, chips = 1, next_boost = 2, next_increase = 2, unscalable_dollars = 7, voucher_bought = 0, beat_boss = false}},
@@ -477,6 +484,7 @@ local stakataka = {
 -- Blacephalon 806
 local blacephalon = {
   name = "blacephalon",
+  gen = 7,
   pos = PokemonSprites["blacephalon"].base.pos,
   soul_pos = {x = PokemonSprites["blacephalon"].base.pos.x + 1, y = PokemonSprites["blacephalon"].base.pos.y},
   config = {extra = {card_slots = 1, chips = 1, next_boost = 2, next_increase = 2, unscalable_mult = 23, unscalable_negative_mult = 11, amount_bought = 0}},
@@ -549,6 +557,7 @@ local blacephalon = {
 --Guzzlord 799
 local guzzlord = {
   name = "guzzlord",
+  gen = 7,
   pos = PokemonSprites["guzzlord"].base.pos,
   soul_pos = {x = PokemonSprites["guzzlord"].base.pos.x + 1, y = PokemonSprites["guzzlord"].base.pos.y},
   config = {extra = {to_eat = 1, chips = 1, next_boost = 3, next_increase = 3, unscalable_mult = 1, unscalable_mult2 = 1}},

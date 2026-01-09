@@ -138,6 +138,7 @@ local gym_leader={
 -- Odd Keystone
 local odd_keystone={
   name = "odd_keystone",
+  gen = 4,
   --poke_custom_prefix = "maelmc",
   pos = {x = 0, y = 0},
   config = {extra = {evolve_progress = 0, evolve_after = 108, evolve_using = "The Soul"}},
@@ -459,6 +460,7 @@ local pc = {
 
 local photographer = {
   name = "photographer",
+  gen = 9,
   pos = {x = 4, y = 1},
   config = {extra = {found = {}, to_snap = 10, joker = 1}},
   loc_vars = function(self, info_queue, card)

@@ -1,6 +1,7 @@
 -- Woobat
 local woobat = {
   name = "woobat",
+  gen = 5,
   pos = {x = 2, y = 35},
   config = {extra = {num = 1, dem = 2, heart_stamped_count = 0}, evo_rqmt = 4},
   loc_vars = function(self, info_queue, card)
@@ -60,6 +61,7 @@ local woobat = {
 
 local swoobat = {
   name = "swoobat",
+  gen = 5,
   pos = {x = 4, y = 35},
   config = {extra = {num = 1, dem = 2}},
   loc_vars = function(self, info_queue, card)
@@ -105,6 +107,7 @@ local swoobat = {
 
 local bouffalant = {
   name = "bouffalant",
+  gen = 5,
   pos = PokemonSprites["bouffalant"].base.pos,
   config = {extra = {money = 8, boss_trigger = 0, blind_buff = 1.5, boss_blind = nil}},
   loc_vars = function(self, info_queue, card)
@@ -180,6 +183,7 @@ local bouffalant = {
 -- Meloetta
 local meloetta = {
   name = "meloetta",
+  gen = 5,
   atlas = "AtlasJokersBasicGen05",
   pos = { x = 4, y = 6 },
   soul_pos = { x = 5, y = 6 },
@@ -227,6 +231,7 @@ local meloetta = {
 
 local meloetta_pirouette = {
   name = "meloetta_pirouette",
+  gen = 5,
   atlas = "AtlasJokersBasicGen05",
   pos = { x = 6, y = 6 },
   soul_pos = { x = 7, y = 6 },

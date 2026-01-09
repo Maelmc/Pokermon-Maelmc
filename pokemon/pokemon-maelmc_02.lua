@@ -1,6 +1,7 @@
 -- Galarian Corsola 222
 local galarian_corsola={
   name = "galarian_corsola",
+  gen = 8,
   pos = {x = 8, y = 4},
   config = {extra = {Xmult_multi = 1.5, volatile = 'left', perish_rounds = 3, currently_perished = 0}, evo_rqmt = 2},
   loc_vars = function(self, info_queue, card)

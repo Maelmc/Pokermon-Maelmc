@@ -2,6 +2,7 @@
 -- mostly copied from vanilla remade
 local wingull={
   name = "wingull",
+  gen = 3,
   stage = "Basic",
   ptype = "Water",
   atlas = "AtlasJokersBasicNatdex",
@@ -39,6 +40,7 @@ local wingull={
 -- Pelipper 279
 local pelipper={
   name = "pelipper",
+  gen = 3,
   stage = "One",
   ptype = "Water",
   atlas = "AtlasJokersBasicNatdex",
@@ -74,6 +76,7 @@ local pelipper={
 -- Ralts 280
 local ralts={
   name = "ralts",
+  gen = 3,
   pos = {x = 18, y = 18},
   config = {extra = {mult_mod = 1, rounds = 4}},
   loc_vars = function(self, info_queue, card)
@@ -130,6 +133,7 @@ local ralts={
 -- Kirlia 281
 local kirlia={
   name = "kirlia",
+  gen = 3,
   --poke_custom_prefix = "maelmc",
   pos = {x = 20, y = 18},
   config = {extra = {mult_mod = 2, rounds = 5}},
@@ -187,6 +191,7 @@ local kirlia={
 -- Gardevoir 282
 local gardevoir={
   name = "gardevoir",
+  gen = 3,
   --poke_custom_prefix = "maelmc",
   pos = {x = 22, y = 18},
   config = {extra = {Xmult_mod = 0.1}},
@@ -242,6 +247,7 @@ local gardevoir={
 
 local mega_gardevoir={
   name = "mega_gardevoir",
+  gen = 3,
   --poke_custom_prefix = "maelmc",
   pos = {x = 6, y = 4},
   soul_pos = { x = 7, y = 4 },
@@ -283,6 +289,7 @@ local mega_gardevoir={
 -- Gulpin 316
 local gulpin={
   name = "gulpin",
+  gen = 3,
   pos = PokemonSprites["gulpin"].base.pos,
   config = {extra = {stockpile = 0, max_stockpile = 3,
     money = 3, money1 = 8, money2 = 15,
@@ -349,6 +356,7 @@ local gulpin={
 -- Swalot 317
 local swalot={
   name = "swalot",
+  gen = 3,
   pos = PokemonSprites["swalot"].base.pos,
   config = {extra = {stockpile = 0, max_stockpile = 3,
     money = 5, money1 = 12, money2 = 21,
@@ -409,6 +417,7 @@ local swalot={
 -- Lunatone 337
 local lunatone={
   name = "lunatone",
+  gen = 3,
   --poke_custom_prefix = "maelmc",
   pos = {x = 12, y = 22},
   config = {extra = {num_clubs = 1, dem_clubs = 4, suit = "Clubs", level_amt = 1, num_level = 1, dem_level = 4}},
@@ -461,6 +470,7 @@ local lunatone={
 -- Solrock 338
 local solrock={
   name = "solrock",
+  gen = 3,
   --poke_custom_prefix = "maelmc",
   pos = {x = 14, y = 22},
   config = {extra = {num_hearts = 1, dem_hearts = 4, suit = "Hearts", num_wild = 1, dem_wild = 4}},
@@ -516,7 +526,8 @@ local solrock={
 -- Kecleon 352
 local kecleon={
   name = "kecleon",
-  --poke_cust1om_prefix = "maelmc",
+  gen = 3,
+  --poke_custom_prefix = "maelmc",
   pos = {x = 12, y = 23},
   config = {extra = {mult = 0, mult_mod = 6, current_type = "Colorless"}},
   loc_vars = function(self, info_queue, card)
@@ -600,6 +611,7 @@ local kecleon={
 -- Shuppet
 local shuppet={
   name = "shuppet",
+  gen = 3,
   stage = "Basic",
   ptype = "Psychic",
   perishable_compat = true,
@@ -637,6 +649,7 @@ local shuppet={
 -- Banette
 local banette={
   name = "banette",
+  gen = 3,
   stage = "One",
   ptype = "Psychic",
   perishable_compat = true,
@@ -671,6 +684,7 @@ local banette={
 
 local mega_banette={
   name = "mega_banette",
+  gen = 3,
   stage = "Mega",
   ptype = "Psychic",
   perishable_compat = true,
@@ -709,6 +723,7 @@ local mega_banette={
 
 local fake_mega_banette={
   name = "fake_mega_banette",
+  gen = 3,
   poke_custom_prefix = "maelmc",
   atlas = "maelmc_jokers",
   pos = {x = 12, y = 1},
@@ -745,6 +760,7 @@ local fake_mega_banette={
 -- Tropius 357
 local tropius = {
   name = "tropius",
+  gen = 3,
   --poke_custom_prefix = "maelmc",
   pos = {x = 22, y = 23},
   config = {extra = {num_banana = 1, dem_banana = 2, num_cavendish = 1, dem_cavendish = 10}},
@@ -782,6 +798,7 @@ local tropius = {
 -- Deoxys 386
 local deoxys = {
   name = "deoxys",
+  gen = 3,
   pos = {x = 2, y = 3},
   soul_pos = { x = 3, y = 3},
   config = {extra = {allow_dna = false, copy = 2 --[[hands = 1, d_size = 1, h_size = 1]]}},
@@ -858,6 +875,7 @@ local deoxys = {
 
 local deoxys_attack = {
   name = "deoxys_attack",
+  gen = 3,
   pos = {x = 4, y = 3},
   soul_pos = { x = 5, y = 3},
   config = {extra = {hands = 3}},
@@ -885,7 +903,8 @@ local deoxys_attack = {
 }
 
 local deoxys_defense = {
-  name = "deoxys_defense", 
+  name = "deoxys_defense",
+  gen = 3,
   pos = {x = 6, y = 3},
   soul_pos = { x = 7, y = 3},
   config = {extra = {d_size = 5}},
@@ -914,6 +933,7 @@ local deoxys_defense = {
 
 local deoxys_speed = {
   name = "deoxys_speed",
+  gen = 3,
   pos = { x = 8, y = 3 },
   soul_pos = { x = 9, y = 3 },
   config = { extra = { h_size = 4} },

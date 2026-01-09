@@ -1,5 +1,6 @@
 local cherubi = {
   name = "cherubi",
+  gen = 4,
   config = {extra = {seed_req = 2, rounds = 4}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -47,6 +48,7 @@ local cherubi = {
 
 local cherrim = {
   name = "cherrim",
+  gen = 4,
   config = {extra = {}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -111,6 +113,7 @@ local cherrim = {
 
 local cherrim_sunshine = {
   name = "cherrim_sunshine",
+  gen = 4,
   config = {extra = {Xmult_multi = 1.5, Xmult_mod = 0.05}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -178,6 +181,7 @@ local cherrim_sunshine = {
 -- Spiritomb 442
 local spiritomb={
   name = "spiritomb",
+  gen = 4,
   --poke_custom_prefix = "maelmc",
   pos = {x = 12, y = 29},
   config = {extra = {chips = 108, mult = 108, h_size = 3, to_negative = 108}},
@@ -268,6 +272,7 @@ local spiritomb={
 -- Gible 443
 local gible={
   name = "gible",
+  gen = 4,
   --poke_custom_prefix = "maelmc",
   pos = {x = 14, y = 29},
   config = {extra = {retriggers = 1, rightmost = 2, mult = 2, retriggered = 0}, evo_rqmt = 26},
@@ -328,6 +333,7 @@ local gible={
 -- Gabite 444
 local gabite={
   name = "gabite",
+  gen = 4,
   --poke_custom_prefix = "maelmc",
   pos = {x = 16, y = 29},
   config = {extra = {retriggers = 1, rightmost = 4, mult = 3, retriggered = 0}, evo_rqmt = 64},
@@ -388,6 +394,7 @@ local gabite={
 -- Garchomp 445
 local garchomp={
   name = "garchomp",
+  gen = 4,
   --poke_custom_prefix = "maelmc",
   pos = {x = 18, y = 29},
   config = {extra = {retriggers = 1, mult = 4, h_size = 1}},
@@ -434,6 +441,7 @@ local garchomp={
 
 local mega_garchomp={
   name = "mega_garchomp",
+  gen = 4,
   pos = {x = 2, y = 7},
   soul_pos = {x = 3, y = 7},
   config = {extra = {Xmult_multi = 1.5, h_size = 2}},
@@ -479,6 +487,7 @@ local mega_garchomp={
 
 local mega_garchomp_z={
   name = "mega_garchomp_z",
+  gen = 4,
   pos = {x = 2, y = 7},
   soul_pos = {x = 3, y = 7},
   config = {extra = {retriggers = 2, h_size = 2}},

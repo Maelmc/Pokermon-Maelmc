@@ -1,6 +1,7 @@
 -- Inkay 686
 local inkay={
   name = "inkay",
+  gen = 6,
   pos = {x = 20, y = 45},
   config = {extra = {mult = 8, num = 1, dem = 2, flipped_triggered = 0}, evo_rqmt = 20},
   loc_vars = function(self, info_queue, card)
@@ -114,6 +115,7 @@ SMODS.DrawStep({
 -- Malamar 687
 local malamar={
   name = "malamar",
+  gen = 6,
   pos = {x = 22, y = 45},
   config = {extra = {Xmult_multi = 1.5}},
   loc_vars = function(self, info_queue, card)
@@ -191,6 +193,7 @@ local malamar={
 -- Mega Malamar 687-1
 local mega_malamar={
   name = "mega_malamar",
+  gen = 6,
   pos = {x = 6, y = 1},
   soul_pos = {x = 7, y = 1},
   artist = "KingOfThe-X-Roads",
@@ -291,6 +294,7 @@ local mega_malamar={
 -- Binacle 688
 local binacle={
   name = "binacle",
+  gen = 6,
   pos = {x = 24, y = 45},
   config = {extra = {value = 7, retriggers = 1, retrigger_hand = 2, retrigger_held = 2, retriggered_hand = 0, retriggered_held = 0, retriggered_held_end = 0, rounds = 4}},
   loc_vars = function(self, info_queue, card)
@@ -357,6 +361,7 @@ local binacle={
 -- Barbaracle 689
 local barbaracle={
   name = "barbaracle",
+  gen = 6,
   pos = {x = 26, y = 45},
   config = {extra = {value = 7, retriggers = 1, retrigger_hand = 7, retrigger_held = 7, retriggered_hand = 0, retriggered_held = 0, retriggered_held_end = 0}},
   loc_vars = function(self, info_queue, card)
@@ -425,6 +430,7 @@ local barbaracle={
 -- Mega Barbaracle 689-1
 local mega_barbaracle={
   name = "mega_barbaracle",
+  gen = 6,
   pos = {x = 8, y = 1},
   soul_pos = {x = 9, y = 1},
   artist = "KingOfThe-X-Roads",

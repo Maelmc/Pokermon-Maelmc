@@ -1,6 +1,7 @@
 -- Sinistea
 local sinistea={
   name = "sinistea",
+  gen = 8,
   config = { extra = { rounds = 3 } },
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -35,7 +36,8 @@ local sinistea={
 -- Polteageist
 local polteageist={
   name = "polteageist",
-  config = {},
+  gen = 8,
+  config = {extra = {}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_cleanse_tag', set = 'Tag' }
@@ -77,6 +79,7 @@ local polteageist={
 -- Cursola
 local cursola={
   name = "cursola",
+  gen = 8,
   pos = {x = 16, y = 57},
   config = {extra = {Xmult_multi = 1.5, Xmult_multi1 = 2, volatile = 'left', perish_rounds = 3}},
   loc_vars = function(self, info_queue, card)
@@ -142,6 +145,7 @@ local cursola={
 -- Cufant
 local cufant = {
   name = "cufant",
+  gen = 8,
   pos = {x = 14, y = 58},
   config = {extra = {hazards = 4, done = false, to_steel = 1, rounds = 5}},
   loc_vars = function(self, info_queue, card)
@@ -199,6 +203,7 @@ local cufant = {
 -- Copperajah
 local copperajah = {
   name = "copperajah",
+  gen = 8,
   pos = {x = 16, y = 58},
   config = {extra = {hazards = 4, done = false, to_steel = 3}},
   loc_vars = function(self, info_queue, card)
@@ -255,6 +260,7 @@ local copperajah = {
 -- Gmax Copperajah
 local mega_copperajah = {
   name = "mega_copperajah",
+  gen = 8,
   pos = {x = 8, y = 13},
   soul_pos = { x = 9, y = 13 },
   config = {extra = {Xmult_mod = 1}},
@@ -300,6 +306,7 @@ local mega_copperajah = {
 
 local bloodmoon_ursaluna = {
   name = "bloodmoon_ursaluna",
+  gen = 9,
   pos = {x = 0, y = 11},
   config = {extra = {Xmult = 1, Xmult2 = 1, Xmult_multi = 1.5, Xmult_mod = 0.1, suit = "Hearts"}},
   loc_vars = function(self, info_queue, card)

@@ -1,6 +1,7 @@
 -- Glimmora 969
 local glimmet={
   name = "glimmet",
+  gen = 9,
   poke_custom_prefix = "maelmc",
   pos = {x = 16, y = 64},
   config = {extra = {hazards = 4, chips = 10, hazard_triggered = 0}, evo_rqmt = 25},
@@ -65,6 +66,7 @@ local glimmet={
 -- Glimmora 970
 local glimmora={
   name = "glimmora",
+  gen = 9,
   pos = {x = 18, y = 64},
   config = {extra = {hazards = 4, chips = 20, base_increase = 25, req_increase = 5, increase_in = 25, increase_by = 1, chips_mod = 15}},
   poke_custom_values_to_keep = {"hazards", "chips", "chips_mod", "base_increase", "req_increase", "increase_in", "increase_by"},
@@ -133,6 +135,7 @@ local glimmora={
 
 local mega_glimmora={
   name = "mega_glimmora",
+  gen = 9,
   pos = {x = 0, y = 2},
   soul_pos = {x = 1, y = 2},
   config = {extra = {chips_mod = 15, hazards = 0, chips = 0, base_increase = 0, req_increase = 0, increase_in = 0, increase_by = 0}},
@@ -187,6 +190,7 @@ local mega_glimmora={
 -- Poltchageist
 local poltchageist = {
   name = "poltchageist",
+  gen = 9,
   config = { extra = { rounds = 5 } },
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
@@ -221,7 +225,8 @@ local poltchageist = {
 -- Sinistcha
 local sinistcha = {
   name = "sinistcha",
-  config = {},
+  gen = 9,
+  config = {extra = {}},
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_spell_tag', set = 'Tag' }
@@ -262,6 +267,7 @@ local sinistcha = {
 
 local ogerpon={
   name = "ogerpon", 
+  gen = 9,
   pos = {x = 4, y = 4},
   soul_pos = {x = 5, y = 4},
   config = {extra = {money = 0, money_mod = 2, retriggers = 1, beat_boss = false}},
@@ -339,7 +345,8 @@ local ogerpon={
 }
 
 local ogerpon_wellspring={
-  name = "ogerpon_wellspring", 
+  name = "ogerpon_wellspring",
+  gen = 9,
   pos = {x = 2, y = 5},
   soul_pos = {x = 3, y = 5},
   config = {extra = {Xchips_multi = 3}},
@@ -442,7 +449,8 @@ local ogerpon_wellspring={
 }
 
 local ogerpon_hearthflame={
-  name = "ogerpon_hearthflame", 
+  name = "ogerpon_hearthflame",
+  gen = 9,
   pos = {x = 8, y = 4},
   soul_pos = {x = 9, y = 4},
   config = {extra = {Xmult_multi = 3, delete = 1}},
@@ -530,7 +538,8 @@ local ogerpon_hearthflame={
 }
 
 local ogerpon_cornerstone={
-  name = "ogerpon_cornerstone", 
+  name = "ogerpon_cornerstone",
+  gen = 9,
   pos = {x = 6, y = 5},
   soul_pos = {x = 7, y = 5},
   config = {extra = {mult = 1, mult_divide = 10}},
