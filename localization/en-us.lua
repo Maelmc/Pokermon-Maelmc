@@ -227,7 +227,7 @@ return {
                     "at end of round",
                 }
             },
-            j_maelmc_mega_copperajah = {
+            j_maelmc_gmax_copperajah = {
                 name = "Gigantamax Copperajah",
                 text = {
                     "{X:red,C:white}X#1#{} Mult for every {C:attention}Steel",

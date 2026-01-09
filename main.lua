@@ -1,6 +1,6 @@
 --Required by the pokemon family function (right click on a pokemon joker)
 local name_lists = {{"glimmet", "glimmora","mega_glimmora"},
-  {"cufant","copperajah","mega_copperajah"},
+  {"cufant","copperajah","gmax_copperajah"},
   {"odd_keystone","spiritomb"},
   {
     {key = "gym_leader", form = "Grass"},

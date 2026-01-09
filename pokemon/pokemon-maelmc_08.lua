@@ -254,12 +254,12 @@ local copperajah = {
       card.ability.extra.done = true
     end
   end,
-  megas = {"mega_copperajah"}
+  megas = {"gmax_copperajah"}
 }
 
 -- Gmax Copperajah
-local mega_copperajah = {
-  name = "mega_copperajah",
+local gmax_copperajah = {
+  name = "gmax_copperajah",
   gen = 8,
   pos = {x = 8, y = 13},
   soul_pos = { x = 9, y = 13 },
@@ -359,7 +359,7 @@ return {
   list = {
     sinistea, polteageist,
     cursola,
-    cufant, copperajah, mega_copperajah,
+    cufant, copperajah, gmax_copperajah,
     bloodmoon_ursaluna,
   },
 }
