@@ -130,14 +130,8 @@ local glimmora={
   add_to_deck = function(self, card, from_debuff)
     G.E_MANAGER:add_event(Event({
       func = (function()
-        for k, v in pairs(card.ability.extra) do
-          if k == "hazard_max" then
-            poke_change_hazard_max(v)
-          end
-          if k == "hazard_level" then
-            poke_change_hazard_level(v)
-          end
-        end
+        poke_change_hazard_max(card.ability.extra.hazard_max)
+        poke_change_hazard_level(card.ability.extra.hazard_level)
         return true
       end)
     }))
@@ -209,14 +203,8 @@ local mega_glimmora={
   add_to_deck = function(self, card, from_debuff)
     G.E_MANAGER:add_event(Event({
       func = (function()
-        for k, v in pairs(card.ability.extra) do
-          if k == "hazard_max" then
-            poke_change_hazard_max(v)
-          end
-          if k == "hazard_level" then
-            poke_change_hazard_level(v)
-          end
-        end
+        poke_change_hazard_max(card.ability.extra.hazard_max)
+        poke_change_hazard_level(card.ability.extra.hazard_level)
         return true
       end)
     }))
