@@ -71,9 +71,11 @@ local bloodmoon_beast={
     G.GAME.maelmc_quest_set = false
   end,
   calculate = function(self, blind, context)
-    for i = 1, #G.consumeables.cards do
-      if not G.consumeables.cards[i].debuff then
-        G.consumeables.cards[i]:set_debuff(true)
+    if not self.config.disabled then
+      for i = 1, #G.consumeables.cards do
+        if not G.consumeables.cards[i].debuff then
+          G.consumeables.cards[i]:set_debuff(true)
+        end
       end
     end
   end,
@@ -81,14 +83,14 @@ local bloodmoon_beast={
     G.GAME.bloodmoon_beast_quest_completed = true
     G.E_MANAGER:add_event(Event({
       func = function()
+        for i = 1, #G.consumeables.cards do
+          G.consumeables.cards[i]:set_debuff(false)
+        end
         play_sound('timpani')
         SMODS.add_card({ set = 'Joker', key = "j_maelmc_bloodmoon_ursaluna" })
         return true
       end
     }))
-    for i = 1, #G.consumeables.cards do
-      G.consumeables.cards[i]:set_debuff(false)
-    end
   end,
   disable = function(self)
     self.config.disabled = true
