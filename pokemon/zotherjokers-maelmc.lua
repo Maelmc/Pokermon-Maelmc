@@ -529,7 +529,7 @@ local photographer = {
     G.GAME.play_sepia_song = false
   end,
   load = function(self, card, from_debuff)
-    set_sepia_quest(self, card)
+    maelmc_set_sepia_quest(self, card)
   end,
 }
 
