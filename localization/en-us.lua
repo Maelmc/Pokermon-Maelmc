@@ -1080,8 +1080,10 @@ return {
             ultra_beast = {
                 name = "Ultra Beast",
                 text = {
-                    "{C:pink}Energizing{} doesn't affect this Joker's",
-                    "{C:mult}Mult{}, {C:chips}Chips{}, {C:money}${} and {X:mult,C:white}X{} Mult values",
+                    "{C:pink}Energizing{} doesn't",
+                    "affect this Joker's",
+                    "{C:mult}Mult{}, {C:chips}Chips{}, {C:money}${}",
+                    "and {X:mult,C:white}X{} Mult values",
                 }
             },
             beast_boost = {
