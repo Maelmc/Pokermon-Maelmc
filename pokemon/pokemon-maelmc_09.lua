@@ -55,11 +55,9 @@ local glimmet={
     return scaling_evo(self, card, context, "j_maelmc_glimmora", card.ability.extra.hazard_triggered, self.config.evo_rqmt)
   end,
   add_to_deck = function(self, card, from_debuff)
-    poke_change_hazard_max(card.ability.extra.hazard_max)
     poke_change_hazard_level(card.ability.extra.hazard_level)
   end,
   remove_from_deck = function(self, card, from_debuff)
-    poke_change_hazard_max(-card.ability.extra.hazard_max)
     poke_change_hazard_level(-card.ability.extra.hazard_level)
   end,
 }
