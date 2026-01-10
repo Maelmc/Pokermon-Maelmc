@@ -440,6 +440,9 @@ local mint = {
   cost = 4,
   unlocked = true,
   discovered = true,
+  hidden = true,
+  soul_set = "Item",
+  soul_rate = .025,
   can_use = function(self, card)
     local target = poke_find_leftmost_or_highlighted(function(joker) return joker.config.center.set_nature end)
     if target then return true end
