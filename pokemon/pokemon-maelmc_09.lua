@@ -12,8 +12,8 @@ local glimmet={
     info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = poke_get_hazard_level_vars()}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
     local hazard_count = 0
-    if G.playing_cards then
-      for _, v in pairs(G.playing_cards) do
+    if G.hand then
+      for _, v in pairs(G.hand.cards) do
         if SMODS.has_enhancement(v, "m_poke_hazard") then
           hazard_count = hazard_count + 1
         end
@@ -76,8 +76,8 @@ local glimmora={
     info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = poke_get_hazard_level_vars()}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
     local hazard_count = 0
-    if G.playing_cards then
-      for _, v in pairs(G.playing_cards) do
+    if G.hand then
+      for _, v in pairs(G.hand.cards) do
         if SMODS.has_enhancement(v, "m_poke_hazard") then
           hazard_count = hazard_count + 1
         end

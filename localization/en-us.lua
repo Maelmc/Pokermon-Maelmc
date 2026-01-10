@@ -187,7 +187,7 @@ return {
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
                     "gives {C:chips}+#2#{} Chips for every",
-                    "{C:attention}Hazard Cards{} held in hand",
+                    "{C:attention}Hazard{} card held in hand",
                     "{C:inactive}(Currently {C:chips}+#3#{C:inactive} Chips)",
                     "{C:inactive,s:0.8}(Evolves after triggering {C:attention,s:0.8}#4#{C:inactive,s:0.8} times)"
                 }
@@ -202,7 +202,7 @@ return {
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
                     "gives {C:chips}+#6#{} Chips for every",
-                    "{C:attention}Hazard Cards{} card held in hand",
+                    "{C:attention}Hazard{} card held in hand",
                     "{C:inactive}(Currently {C:chips}+#7#{C:inactive} Chips)",
                 }
             },
@@ -211,7 +211,7 @@ return {
                 text = {
                     "{C:purple}+#1#{} hazard level",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Enhance {C:purple}#2# Hazard{} card in hand",
+                    "Enhance {C:attention}#2# Hazard{} card in hand",
                     "into a {C:attention}Steel{} card",
                     "at end of round",
                     "{C:inactive,s:0.8}(Evolves after {C:attention,s:0.8}#3#{C:inactive,s:0.8} rounds)"
@@ -222,7 +222,7 @@ return {
                 text = {
                     "{C:purple}+#1#{} hazard level",
                     "{br:3}ERROR - CONTACT STEAK",
-                    "Enhance {C:purple}#2# Hazards{} cards in hand",
+                    "Enhance {C:attention}#2# Hazards{} cards in hand",
                     "into {C:attention}Steel{} cards",
                     "at end of round",
                 }
