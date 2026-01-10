@@ -616,12 +616,14 @@ local guzzlord = {
         if G.GAME.round_resets.hands > 1 then table.insert(pool,{weight = 75, name = "hand"}) end
         if G.GAME.round_resets.discards > 0 then table.insert(pool,{weight = 75, name = "discard"}) end
         if G.hand.config.card_limit > 1 then table.insert(pool,{weight = 75, name = "hand size"}) end
+        if (G.GAME.round_resets.hazard_level or 0) > 0 then table.insert(pool,{weight = 75, name = "hazard level"}) end
         if G.jokers.config.card_limit > 1 then table.insert(pool,{weight = 50, name = "joker slot"}) end
         if G.consumeables.config.card_limit > 0 then table.insert(pool,{weight = 50, name = "consumable slot"}) end
         if G.shop_jokers.config.card_limit > 1 then table.insert(pool,{weight = 50, name = "card slot"}) end
         if (G.GAME.modifiers.extra_boosters or 0) > -2 then table.insert(pool,{weight = 50, name = "booster slot"}) end
         if (G.GAME.modifiers.extra_vouchers or 0) > -1 then table.insert(pool,{weight = 50, name = "voucher slot"}) end
         if (G.GAME.energy_plus or 0) > -energy_max then table.insert(pool,{weight = 50, name = "energy limit"}) end
+        if (G.GAME.hazard_max or 3) > 0 then table.insert(pool,{weight = 50, name = "hazard limit"}) end
         if not G.GAME.modifiers.guzzlord_eat_shop_reroll then table.insert(pool,{weight = 1, name = "shop reroll"}) end
         if not G.GAME.modifiers.guzzlord_eat_shop_sign then table.insert(pool,{weight = 1, name = "shop sign"}) end
 
@@ -681,6 +683,10 @@ local guzzlord = {
             G.hand.config.real_card_limit = (G.hand.config.real_card_limit or G.hand.config.card_limit) - 1
             G.hand.config.card_limit = math.max(0, G.hand.config.real_card_limit)
             SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_hand_size_minus', vars = { 1 } } }, card)
+
+          elseif result == "hazard level" then
+            G.GAME.round_resets.hazard_level = G.GAME.round_resets.hazard_level - 1
+            SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_hazard_level_minus', vars = { 1 } } }, card)
           
           elseif result == "joker slot" then
             G.jokers.config.real_card_limit = (G.jokers.config.real_card_limit or G.jokers.config.card_limit) - 1
@@ -709,6 +715,11 @@ local guzzlord = {
             if G.GAME.energy_plus then G.GAME.energy_plus = G.GAME.energy_plus - 1
             else G.GAME.energy_plus = -1 end
             SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_energy_limit_minus', vars = { 1 } } }, card)
+
+          elseif result == "hazard limit" then
+            if G.GAME.hazard_max then G.GAME.hazard_max = G.GAME.hazard_max - 1
+            else G.GAME.hazard_max = 2 end
+            SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_hazard_limit_minus', vars = { 1 } } }, card)
 
           elseif result == "shop reroll" then
             G.GAME.modifiers.guzzlord_eat_shop_reroll = true

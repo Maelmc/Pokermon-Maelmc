@@ -1342,6 +1342,8 @@ return {
             maelmc_playing_card_minus = "-#1# Playing card",
             maelmc_voucher_slot_minus = "-#1# Voucher slot",
             maelmc_energy_limit_minus = "-#1# Energy limit",
+            maelmc_hazard_level_minus = "-#1# Hazard level",
+            maelmc_hazard_limit_minus = "-#1# Hazard level limit",
         },
         v_text = {
            ch_c_maelmc_gym_challenge = {"Jokers not matching the Gym Leader's {C:attention}Type{} {C:attention}perish{} after 3 rounds"},
