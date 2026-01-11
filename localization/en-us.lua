@@ -1233,6 +1233,7 @@ return {
             maelmc_safe = "Safe",
             maelmc_quest = "Pokémon Quests",
             maelmc_qm = "???",
+            maelmc_quest_mp_disabled = "Quests are disabled during a Multiplayer game",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",

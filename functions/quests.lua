@@ -2,8 +2,12 @@ to_run_quests = {}
 
 function G.FUNCS.maelmc_quest(args)
   local quest_keys = {}
-  for _, v in pairs(to_run_quests) do
-    table.insert(quest_keys,v())
+  if (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code then
+    table.insert(quest_keys,{atlas = "maelmc_quests", pos = {x = 0, y = 0}, display_text = localize("maelmc_quest_mp_disabled")})
+  else
+    for _, v in pairs(to_run_quests) do
+      table.insert(quest_keys,v())
+    end
   end
   G.SETTINGS.paused = true
   G.FUNCS.overlay_menu {
@@ -20,7 +24,7 @@ function G.FUNCS.maelmc_quest(args)
 end
 
 local function sepia_quest()
-  local quest = {atlas = "maelmc_quests", pos = {x = 0, y = 0}}
+  local quest = {atlas = "maelmc_quests", pos = {x = 1, y = 0}}
   local in_work = (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_sepia") or G.GAME.sepia_quest_complete or false
   local has_perrin = next(SMODS.find_card("j_maelmc_photographer")) or in_work
   local blind = has_perrin and (G.GAME and G.GAME.blind and G.GAME.blind.name == "The Mouth") or in_work
@@ -35,7 +39,7 @@ end
 table.insert(to_run_quests,sepia_quest)
 
 local function bloodmoon_beast_quest()
-  local quest = {atlas = "maelmc_quests", pos = {x = 1, y = 0}}
+  local quest = {atlas = "maelmc_quests", pos = {x = 2, y = 0}}
   local in_work = G.GAME.bloodmoon_beast_quest_completed and G.GAME.bloodmoon_beast_quest_completed or false
   local has_perrin = next(SMODS.find_card("j_maelmc_photographer")) or in_work
   quest.display_text = {
@@ -49,7 +53,7 @@ end
 table.insert(to_run_quests,bloodmoon_beast_quest)
 
 local function kitikami_ogre_quest()
-  local quest = {atlas = "maelmc_quests", pos = {x = 2, y = 0}}
+  local quest = {atlas = "maelmc_quests", pos = {x = 3, y = 0}}
   local bonus = 0
   local mult = 0
   local stone = 0
@@ -85,31 +89,33 @@ SMODS.current_mod.calculate = function(self, context)
   if calculate_ref then
     calculate_ref(self, context)
   end
-  if context.kitikami_ogre_check and not G.GAME.kitikami_ogre_quest_completed then
-    local bonus = 0
-    local mult = 0
-    local stone = 0
-    local lucky = 0
-    if G.playing_cards then
-      for _, v in pairs(G.playing_cards) do
-        if v.config.center.key == "m_bonus" then bonus = bonus + 1 end
-        if v.config.center.key == "m_mult" then mult = mult + 1 end
-        if v.config.center.key == "m_stone" then stone = stone + 1 end
-        if v.config.center.key == "m_lucky" then lucky = lucky + 1 end
-      end
-    end
-    if (bonus/#G.playing_cards >= 0.2) and (mult/#G.playing_cards >= 0.2) and (stone/#G.playing_cards >= 0.2) and (lucky/#G.playing_cards >= 0.2) then
-      G.GAME.kitikami_ogre_quest_completed = "set"
-      G.E_MANAGER:add_event(Event({
-        trigger = "condition",
-        blocking = false,
-        func = function()
-          if G.GAME.maelmc_quest_set then return false end
-          maelmc_set_next_boss("bl_maelmc_hearthflame_mask")
-          G.GAME.maelmc_quest_set = true
-          return true
+  if not ((next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code) then
+    if context.kitikami_ogre_check and not G.GAME.kitikami_ogre_quest_completed then
+      local bonus = 0
+      local mult = 0
+      local stone = 0
+      local lucky = 0
+      if G.playing_cards then
+        for _, v in pairs(G.playing_cards) do
+          if v.config.center.key == "m_bonus" then bonus = bonus + 1 end
+          if v.config.center.key == "m_mult" then mult = mult + 1 end
+          if v.config.center.key == "m_stone" then stone = stone + 1 end
+          if v.config.center.key == "m_lucky" then lucky = lucky + 1 end
         end
-      }))
+      end
+      if (bonus/#G.playing_cards >= 0.2) and (mult/#G.playing_cards >= 0.2) and (stone/#G.playing_cards >= 0.2) and (lucky/#G.playing_cards >= 0.2) then
+        G.GAME.kitikami_ogre_quest_completed = "set"
+        G.E_MANAGER:add_event(Event({
+          trigger = "condition",
+          blocking = false,
+          func = function()
+            if G.GAME.maelmc_quest_set then return false end
+            maelmc_set_next_boss("bl_maelmc_hearthflame_mask")
+            G.GAME.maelmc_quest_set = true
+            return true
+          end
+        }))
+      end
     end
   end
 end

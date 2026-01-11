@@ -37,7 +37,7 @@ function maelmc_photographer_util(card)
   if #photographers > 0 then
     if timeless_woods_available[card.config.center.name] then
       for _, v in ipairs(photographers) do
-        if not table.contains(v.ability.extra.found, card.config.center_key) then
+        if not v.ability.extra.found[card.config.center_key] then
           v.ability.extra.found[card.config.center_key] = true
           v:juice_up()
           card_eval_status_text(v, 'extra', nil, nil, nil, {message = localize("maelmc_photo_ex")})
@@ -46,18 +46,20 @@ function maelmc_photographer_util(card)
           local count = 0
           for _, _ in pairs(v.ability.extra.found) do count = count + 1 end
           if (count >= v.ability.extra.to_snap) and not G.GAME.bloodmoon_beast_quest_completed then
-            G.GAME.bloodmoon_beast_quest_completed = "in progress"
-            G.E_MANAGER:add_event(Event({
-              trigger = "condition",
-              blocking = false,
-              func = function()
-                if G.GAME.maelmc_quest_set then return false end
-                maelmc_set_next_boss("bl_maelmc_bloodmoon_beast")
-                G.GAME.maelmc_quest_set = true
-                v:speak("maelmc_announce_bloodmoon",4,7*G.SETTINGS.GAMESPEED)
-                return true
-              end
-            }))
+            if not ((next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code) then
+              G.GAME.bloodmoon_beast_quest_completed = "in progress"
+              G.E_MANAGER:add_event(Event({
+                trigger = "condition",
+                blocking = false,
+                func = function()
+                  if G.GAME.maelmc_quest_set then return false end
+                  maelmc_set_next_boss("bl_maelmc_bloodmoon_beast")
+                  G.GAME.maelmc_quest_set = true
+                  v:speak("maelmc_announce_bloodmoon",4,7*G.SETTINGS.GAMESPEED)
+                  return true
+                end
+              }))
+            end
           end
         end
       end
@@ -86,7 +88,9 @@ function maelmc_set_sepia_quest(self,card)
     card.ability.extra.dist_dragged = distance + (card.ability.extra.dist_dragged or 0)
 
     if (G.GAME and G.GAME.blind and G.GAME.blind.name == "The Mouth") and card.ability.extra.dist_dragged > shake_rqmt and not G.GAME.sepia_quest_complete then
-      maelmc_set_next_boss("bl_maelmc_sepia",false,false,true,true)
+      if not ((next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code) then
+        maelmc_set_next_boss("bl_maelmc_sepia",false,false,true,true)
+      end
     end
   end
 
