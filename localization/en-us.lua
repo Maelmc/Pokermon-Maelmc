@@ -551,8 +551,9 @@ return {
                 text = {
                     "When {C:attention}Blind{} is selected,",
                     "{C:green}#1# in #2#{} chance to",
-                    "create a {C:attention}banana",
+                    "create a {C:attention}banana Joker",
                     "if you have none",
+                    "{C:inactive}(Must have room)"
                 }
             },
             j_maelmc_pc = {
