@@ -4,8 +4,8 @@ return {
             b_maelmc_hazarddeck = {
                 name = "Hazard Deck",
                 text = {
-                    "{C:purple}+#1#{} hazard level",
-                    "{C:purple}+#2#{} hazard level limit",
+                    "{C:earth}+#1#{} hazard layer",
+                    "{C:earth}+#2#{} hazard layer limit",
                     "Hazards held in hand",
                     "give {C:attention}+1{} hand size"
                 }
@@ -183,7 +183,7 @@ return {
             j_maelmc_glimmet = {
                 name = "Glimmet",
                 text = {
-                    "{C:purple}+#1#{} hazard level",
+                    "{C:earth}+#1#{} hazard layer",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
                     "gives {C:chips}+#2#{} Chips for every",
@@ -195,7 +195,7 @@ return {
             j_maelmc_glimmora = {
                 name = "Glimmora",
                 text = {
-                    "{C:purple}+#1#{} hazard level, {C:purple}+#2#{} hazard level limit",
+                    "{C:earth}+#1#{} hazard layer, {C:earth}+#2#{} hazard layer limit",
                     "Increase hazard level and limit by #3#",
                     "after triggering {C:attention}#4#{} held {C:attention}Hazard Cards{}",
                     "{C:inactive,s:0.8}(Requirement increases by #5# after each increase)",
@@ -209,7 +209,7 @@ return {
             j_maelmc_cufant = {
                 name = "Cufant",
                 text = {
-                    "{C:purple}+#1#{} hazard level",
+                    "{C:earth}+#1#{} hazard layer",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Enhance {C:attention}#2# Hazard{} card in hand",
                     "into a {C:attention}Steel{} card",
@@ -220,7 +220,7 @@ return {
             j_maelmc_copperajah = {
                 name = "Copperajah",
                 text = {
-                    "{C:purple}+#1#{} hazard level",
+                    "{C:earth}+#1#{} hazard layer",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Enhance {C:attention}#2# Hazards{} cards in hand",
                     "into {C:attention}Steel{} cards",
@@ -981,7 +981,7 @@ return {
             j_maelmc_mega_glimmora = {
                 name = "Mega Glimmora",
                 text = {
-                    "{C:purple}+#1#{} hazard level, {C:purple}+#2#{} hazard level limit",
+                    "{C:earth}+#1#{} hazard layer, {C:purple}+#2#{} hazard level limit",
                     "When round begins, draw",
                     "all your {C:attention}Hazard{} cards",
                     "{br:3}ERROR - CONTACT STEAK",
@@ -1342,8 +1342,8 @@ return {
             maelmc_playing_card_minus = "-#1# Playing card",
             maelmc_voucher_slot_minus = "-#1# Voucher slot",
             maelmc_energy_limit_minus = "-#1# Energy limit",
-            maelmc_hazard_level_minus = "-#1# Hazard level",
-            maelmc_hazard_limit_minus = "-#1# Hazard level limit",
+            maelmc_hazard_level_minus = "-#1# Hazard layer",
+            maelmc_hazard_limit_minus = "-#1# Hazard layer limit",
         },
         v_text = {
            ch_c_maelmc_gym_challenge = {"Jokers not matching the Gym Leader's {C:attention}Type{} {C:attention}perish{} after 3 rounds"},
