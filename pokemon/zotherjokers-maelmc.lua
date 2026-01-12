@@ -561,7 +561,10 @@ local pokemoncenter = {
                 ab.perish_tally = nil
                 ab.eternal = false
                 ab.rental = false
-                ab.sonfive_weakened = false
+                if ab.sonfive_weakened then
+                  energy_increase(G.jokers.cards[i],get_type(G.jokers.cards[i]),1,true)
+                  ab.sonfive_weakened = false
+                end
                 ab.fainted = nil
                 if G.jokers.cards[i].config.center_key == "j_agar_regigigas" then
                   ab.extra.rounds = ab.slow_start_rounds
