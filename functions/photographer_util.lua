@@ -54,6 +54,7 @@ function maelmc_photographer_util(card)
                 func = function()
                   if G.GAME.maelmc_quest_set then return false end
                   maelmc_set_next_boss("bl_maelmc_bloodmoon_beast")
+                  attention_text({scale = 0.8, text = localize("bloodmoon_beast_next"), hold = 5*G.SETTINGS.GAMESPEED, align = 'cm', offset = { x = 0, y = -3.5 }, major = G.play})
                   G.GAME.maelmc_quest_set = true
                   v:speak("maelmc_announce_bloodmoon",4,7*G.SETTINGS.GAMESPEED)
                   return true

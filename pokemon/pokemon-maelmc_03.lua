@@ -795,6 +795,78 @@ local tropius = {
   end,
 }
 
+-- Regirock 377
+local regirock = {
+  name = "regirock",
+  gen = 3,
+  stage = "Legendary",
+  ptype = "Earth",
+  perishable_compat = true,
+  blueprint_compat = false,
+  eternal_compat = true,
+  rarity = 4,
+  cost = 20,
+  config = { extra = { } },
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_stone
+    return { vars = { } }
+  end,
+  calculate = function(self, card, context)
+    if context.check_enhancement then
+      return {m_stone = true}
+    end
+  end,
+}
+
+-- Regice 378
+local regice = {
+  name = "regice",
+  gen = 3,
+  stage = "Legendary",
+  ptype = "Water",
+  perishable_compat = true,
+  blueprint_compat = false,
+  eternal_compat = true,
+  rarity = 4,
+  cost = 20,
+  config = { extra = { } },
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_glass
+    return { vars = { } }
+  end,
+  calculate = function(self, card, context)
+    if context.check_enhancement then
+      return {m_glass = true}
+    end
+  end,
+}
+
+-- Registeel 379
+local registeel = {
+  name = "registeel",
+  gen = 3,
+  stage = "Legendary",
+  ptype = "Metal",
+  perishable_compat = true,
+  blueprint_compat = false,
+  eternal_compat = true,
+  rarity = 4,
+  cost = 20,
+  config = { extra = { } },
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_steel
+    return { vars = { } }
+  end,
+  calculate = function(self, card, context)
+    if context.check_enhancement then
+      return {m_steel = true}
+    end
+  end,
+}
+
 -- Deoxys 386
 local deoxys = {
   name = "deoxys",
@@ -1017,6 +1089,9 @@ return {
     kecleon,
     shuppet, banette, mega_banette, fake_mega_banette,
     tropius,
+    regirock,
+    regice,
+    registeel,
     deoxys, deoxys_attack, deoxys_defense, deoxys_speed
   },
 }

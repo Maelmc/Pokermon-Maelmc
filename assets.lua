@@ -7,74 +7,83 @@ SMODS.Atlas({
 }):register()
 
 SMODS.Atlas({
-  key = "maelmc_jokers",
+  key = "jokers",
   path = "jokers.png",
   px = 71,
   py = 95
 }):register()
 
 SMODS.Atlas({
-  key = "maelmc_shiny_jokers",
+  key = "shiny_jokers",
   path = "shiny_jokers.png",
   px = 71,
   py = 95
 }):register()
 
 SMODS.Atlas({
-  key = "maelmc_mart",
+  key = "mart",
   path = "mart.png",
   px = 71,
   py = 95
 }):register()
 
 SMODS.Atlas({
-  key = "maelmc_vouchers",
+  key = "vouchers",
   path = "vouchers.png",
   px = 71,
   py = 95
 }):register()
 
 SMODS.Atlas({
-  key = "maelmc_pokedeck",
+  key = "pokedeck",
   path = "pokedeck.png",
   px = 71,
   py = 95,
 }):register()
 
 SMODS.Atlas({
-    key = "maelmc_stickers",
+    key = "stickers",
     path = "stickers.png",
     px = 71,
     py = 95
 }):register()
 
 SMODS.Atlas({
-    key = "maelmc_tags",
+    key = "tags",
     path = "tags.png",
     px = 34,
     py = 34
 }):register()
 
 SMODS.Atlas({
-    key = "maelmc_enhancements",
+    key = "enhancements",
     path = "enhancements.png",
     px = 71,
     py = 95
 }):register()
 
 SMODS.Atlas({
-    key = "maelmc_quests",
+    key = "quests",
     path = "quests.png",
     px = 71,
     py = 95
 }):register()
 
 SMODS.Atlas({
-    key = "maelmc_boss_blinds",
+    key = "boss_blinds",
     atlas_table = "ANIMATION_ATLAS",
     path = "boss_blinds.png",
     px = 34,
     py = 34,
+    frames = 21,
+}):register()
+
+SMODS.Atlas({
+    key = "boss_blinds_big",
+    atlas_table = "ANIMATION_ATLAS",
+    path = "boss_blinds_big.png",
+    px = 49,
+    py = 49,
     frames = 21,
 }):register()
 
@@ -88,6 +97,11 @@ G.C.MAELMC = {
 SMODS.Sound({
     key = "pokerus_sound",
     path = "pokerus_sound.wav"
+}):register()
+
+SMODS.Sound({
+    key = "door",
+    path = "door.wav"
 }):register()
 
 SMODS.Sound({

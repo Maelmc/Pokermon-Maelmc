@@ -314,6 +314,54 @@ local gmax_copperajah = {
   end,
 }
 
+-- Regieleki 394
+local regieleki = {
+  name = "regieleki",
+  gen = 3,
+  stage = "Legendary",
+  ptype = "Lightning",
+  perishable_compat = true,
+  blueprint_compat = false,
+  eternal_compat = true,
+  rarity = 4,
+  cost = 20,
+  config = { extra = { } },
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_gold
+    return { vars = { } }
+  end,
+  calculate = function(self, card, context)
+    if context.check_enhancement then
+      return {m_gold = true}
+    end
+  end,
+}
+
+-- Regidrago 394
+local regidrago = {
+  name = "regidrago",
+  gen = 3,
+  stage = "Legendary",
+  ptype = "Dragon",
+  perishable_compat = true,
+  blueprint_compat = false,
+  eternal_compat = true,
+  rarity = 4,
+  cost = 20,
+  config = { extra = { } },
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_mult
+    return { vars = {} }
+  end,
+  calculate = function(self, card, context)
+    if context.check_enhancement then
+      return {m_mult = true}
+    end
+  end,
+}
+
 local bloodmoon_ursaluna = {
   name = "bloodmoon_ursaluna",
   gen = 9,
@@ -370,6 +418,8 @@ return {
     sinistea, polteageist,
     cursola,
     cufant, copperajah, gmax_copperajah,
+    regieleki,
+    regidrago,
     bloodmoon_ursaluna,
   },
 }

@@ -771,3 +771,12 @@ position = 'at'
 match_indent = true
 payload = '''if context.main_scoring and context.cardarea == G.play and (not next(SMODS.find_card("j_maelmc_cherrim"))) then
        card.ability.extra.level = card.ability.extra.level + 1'''
+
+# Regidrago triple mult
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''ret.playing_card.mult = mult'''
+position = "at"
+payload = '''ret.playing_card.mult = (next(SMODS.find_card('j_maelmc_regidrago')) and mult * 4) or mult'''
+match_indent = true

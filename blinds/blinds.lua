@@ -1,3 +1,154 @@
+local rock_giant = {
+  key = "rock_giant",
+  dollars = 10,
+  mult = 3,
+  boss = { showdown = false, min = 1, max = 80 },
+  boss_colour = HEX("DF771F"),
+  pos = { x = 0, y = 6 },
+  atlas = "maelmc_boss_blinds",
+  discovered = false,
+  debuff = { },
+  config = {disabled = false},
+  set_blind = function(self)
+    G.GAME.giants_quest_completed = "fighting regirock"
+    G.GAME.maelmc_quest_set = false
+  end,
+  defeat = function(self)
+    G.GAME.giants_quest_completed = true
+    G.E_MANAGER:add_event(Event({
+      func = function()
+        play_sound('timpani')
+        SMODS.add_card({ set = 'Joker', key = "j_maelmc_regirock" })
+        return true
+      end
+    }))
+  end,
+  disable = function(self)
+    self.config.disabled = true
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
+local ice_giant = {
+  key = "ice_giant",
+  dollars = 10,
+  mult = 3,
+  boss = { showdown = false, min = 1, max = 80 },
+  boss_colour = HEX("879FFF"),
+  pos = { x = 0, y = 7 },
+  atlas = "maelmc_boss_blinds",
+  discovered = false,
+  debuff = { },
+  config = {disabled = false},
+  set_blind = function(self)
+    G.GAME.giants_quest_completed = "fighting regice"
+    G.GAME.maelmc_quest_set = false
+  end,
+  defeat = function(self)
+    G.GAME.giants_quest_completed = true
+    G.E_MANAGER:add_event(Event({
+      func = function()
+        play_sound('timpani')
+        SMODS.add_card({ set = 'Joker', key = "j_maelmc_regice" })
+        return true
+      end
+    }))
+  end,
+  disable = function(self)
+    self.config.disabled = true
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
+local steel_giant = {
+  key = "steel_giant",
+  dollars = 10,
+  mult = 3,
+  boss = { showdown = false, min = 1, max = 80 },
+  boss_colour = HEX("7F8F97"),
+  pos = { x = 0, y = 8 },
+  atlas = "maelmc_boss_blinds",
+  discovered = false,
+  debuff = { },
+  config = {disabled = false},
+  set_blind = function(self)
+    G.GAME.giants_quest_completed = "fighting registeel"
+    G.GAME.maelmc_quest_set = false
+  end,
+  defeat = function(self)
+    G.GAME.giants_quest_completed = true
+    G.E_MANAGER:add_event(Event({
+      func = function()
+        play_sound('timpani')
+        SMODS.add_card({ set = 'Joker', key = "j_maelmc_registeel" })
+        return true
+      end
+    }))
+  end,
+  disable = function(self)
+    self.config.disabled = true
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
+local ramping_giant = {
+  key = "ramping_giant",
+  dollars = 10,
+  mult = 4,
+  boss = { showdown = false, min = 1, max = 80 },
+  boss_colour = HEX("D7E7FF"),
+  pos = { x = 0, y = 0 },
+  atlas = "maelmc_boss_blinds_big",
+  discovered = false,
+  debuff = { },
+  config = {disabled = false},
+  set_blind = function(self)
+    G.GAME.giants_quest_completed = "fighting regigigas"
+    G.GAME.maelmc_quest_set = false
+    G.GAME.maelmc_regigigas_mult = 4
+    G.GAME.maelmc_regigigas_initial = true
+  end,
+  press_play = function(self)
+    G.GAME.blind.triggered = true
+    G.GAME.blind.prepped = true
+  end,
+  drawn_to_hand = function(self)
+    if G.GAME.maelmc_regigigas_initial then
+      G.GAME.maelmc_regigigas_initial = nil
+    elseif G.GAME.blind.prepped then
+      G.GAME.blind.chips = G.GAME.blind.chips / G.GAME.maelmc_regigigas_mult * (G.GAME.maelmc_regigigas_mult+1)
+      G.GAME.maelmc_regigigas_mult = G.GAME.maelmc_regigigas_mult + 1
+      G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+      G.GAME.blind:wiggle()
+    end
+  end,
+  defeat = function(self)
+    G.GAME.giants_quest_completed = true
+    G.GAME.maelmc_regigigas_mult = nil
+    G.E_MANAGER:add_event(Event({
+      func = function()
+        play_sound('timpani')
+        SMODS.add_card({ set = 'Joker', key = "j_agar_regigigas" })
+        return true
+      end
+    }))
+  end,
+  disable = function(self)
+    self.config.disabled = true
+    G.GAME.blind.chips = G.GAME.blind.chips / (G.GAME.maelmc_regigigas_mult or 4) * 2
+    G.GAME.maelmc_regigigas_mult = nil
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
 local sepia={
   key = "sepia",
   dollars = 10,
@@ -39,6 +190,74 @@ local sepia={
       trigger = "after",
       func = function()
         G.GAME.play_sepia_song = false
+        return true
+      end
+    }))
+  end,
+  disable = function(self)
+    self.config.disabled = true
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
+local electric_giant = {
+  key = "electric_giant",
+  dollars = 10,
+  mult = 3,
+  boss = { showdown = false, min = 1, max = 80 },
+  boss_colour = HEX("E6EE31"),
+  pos = { x = 0, y = 9 },
+  atlas = "maelmc_boss_blinds",
+  artist = "baronessfaron",
+  discovered = false,
+  debuff = { },
+  config = {disabled = false},
+  set_blind = function(self)
+    G.GAME.giants_quest_completed = "fighting regieleki"
+    G.GAME.maelmc_quest_set = false
+  end,
+  defeat = function(self)
+    G.GAME.giants_quest_completed = true
+    G.E_MANAGER:add_event(Event({
+      func = function()
+        play_sound('timpani')
+        SMODS.add_card({ set = 'Joker', key = "j_maelmc_regieleki" })
+        return true
+      end
+    }))
+  end,
+  disable = function(self)
+    self.config.disabled = true
+  end,
+  in_pool = function(self)
+    return false
+  end,
+}
+
+local draconic_giant = {
+  key = "draconic_giant",
+  dollars = 10,
+  mult = 3,
+  boss = { showdown = false, min = 1, max = 80 },
+  boss_colour = HEX("D53983"),
+  pos = { x = 0, y = 10 },
+  atlas = "maelmc_boss_blinds",
+  artist = "baronessfaron",
+  discovered = false,
+  debuff = { },
+  config = {disabled = false},
+  set_blind = function(self)
+    G.GAME.giants_quest_completed = "fighting regidrago"
+    G.GAME.maelmc_quest_set = false
+  end,
+  defeat = function(self)
+    G.GAME.giants_quest_completed = true
+    G.E_MANAGER:add_event(Event({
+      func = function()
+        play_sound('timpani')
+        SMODS.add_card({ set = 'Joker', key = "j_maelmc_regidrago" })
         return true
       end
     }))
@@ -280,11 +499,22 @@ local teal_mask={
   end,
 }
 
+local list = {
+  rock_giant,
+  ice_giant,
+  steel_giant,
+  sepia,
+  electric_giant,
+  draconic_giant,
+  bloodmoon_beast,
+  hearthflame_mask, wellspring_mask, cornerstone_mask, teal_mask
+}
+
+if next(SMODS.find_mod('Agarmons')) then
+  table.insert(list,4,ramping_giant)
+end
+
 return {
   name = "Blinds",
-  list = {
-    sepia,
-    bloodmoon_beast,
-    hearthflame_mask, wellspring_mask, cornerstone_mask, teal_mask
-  }
+  list = list
 }

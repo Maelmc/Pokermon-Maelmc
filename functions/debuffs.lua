@@ -9,6 +9,11 @@ SMODS.current_mod.set_debuff = function(card)
    if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_wellspring_mask" and not G.GAME.blind.disabled) and (is_type(card,"Water") or SMODS.has_enhancement(card,'m_bonus')) then return true end
    if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_cornerstone_mask" and not G.GAME.blind.disabled) and (is_type(card,"Earth") or SMODS.has_enhancement(card,'m_stone')) then return true end
    if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_teal_mask" and not G.GAME.blind.disabled) and (is_type(card,"Grass") or SMODS.has_enhancement(card,'m_lucky')) then return true end
+   if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_rock_giant" and not G.GAME.blind.disabled) and SMODS.has_enhancement(card,'m_stone') then return true end
+   if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_ice_giant" and not G.GAME.blind.disabled) and SMODS.has_enhancement(card,'m_glass') then return true end
+   if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_steel_giant" and not G.GAME.blind.disabled) and SMODS.has_enhancement(card,'m_steel') then return true end
+   if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_draconic_giant" and not G.GAME.blind.disabled) and SMODS.has_enhancement(card,'m_mult') then return true end
+   if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_electric_giant" and not G.GAME.blind.disabled) and SMODS.has_enhancement(card,'m_gold') then return true end
    return false
 end
 

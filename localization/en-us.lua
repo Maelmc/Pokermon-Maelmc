@@ -61,6 +61,49 @@ return {
                     "Grass Jokers are debuffed"
                 }, 
             },
+            bl_maelmc_rock_giant = {
+                name = "The Rock Giant",
+                text = {
+                    "All Stone cards",
+                    "are debuffed",
+                }, 
+            },
+            bl_maelmc_ice_giant = {
+                name = "The Ice Giant",
+                text = {
+                    "All Glass cards",
+                    "are debuffed",
+                }, 
+            },
+            bl_maelmc_steel_giant = {
+                name = "The Steel Giant",
+                text = {
+                    "All Steel cards",
+                    "are debuffed",
+                }, 
+            },
+            bl_maelmc_ramping_giant = {
+                name = "The Ramping Giant",
+                text = {
+                    "Extra large blind",
+                    "Score requirement increases",
+                    "after each hand played",
+                }, 
+            },
+            bl_maelmc_electric_giant = {
+                name = "The Electric Giant",
+                text = {
+                    "All Gold cards",
+                    "are debuffed",
+                }, 
+            },
+            bl_maelmc_draconic_giant = {
+                name = "The Draconic Giant",
+                text = {
+                    "All Mult cards",
+                    "are debuffed",
+                }, 
+            },
         },
         Enhanced = {
             m_maelmc_trapped = {
@@ -1033,6 +1076,44 @@ return {
                     "{s:0.8}Changes form without a {X:fire,C:white,s:0.8}Fire{s:0.8} Joker",
                 },
             },
+            j_maelmc_regirock = {
+                name = "Regirock",
+                text = {
+                    "All cards are",
+                    "{C:attention}Stone{} cards",
+                },
+            },
+            j_maelmc_regice = {
+                name = "Regice",
+                text = {
+                    "All cards are",
+                    "{C:attention}Glass{} cards",
+                },
+            },
+            j_maelmc_registeel = {
+                name = "Registeel",
+                text = {
+                    "All cards are",
+                    "{C:attention}Steel{} cards",
+                },
+            },
+            j_maelmc_regieleki = {
+                name = "Regieleki",
+                text = {
+                    "All cards are",
+                    "{C:attention}Gold{} cards",
+                },
+            },
+            j_maelmc_regidrago = {
+                name = "Regidrago",
+                text = {
+                    "All cards are",
+                    "{C:attention}Mult{} cards",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "Scoring cards with {C:mult}Mult",
+                    "give {C:attention}quadruple{} the {C:mult}Mult",
+                },
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -1266,6 +1347,27 @@ return {
             kitikami_ogre_lucky = "Deck is composed at 20% of Lucky Cards",
             kitikami_ogre_next = "The Ogre awaits...",
             kitikami_ogre_done = "You defeated the Ogre!",
+
+            giants_quest_name = "Giants of the Ages",
+            giants_chart = "UEB Braille",
+            giants_fishes = ". .- .-. - .... -....- .-. . ... - -....- .-- .- - . .-.",
+            giants_fishes_translated = "EARTH - REST - WATER",
+            giants_shake = "It sounded as if doors opened somewhere far away",
+            giants_one = "-.-. --- -- .--. .-.. . - . -....- --- -. .", -- COMPLETE-ONE
+            giants_desert_ruins = ".---- ..... -....- ... - .-. . -. --. - .... -....- .---- ..... -....- -.. . ... - .-. --- -.--",
+            giants_desert_ruins_translated = "15 STRENGTH - 15 DESTROY",
+            giants_desert_ruins_open = "The Desert Ruins opened",
+            giants_island_cave = "-.. --- -. - -....- -- --- ...- . -....- --- .-. -....- -.-. .... .- -. --. . -....- .--- --- -.- . .-. ...",
+            giants_island_cave_translated = "DONT MOVE OR CHANGE JOKERS",
+            giants_island_cave_open = "The Island Cave opened",
+            giants_island_cave_open_secret = "The Island Cave opened with a Powerful foe",
+            giants_ancient_tomb = "-- .- -. -.-- -....- ..-. .-.. .- ... .... -.-- -....- -.-. .- .-. -.. ...",
+            giants_ancient_tomb_translated = "MANY FLASHY CARDS",
+            giants_ancient_tomb_open = "The Ancient Tomb opened",
+            giants_split_decision_ruins = "-.-. .... --- --- ... . -....- -- ..- .-.. - -....- --- .-. -....- --. --- .-.. -..",
+            giants_split_decision_ruins_translated = "CHOOSE MULT OR GOLD",
+            giants_split_decision_ruins_open_dragon = "The Split-Decision Ruins opened with a Draconic foe",
+            giants_split_decision_ruins_open_electric = "The Split-Decision Ruins opened with an Electric foe",
         },
         labels = {
             k_maelmc_ultra_beast = "Ultra Beast",
