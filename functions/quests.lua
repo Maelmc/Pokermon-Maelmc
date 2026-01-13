@@ -61,7 +61,7 @@ SMODS.current_mod.calculate = function(self, context)
         end
       end
       if context.using_consumeable and context.consumeable and context.consumeable.config.center.key == "c_strength" then
-        G.GAME.giants_strength = (G.GAME.giants_strength or 0) + 1
+        G.GAME.giants_strength = (G.GAME.giants_strength or 0) + #G.hand.highlighted
       end
       if context.remove_playing_cards or (context.using_consumeable and context.consumeable and context.consumeable.config.center.key == "c_strength") then
         if (G.GAME.giants_destroyed or 0) >= 15 and (G.GAME.giants_strength or 0) >= 15 then
