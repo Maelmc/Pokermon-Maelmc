@@ -462,7 +462,7 @@ local mega_garchomp={
     if context.individual and context.cardarea == G.hand and context.scoring_name == "Pair" then
       local pair_of = nil
       for _, v in pairs(context.scoring_hand) do
-        if not SMODS.has_enhancement(v, "m_stone") then
+        if not SMODS.has_no_rank(v) then
           pair_of = v:get_id()
         end
       end
@@ -508,7 +508,7 @@ local mega_garchomp_z={
     if context.repetition and context.cardarea == G.hand and context.scoring_name == "Pair" then
       local pair_of = nil
       for _, v in pairs(context.scoring_hand) do
-        if not SMODS.has_enhancement(v, "m_stone") then
+        if not SMODS.has_no_rank(v) then
           pair_of = v:get_id()
         end
       end
