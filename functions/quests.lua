@@ -48,7 +48,7 @@ SMODS.current_mod.calculate = function(self, context)
       if (G.jokers.cards[1] and get_type(G.jokers.cards[1]) == "Earth") and (G.jokers.cards[#G.jokers.cards] and get_type(G.jokers.cards[#G.jokers.cards]) == "Water") then
         G.GAME.giants_start = true
         play_sound('maelmc_door', 1, 1)
-        attention_text({scale = 0.8, text = localize("giants_shake"), hold = 5*G.SETTINGS.GAMESPEED, align = 'cm', offset = { x = 0, y = -3.5 }, major = G.play})
+        attention_text({scale = 0.6, text = localize("giants_shake"), hold = 5*G.SETTINGS.GAMESPEED, align = 'cm', offset = { x = 0, y = -3.5 }, major = G.play})
       end
     end
 
