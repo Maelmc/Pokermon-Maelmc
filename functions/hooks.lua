@@ -2,7 +2,7 @@
 local gid = Card.get_id
 function Card:get_id()
   local ogerpons_cornerstone = find_joker('ogerpon_cornerstone')
-  if #ogerpons_cornerstone > 0 and self.ability.effect == 'Stone Card' then
+  if #ogerpons_cornerstone > 0 and SMODS.has_enhancement(self,"m_stone") then
       return SMODS.Ranks["maelmc_Ogerpon"].id
   end
   return gid(self)
