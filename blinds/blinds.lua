@@ -353,6 +353,8 @@ local hearthflame_mask={
           func = function()
             maelmc_set_next_boss("bl_maelmc_wellspring_mask",false,false,true,true)
             blind.prep_next = false
+            G.P_BLINDS["bl_maelmc_hearthflame_mask"].unlocked = true
+            G.P_BLINDS["bl_maelmc_hearthflame_mask"].discovered = true
             return true
           end
         }))
@@ -400,6 +402,8 @@ local wellspring_mask={
           func = function()
             maelmc_set_next_boss("bl_maelmc_cornerstone_mask",false,false,true,true)
             blind.prep_next = false
+            G.P_BLINDS["bl_maelmc_wellspring_mask"].unlocked = true
+            G.P_BLINDS["bl_maelmc_wellspring_mask"].discovered = true
             return true
           end
         }))
@@ -447,6 +451,8 @@ local cornerstone_mask={
           func = function()
             maelmc_set_next_boss("bl_maelmc_teal_mask",false,false,true,true)
             blind.prep_next = false
+            G.P_BLINDS["bl_maelmc_cornerstone_mask"].unlocked = true
+            G.P_BLINDS["bl_maelmc_cornerstone_mask"].discovered = true
             return true
           end
         }))
