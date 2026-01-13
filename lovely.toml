@@ -770,7 +770,7 @@ position = 'at'
 match_indent = true
 payload = '''if context.main_scoring and context.cardarea == G.play and card.ability and card.ability.extra and (not next(SMODS.find_card("j_maelmc_cherrim"))) then'''
 
-# Regidrago triple mult
+# Regidrago quadruple mult
 [[patches]]
 [patches.pattern]
 target = 'functions/common_events.lua'
@@ -778,3 +778,31 @@ pattern = '''ret.playing_card.mult = mult'''
 position = "at"
 payload = '''ret.playing_card.mult = (next(SMODS.find_card('j_maelmc_regidrago')) and mult * 4) or mult'''
 match_indent = true
+
+# Pokémon Center banned from challenges
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "self.GAME.round_resets.hands = self.GAME.starting_params.hands"
+position = "before"
+match_indent = true
+payload = '''
+if args.challenge then
+  G.GAME.banned_keys["j_maelmc_pokemoncenter"] = true
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "if challenge.restrictions then"
+position = "before"
+match_indent = true
+payload = '''
+if challenge.restrictions then
+  challenge.restrictions.banned_cards = challenge.restrictions.banned_cards or {}
+  challenge.restrictions.banned_cards[#challenge.restrictions.banned_cards+1] = {id = "j_maelmc_pokemoncenter"}
+else
+  challenge.restrictions = {banned_cards = {{id = "j_maelmc_pokemoncenter"}}}
+end
+'''
