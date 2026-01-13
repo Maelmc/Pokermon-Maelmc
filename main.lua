@@ -42,12 +42,8 @@ for _, list in ipairs(name_lists) do
 end
 
 --Load Assets file
-local asset, load_error = SMODS.load_file("assets.lua")
-if load_error then
-  sendDebugMessage ("The error is: "..load_error)
-else
-  asset()
-end
+sendDebugMessage("[PokermonMaelmc] Loading atlases")
+assert(SMODS.load_file("assets.lua"))()
 
 SMODS.Rank {
   key = 'Ogerpon',
@@ -80,10 +76,10 @@ end
 --Load functions
 local pfunc = NFS.getDirectoryItems(mod_dir.."functions")
 for _, file in ipairs(pfunc) do
-  sendDebugMessage ("The file is: "..file)
+  sendDebugMessage ("[PokermonMaelmc] The file is: "..file)
   local helper, load_error = SMODS.load_file("functions/"..file)
   if load_error then
-    sendDebugMessage ("The error is: "..load_error)
+    sendDebugMessage ("[PokermonMaelmc] Error: "..load_error)
   else
     helper()
   end
@@ -93,10 +89,10 @@ end
 local pseals = NFS.getDirectoryItems(mod_dir.."stickers")
 
 for _, file in ipairs(pseals) do
-  sendDebugMessage ("The file is: "..file)
+  sendDebugMessage ("[PokermonMaelmc] The file is: "..file)
   local sticker, load_error = SMODS.load_file("stickers/"..file)
   if load_error then
-    sendDebugMessage ("The error is: "..load_error)
+    sendDebugMessage ("[PokermonMaelmc] Error: "..load_error)
   else
     local curr_sticker = sticker()
     if curr_sticker.init then curr_sticker:init() end
@@ -112,10 +108,10 @@ end
 local blinds = NFS.getDirectoryItems(mod_dir.."blinds")
 
 for _, file in ipairs(blinds) do
-  sendDebugMessage ("The file is: "..file)
+  sendDebugMessage ("[PokermonMaelmc] The file is: "..file)
   local blind, load_error = SMODS.load_file("blinds/"..file)
   if load_error then
-    sendDebugMessage ("The error is: "..load_error)
+    sendDebugMessage ("[PokermonMaelmc] Error: "..load_error)
   else
     local curr_blind = blind()
     if curr_blind.init then curr_blind:init() end
@@ -131,10 +127,10 @@ end
 local tags = NFS.getDirectoryItems(mod_dir.."tags")
 
 for _, file in ipairs(tags) do
-  sendDebugMessage ("The file is: "..file)
+  sendDebugMessage ("[PokermonMaelmc] The file is: "..file)
   local tag, load_error = SMODS.load_file("tags/"..file)
   if load_error then
-    sendDebugMessage ("The error is: "..load_error)
+    sendDebugMessage ("[PokermonMaelmc] Error: "..load_error)
   else
     local curr_tag = tag()
     if curr_tag.init then curr_tag:init() end
@@ -150,10 +146,10 @@ end
 local enhancements = NFS.getDirectoryItems(mod_dir.."enhancements")
 
 for _, file in ipairs(enhancements) do
-  sendDebugMessage ("The file is: "..file)
+  sendDebugMessage ("[PokermonMaelmc] The file is: "..file)
   local enhancement, load_error = SMODS.load_file("enhancements/"..file)
   if load_error then
-    sendDebugMessage ("The error is: "..load_error)
+    sendDebugMessage ("[PokermonMaelmc] Error: "..load_error)
   else
     local curr_enhance = enhancement()
     if curr_enhance.init then curr_enhance:init() end
@@ -169,10 +165,10 @@ end
 local pfiles = NFS.getDirectoryItems(mod_dir.."pokemon")
 
 for _, file in ipairs(pfiles) do
-  sendDebugMessage ("The file is: "..file)
+  sendDebugMessage ("[PokermonMaelmc] The file is: "..file)
   local pokemon, load_error = SMODS.load_file("pokemon/"..file)
   if load_error then
-    sendDebugMessage ("The error is: "..load_error)
+    sendDebugMessage ("[PokermonMaelmc] Error: "..load_error)
   else
     local curr_pokemon = pokemon()
     if curr_pokemon.init then curr_pokemon:init() end
@@ -195,10 +191,10 @@ end
 local pconsumables = NFS.getDirectoryItems(mod_dir.."consumables")
 
 for _, file in ipairs(pconsumables) do
-  sendDebugMessage ("The file is: "..file)
+  sendDebugMessage ("[PokermonMaelmc] The file is: "..file)
   local consumable, load_error = SMODS.load_file("consumables/"..file)
   if load_error then
-    sendDebugMessage ("The error is: "..load_error)
+    sendDebugMessage ("[PokermonMaelmc] Error: "..load_error)
   else
     local curr_consumable = consumable()
     if curr_consumable.init then curr_consumable:init() end
@@ -216,10 +212,10 @@ end
 local pboosters = NFS.getDirectoryItems(mod_dir.."boosters")
 
 for _, file in ipairs(pboosters) do
-  sendDebugMessage ("The file is: "..file)
+  sendDebugMessage ("[PokermonMaelmc] The file is: "..file)
   local booster, load_error = SMODS.load_file("boosters/"..file)
   if load_error then
-    sendDebugMessage ("The error is: "..load_error)
+    sendDebugMessage ("[PokermonMaelmc] Error: "..load_error)
   else
     local curr_booster = booster()
     if curr_booster.init then curr_booster:init() end
@@ -235,10 +231,10 @@ end
 local vouchers = NFS.getDirectoryItems(mod_dir.."vouchers")
 
 for _, file in ipairs(vouchers) do
-  sendDebugMessage ("The file is: "..file)
+  sendDebugMessage ("[PokermonMaelmc] The file is: "..file)
   local voucher, load_error = SMODS.load_file("vouchers/"..file)
   if load_error then
-    sendDebugMessage ("The error is: "..load_error)
+    sendDebugMessage ("[PokermonMaelmc] Error: "..load_error)
   else
     local curr_voucher = voucher()
     if curr_voucher.init then curr_voucher:init() end
@@ -255,10 +251,10 @@ if (SMODS.Mods["Pokermon"] or {}).can_load and SMODS.Mods["Pokermon"] and not po
   local backs = NFS.getDirectoryItems(mod_dir.."backs")
 
   for _, file in ipairs(backs) do
-    sendDebugMessage ("The file is: "..file)
+    sendDebugMessage ("[PokermonMaelmc] The file is: "..file)
     local back, load_error = SMODS.load_file("backs/"..file)
     if load_error then
-      sendDebugMessage ("The error is: "..load_error)
+      sendDebugMessage ("[PokermonMaelmc] Error: "..load_error)
     else
       local curr_back = back()
       if curr_back.init then curr_back:init() end
@@ -276,7 +272,7 @@ local pchallenges = NFS.getDirectoryItems(mod_dir.."challenges")
 for _, file in ipairs(pchallenges) do
   local challenge, load_error = SMODS.load_file("challenges/"..file)
   if load_error then
-    sendDebugMessage ("The error is: "..load_error)
+    sendDebugMessage ("[PokermonMaelmc] Error: "..load_error)
   else
     local curr_challenge = challenge()
     if curr_challenge.init then curr_challenge:init() end
