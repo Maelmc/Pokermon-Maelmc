@@ -1349,7 +1349,7 @@ return {
             kitikami_ogre_done = "You defeated the Ogre!",
 
             giants_quest_name = "Giants of the Ages",
-            giants_chart = "UEB Braille",
+            giants_chart = "Grade 2 Braille", -- https://www.teachingvisuallyimpaired.com/uploads/1/4/1/2/14122361/ueb_braille_chart.pdf
             giants_fishes = ". .- .-. - .... -....- .-. . ... - -....- .-- .- - . .-.",
             giants_fishes_translated = "EARTH - REST - WATER",
             giants_shake = "It sounded as if doors opened somewhere far away",
