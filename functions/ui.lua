@@ -130,27 +130,3 @@ SMODS.current_mod.config_tab = function()
       }
     }
 end
-
-
--- Quest menu
-local cuibo = create_UIBox_options
-function create_UIBox_options() 
-  local base = cuibo()
-  local minw = 0
-  local t_node = base.nodes[1].nodes[1].nodes[1].nodes
-  for _,v in pairs(t_node) do
-      if v.nodes[1].nodes[1].config then
-          if v.nodes[1].nodes[1].config.minw and v.nodes[1].nodes[1].config.minw > minw then
-              minw = v.nodes[1].nodes[1].config.minw
-          end
-      end
-  end
-  table.insert(base.nodes[1].nodes[1].nodes[1].nodes,UIBox_button{id = 'quest_button', label = {localize('maelmc_quest')}, button = "maelmc_quest", minw = minw})
-  return base
-end
-
-local function quest_keybind()
-  G.FUNCS.maelmc_quest({no_back = true})
-end
-
-SMODS.Keybind({ key = "openPokemonQuests", key_pressed = "g", action = quest_keybind })
