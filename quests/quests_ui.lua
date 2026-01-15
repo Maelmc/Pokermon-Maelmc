@@ -329,7 +329,7 @@ local cuibhud = create_UIBox_HUD
 function create_UIBox_HUD()
   local root = cuibhud()
   local quest_button = {n=G.UIT.R, config={align = "cm", minh = 1.75, minw = 1.5, padding = 0.05, r = 0.1, hover = true, colour = G.C.GREEN, button = "maelmc_quest_menu", shadow = true}, nodes={
-            {n=G.UIT.C, config={align = "cm", maxw = 1.4, focus_args = {button = 'start', orientation = 'bm'}, func = 'set_button_pip'}, nodes={
+            {n=G.UIT.C, config={align = "cm", maxw = 1.4, focus_args = {button = 'leftstick', orientation = 'bm'}, func = 'set_button_pip'}, nodes={
               {n=G.UIT.T, config={text = localize('maelmc_quests'), scale = 0.4, colour = G.C.UI.TEXT_LIGHT, shadow = true}}
             }},
           }}
