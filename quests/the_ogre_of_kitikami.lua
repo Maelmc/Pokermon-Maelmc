@@ -27,15 +27,22 @@ local function display_text()
   }
   return display_text
 end
---table.insert(to_run_quests,kitikami_ogre_quest)
 
-maelmc_add_quest(
-  "kitikami_ogre_quest_name",
-  "maelmc_quests",
-  {x = 3, y = 0},
-  display_text,
-  1017
-)
+local function reward_text()
+  return {localize("kitikami_ogre_reward")}
+end
+
+maelmc_add_quest{
+  name = "kitikami_ogre_quest_name",
+  atlas = "maelmc_quests",
+  pos = {x = 3, y = 0},
+  display_text = display_text,
+  dex = 1017,
+  reward_text = reward_text,
+  reward_atlas = "maelmc_boss_blinds",
+  reward_pos = {x = 0, y = 5},
+  set = "Blind",
+}
 
 local calculate_ref = SMODS.current_mod.calculate
 SMODS.current_mod.calculate = function(self, context)

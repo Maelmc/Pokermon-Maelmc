@@ -1332,6 +1332,7 @@ return {
             sepia_blind = "Fight The Mouth",
             sepia_no_blind = "Fight a certain Boss Blind",
             sepia_spin = "Spin!",
+            sepia_reward = "Challenge The Sepia-Toned",
 
             bloodmoon_beast_quest_name = "Creatures of the Timeless Woods",
             bloodmoon_beast_photo = "Perrin is here!",
@@ -1339,6 +1340,7 @@ return {
             bloodmoon_beast_species = "Complete her request",
             bloodmoon_beast_next = "The Beast awaits...",
             bloodmoon_beast_done = "You defeated the Bloodmoon Beast!",
+            bloodmoon_beast_reward = "Challenge The Bloodmoon Beast",
 
             kitikami_ogre_quest_name = "The Ogre of Kitikami",
             kitikami_ogre_enhancements = "Collect enhancements",
@@ -1348,9 +1350,10 @@ return {
             kitikami_ogre_lucky = "Deck is composed at 20% of Lucky Cards",
             kitikami_ogre_next = "The Ogre awaits...",
             kitikami_ogre_done = "You defeated the Ogre!",
+            kitikami_ogre_reward = "Challenge The Mask",
 
             giants_quest_name = "Giants of the Ages",
-            giants_chart = "Grade 2 Braille", -- https://www.teachingvisuallyimpaired.com/uploads/1/4/1/2/14122361/ueb_braille_chart.pdf
+            giants_chart = "Decipher the Grade 2 Braille", -- https://www.teachingvisuallyimpaired.com/uploads/1/4/1/2/14122361/ueb_braille_chart.pdf
             giants_fishes = ". .- .-. - .... -....- .-. . ... - -....- .-- .- - . .-.",
             giants_fishes_translated = "EARTH - REST - WATER",
             giants_shake = "It sounded as if doors opened somewhere far away",
@@ -1369,6 +1372,7 @@ return {
             giants_split_decision_ruins_translated = "CHOOSE MULT OR GOLD",
             giants_split_decision_ruins_open_dragon = "The Split-Decision Ruins opened with a Draconic foe",
             giants_split_decision_ruins_open_electric = "The Split-Decision Ruins opened with an Electric foe",
+            giants_reward = "Challenge a Giant",
         },
         labels = {
             k_maelmc_ultra_beast = "Ultra Beast",

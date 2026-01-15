@@ -1,30 +1,40 @@
---to_run_quests = {}
-
 MAELMC_QUESTS = {}
 
----@param name string localization key
----@param atlas string atlas key
----@param pos table|function a table of {x,y}, or a function returning a table of {x,y}
----@param display_text table|function a table of strings, or a function returning a table of strings
----@param dex integer the pokemon's dex number, used to order quests
-function maelmc_add_quest(name,atlas,pos,display_text,dex)
+--- Add a quest to the quest menu
+---@param args {name:string,atlas:string,pos:function|table,display_text:function|table,dex:integer|nil,reward_text:function|table,reward_atlas:string|nil,reward_pos:function|table|nil,set:string|nil}
+---`name = "sepia_quest_name"` - Key for quest's name localization\
+---`atlas = "maelmc_quests"` - Key for the quest's atlas, will be displayed as a PokeDisplayCard\
+---`pos = {x = 0, y = 0}` - Table of {x,y} or function that returns said table\
+---`display_text = {"a","b"}` - Table of strings or function that returns said table, describing the quest\
+---`dex = 1` - Related Pokémon's dex number, or position in the quest's menu\
+---`reward_text = {"a","b"}` - Table of strings or function that returns said table, describing rewards\
+---`reward_atlas = "maelmc_boss_blinds"` - Key for the reward's atlas, or nil if none\
+---`reward_pos = {x = 0, y = 0}` - Table of {x,y} or function that returns said table\
+---`set = "Blind"` - The reward's set (only matters for Tag, Blind & Booster)
+function maelmc_add_quest(args)
   local new_quest = {
-    name = name,
-    atlas = atlas,
-    pos = pos,
-    display_text = display_text,
-    dex = dex
+    name = args.name,
+    atlas = args.atlas,
+    pos = args.pos,
+    display_text = args.display_text,
+    dex = args.dex or 999999,
+    reward_text = args.reward_text,
+    reward_atlas = args.reward_atlas,
+    reward_pos = args.reward_pos,
+    set = args.set
   }
 
   local insert_at = 1
   for _, v in ipairs(MAELMC_QUESTS) do
-    if v.dex > dex then
+    if v.dex > args.dex then
       break
     end
     insert_at = insert_at + 1
   end
   table.insert(MAELMC_QUESTS, insert_at, new_quest)
 end
+
+--to_run_quests = {}
 
 --[[function G.FUNCS.maelmc_quest(args)
   local quest_keys = {}

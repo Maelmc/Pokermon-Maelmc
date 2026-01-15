@@ -25,10 +25,18 @@ local function display_text()
   return display_text
 end
 
-maelmc_add_quest(
-  "sepia_quest_name",
-  "maelmc_quests",
-  {x = 1, y = 0},
-  display_text,
-  648
-)
+local function reward_text()
+  return {localize("sepia_reward")}
+end
+
+maelmc_add_quest{
+  name = "sepia_quest_name",
+  atlas = "maelmc_quests",
+  pos = {x = 1, y = 0},
+  display_text = display_text,
+  dex = 648,
+  reward_text = reward_text,
+  reward_atlas = "maelmc_boss_blinds",
+  reward_pos = {x = 0, y = 0},
+  set = "Blind",
+}

@@ -9,10 +9,18 @@ local function display_text()
   return display_text
 end
 
-maelmc_add_quest(
-  "bloodmoon_beast_quest_name",
-  "maelmc_quests",
-  {x = 2, y = 0},
-  display_text,
-  901
-)
+local function reward_text()
+  return {localize("bloodmoon_beast_reward")}
+end
+
+maelmc_add_quest{
+  name = "bloodmoon_beast_quest_name",
+  atlas = "maelmc_quests",
+  pos = {x = 2, y = 0},
+  display_text = display_text,
+  dex = 901,
+  reward_text = reward_text,
+  reward_atlas = "maelmc_boss_blinds",
+  reward_pos = {x = 0, y = 1},
+  set = "Blind",
+}

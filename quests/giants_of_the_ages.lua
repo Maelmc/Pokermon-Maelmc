@@ -1,17 +1,44 @@
-local function giants_quest()
+--[[local function giants_quest()
   local quest = {atlas = "maelmc_quests", pos = {x = (G.GAME.giants_start and 5) or 4, y = 0}}
   quest.display_text = {
     localize("giants_quest_name"),
     localize("giants_chart"),
-    --[[localize("giants_one"),
+    [[localize("giants_one"),
     localize("giants_desert_ruins"),
     localize("giants_island_cave"),
     localize("giants_ancient_tomb"),
-    localize("giants_split_decision_ruins"),]]
+    localize("giants_split_decision_ruins"),
   }
   return quest
-end
+end]]
 --table.insert(to_run_quests,giants_quest)
+
+local function display_text()
+  local display_text = {
+    localize("giants_chart")
+  }
+  return display_text
+end
+
+local function reward_text()
+  return {localize("giants_reward")}
+end
+
+local function quest_pos()
+  return {x = (G.GAME.giants_start and 5) or 4, y = 0}
+end
+
+maelmc_add_quest{
+  name = "giants_quest_name",
+  atlas = "maelmc_quests",
+  pos = quest_pos,
+  display_text = display_text,
+  dex = 377,
+  reward_text = reward_text,
+  reward_atlas = "maelmc_boss_blinds",
+  reward_pos = {x = 0, y = 6},
+  set = "Blind",
+}
 
 local calculate_ref = SMODS.current_mod.calculate
 SMODS.current_mod.calculate = function(self, context)
