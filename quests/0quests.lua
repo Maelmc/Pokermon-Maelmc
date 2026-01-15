@@ -1,7 +1,7 @@
 MAELMC_QUESTS = {}
 
 --- Add a quest to the quest menu
----@param args {name:string,atlas:string,pos:function|table,display_text:function|table,dex:integer|nil,reward_text:function|table,reward_atlas:string|nil,reward_pos:function|table|nil,set:string|nil}
+---@param args {name:string, atlas:string, pos:function|table, display_text:function|table, dex:integer|nil, reward_text:function|table, reward_atlas:string|nil, reward_pos:function|table|nil, set:string|nil}
 ---`name = "sepia_quest_name"` - Key for quest's name localization\
 ---`atlas = "maelmc_quests"` - Key for the quest's atlas, will be displayed as a PokeDisplayCard\
 ---`pos = {x = 0, y = 0}` - Table of {x,y} or function that returns said table\
