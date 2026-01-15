@@ -183,6 +183,8 @@ function G.FUNCS.maelmc_quest_menu(args)
   local keys = {}
   if (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code then
     -- do things for multiplayer
+    sendDebugMessage("[PokermonMaelmc] The Quests button is disabled during a Multiplayer game")
+    return -- temporary solution to prevent crashes
   else
     for _, v in pairs(MAELMC_QUESTS) do
       table.insert(keys,{
