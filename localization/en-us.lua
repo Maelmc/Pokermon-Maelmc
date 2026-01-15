@@ -1315,6 +1315,7 @@ return {
             maelmc_safe = "Safe",
             maelmc_pokemon_quest = "Pokémon Quests",
             maelmc_quest = "Quest",
+            maelmc_quests = "Quests",
             maelmc_qm = "???",
             maelmc_quest_mp_disabled = "Quests are disabled during a Multiplayer game",
 

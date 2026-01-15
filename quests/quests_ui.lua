@@ -322,4 +322,26 @@ local function quest_keybind()
   G.FUNCS.maelmc_quest_menu({no_back = true})
 end
 
+-- Quest menu next to run info
+local cuibhud = create_UIBox_HUD
+function create_UIBox_HUD()
+  local root = cuibhud()
+  local quest_button = {n=G.UIT.R, config={align = "cm", minh = 1.75, minw = 1.5, padding = 0.05, r = 0.1, hover = true, colour = G.C.GREEN, button = "maelmc_quest_menu", shadow = true}, nodes={
+            {n=G.UIT.C, config={align = "cm", maxw = 1.4, focus_args = {button = 'start', orientation = 'bm'}, func = 'set_button_pip'}, nodes={
+              {n=G.UIT.T, config={text = localize('maelmc_quests'), scale = 0.4, colour = G.C.UI.TEXT_LIGHT, shadow = true}}
+            }},
+          }}
+  local buttons = root.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1]
+  local minh = 0
+  for _, v in pairs(buttons.nodes) do
+    minh = minh + v.config.minh
+  end
+  table.insert(buttons.nodes,quest_button)
+  minh = minh/#buttons.nodes
+  for _, v in pairs(buttons.nodes) do
+    v.config.minh = minh
+  end
+  return root
+end
+
 SMODS.Keybind({ key = "openPokemonQuests", key_pressed = "g", action = quest_keybind })
