@@ -1,47 +1,21 @@
 local displayed_quest = {
   name = "PLACEHOLDER",
   req_nodes = {
-    n = G.UIT.C,
-    config = {
-      align = "cm",
-      minw = G.CARD_W * 4,
-      padding = 0.05,
-      r = 0.1,
-      colour = G.C.BLACK
-    }, nodes={
-      {n = G.UIT.R,
-      config = { align = "cl" }, nodes={
-        {n = G.UIT.T,
-        config = {
-          align = "cl",
-          text = "PLACEHOLDER REQ_NODE",
-          scale = 0.4,
-          colour = G.C.UI.TEXT_LIGHT
-        }}
-      }},
-    }
+    n = G.UIT.C, config = {align = "cl", padding = 0.2, r = 0.1, colour = G.C.BLACK}, nodes={}
   },
   reward_nodes = {
     n = G.UIT.C,
-    config = {
-      align = "cm",
-      minw = G.CARD_W * 2,
-      padding = 0.05,
-      r = 0.1,
-      colour = G.C.BLACK
-    }, nodes={
-      {n = G.UIT.R,
-      config = { align = "cl" }, nodes={
-        {n = G.UIT.T,
-        config = {
-          text = "PLACEHOLDER REWARD_NODE",
-          scale = 0.4,
-          colour = G.C.UI.TEXT_LIGHT
-        }}
-      }},
-    }
+    config = {align = "cm", padding = 0.05, r = 0.1, colour = G.C.BLACK}, nodes={}
   },
 }
+
+local req_nodes_func = function()
+  return {n=G.UIT.ROOT, config={align = "cl", colour = G.C.CLEAR}, nodes={displayed_quest.req_nodes}}
+end
+
+local function reward_nodes_func()
+  return {n=G.UIT.ROOT, config={align = "cm", colour = G.C.CLEAR}, nodes={displayed_quest.reward_nodes}}
+end
 
 local function update_current_quest(id)
   if not MAELMC_QUESTS[id] then return end
@@ -53,7 +27,7 @@ local function update_current_quest(id)
   for _, v in ipairs(prerequisites) do
     nodes[#nodes + 1] = {
       n = G.UIT.R,
-      config = { align = "cl" },
+      config = { align = "cl"},
       nodes={
         {n = G.UIT.T,
         config = {
@@ -72,24 +46,14 @@ end
 
 local function create_cardareas(cols)
   G.your_collection = {}
-  local nodes = {
-      n = G.UIT.C,
-      config = {
-        align = "cm",
-        r = 0.1,
-        colour = G.C.BLACK,
-        emboss = 0.05
-      },
-      nodes = {
-      }
-    }
+  local nodes = {n = G.UIT.R, config = { align = "cm", r = 0.1, colour = G.C.BLACK }, nodes = {}}
 
   for i = 1, cols do
     local cardarea = CardArea(
       G.ROOM.T.x + 0.2 * G.ROOM.T.w / 2,
       G.ROOM.T.h,
       G.CARD_W*1.05,
-      G.CARD_H * 1.025,
+      G.CARD_H * 1.05,
       {
         card_limit = 1,
         type = 'title',
@@ -99,7 +63,7 @@ local function create_cardareas(cols)
     )
     G.your_collection[i] = cardarea
 
-    nodes.nodes[#nodes.nodes + 1] = { n = G.UIT.O, config = { align = "cm", object = cardarea } }
+    nodes.nodes[#nodes.nodes + 1] = { n = G.UIT.O, config = { align = "cr", object = cardarea } }
   end
 
   return nodes
@@ -120,7 +84,7 @@ local function populate_quest(options)
   cardarea:emplace(card)
 end
 
-G.FUNCS.maelmc_refresh_quest = function(args)
+function G.FUNCS.maelmc_refresh_quest(args)
   if not args or not args.cycle_config then return end
 
   local page = args.cycle_config.current_option
@@ -133,10 +97,23 @@ G.FUNCS.maelmc_refresh_quest = function(args)
   populate_quest({ page = page, create_card_func = create_card_func })
 
   update_current_quest(page)
-  --args.name_node:recalculate()
-  --args.req_nodes:recalculate()
-  --args.reward_nodes:recalculate()
-  print(args.cycle_config)
+  
+  local req = G.OVERLAY_MENU:get_UIE_by_ID("maelmc_req_nodes")
+  req.config.object:remove()
+  req.config.object = UIBox {
+    definition = req_nodes_func(),
+    config = { parent = req, align = "cm", colour = G.C.CLEAR},
+  }
+  req.UIBox:recalculate()
+
+  local rew = G.OVERLAY_MENU:get_UIE_by_ID("maelmc_reward_nodes")
+  rew.config.object:remove()
+  rew.config.object = UIBox {
+    definition = reward_nodes_func(),
+    config = { parent = rew, align = "cm", colour = G.C.CLEAR},
+  }
+  rew.UIBox:recalculate()
+
   INIT_COLLECTION_CARD_ALERTS()
 end
 
@@ -168,30 +145,14 @@ function G.FUNCS.maelmc_quest_menu(args)
     page_options[#page_options + 1] = page_text .. ' ' .. i .. '/' .. pages
   end
 
-  local req_nodes_func = function()
-  return {n=G.UIT.ROOT, config={align = "cm"}, nodes={displayed_quest.req_nodes}}
-  end
   local req_nodes = UIBox({
-      definition = req_nodes_func(),
-      config = {type = "cm"}
-    })
-
-  local function reward_nodes_func()
-    return {n=G.UIT.ROOT, config={align = "cm"}, nodes={displayed_quest.reward_nodes}}
-  end
-  local reward_nodes = UIBox({
-    definition = reward_nodes_func(),
-    config = {type = "cm"}
+    definition = req_nodes_func(),
+    config = {colour = G.C.CLEAR}
   })
 
-  local function name_node_func()
-    return {n=G.UIT.ROOT, config={align = "cm"}, nodes={
-        {n=G.UIT.T, config={text = displayed_quest.name, scale = 0.5, colour = G.C.UI.TEXT_LIGHT}}
-      }}
-  end
-  local name_node = UIBox({
-    definition = name_node_func(),
-    config = {type = "cm"}
+  local reward_nodes = UIBox({
+    definition = reward_nodes_func(),
+    config = {colour = G.C.CLEAR}
   })
 
   local cycle_menu = {
@@ -205,9 +166,6 @@ function G.FUNCS.maelmc_quest_menu(args)
         keys = keys,
         rows = rows,
         cols = cols,
-        name_node = name_node,
-        req_nodes = req_nodes,
-        reward_nodes = reward_nodes,
         create_card_func = PokeDisplayCard,
         colour = G.C.RED,
         no_pips = true,
@@ -225,14 +183,33 @@ function G.FUNCS.maelmc_quest_menu(args)
       contents = {
         -- title
         {n=G.UIT.R, config={align = "cm", minw = 2.5, padding = 0.1, r = 0.1, colour = G.C.ORANGE}, nodes={
-          {n=G.UIT.O, config={object = name_node}},
+           {n=G.UIT.T, config={ref_table = displayed_quest, ref_value = "name", scale = 0.5, colour = G.C.UI.TEXT_LIGHT}},
         }},
         
         -- prerequisites & reward
-        {n = G.UIT.R, config = {align = "cm", minh = G.CARD_H * 1.5, padding = 0.05}, nodes = {
-          cardareas,
-          {n=G.UIT.O, config={object = req_nodes}},
-          {n=G.UIT.O, config={object = reward_nodes}},
+        {n = G.UIT.R, config = {align = "cm", padding = 0.05}, nodes = {
+          -- card
+          {n = G.UIT.C, config = {align = "cm", padding = 0.2, r = 0.1, colour = G.C.BLACK}, nodes={cardareas}},
+          
+          -- req
+          {n = G.UIT.C, config = {align = "cm", minw = G.CARD_W * 3, padding = 0.2, r = 0.1, colour = G.C.BLACK}, nodes={
+            {n=G.UIT.R, config={align = "cm", minw = G.CARD_W * 3 - 0.2, padding = 0.1, r = 0.1, colour = G.C.ORANGE}, nodes={
+              {n=G.UIT.T, config={text = "Prerequisites", scale = 0.5, colour = G.C.UI.TEXT_LIGHT}},
+            }},
+            {n=G.UIT.R, config={align = "cl", minh = G.CARD_H * 2, padding = 0.1, r = 0.1}, nodes={
+              {n=G.UIT.O, config={align = "cl", id = "maelmc_req_nodes", object = req_nodes}},
+            }}
+          }},
+
+          -- rew
+          {n = G.UIT.C, config = {align = "cm", minw = G.CARD_W * 2, padding = 0.2, r = 0.1, colour = G.C.BLACK}, nodes={
+            {n=G.UIT.R, config={align = "cm", minw = G.CARD_W * 2 - 0.2, padding = 0.1, r = 0.1, colour = G.C.ORANGE}, nodes={
+              {n=G.UIT.T, config={text = "Reward", scale = 0.5, colour = G.C.UI.TEXT_LIGHT}},
+            }},
+            {n=G.UIT.R, config={align = "cl", minh = G.CARD_H * 2, padding = 0.1, r = 0.1}, nodes={
+              {n=G.UIT.O, config={align = "cl", id = "maelmc_reward_nodes", object = reward_nodes}},
+            }}
+          }},
         }},
 
         -- cycle menu
@@ -244,7 +221,7 @@ end
 
 
 -- Quest menu in page_options
-local cuibo = create_UIBox_options
+--[[local cuibo = create_UIBox_options
 function create_UIBox_options() 
   local base = cuibo()
   local minw = 0
@@ -256,9 +233,9 @@ function create_UIBox_options()
           end
       end
   end
-  table.insert(base.nodes[1].nodes[1].nodes[1].nodes,UIBox_button{id = 'quest_button', label = {localize('maelmc_pokemon_quest')}, button = "maelmc_pokemon_quest", minw = minw})
+  table.insert(base.nodes[1].nodes[1].nodes[1].nodes,UIBox_button{id = 'quest_button', label = {localize('maelmc_pokemon_quest')}, button = "maelmc_quest_menu", minw = minw})
   return base
-end
+end]]
 
 local function quest_keybind()
   G.FUNCS.maelmc_quest_menu({no_back = true})

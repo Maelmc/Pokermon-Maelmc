@@ -30,5 +30,5 @@ maelmc_add_quest(
   "maelmc_quests",
   {x = 1, y = 0},
   display_text,
-  901
+  648
 )
