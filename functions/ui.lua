@@ -145,12 +145,12 @@ function create_UIBox_options()
           end
       end
   end
-  table.insert(base.nodes[1].nodes[1].nodes[1].nodes,UIBox_button{id = 'quest_button', label = {localize('maelmc_quest')}, button = "maelmc_quest", minw = minw})
+  table.insert(base.nodes[1].nodes[1].nodes[1].nodes,UIBox_button{id = 'quest_button', label = {localize('maelmc_quest_menu')}, button = "maelmc_pokemon_quest", minw = minw})
   return base
 end
 
 local function quest_keybind()
-  G.FUNCS.maelmc_quest({no_back = true})
+  G.FUNCS.maelmc_quest_menu({no_back = true})
 end
 
 SMODS.Keybind({ key = "openPokemonQuests", key_pressed = "g", action = quest_keybind })

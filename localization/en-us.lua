@@ -1313,7 +1313,8 @@ return {
             maelmc_healed_ex = "Healed!",
             maelmc_trapped_ex = "Trapped!",
             maelmc_safe = "Safe",
-            maelmc_quest = "Pokémon Quests",
+            maelmc_pokemon_quest = "Pokémon Quests",
+            maelmc_quest = "Quest",
             maelmc_qm = "???",
             maelmc_quest_mp_disabled = "Quests are disabled during a Multiplayer game",
 

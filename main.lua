@@ -85,6 +85,18 @@ for _, file in ipairs(pfunc) do
   end
 end
 
+--Load quests
+local pquest = NFS.getDirectoryItems(mod_dir.."quests")
+for _, file in ipairs(pquest) do
+  sendDebugMessage ("[PokermonMaelmc] The file is: "..file)
+  local q, load_error = SMODS.load_file("quests/"..file)
+  if load_error then
+    sendDebugMessage ("[PokermonMaelmc] Error: "..load_error)
+  else
+    q()
+  end
+end
+
 --Load stickers
 local pseals = NFS.getDirectoryItems(mod_dir.."stickers")
 
