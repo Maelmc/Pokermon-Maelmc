@@ -2,11 +2,11 @@ local displayed_quest = {
   id = 1,
   name = "PLACEHOLDER",
   req_nodes = {
-    n = G.UIT.C, config = {align = "cl", padding = 0.2, r = 0.1}, nodes={}
+    n = G.UIT.C, config = {align = "cl", padding = 0.1}, nodes={}
   },
   reward_nodes = {
     n = G.UIT.C,
-    config = {align = "cm", padding = 0.05, r = 0.1}, nodes={}
+    config = {align = "cm", padding = 0.1}, nodes={}
   },
   reward_object_node = {
     n = G.UIT.C,
@@ -268,7 +268,7 @@ function G.FUNCS.maelmc_quest_menu(args)
           }},
           
           -- req
-          {n = G.UIT.C, config = {align = "cm", minw = G.CARD_W * 3, padding = 0.2, r = 0.1, colour = G.C.BLACK}, nodes={
+          {n = G.UIT.C, config = {align = "tm", minw = G.CARD_W * 3, padding = 0.2, r = 0.1, colour = G.C.BLACK}, nodes={
             {n=G.UIT.R, config={align = "cm", minw = G.CARD_W * 3 - 0.2, padding = 0.1, r = 0.1, colour = G.C.ORANGE}, nodes={
               {n=G.UIT.T, config={text = "Prerequisites", scale = 0.5, colour = G.C.UI.TEXT_LIGHT}},
             }},
@@ -278,7 +278,7 @@ function G.FUNCS.maelmc_quest_menu(args)
           }},
 
           -- rew
-          {n = G.UIT.C, config = {align = "cm", minw = G.CARD_W * 3, minh = G.CARD_H * 1.5, padding = 0.2, r = 0.1, colour = G.C.BLACK}, nodes={
+          {n = G.UIT.C, config = {align = "tm", minw = G.CARD_W * 3, minh = G.CARD_H * 1.5, padding = 0.2, r = 0.1, colour = G.C.BLACK}, nodes={
             {n=G.UIT.R, config={align = "cm", minw = G.CARD_W * 3 - 0.2, padding = 0.1, r = 0.1, colour = G.C.ORANGE}, nodes={
               {n=G.UIT.T, config={text = "Reward", scale = 0.5, colour = G.C.UI.TEXT_LIGHT}},
             }},

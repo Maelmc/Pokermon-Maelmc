@@ -28,6 +28,10 @@ local function quest_pos()
   return {x = (G.GAME.giants_start and 5) or 4, y = 0}
 end
 
+local function reward_pos()
+  return {x = 0, y = pseudorandom("quest_regi_blind",6,10)}
+end
+
 maelmc_add_quest{
   name = "giants_quest_name",
   atlas = "maelmc_quests",
@@ -36,7 +40,7 @@ maelmc_add_quest{
   dex = 377,
   reward_text = reward_text,
   reward_atlas = "maelmc_boss_blinds",
-  reward_pos = {x = 0, y = 6},
+  reward_pos = reward_pos,
   set = "Blind",
 }
 
