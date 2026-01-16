@@ -4,6 +4,7 @@ local function display_text()
   local mult = 0
   local stone = 0
   local lucky = 0
+  local percent = 0.1
   if G.playing_cards then
     for _, v in pairs(G.playing_cards) do
       if v.config.center.key == "m_bonus" then bonus = bonus + 1 end
@@ -19,10 +20,10 @@ local function display_text()
   local in_work = G.GAME.kitikami_ogre_quest_completed and G.GAME.kitikami_ogre_quest_completed or false
   local display_text = {
     localize("kitikami_ogre_enhancements"),
-    localize((bonus >= 0.2 or in_work) and "kitikami_ogre_bonus" or "maelmc_qm"),
-    localize((mult >= 0.2 or in_work) and "kitikami_ogre_mult" or "maelmc_qm"),
-    localize((stone >= 0.2 or in_work) and "kitikami_ogre_stone" or "maelmc_qm"),
-    localize((lucky >= 0.2 or in_work) and "kitikami_ogre_lucky" or "maelmc_qm"),
+    localize((bonus >= percent or in_work) and "kitikami_ogre_bonus" or "maelmc_qm"),
+    localize((mult >= percent or in_work) and "kitikami_ogre_mult" or "maelmc_qm"),
+    localize((stone >= percent or in_work) and "kitikami_ogre_stone" or "maelmc_qm"),
+    localize((lucky >= percent or in_work) and "kitikami_ogre_lucky" or "maelmc_qm"),
     localize(in_work == true and "kitikami_ogre_done" or in_work and "kitikami_ogre_next" or "maelmc_qm")
   }
   return display_text
