@@ -4,8 +4,7 @@ return {
             b_maelmc_hazarddeck = {
                 name = "Hazard Deck",
                 text = {
-                    "{C:earth}+#1#{} hazard layer",
-                    "{C:earth}+#2#{} hazard layer limit",
+                    "{C:hazard}+#1#{} hazard layer and limit",
                     "Hazards held in hand",
                     "give {C:attention}+1{} hand size"
                 }
@@ -226,33 +225,29 @@ return {
             j_maelmc_glimmet = {
                 name = "Glimmet",
                 text = {
-                    "{C:earth}+#1#{} hazard layer",
+                    "{C:hazard}+#1#{} hazard layer",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
-                    "gives {C:chips}+#2#{} Chips for every",
-                    "{C:attention}Hazard{} card held in hand",
-                    "{C:inactive}(Currently {C:chips}+#3#{C:inactive} Chips)",
-                    "{C:inactive,s:0.8}(Evolves after triggering {C:attention,s:0.8}#4#{C:inactive,s:0.8} times)"
+                    "gives {C:chips}+#2#{} Chips",
+                    "{C:inactive,s:0.8}(Evolves after triggering {C:attention,s:0.8}#3#{C:inactive,s:0.8} times)"
                 }
             },
             j_maelmc_glimmora = {
                 name = "Glimmora",
                 text = {
-                    "{C:earth}+#1#{} hazard layer, {C:earth}+#2#{} hazard layer limit",
-                    "Increase hazard level and limit by #3#",
-                    "after triggering {C:attention}#4#{} held {C:attention}Hazard Cards{}",
-                    "{C:inactive,s:0.8}(Requirement increases by #5# after each increase)",
+                    "{C:hazard}+#1#{} hazard layer and limit",
+                    "Increase hazard level and limit by {C:attention}#2#",
+                    "after triggering {C:attention}#3#{} held {C:attention}Hazard Cards{}",
+                    "{C:inactive,s:0.8}(Requirement {C:attention,s:0.8}doubles{C:inactive,s:0.8} after each increase)",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
-                    "gives {C:chips}+#6#{} Chips for every",
-                    "{C:attention}Hazard{} card held in hand",
-                    "{C:inactive}(Currently {C:chips}+#7#{C:inactive} Chips)",
+                    "gives {C:chips}+#4#{} Chips",
                 }
             },
             j_maelmc_cufant = {
                 name = "Cufant",
                 text = {
-                    "{C:earth}+#1#{} hazard layer",
+                    "{C:hazard}+#1#{} hazard layer",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Enhance {C:attention}#2# Hazard{} card in hand",
                     "into a {C:attention}Steel{} card",
@@ -263,7 +258,7 @@ return {
             j_maelmc_copperajah = {
                 name = "Copperajah",
                 text = {
-                    "{C:earth}+#1#{} hazard layer",
+                    "{C:hazard}+#1#{} hazard layer",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Enhance {C:attention}#2# Hazards{} cards in hand",
                     "into {C:attention}Steel{} cards",
@@ -1025,7 +1020,7 @@ return {
             j_maelmc_mega_glimmora = {
                 name = "Mega Glimmora",
                 text = {
-                    "{C:earth}+#1#{} hazard layer, {C:purple}+#2#{} hazard level limit",
+                    "{C:hazard}+#1#{} hazard layer and limit",
                     "When round begins, draw",
                     "all your {C:attention}Hazard{} cards",
                     "{br:3}ERROR - CONTACT STEAK",
