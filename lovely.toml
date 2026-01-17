@@ -189,7 +189,7 @@ payload = '''
 [[patches]]
 [patches.pattern]
 target = '=[SMODS Pokermon "enhancements/enhancement1.lua"]'
-pattern = '''in_pool = function(self, args) return false end,'''
+pattern = '''key = "hazard",'''
 position = "after"
 match_indent = true
 payload = '''set_ability = function(self, card, initial, delay_sprites)
