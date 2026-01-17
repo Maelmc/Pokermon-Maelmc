@@ -55,6 +55,7 @@ SMODS.current_mod.calculate = function(self, context)
   end
   if not ((next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code) then
     if context.kitikami_ogre_check and not G.GAME.kitikami_ogre_quest_completed then
+      local percent = 0.1
       local bonus = 0
       local mult = 0
       local stone = 0
@@ -67,7 +68,7 @@ SMODS.current_mod.calculate = function(self, context)
           if v.config.center.key == "m_lucky" then lucky = lucky + 1 end
         end
       end
-      if (bonus/#G.playing_cards >= 0.2) and (mult/#G.playing_cards >= 0.2) and (stone/#G.playing_cards >= 0.2) and (lucky/#G.playing_cards >= 0.2) then
+      if (bonus/#G.playing_cards >= percent) and (mult/#G.playing_cards >= percent) and (stone/#G.playing_cards >= percent) and (lucky/#G.playing_cards >= percent) then
         G.GAME.kitikami_ogre_quest_completed = "set"
         G.E_MANAGER:add_event(Event({
           trigger = "condition",
