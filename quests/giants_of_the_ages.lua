@@ -14,6 +14,9 @@ end]]
 --table.insert(to_run_quests,giants_quest)
 
 local function display_text()
+  if (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code then
+    return {localize("maelmc_quest_mp_disabled")}
+  end
   local display_text = {
     localize("giants_chart")
   }

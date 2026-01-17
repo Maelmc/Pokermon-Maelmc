@@ -1,4 +1,7 @@
 local function display_text()
+  if (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code then
+    return {localize("maelmc_quest_mp_disabled")}
+  end
   local quest = {atlas = "maelmc_quests", pos = {x = 3, y = 0}}
   local bonus = 0
   local mult = 0

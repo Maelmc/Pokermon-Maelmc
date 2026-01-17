@@ -14,6 +14,9 @@ end
 table.insert(to_run_quests,sepia_quest)]]
 
 local function display_text()
+  if (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code then
+    return {localize("maelmc_quest_mp_disabled")}
+  end
   local in_work = (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_sepia") or G.GAME.sepia_quest_complete or false
   local has_perrin = next(SMODS.find_card("j_maelmc_photographer")) or in_work
   local blind = has_perrin and (G.GAME and G.GAME.blind and G.GAME.blind.name == "The Mouth") or in_work

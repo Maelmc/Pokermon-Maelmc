@@ -1317,7 +1317,7 @@ return {
             maelmc_quest = "Quest",
             maelmc_quests = "Quests",
             maelmc_qm = "???",
-            maelmc_quest_mp_disabled = "Quests are disabled during a Multiplayer game",
+            maelmc_quest_mp_disabled = "Disabled during a Multiplayer game",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",

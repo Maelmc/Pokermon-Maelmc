@@ -1,4 +1,7 @@
 local function display_text()
+  if (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code then
+    return {localize("maelmc_quest_mp_disabled")}
+  end
   local in_work = G.GAME.bloodmoon_beast_quest_completed and G.GAME.bloodmoon_beast_quest_completed or false
   local has_perrin = next(SMODS.find_card("j_maelmc_photographer")) or in_work
   local display_text = {
