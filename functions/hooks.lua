@@ -16,10 +16,14 @@ function Card:set_ability(center, initial, delay_sprites)
   if self.config and self.config.center and (self.config.center.key == 'm_maelmc_trapped' ) and not initial then
     return
   end
-  if G.GAME.modifiers.hazard_deck and self.config.center_key == "m_poke_hazard" and self.ability.card_limit then
-    self.ability.card_limit = 0
+  if G.GAME.modifiers.hazard_deck and self.config.center and self.config.center.key == "m_poke_hazard" and self.ability and self.ability.card_limit then
+    self.ability.card_limit = self.ability.card_limit - 1
   end
   local ret = card_set_ability_ref(self, center, initial, delay_sprites)
+  if G.GAME.modifiers.hazard_deck and self.config.center and self.config.center.key == "m_poke_hazard" then
+    if not self.ability then self.ability = {} end
+    self.ability.card_limit = (self.ability.card_limit or 0) + 1
+  end
   SMODS.calculate_context({kitikami_ogre_check = true})
   return ret
 end

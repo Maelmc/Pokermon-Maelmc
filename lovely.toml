@@ -185,19 +185,6 @@ payload = '''
 #    if not self.getting_sliced)
 #'''
 
-# Hazards giving hand size on Hazard Deck (copied from the original code of Hazard cards)
-[[patches]]
-[patches.pattern]
-target = '=[SMODS Pokermon "enhancements/enhancement1.lua"]'
-pattern = '''key = "hazard",'''
-position = "after"
-match_indent = true
-payload = '''set_ability = function(self, card, initial, delay_sprites)
-    if G.GAME.modifiers.hazard_deck then
-      card.ability.card_limit = 1
-    end
-  end,'''
-
 # Guzzlord eats the reroll button
 [[patches]]
 [patches.pattern]
