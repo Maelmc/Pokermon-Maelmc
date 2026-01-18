@@ -181,15 +181,6 @@ position = 'before'
 match_indent = true
 payload = '''G.GAME.modifiers.guzzlord_eat_shop_reroll and {} or'''
 
-# Guzzlord eats the shop sign
-[[patches]]
-[patches.pattern]
-target = "functions/UI_definitions.lua"
-pattern = '''{n=G.UIT.O, config={object = shop_sign}}'''
-position = 'before'
-match_indent = true
-payload = '''G.GAME.modifiers.guzzlord_eat_shop_sign and {} or'''
-
 # Bouffalant working with Cerulean Bell
 [[patches]]
 [patches.pattern]

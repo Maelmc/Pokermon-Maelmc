@@ -625,7 +625,7 @@ local guzzlord = {
         if (G.GAME.energy_plus or 0) > -energy_max then table.insert(pool,{weight = 50, name = "energy limit"}) end
         if (G.GAME.hazard_max or 3) > 0 then table.insert(pool,{weight = 50, name = "hazard limit"}) end
         if not G.GAME.modifiers.guzzlord_eat_shop_reroll then table.insert(pool,{weight = 1, name = "shop reroll"}) end
-        if not G.GAME.modifiers.guzzlord_eat_shop_sign then table.insert(pool,{weight = 1, name = "shop sign"}) end
+        if not G.GAME.modifiers.guzzlord_eat_shop_sign then table.insert(pool,{weight = 1000000000, name = "shop sign"}) end
 
         if not next(pool) then
           card.ability.extra.unscalable_mult = card.ability.extra.unscalable_mult - card.ability.extra.unscalable_mult2

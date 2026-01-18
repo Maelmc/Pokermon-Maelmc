@@ -178,6 +178,14 @@ G.FUNCS.can_reroll = function(e)
   return cr(e)
 end
 
+-- Guzzlord eats the shop sign
+local guidef_shop_ref = G.UIDEF.shop
+function G.UIDEF.shop()
+  local ret = guidef_shop_ref()
+  if G.GAME.modifiers.guzzlord_eat_shop_sign and G.SHOP_SIGN then G.SHOP_SIGN:remove() end
+  return ret
+end
+
 -- Multiple Mega Malamar hooks
 local cscui = create_shop_card_ui
 create_shop_card_ui = function(card, type, area)

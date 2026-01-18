@@ -349,6 +349,7 @@ local hearthflame_mask={
       G.GAME.chips = 0
       if not blind.prep_next then
         blind.prep_next = true
+        ease_hands_played(1,true)
         G.E_MANAGER:add_event(Event({
           func = function()
             maelmc_set_next_boss("bl_maelmc_wellspring_mask",false,false,true,true)
@@ -385,7 +386,6 @@ local wellspring_mask={
   config = {disabled = false},
   set_blind = function(self)
     G.GAME.kitikami_ogre_quest_completed = "fighting wellspring"
-    ease_hands_played(1)
   end,
   calculate = function(self, blind, context)
     local beat = false
@@ -398,6 +398,7 @@ local wellspring_mask={
       G.GAME.chips = 0
       if not blind.prep_next then
         blind.prep_next = true
+        ease_hands_played(1,true)
         G.E_MANAGER:add_event(Event({
           func = function()
             maelmc_set_next_boss("bl_maelmc_cornerstone_mask",false,false,true,true)
@@ -434,7 +435,6 @@ local cornerstone_mask={
   config = {disabled = false},
   set_blind = function(self)
     G.GAME.kitikami_ogre_quest_completed = "fighting cornerstone"
-    ease_hands_played(1)
   end,
   calculate = function(self, blind, context)
     local beat = false
@@ -447,6 +447,7 @@ local cornerstone_mask={
       G.GAME.chips = 0
       if not blind.prep_next then
         blind.prep_next = true
+        ease_hands_played(1,true)
         G.E_MANAGER:add_event(Event({
           func = function()
             maelmc_set_next_boss("bl_maelmc_teal_mask",false,false,true,true)
@@ -483,7 +484,6 @@ local teal_mask={
   config = {disabled = false},
   set_blind = function(self)
     G.GAME.kitikami_ogre_quest_completed = "fighting teal"
-    ease_hands_played(1)
   end,
   calculate = function(self, blind, context)
   end,
