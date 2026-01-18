@@ -244,7 +244,7 @@ local mega_malamar={
     end
 
     for _, v in ipairs(G.consumeables.cards) do
-      if not (v.config.center.key == "c_poke_megastone" and v.ability.extra.used_on == card.config.center.key) then
+      if not (v.config.center.key == "c_poke_megastone" and v.ability.extra.used_on == card.unique_val) then
         v:flip()
       end
     end

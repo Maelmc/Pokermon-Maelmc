@@ -56,6 +56,17 @@ local wonder_trade = {
   end
 }
 
+if (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) then
+  MP.ACTIONS.wonder_trade = function(msg)
+    Client.send("action:magnetResponse,key:reqType;WTREQUEST/"..msg)
+  end
+
+  MP.ACTIONS.wonder_trade_response = function(msg,sent)
+    Client.send("action:magnetResponse,key:reqType;WTANSWER/"..msg.."/sent;"..sent)
+  end
+end
+
+
 local mean_look = {
   name = "mean_look",
   poke_custom_prefix = "maelmc",
@@ -90,6 +101,12 @@ local mean_look = {
     return (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code and MP.LOBBY.config.multiplayer_jokers
   end
 }
+
+if (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) then
+  MP.ACTIONS.mean_look = function()
+    Client.send("action:magnetResponse,key:MEANLOOK")
+  end
+end
 
 return {
   name = "Maelmc's Multiplayer Jokers",

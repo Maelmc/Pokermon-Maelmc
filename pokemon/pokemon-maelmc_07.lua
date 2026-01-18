@@ -667,7 +667,6 @@ local guzzlord = {
             car.getting_sliced = true
             car:start_dissolve({ G.C.RED }, nil, 1.6)
             SMODS.calculate_effect({ message = localize { type = 'variable', key = 'maelmc_playing_card_minus', vars = { 1 } } }, card)
-            return true
 
           elseif result == "hand" then
             G.GAME.round_resets.hands = G.GAME.round_resets.hands - 1

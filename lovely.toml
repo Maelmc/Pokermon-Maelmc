@@ -52,19 +52,6 @@ if _type == 'Joker' then
 end
 '''
 
-# More code for Photographer, to make it compatible with evolving pokemon
-[[patches]]
-[patches.pattern]
-target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
-pattern = '''G.P_CENTERS.e_poke_shiny.on_load(card)
-    end
-  end'''
-position = "after"
-match_indent = true
-payload = '''
-maelmc_photographer_util(card)
-'''
-
 # maelmc_ban_no_perish banishing non perish jokers
 [[patches]]
 [patches.pattern]
@@ -189,89 +176,19 @@ payload = '''
 [[patches]]
 [patches.pattern]
 target = "functions/UI_definitions.lua"
-pattern = '''{n=G.UIT.R, config={align = "cm", minw = 2.8, minh = 1.6, r=0.15,colour = G.C.GREEN, button = 'reroll_shop', func = 'can_reroll', hover = true,shadow = true}, nodes = {
-                          {n=G.UIT.R, config={align = "cm", padding = 0.07, focus_args = {button = 'x', orientation = 'cr'}, func = 'set_button_pip'}, nodes={
-                            {n=G.UIT.R, config={align = "cm", maxw = 1.3}, nodes={
-                              {n=G.UIT.T, config={text = localize('k_reroll'), scale = 0.4, colour = G.C.WHITE, shadow = true}},
-                            }},
-                            {n=G.UIT.R, config={align = "cm", maxw = 1.3, minw = 1}, nodes={
-                              {n=G.UIT.T, config={text = localize('$'), scale = 0.7, colour = G.C.WHITE, shadow = true}},
-                              {n=G.UIT.T, config={ref_table = G.GAME.current_round, ref_value = 'reroll_cost', scale = 0.75, colour = G.C.WHITE, shadow = true}},
-                            }}
-                          }}
-                        }},
-                      }},'''
-position = 'at'
+pattern = '''{n=G.UIT.R, config={align = "cm", minw = 2.8, minh = 1.6, r=0.15,colour = G.C.GREEN, button = 'reroll_shop', func = 'can_reroll', hover = true,shadow = true}, nodes = {'''
+position = 'before'
 match_indent = true
-payload = '''G.GAME.modifiers.guzzlord_eat_shop_reroll and {} or {n=G.UIT.R, config={align = "cm", minw = 2.8, minh = 1.6, r=0.15,colour = G.C.GREEN, button = 'reroll_shop', func = 'can_reroll', hover = true,shadow = true}, nodes = {
-    {n=G.UIT.R, config={align = "cm", padding = 0.07, focus_args = {button = 'x', orientation = 'cr'}, func = 'set_button_pip'}, nodes={
-    {n=G.UIT.R, config={align = "cm", maxw = 1.3}, nodes={
-        {n=G.UIT.T, config={text = localize('k_reroll'), scale = 0.4, colour = G.C.WHITE, shadow = true}},
-    }},
-    {n=G.UIT.R, config={align = "cm", maxw = 1.3, minw = 1}, nodes={
-        {n=G.UIT.T, config={text = localize('$'), scale = 0.7, colour = G.C.WHITE, shadow = true}},
-        {n=G.UIT.T, config={ref_table = G.GAME.current_round, ref_value = 'reroll_cost', scale = 0.75, colour = G.C.WHITE, shadow = true}},
-    }}
-    }}
-}},
-}},'''
-
-[[patches]]
-[patches.pattern]
-target = "functions/button_callbacks.lua"
-pattern = '''G.FUNCS.can_reroll = function(e)'''
-position = "after"
-payload = '''if G.GAME.modifiers.guzzlord_eat_shop_reroll then
-        e.config.colour = G.C.BLACK
-        e.config.button = nil
-        return
-    end'''
-match_indent = true
+payload = '''G.GAME.modifiers.guzzlord_eat_shop_reroll and {} or'''
 
 # Guzzlord eats the shop sign
 [[patches]]
 [patches.pattern]
 target = "functions/UI_definitions.lua"
-pattern = '''G.SHOP_SIGN = UIBox{
-      definition = 
-        {n=G.UIT.ROOT, config = {colour = G.C.DYN_UI.MAIN, emboss = 0.05, align = 'cm', r = 0.1, padding = 0.1}, nodes={
-          {n=G.UIT.R, config={align = "cm", padding = 0.1, minw = 4.72, minh = 3.1, colour = G.C.DYN_UI.DARK, r = 0.1}, nodes={
-            {n=G.UIT.R, config={align = "cm"}, nodes={
-              {n=G.UIT.O, config={object = shop_sign}}
-            }},
-            {n=G.UIT.R, config={align = "cm"}, nodes={
-              {n=G.UIT.O, config={object = DynaText({string = {localize('ph_improve_run')}, colours = {lighten(G.C.GOLD, 0.3)},shadow = true, rotate = true, float = true, bump = true, scale = 0.5, spacing = 1, pop_in = 1.5, maxw = 4.3})}}
-            }},
-          }},
-        }},
-      config = {
-        align="cm",
-        offset = {x=0,y=-15},
-        major = G.HUD:get_UIE_by_ID('row_blind'),
-        bond = 'Weak'
-      }
-    }'''
-position = 'at'
+pattern = '''{n=G.UIT.O, config={object = shop_sign}}'''
+position = 'before'
 match_indent = true
-payload = '''G.SHOP_SIGN = UIBox{
-      definition = 
-        {n=G.UIT.ROOT, config = {colour = G.C.DYN_UI.MAIN, emboss = 0.05, align = 'cm', r = 0.1, padding = 0.1}, nodes={
-          {n=G.UIT.R, config={align = "cm", padding = 0.1, minw = 4.72, minh = 3.1, colour = G.C.DYN_UI.DARK, r = 0.1}, nodes={
-            G.GAME.modifiers.guzzlord_eat_shop_sign and {} or {n=G.UIT.R, config={align = "cm"}, nodes={
-              {n=G.UIT.O, config={object = shop_sign}}
-            }},
-            {n=G.UIT.R, config={align = "cm"}, nodes={
-              {n=G.UIT.O, config={object = DynaText({string = {localize('ph_improve_run')}, colours = {lighten(G.C.GOLD, 0.3)},shadow = true, rotate = true, float = true, bump = true, scale = 0.5, spacing = 1, pop_in = 1.5, maxw = 4.3})}}
-            }},
-          }},
-        }},
-      config = {
-        align="cm",
-        offset = {x=0,y=-15},
-        major = G.HUD:get_UIE_by_ID('row_blind'),
-        bond = 'Weak'
-      }
-    }'''
+payload = '''G.GAME.modifiers.guzzlord_eat_shop_sign and {} or'''
 
 # Bouffalant working with Cerulean Bell
 [[patches]]
@@ -308,38 +225,14 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
-pattern = "card.created_on_pause = nil"
-position = "after"
+pattern = '''return card'''
+position = "before"
 match_indent = true
 payload = '''if #find_joker("mega_malamar") > 0 and not (card.facing == 'back') then
-      card.facing = 'back'
-      card.sprite_facing = 'back'
-    end'''
-
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = "if not skip_materialize then card:start_materialize(colours, silent) end"
-position = "after"
-match_indent = true
-payload = '''if #find_joker("mega_malamar") > 0 and not (card.facing == 'back') then
-      card.facing = 'back'
-      card.sprite_facing = 'back'
-    end'''
-
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = '''end
-    return card'''
-position = "at"
-match_indent = true
-payload = '''end
-    if #find_joker("mega_malamar") > 0 and not (card.facing == 'back') then
-      card.facing = 'back'
-      card.sprite_facing = 'back'
-    end
-    return card'''
+  card.facing = 'back'
+  card.sprite_facing = 'back'
+end
+'''
 
 [[patches]]
 [patches.pattern]
@@ -347,18 +240,7 @@ target = "cardarea.lua"
 pattern = '''function CardArea:emplace(card, location, stay_flipped)'''
 position = "after"
 match_indent = true
-payload = '''    stay_flipped = stay_flipped or (self ~= G.hand and #find_joker("mega_malamar") > 0)'''
-
-[[patches]]
-[patches.pattern]
-target = "functions/UI_definitions.lua"
-pattern = '''function create_shop_card_ui(card, type, area)'''
-position = "after"
-match_indent = true
-payload = ''' if #find_joker("mega_malamar") > 0 and not (card.facing == 'back') then
-      card.facing = 'back'
-      card.sprite_facing = 'back'
-    end'''
+payload = '''stay_flipped = stay_flipped or (self ~= G.hand and #find_joker("mega_malamar") > 0)'''
 
 
 # Preventing pokerus from acting weirdly when evolving
@@ -434,20 +316,6 @@ local function action_wonder_trade_response(msg)
   maelmc_wonder_trade_joker_creation(key,extra,edition)
 end
 '''
-
-[[patches]]
-[patches.pattern]
-target = '=[SMODS Multiplayer "networking/action_handlers.lua"]'
-pattern = '''function MP.ACTIONS.fail_timer()'''
-position = "before"
-match_indent = true
-payload = '''function MP.ACTIONS.wonder_trade(msg)
-  Client.send("action:magnetResponse,key:reqType;WTREQUEST/"..msg)
-end
-
-function MP.ACTIONS.wonder_trade_response(msg,sent)
-  Client.send("action:magnetResponse,key:reqType;WTANSWER/"..msg.."/sent;"..sent)
-end'''
 
 [[patches]]
 [patches.pattern]
@@ -528,20 +396,6 @@ end
 [[patches]]
 [patches.pattern]
 target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
-pattern = '''function MP.ACTIONS.fail_timer()'''
-position = "before"
-match_indent = true
-payload = '''function MP.ACTIONS.wonder_trade(msg)
-  Client.send("action:magnetResponse,key:reqType;WTREQUEST/"..msg)
-end
-
-function MP.ACTIONS.wonder_trade_response(msg,sent)
-  Client.send("action:magnetResponse,key:reqType;WTANSWER/"..msg.."/sent;"..sent)
-end'''
-
-[[patches]]
-[patches.pattern]
-target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
 pattern = '''elseif parsedAction.action == "version" then'''
 position = "before"
 match_indent = true
@@ -571,7 +425,6 @@ match_indent = true
 payload = '''
 end
 '''
-
 # Mean Look
 [[patches]]
 [patches.pattern]
@@ -590,16 +443,6 @@ payload = '''local function action_mean_look()
   }))
 end
 '''
-
-[[patches]]
-[patches.pattern]
-target = '=[SMODS Multiplayer "networking/action_handlers.lua"]'
-pattern = '''function MP.ACTIONS.fail_timer()'''
-position = "before"
-match_indent = true
-payload = '''function MP.ACTIONS.mean_look()
-  Client.send("action:magnetResponse,key:MEANLOOK")
-end'''
 
 [[patches]]
 [patches.pattern]
@@ -632,22 +475,11 @@ end
 [[patches]]
 [patches.pattern]
 target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
-pattern = '''function MP.ACTIONS.fail_timer()'''
-position = "before"
-match_indent = true
-payload = '''function MP.ACTIONS.mean_look()
-  Client.send("action:magnetResponse,key:MEANLOOK")
-end'''
-
-[[patches]]
-[patches.pattern]
-target = '=[SMODS NanoMultiplayer "networking/action_handlers.lua"]'
 pattern = '''elseif parsedAction.action == "version" then'''
 position = "before"
 match_indent = true
 payload = '''elseif parsedAction.action == "magnetResponse" and string.find(parsedAction.key,"MEANLOOK") then
 	action_mean_look()'''
-
 
 # Sepia for Meloetta
 [[patches]]
@@ -761,9 +593,9 @@ payload = '''if context.main_scoring and context.cardarea == G.play and card.abi
 [[patches]]
 [patches.pattern]
 target = 'functions/common_events.lua'
-pattern = '''ret.playing_card.mult = mult'''
-position = "at"
-payload = '''ret.playing_card.mult = (next(SMODS.find_card('j_maelmc_regidrago')) and mult * 4) or mult'''
+pattern = '''-- TARGET: main scoring on played cards'''
+position = "after"
+payload = '''if ret.playing_card.mult then ret.playing_card.mult = (next(SMODS.find_card('j_maelmc_regidrago')) and ret.playing_card.mult * 4) or ret.playing_card.mult end'''
 match_indent = true
 
 # Pokémon Center banned from challenges

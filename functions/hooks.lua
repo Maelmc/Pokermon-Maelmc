@@ -158,3 +158,33 @@ get_family_keys = function(card)
   end
   return ret
 end
+
+-- Photographer compatible with evolving pokemon
+local pbe = poke_backend_evolve
+poke_backend_evolve = function(card, to_key, energize_amount)
+  local ret = pbe(card, to_key, energize_amount)
+  maelmc_photographer_util(card)
+  return ret
+end
+
+-- Guzzlord eats the reroll button
+local cr = G.FUNCS.can_reroll
+G.FUNCS.can_reroll = function(e)
+  if G.GAME.modifiers.guzzlord_eat_shop_reroll then
+    e.config.colour = G.C.BLACK
+    e.config.button = nil
+    return
+  end
+  return cr(e)
+end
+
+-- Multiple Mega Malamar hooks
+local cscui = create_shop_card_ui
+create_shop_card_ui = function(card, type, area)
+  local ret = cscui(card, type, area)
+  if #find_joker("mega_malamar") > 0 and not (card.facing == 'back') then
+    card.facing = 'back'
+    card.sprite_facing = 'back'
+  end
+  return ret
+end
