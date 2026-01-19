@@ -14,6 +14,8 @@ local wonder_trade = {
     type_tooltip(self, info_queue, card)
     return {vars = {}}
   end,
+  unlocked = true,
+  discovered = true,
   rarity = 2,
   cost = 5,
   stage = "Other",
@@ -84,6 +86,8 @@ local mean_look = {
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_shadow_tag', set = 'Tag', specific_vars = {localize { type = 'name_text', set = 'Enhanced', key = "m_maelmc_trapped" }} }
     return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_shadow_tag" }}}
   end,
+  unlocked = true,
+  discovered = true,
   rarity = 2,
   cost = 5,
   stage = "Other",

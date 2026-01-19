@@ -1,16 +1,15 @@
 local pokemart = {
 	key = "pokemart",
 	atlas = "maelmc_vouchers",
-    order = 37,
-    set = "Voucher",
-    pos = { x = 0, y = 0 },
-    config = {extra = {rate = 2}},
-    discovered = true,
-    unlocked = true,
-    available = true,
-    cost = 10,
-    loc_vars = function(self, info_queue, card)
-		return { vars = { card.ability.extra.rate } }
+  order = 37,
+  set = "Voucher",
+  pos = { x = 0, y = 0 },
+  config = {extra = {rate = 2}},
+  unlocked = true,
+  available = true,
+  cost = 10,
+  loc_vars = function(self, info_queue, card)
+    return { vars = { card.ability.extra.rate } }
 	end,
   redeem = function(self, card)
     G.E_MANAGER:add_event(Event({
@@ -33,17 +32,16 @@ local pokemart = {
 local departmentstore = {
 	key = "departmentstore",
 	atlas = "maelmc_vouchers",
-    order = 38,
-    set = "Voucher",
-    pos = { x = 1, y = 0 },
-    config = {extra = {rate = 4}},
-    discovered = true,
-    unlocked = true,
-    available = true,
-    cost = 10,
-    requires = {"v_maelmc_pokemart"},
-    loc_vars = function(self, info_queue, card)
-		return { vars = { card.ability.extra.rate } }
+  order = 38,
+  set = "Voucher",
+  pos = { x = 1, y = 0 },
+  config = {extra = {rate = 4}},
+  unlocked = true,
+  available = true,
+  cost = 10,
+  requires = {"v_maelmc_pokemart"},
+  loc_vars = function(self, info_queue, card)
+    return { vars = { card.ability.extra.rate } }
 	end,
   redeem = function(self, card)
     G.E_MANAGER:add_event(Event({

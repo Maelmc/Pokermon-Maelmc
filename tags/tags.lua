@@ -6,7 +6,6 @@ local cleanse_tag = {
 	config = {},
 	key = "cleanse_tag",
   min_ante = 2,
-  discovered = true,
 	loc_vars = function(self, info_queue)
 		return {}
 	end,
@@ -31,7 +30,6 @@ local spell_tag = {
 	config = {},
 	key = "spell_tag",
   min_ante = 2,
-  discovered = true,
 	loc_vars = function(self, info_queue)
 		return {}
 	end,

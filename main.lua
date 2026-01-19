@@ -110,7 +110,7 @@ for _, file in ipairs(pseals) do
     if curr_sticker.init then curr_sticker:init() end
     
     for _, item in ipairs(curr_sticker.list) do
-      item.discovered = not pokermon_config.pokemon_discovery
+      if not item.discovered then item.discovered = not pokermon_config.pokemon_discovery end
       SMODS.Sticker(item)
     end
   end
@@ -129,7 +129,7 @@ for _, file in ipairs(blinds) do
     if curr_blind.init then curr_blind:init() end
     
     for i, item in ipairs(curr_blind.list) do
-      item.discovered = not pokermon_config.pokemon_discovery
+      if not item.discovered then item.discovered = not pokermon_config.pokemon_discovery end
       SMODS.Blind(item)
     end
   end
@@ -148,7 +148,7 @@ for _, file in ipairs(tags) do
     if curr_tag.init then curr_tag:init() end
     
     for _, item in ipairs(curr_tag.list) do
-      item.discovered = not pokermon_config.pokemon_discovery
+      if not item.discovered then item.discovered = not pokermon_config.pokemon_discovery end
       SMODS.Tag(item)
     end
   end
@@ -167,7 +167,7 @@ for _, file in ipairs(enhancements) do
     if curr_enhance.init then curr_enhance:init() end
     
     for _, item in ipairs(curr_enhance.list) do
-      item.discovered = not pokermon_config.pokemon_discovery
+      if not item.discovered then item.discovered = not pokermon_config.pokemon_discovery end
       SMODS.Enhancement(item)
     end
   end
@@ -213,7 +213,7 @@ for _, file in ipairs(pconsumables) do
     
     for _, item in ipairs(curr_consumable.list) do
       if not (item.pokeball and not pokermon_config.pokeballs) then
-        item.discovered = not pokermon_config.pokemon_discovery
+        if not item.discovered then item.discovered = not pokermon_config.pokemon_discovery end
         SMODS.Consumable(item)
       end
     end
@@ -233,7 +233,7 @@ for _, file in ipairs(pboosters) do
     if curr_booster.init then curr_booster:init() end
     
     for _, item in ipairs(curr_booster.list) do
-      item.discovered = not pokermon_config.pokemon_discovery
+      if not item.discovered then item.discovered = not pokermon_config.pokemon_discovery end
       SMODS.Booster(item)
     end
   end
@@ -252,7 +252,7 @@ for _, file in ipairs(vouchers) do
     if curr_voucher.init then curr_voucher:init() end
     
     for _, item in ipairs(curr_voucher.list) do
-      item.discovered = not pokermon_config.pokemon_discovery
+      if not item.discovered then item.discovered = not pokermon_config.pokemon_discovery end
       SMODS.Voucher(item)
     end
   end

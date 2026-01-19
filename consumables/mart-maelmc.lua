@@ -12,7 +12,6 @@ local tealmask = {
   cost = 4,
   evo_item = true,
   unlocked = true,
-  discovered = true,
   can_use = function(self, card)
     if G.hand.highlighted then
       if #G.hand.highlighted >= self.config.min_highlighted and #G.hand.highlighted <= self.config.max_highlighted then
@@ -80,7 +79,6 @@ local wellspringmask = {
   cost = 4,
   evo_item = true,
   unlocked = true,
-  discovered = true,
   can_use = function(self, card)
     if G.hand.highlighted then
       if #G.hand.highlighted >= self.config.min_highlighted and #G.hand.highlighted <= self.config.max_highlighted then
@@ -149,7 +147,6 @@ local hearthflamemask = {
   cost = 4,
   evo_item = true,
   unlocked = true,
-  discovered = true,
   can_use = function(self, card)
     if G.hand.highlighted then
       if #G.hand.highlighted >= self.config.min_highlighted and #G.hand.highlighted <= self.config.max_highlighted then
@@ -217,7 +214,6 @@ local cornerstonemask = {
   cost = 4,
   evo_item = true,
   unlocked = true,
-  discovered = true,
   can_use = function(self, card)
     if G.hand.highlighted then
       if #G.hand.highlighted >= self.config.min_highlighted and #G.hand.highlighted <= self.config.max_highlighted then
@@ -284,7 +280,6 @@ local meteorite = {
   cost = 4,
   evo_item = true,
   unlocked = true,
-  discovered = true,
   can_use = function(self, card, context)
     if G.jokers.highlighted and #G.jokers.highlighted == 1 then
       if string.find(G.jokers.highlighted[1].config.center.name,"deoxys") then
@@ -358,7 +353,6 @@ local beastball = {
   soul_set = "Planet",
   soul_rate = .0046,
   unlocked = true,
-  discovered = true,
   can_use = function(self, card)
     if #G.jokers.cards < G.jokers.config.card_limit or self.area == G.jokers then
         return true
@@ -389,7 +383,6 @@ local metronome = {
   atlas = "maelmc_mart",
   cost = 4,
   unlocked = true,
-  discovered = true,
   can_use = function(self, card)
     if card.ability.hand_times >= card.ability.use_at then return true end
     return false
@@ -439,7 +432,6 @@ local mint = {
   atlas = "maelmc_mart",
   cost = 4,
   unlocked = true,
-  discovered = true,
   hidden = true,
   soul_set = "Item",
   soul_rate = .025,

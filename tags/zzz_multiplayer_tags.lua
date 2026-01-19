@@ -5,6 +5,7 @@ local shadow_tag = {
 	pos = { x = 0, y = 0 },
 	config = { type = "eval" },
 	key = "shadow_tag",
+  unlocked = true,
   discovered = true,
 	loc_vars = function(self, info_queue)
 		info_queue[#info_queue + 1] = G.P_CENTERS["m_maelmc_trapped"]
