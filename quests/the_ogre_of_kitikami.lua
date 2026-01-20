@@ -36,6 +36,10 @@ local function reward_text()
   return {localize("kitikami_ogre_reward")}
 end
 
+local function designer()
+  return {name = "Maelmc", colour = G.C.MAELMC.ORANGE}
+end
+
 maelmc_add_quest{
   name = "kitikami_ogre_quest_name",
   atlas = "maelmc_quests",
@@ -46,6 +50,7 @@ maelmc_add_quest{
   reward_atlas = "maelmc_boss_blinds",
   reward_pos = {x = 0, y = 5},
   set = "Blind",
+  designer = designer,
 }
 
 local calculate_ref = SMODS.current_mod.calculate

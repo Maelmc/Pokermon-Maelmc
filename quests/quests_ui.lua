@@ -5,13 +5,14 @@ local displayed_quest = {
     n = G.UIT.C, config = {align = "cl", padding = 0.1}, nodes={}
   },
   reward_nodes = {
-    n = G.UIT.C,
-    config = {align = "cm", padding = 0.1}, nodes={}
+    n = G.UIT.C, config = {align = "cm", padding = 0.1}, nodes={}
   },
   reward_object_node = {
-    n = G.UIT.C,
-    config = {align = "cm"}, nodes={}
+    n = G.UIT.C, config = {align = "cm"}, nodes={}
   },
+  designer_node = {
+    n = G.UIT.C, config = {align = "cm", padding = 0.1}, nodes={}
+  }
 }
 
 local req_nodes_func = function()
@@ -24,6 +25,10 @@ end
 
 local function reward_object_node_func()
   return {n=G.UIT.ROOT, config={align = "cm", colour = G.C.CLEAR}, nodes={displayed_quest.reward_object_node}}
+end
+
+local function designer_nodes_func()
+  return {n=G.UIT.ROOT, config={align = "cm", colour = G.C.CLEAR}, nodes={displayed_quest.designer_node}}
 end
 
 local function update_current_quest(id)
@@ -71,6 +76,23 @@ local function update_current_quest(id)
   displayed_quest.reward_nodes.nodes = nodes2
 
   displayed_quest.reward_object_node.nodes = {{ n = G.UIT.O, config = { align = "cm", object = G.your_collection[2] } }}
+
+  local designer = type(curr_quest.designer) == "function" and curr_quest.designer() or curr_quest.designer
+  if designer then
+    local designer_colour = (type(designer) == "table" and designer.colour) and designer.colour or G.C.UI.TEXT_LIGHT
+    local back_colour = (type(designer) == "table" and designer.back_colour) and designer.back_colour or G.C.CLEAR
+    local designer_text = (type(designer) == "string" and designer) or designer.name
+    displayed_quest.designer_node.nodes = {
+      {n = G.UIT.R, config = {align = "cm"}, nodes = {
+        {n=G.UIT.T, config={text = localize("maelmc_designed_by"), scale = 0.3, colour = G.C.UI.TEXT_LIGHT}},
+      }},
+      {n = G.UIT.R, config = {align = "cm", colour = back_colour, r = 0.1}, nodes = {
+        {n=G.UIT.T, config={text = designer_text, scale = 0.3, colour = designer_colour}},
+      }}
+    }
+  else
+    displayed_quest.designer_node.nodes = {}
+  end
 end
 
 local function create_cardareas(empty_collection,collection_pos)
@@ -174,6 +196,14 @@ function G.FUNCS.maelmc_refresh_quest(args)
   }
   rew.UIBox:recalculate()
 
+  local des = G.OVERLAY_MENU:get_UIE_by_ID("maelmc_designer_nodes")
+  des.config.object:remove()
+  des.config.object = UIBox {
+    definition = designer_nodes_func(),
+    config = { parent = rew, colour = G.C.CLEAR},
+  }
+  des.UIBox:recalculate()
+
   INIT_COLLECTION_CARD_ALERTS()
 end
 
@@ -227,6 +257,11 @@ function G.FUNCS.maelmc_quest_menu(args)
     config = {colour = G.C.CLEAR}
   })
 
+  local designer_node = UIBox({
+    definition = designer_nodes_func(),
+    config = {colour = G.C.CLEAR}
+  })
+
   local cycle_menu = {
     n = G.UIT.R, config = { align = "cm" }, nodes = {
       create_option_cycle {
@@ -264,13 +299,16 @@ function G.FUNCS.maelmc_quest_menu(args)
           {n = G.UIT.C, config = {align = "cm", colour = G.C.CLEAR}, nodes={
             {n=G.UIT.R, config={align = "cr", colour = G.C.CLEAR}, nodes={
               {n = G.UIT.C, config = {align = "cr", padding = 0.2, r = 0.1, colour = G.C.BLACK}, nodes={quest_cardarea}},
+            }},
+            {n=G.UIT.R, config={align = "cm", colour = G.C.CLEAR}, nodes={
+              {n=G.UIT.O, config={align = "cm", id = "maelmc_designer_nodes", object = designer_node}},
             }}
           }},
           
           -- req
           {n = G.UIT.C, config = {align = "tm", minw = G.CARD_W * 3, padding = 0.2, r = 0.1, colour = G.C.BLACK}, nodes={
             {n=G.UIT.R, config={align = "cm", minw = G.CARD_W * 3 - 0.2, padding = 0.1, r = 0.1, colour = G.C.ORANGE}, nodes={
-              {n=G.UIT.T, config={text = "Prerequisites", scale = 0.5, colour = G.C.UI.TEXT_LIGHT}},
+              {n=G.UIT.T, config={text = localize("maelmc_prerequisites"), scale = 0.5, colour = G.C.UI.TEXT_LIGHT}},
             }},
             {n=G.UIT.R, config={align = "cl", minh = G.CARD_H * 1.5, padding = 0.1, r = 0.1}, nodes={
               {n=G.UIT.O, config={align = "cl", id = "maelmc_req_nodes", object = req_nodes}},
@@ -280,7 +318,7 @@ function G.FUNCS.maelmc_quest_menu(args)
           -- rew
           {n = G.UIT.C, config = {align = "tm", minw = G.CARD_W * 3, minh = G.CARD_H * 1.5, padding = 0.2, r = 0.1, colour = G.C.BLACK}, nodes={
             {n=G.UIT.R, config={align = "cm", minw = G.CARD_W * 3 - 0.2, padding = 0.1, r = 0.1, colour = G.C.ORANGE}, nodes={
-              {n=G.UIT.T, config={text = "Reward", scale = 0.5, colour = G.C.UI.TEXT_LIGHT}},
+              {n=G.UIT.T, config={text = localize("maelmc_reward"), scale = 0.5, colour = G.C.UI.TEXT_LIGHT}},
             }},
             {n=G.UIT.R, config={align = "cm", minh = G.CARD_H * 1.5, padding = 0.1, r = 0.1}, nodes={
               {n=G.UIT.C, config={align = "cm", colour = G.C.CLEAR}, nodes={

@@ -1313,6 +1313,9 @@ return {
             maelmc_quests = "Quests",
             maelmc_qm = "???",
             maelmc_quest_mp_disabled = "Disabled during a Multiplayer game",
+            maelmc_prerequisites = "Prerequisites",
+            maelmc_reward = "Reward",
+            maelmc_designed_by = "Designed by",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",

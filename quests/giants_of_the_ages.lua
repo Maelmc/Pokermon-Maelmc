@@ -35,6 +35,10 @@ local function reward_pos()
   return {x = 0, y = pseudorandom("quest_regi_blind",6,10)}
 end
 
+local function designer()
+  return {name = "Maelmc", colour = G.C.MAELMC.ORANGE}
+end
+
 maelmc_add_quest{
   name = "giants_quest_name",
   atlas = "maelmc_quests",
@@ -45,6 +49,7 @@ maelmc_add_quest{
   reward_atlas = "maelmc_boss_blinds",
   reward_pos = reward_pos,
   set = "Blind",
+  designer = designer,
 }
 
 local calculate_ref = SMODS.current_mod.calculate
