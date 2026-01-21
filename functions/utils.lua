@@ -253,3 +253,14 @@ function maelmc_blind_trigger(card, context, boss_name)
 
   return boss_trigg
 end
+
+poke_total_mult = poke_total_mult or function(card)
+  local total_mult = (card.ability.perma_mult or 0)
+  if card.config.center ~= G.P_CENTERS.m_lucky then
+    total_mult = total_mult + card.ability.mult
+  end
+  if card.edition then
+    total_mult = total_mult + (card.edition.mult or 0)
+  end
+  return total_mult
+end

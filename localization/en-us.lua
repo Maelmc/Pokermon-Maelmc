@@ -21,8 +21,8 @@ return {
             bl_maelmc_sepia = {
                 name = "The Sepia-Toned",
                 text = {
-                    "Lose $1 and X0.9 Mult",
-                    "when a card is scored"
+                    "Lose $1 and X0.9 Mult when",
+                    "a played card is scored"
                 }, 
             },
             bl_maelmc_bloodmoon_beast = {
@@ -70,8 +70,8 @@ return {
             bl_maelmc_ice_giant = {
                 name = "The Ice Giant",
                 text = {
-                    "All Glass cards",
-                    "are debuffed",
+                    "Least recently acquired",
+                    "Joker is debuffed",
                 }, 
             },
             bl_maelmc_steel_giant = {
@@ -92,15 +92,15 @@ return {
             bl_maelmc_electric_giant = {
                 name = "The Electric Giant",
                 text = {
-                    "All Gold cards",
-                    "are debuffed",
+                    "Lose $4 when scoring",
+                    "a played or held Gold Card",
                 }, 
             },
             bl_maelmc_draconic_giant = {
                 name = "The Draconic Giant",
                 text = {
-                    "All Mult cards",
-                    "are debuffed",
+                    "Played cards with Mult",
+                    "give X0.9 Mult when scored",
                 }, 
             },
         },

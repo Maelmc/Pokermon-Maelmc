@@ -58,6 +58,10 @@ SMODS.current_mod.calculate = function(self, context)
     calculate_ref(self, context)
   end
   if not ((next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code) then
+    if context.card_added and context.card.ability.set == "Joker" then
+      context.card.ability.regice_id = G.GAME.regice_id or 0
+      G.GAME.regice_id = (G.GAME.regice_id or 0) + 1
+    end
     if not G.GAME.giants_start then
       if (G.jokers.cards[1] and get_type(G.jokers.cards[1]) == "Earth") and (G.jokers.cards[#G.jokers.cards] and get_type(G.jokers.cards[#G.jokers.cards]) == "Water") then
         G.GAME.giants_start = true

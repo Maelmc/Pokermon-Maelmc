@@ -10,10 +10,23 @@ SMODS.current_mod.set_debuff = function(card)
    if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_cornerstone_mask" and not G.GAME.blind.disabled) and (is_type(card,"Earth") or SMODS.has_enhancement(card,'m_stone')) then return true end
    if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_teal_mask" and not G.GAME.blind.disabled) and (is_type(card,"Grass") or SMODS.has_enhancement(card,'m_lucky')) then return true end
    if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_rock_giant" and not G.GAME.blind.disabled) and SMODS.has_enhancement(card,'m_stone') then return true end
-   if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_ice_giant" and not G.GAME.blind.disabled) and SMODS.has_enhancement(card,'m_glass') then return true end
+   --if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_ice_giant" and not G.GAME.blind.disabled) and SMODS.has_enhancement(card,'m_glass') then return true end
+   if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_ice_giant" and not G.GAME.blind.disabled) and card.ability and card.ability.regice_id then
+      local lowest_id
+      for _, v in pairs(G.jokers.cards) do
+         if v.ability and v.ability.regice_id then
+            if lowest_id then
+               lowest_id = math.min(lowest_id,v.ability.regice_id)
+            else
+               lowest_id = v.ability.regice_id
+            end
+         end
+      end
+      return lowest_id == card.ability.regice_id
+   end
    if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_steel_giant" and not G.GAME.blind.disabled) and SMODS.has_enhancement(card,'m_steel') then return true end
-   if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_draconic_giant" and not G.GAME.blind.disabled) and SMODS.has_enhancement(card,'m_mult') then return true end
-   if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_electric_giant" and not G.GAME.blind.disabled) and SMODS.has_enhancement(card,'m_gold') then return true end
+   --if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_draconic_giant" and not G.GAME.blind.disabled) and SMODS.has_enhancement(card,'m_mult') then return true end
+   --if (G.GAME and G.GAME.blind and G.GAME.blind.name == "bl_maelmc_electric_giant" and not G.GAME.blind.disabled) and SMODS.has_enhancement(card,'m_gold') then return true end
    return false
 end
 

@@ -46,6 +46,25 @@ local ice_giant = {
     G.GAME.giants_quest_completed = "fighting regice"
     G.GAME.maelmc_quest_set = false
   end,
+  calculate = function(self, blind, context)
+    if not blind.disabled then
+      if context.selling_card or context.destroy_card or context.destroying_card then
+        G.E_MANAGER:add_event(Event({
+          func = function()
+            G.E_MANAGER:add_event(Event({
+              func = function()
+                for _, v in pairs(G.jokers.cards) do
+                  SMODS.recalc_debuff(v)
+                end
+                return true
+              end
+            }))
+            return true
+          end
+        }))
+      end
+    end
+  end,
   defeat = function(self)
     G.GAME.giants_quest_completed = true
     G.E_MANAGER:add_event(Event({
@@ -175,7 +194,7 @@ local sepia={
           end
         }))
         return {
-          x_mult = 0.9,
+          x_mult = 0.8,
           dollars = -1
         }
       end
@@ -218,6 +237,24 @@ local electric_giant = {
     G.GAME.giants_quest_completed = "fighting regieleki"
     G.GAME.maelmc_quest_set = false
   end,
+  calculate = function(self, blind, context)
+    if not self.config.disabled then
+      if context.individual and (context.cardarea ==  G.play or context.cardarea == G.hand) and context.scoring_hand and not context.end_of_round then
+        if SMODS.has_enhancement(context.other_card,"m_gold") then
+          G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) - 4
+          G.E_MANAGER:add_event(Event({
+            func = function()
+              G.GAME.dollar_buffer = 0
+              return true
+            end
+          }))
+          return {
+            dollars = -4
+          }
+        end
+      end
+    end
+  end,
   defeat = function(self)
     G.GAME.giants_quest_completed = true
     G.E_MANAGER:add_event(Event({
@@ -251,6 +288,17 @@ local draconic_giant = {
   set_blind = function(self)
     G.GAME.giants_quest_completed = "fighting regidrago"
     G.GAME.maelmc_quest_set = false
+  end,
+  calculate = function(self, blind, context)
+    if not self.config.disabled then
+      if context.individual and context.cardarea ==  G.play and context.scoring_hand and not context.end_of_round then
+        if poke_total_mult(context.other_card) > 0 then
+          return {
+            x_mult = 0.9,
+          }
+        end
+      end
+    end
   end,
   defeat = function(self)
     G.GAME.giants_quest_completed = true
