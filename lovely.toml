@@ -616,3 +616,16 @@ else
   challenge.restrictions = {banned_cards = {{id = "j_maelmc_pokemoncenter"}}}
 end
 '''
+
+# Cleanse Tag protects from Agarmons' Luxury Ball
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Agarmons "src/consumables/01_luxuryball.lua"]'
+pattern = '''ease_dollars(-card.ability.extra.money_mod, true)'''
+position = "at"
+match_indent = true
+payload = '''
+if (not maelmc_should_cleanse_tag()) and G.GAME.dollars ~= 0 then
+  ease_dollars(-card.ability.extra.money_mod, true)
+end
+'''
