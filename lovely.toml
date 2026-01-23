@@ -611,7 +611,16 @@ match_indent = true
 payload = '''
 if challenge.restrictions then
   challenge.restrictions.banned_cards = challenge.restrictions.banned_cards or {}
-  challenge.restrictions.banned_cards[#challenge.restrictions.banned_cards+1] = {id = "j_maelmc_pokemoncenter"}
+  local inside = false
+  for _, v in pairs(challenge.restrictions.banned_cards) do
+    if v.id and v.id == "j_maelmc_pokemoncenter" then
+      inside = true
+      break
+    end
+  end
+  if not inside then
+    challenge.restrictions.banned_cards[#challenge.restrictions.banned_cards+1] = {id = "j_maelmc_pokemoncenter"}
+  end
 else
   challenge.restrictions = {banned_cards = {{id = "j_maelmc_pokemoncenter"}}}
 end
