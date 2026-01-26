@@ -446,16 +446,39 @@ local mint = {
     local target = poke_find_leftmost_or_highlighted(function(joker) return joker.config.center.set_nature end)
     local prev_nature = target.ability.extra.targets
     local changed = false
+    local spinda = target.config.center.key == "j_poke_spinda"
+    local prev_h = spinda and target.ability.extra.enhancements or nil
     while not changed do
       target.config.center:set_nature(target)
-      for k, v in pairs(target.ability.extra.targets) do
-        for l, w in pairs(v) do
-          if prev_nature[k][l] ~= w then
-            changed = true
+      local change_count = #target.ability.extra.targets
+      for _, v in pairs(target.ability.extra.targets) do -- for each nature
+        for j, w in pairs(v) do -- for each element in the nature (usually 1 or 2)
+            local _break = false
+            for _, x in pairs(prev_nature) do -- compare with all previous natures
+              if x[j] and x[j] == w then
+                change_count = change_count - 1
+                _break = true
+                break
+              end
+              if _break then break end
+            end
+            if _break then break end
+        end
+        if change_count == 0 then break end
+      end
+      if change_count > 0 then changed = true end
+
+      if spinda and changed then
+        changed = false
+        change_count = #target.ability.extra.enhancements
+        for _, v in pairs(target.ability.extra.enhancements) do
+          if table.contains(prev_h,v) then
+            change_count = change_count - 1
             break
           end
+          if change_count == 0 then break end
         end
-        if changed then break end
+        if change_count > 0 then changed = true end
       end
     end
 
@@ -472,6 +495,8 @@ local mint = {
           else
             text = text..localize(string.lower("poke_"..w.."_badge"))
           end
+        elseif k == "enhancement" then
+          text = text..localize(string.lower('poke_'..v))
         elseif k ~= "id" and (type(w) == "string" or type(w) == "number") then
           text = text..w
         end
@@ -480,6 +505,15 @@ local mint = {
     end
     text = string.sub(text,1,string.len(text)-2)
     SMODS.calculate_effect({message = text}, target)
+
+    if spinda then
+      text = ""
+      for _, v in pairs(target.ability.extra.enhancements) do
+        text = text..localize('poke_'..v)..", "
+      end
+      text = string.sub(text,1,string.len(text)-2)
+      SMODS.calculate_effect({message = text}, target)
+    end
   end,
   in_pool = function(self)
     for _, v in pairs(G.jokers.cards) do
