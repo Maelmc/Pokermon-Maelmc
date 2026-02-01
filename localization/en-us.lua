@@ -220,6 +220,17 @@ return {
                     "selected Joker's {C:attention}Nature"
                 },
             },
+            c_maelmc_energy_reset = {
+                name = "Energy Reset",
+                text = {
+                    "Remove all energies from",
+                    "leftmost or selected {C:attention}Joker{} and",
+                    "create matching {C:pink}Energy{} cards",
+                    "until there's no room left or",
+                    "the {C:attention}Joker{} has no {C:pink}Energy{} left",
+                    "{C:inactive}(Prioritize Colorless Energy)"
+                },
+            },
         },
         Joker = {
             j_maelmc_glimmet = {

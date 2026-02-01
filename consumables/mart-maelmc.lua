@@ -525,12 +525,83 @@ local mint = {
   end
 }
 
+local energy_reset = {
+  name = "energy_reset",
+  key = "energy_reset",
+  set = "Item",
+  config = {},
+  loc_vars = function(self, info_queue, card)
+    return {vars = {}}
+  end,
+  pos = { x = 8, y = 0 },
+  atlas = "maelmc_mart",
+  cost = 4,
+  unlocked = true,
+  hidden = true,
+  can_use = function(self, card)
+    if #G.consumeables.cards + G.GAME.consumeable_buffer >= G.consumeables.config.card_limit then return false end
+    local target = poke_find_leftmost_or_highlighted(function(joker) return get_total_energy(joker) > 0 end)
+    if target then return true end
+    return false
+  end,
+  use = function(self, card, area, copier)
+    set_spoon_item(card)
+
+    local target = poke_find_leftmost_or_highlighted(function(joker) return get_total_energy(joker) > 0 end)
+    while true do
+      if #G.consumeables.cards + G.GAME.consumeable_buffer >= G.consumeables.config.card_limit then return end
+      if get_total_energy(target) <= 0 then return end
+
+      local typed = target.ability.energy_count or target.ability.extra.energy_count or 0
+      local colorless = target.ability.c_energy_count or target.ability.extra.c_energy_count or 0
+      if colorless > 0 then
+        increment_energy(target, "Colorless", -1, true)
+        G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+        G.E_MANAGER:add_event(Event({
+          func = function()
+              SMODS.add_card {
+                  set = "Energy",
+                  key = "c_poke_colorless_energy",
+              }
+              G.GAME.consumeable_buffer = 0
+              return true
+          end
+        }))
+      elseif typed > 0 then
+        local _type = get_type(target)
+        increment_energy(target, _type, -1, true)
+        G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+        G.E_MANAGER:add_event(Event({
+          func = function()
+              SMODS.add_card {
+                  set = "Energy",
+                  key = string.lower("c_poke_"..(_type == "Dark" and "darkness" or _type).."_energy")
+              }
+              G.GAME.consumeable_buffer = 0
+              return true
+          end
+        }))
+      end
+    end
+    
+  end,
+  in_pool = function(self)
+    for _, v in pairs(G.jokers.cards) do
+      if get_total_energy(v) > 0 then
+        return true
+      end
+    end
+    return false
+  end
+}
+
 return {name = "Maelmc's Items",
   list = {
-    tealmask, wellspringmask, hearthflamemask, cornerstonemask,
-    --meteorite,
-    beastball,
-    metronome,
+    --metronome,
     mint,
+    energy_reset,
+    beastball,
+    --meteorite,
+    tealmask, wellspringmask, hearthflamemask, cornerstonemask,
   }
 }
