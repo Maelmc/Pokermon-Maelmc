@@ -123,6 +123,7 @@ function Card:use_consumeable(area, copier)
 	local ret = use_consumeable(self, area, copier)
   local keep = (self.config.center.keep_on_use and type(self.config.center.keep_on_use) == 'function' and self.config.center:keep_on_use(self)) or false
   if self.config.center.set == "Spectral" and not keep then
+    G.E_MANAGER:add_event(Event({func = function() G.E_MANAGER:add_event(Event({func = function() G.E_MANAGER:add_event(Event({func = function()
     for i = 1, #G.GAME.tags do
       if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
         if G.GAME.tags[i].key == "tag_maelmc_spell_tag" then
@@ -141,6 +142,7 @@ function Card:use_consumeable(area, copier)
         end
       else break end
     end
+    return true end })) return true end })) return true end }))
   end
 	return ret
 end
