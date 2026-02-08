@@ -54,7 +54,22 @@ local mysterydeck = {
   end
 }
 
-local list = { hazarddeck }
+local competitivedeck = {
+	name = "competitivedeck",
+	key = "competitivedeck",
+  unlocked = true,
+  discovered = true,
+	config = {},
+  loc_vars = function(self, info_queue, center)
+  end,
+	pos = { x = 3, y = 0 },
+	atlas = "maelmc_pokedeck",
+  apply = function(self)
+    G.GAME.modifiers.competitivedeck = true
+  end
+}
+
+local list = { hazarddeck, competitivedeck }
 
 if next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer')) then
   table.insert(list, mysterydeck)

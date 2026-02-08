@@ -107,8 +107,30 @@ local gym_leader={
     end
   end,
   set_nature = function(self,card)
-    local poketype_list = {"Grass", "Fire", "Water", "Lightning", "Psychic", "Fighting", "Colorless", "Darkness", "Metal", "Fairy", "Dragon", "Earth"}
-    card.ability.extra.form = pseudorandom_element(poketype_list, pseudoseed("gym_leader"))
+    local set = false
+    if G.GAME and G.GAME.modifiers.competitivedeck and #G.jokers.cards > 0 then
+      local _types = {}
+      local max = 0
+      for _, v in pairs(G.jokers.cards) do
+        local _t = get_type(v)
+        if _t then _types[_t] = (_types[_t] or 0) + 1 end
+        if _types[_t] > max then max = _types[_t] end
+      end
+      if next(_types) then
+        local pool = {}
+        for k, v in pairs(_types) do
+          if v == max then table.insert(pool,k) end
+        end
+        card.ability.extra.form = pseudorandom_element(pool, pseudoseed("gym_leader"))
+        if card.ability.extra.form == "Dark" then card.ability.extra.form = "Darkness" end
+        set = true
+      end
+    end
+    if not set then
+      local poketype_list = {"Grass", "Fire", "Water", "Lightning", "Psychic", "Fighting", "Colorless", "Darkness", "Metal", "Fairy", "Dragon", "Earth"}
+      card.ability.extra.form = pseudorandom_element(poketype_list, pseudoseed("gym_leader"))
+      card.ability.extra.targets = {{type = card.ability.extra.form}}
+    end
     card.ability.extra.targets = {{type = card.ability.extra.form}}
     self:set_sprites(card)
   end,

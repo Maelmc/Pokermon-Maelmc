@@ -16,6 +16,14 @@ return {
                     "and {C:attention}Eternal {C:attention,T:j_maelmc_wonder_trade}Wonder Trade",
                 }
             },
+            b_maelmc_competitivedeck = {
+                name = "Competitive Deck",
+                text = {
+                    "Jokers with a {C:attention}Nature",
+                    "always pick the",
+                    "{C:attention}most common{} one"
+                }
+            },
         },
         Blind = {
             bl_maelmc_sepia = {
