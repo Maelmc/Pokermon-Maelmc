@@ -1267,6 +1267,14 @@ return {
                     "appear when using the",
                     "{C:attention}Multiplayer{} mod"
                 }
+            },
+            meloetta_singing = {
+                name = "Relic Song",
+                text = {
+                    "If the song gets annoying,",
+                    "you can turn it off in",
+                    "the mod's settings"
+                }
             }
         },
     },

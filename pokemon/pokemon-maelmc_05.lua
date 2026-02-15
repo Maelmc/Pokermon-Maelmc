@@ -197,6 +197,9 @@ local meloetta = {
   config = { extra = {money_mod = 3} },
   loc_vars = function(self, info_queue, card)
     type_tooltip(self, info_queue, card)
+    if maelmc_config.meloetta_sings then
+      info_queue[#info_queue+1] = {set = 'Other', key = 'meloetta_singing'}
+    end
     return { vars = {card.ability.extra.money_mod} }
   end,
   calculate = function(self, card, context)
