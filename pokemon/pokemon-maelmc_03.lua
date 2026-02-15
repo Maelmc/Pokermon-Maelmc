@@ -586,13 +586,13 @@ local kecleon={
     if type == "Colorless" then
       if card.edition and card.edition.poke_shiny and card.children.center.atlas.name ~= "poke_AtlasJokersBasicNatdexShiny" then
         card.children.center.atlas = G.ASSET_ATLAS["poke_AtlasJokersBasicNatdexShiny"]
-      elseif card.children.center.atlas.name ~= "poke_AtlasJokersBasicNatdex" then
+      elseif not (card.edition and card.edition.poke_shiny) and card.children.center.atlas.name ~= "poke_AtlasJokersBasicNatdex" then
         card.children.center.atlas = G.ASSET_ATLAS["poke_AtlasJokersBasicNatdex"]
       end
     elseif type ~= "Colorless" then
       if card.edition and card.edition.poke_shiny and card.children.center.atlas.name ~= "poke_AtlasJokersBasicGen03Shiny" then
         card.children.center.atlas = G.ASSET_ATLAS["poke_AtlasJokersBasicGen03Shiny"]
-      elseif card.children.center.atlas.name ~= "poke_AtlasJokersBasicGen03" then
+      elseif not (card.edition and card.edition.poke_shiny) and card.children.center.atlas.name ~= "poke_AtlasJokersBasicGen03" then
         card.children.center.atlas = G.ASSET_ATLAS["poke_AtlasJokersBasicGen03"]
     end
     end
