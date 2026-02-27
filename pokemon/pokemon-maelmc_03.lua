@@ -1092,6 +1092,6 @@ return {
     regirock,
     regice,
     registeel,
-    deoxys, deoxys_attack, deoxys_defense, deoxys_speed
+    --deoxys, deoxys_attack, deoxys_defense, deoxys_speed
   },
 }

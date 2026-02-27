@@ -11,7 +11,7 @@
   "display_name": "Pokermon-Maelmc",
 	"version": "1.17.0-0001",
 	"dependencies": [
-		"Pokermon (>=3.6.1-0129a)"
+		"Pokermon (>=3.6.1-0226a)"
 	],
   "conflicts": [],
 	"provides": [],
