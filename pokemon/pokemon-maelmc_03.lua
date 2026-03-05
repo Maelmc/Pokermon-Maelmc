@@ -1082,7 +1082,7 @@ end
 return {
   name = "Maelmc's Jokers Gen 3",
   list = {
-    wingull, pelipper,
+    --wingull, pelipper,
     ralts, kirlia, gardevoir, mega_gardevoir,
     gulpin, swalot,
     lunatone, solrock,
