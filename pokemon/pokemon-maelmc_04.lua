@@ -170,7 +170,7 @@ local cherrim_sunshine = {
     end
 
     local not_fire = 0
-    if #find_pokemon_type("Fire") <= 1 then not_fire = 1 end
+    if #find_pokemon_type("Fire") < 1 then not_fire = 1 end
     return scaling_evo(self, card, context, "j_maelmc_cherrim", not_fire, 1)
   end,
   in_pool = function(self)
