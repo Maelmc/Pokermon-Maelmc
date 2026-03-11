@@ -495,7 +495,7 @@ local photographer = {
   cost = 8,
   stage = "Other",
   atlas = "maelmc_jokers",
-  blueprint_compat = true,
+  blueprint_compat = false,
   calculate = function(self, card, context)
 
     if context.reroll_shop or context.starting_shop and (not context.blueprint) then
