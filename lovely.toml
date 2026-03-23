@@ -638,3 +638,18 @@ if (not maelmc_should_cleanse_tag()) and G.GAME.dollars ~= 0 then
   ease_dollars(-card.ability.extra.money_mod, true)
 end
 '''
+
+#####################
+# APRILS FOOL
+# Taken from Extra Credits / New context to modify mult/chips before hands are played - used for Miss Mimic
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+match_indent = true
+pattern = '''if modded then update_hand_text({sound = 'chips2', modded = modded}, {chips = hand_chips, mult = mult}) end'''
+position = 'after'
+payload = '''
+for i=1, #G.jokers.cards do
+    eval_card(G.jokers.cards[i], {cardarea = G.jokers, full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, before_but_not_as_much = true})
+end
+'''

@@ -123,6 +123,13 @@ return {
                     "enhancement cannot be changed",
                 },
             },
+            m_maelmc_ludicolo = {
+                name = "Ludicolo",
+                text = {
+                    "Does something awesome",
+                    "when held in hand"
+                },
+            },
         },
         Spectral = {
             c_maelmc_beastball = {
@@ -1128,6 +1135,62 @@ return {
                     "give {C:attention}quadruple{} the {C:mult}Mult",
                 },
             },
+            j_maelmc_ludicolo = {
+                name = "Ludicolo",
+                text = {
+                    "Adds itself to",
+                    "your deck??"
+                },
+            },
+            j_maelmc_capture_disc = {
+                name = "Capture Disc",
+                text = {
+                    "This Joker gains {C:mult}+#1#{} Mult",
+                    "when {C:attention}shaken{}, resets",
+                    "at end of round",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)"
+                },
+            },
+            j_maelmc_missmimic = {
+                name = "Miss Mimic",
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult before any card scores",
+                    "{C:inactive,s:0.8}(Changes form when you have {C:attention,s:0.8}2{C:inactive,s:0.8} of them)",
+                    "{s:0.8}Invader from {C:attention,s:0.8}Cassette Beasts"
+                },
+            },
+            j_maelmc_fusionmimic = {
+                name = "Ultra Miss Mimic",
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult before",
+                    "any card scores",
+                    "{s:0.8}Invader from {C:attention,s:0.8}Cassette Beasts"
+                },
+            },
+            j_maelmc_nibblegar = {
+                name = "Nibblegar",
+                text = {
+                    "{C:chips}+#1#{} hand",
+                    "Shark",
+                    "{s:0.8}Invader from {C:attention,s:0.8}Coromon"
+                },
+            },
+            j_maelmc_sheartooth = {
+                name = "Sheartooth",
+                text = {
+                    "{C:chips}+#1#{} hand",
+                    "Bigger shark",
+                    "{s:0.8}Invader from {C:attention,s:0.8}Coromon"
+                },
+            },
+            j_maelmc_megalobite = {
+                name = "Megalobite",
+                text = {
+                    "{C:chips}+#1#{} hand",
+                    "Biggest shark",
+                    "{s:0.8}Invader from {C:attention,s:0.8}Coromon"
+                },
+            },
         },
         Voucher = {
             v_maelmc_pokemart = {
@@ -1343,6 +1406,7 @@ return {
             maelmc_prerequisites = "Prerequisites",
             maelmc_reward = "Reward",
             maelmc_designed_by = "Designed by",
+            maelmc_ludicolo_ex = "Ludicolo!",
 
             k_maelmc_meteorite_pack = "Meteorite Pack",
             k_maelmc_ultra_beast = "Ultra Beast",
