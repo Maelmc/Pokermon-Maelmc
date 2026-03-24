@@ -194,7 +194,21 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+  key = "shiny_aprils_fool",
+  path = "aprils_fool.png",
+  px = 71,
+  py = 95,
+})
+
+SMODS.Atlas({
   key = "mimic",
+  path = "mimic.png",
+  px = 355,
+  py = 475,
+})
+
+SMODS.Atlas({
+  key = "shiny_mimic",
   path = "mimic.png",
   px = 355,
   py = 475,

@@ -183,6 +183,195 @@ local fusionmimic = {
 
 pokermon.add_family({"missmimic","fusionmimic"})
 
+local cubzero = {
+  name = "cubzero",
+  pos = {x = 0, y = 1},
+  config = {extra = {hands = 1}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return {vars = {card.ability.extra.hands}}
+  end,
+  rarity = 2,
+  cost = 5,
+  stage = "Basic",
+  ptype = "Water",
+  starter = true,
+  atlas = "maelmc_aprils_fool",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands
+    if not from_debuff then
+      ease_hands_played(card.ability.extra.hands)
+    end
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.hands
+    local to_decrease = math.min(G.GAME.current_round.hands_left - 1, card.ability.extra.hands)
+    if to_decrease > 0 then
+      ease_hands_played(-to_decrease)
+    end
+  end,
+}
+
+local arora = {
+  name = "arora",
+  pos = {x = 1, y = 1},
+  config = {extra = {hands = 1}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return {vars = {card.ability.extra.hands}}
+  end,
+  rarity = "poke_safari",
+  cost = 8,
+  stage = "Basic",
+  ptype = "Water",
+  atlas = "maelmc_aprils_fool",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands
+    if not from_debuff then
+      ease_hands_played(card.ability.extra.hands)
+    end
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.hands
+    local to_decrease = math.min(G.GAME.current_round.hands_left - 1, card.ability.extra.hands)
+    if to_decrease > 0 then
+      ease_hands_played(-to_decrease)
+    end
+  end,
+}
+
+local bearealis = {
+  name = "bearealis",
+  pos = {x = 2, y = 1},
+  config = {extra = {hands = 1}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return {vars = {card.ability.extra.hands}}
+  end,
+  rarity = "poke_safari",
+  cost = 10,
+  stage = "Two",
+  ptype = "Water",
+  atlas = "maelmc_aprils_fool",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hands
+    if not from_debuff then
+      ease_hands_played(card.ability.extra.hands)
+    end
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.hands
+    local to_decrease = math.min(G.GAME.current_round.hands_left - 1, card.ability.extra.hands)
+    if to_decrease > 0 then
+      ease_hands_played(-to_decrease)
+    end
+  end,
+}
+
+pokermon.add_family({"cubzero","arora","bearealis"})
+
+local toruga = {
+  name = "toruga",
+  pos = {x = 0, y = 3},
+  config = {extra = {d_size = 1}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return {vars = {card.ability.extra.d_size}}
+  end,
+  rarity = 2,
+  cost = 5,
+  stage = "Basic",
+  ptype = "Water",
+  starter = true,
+  atlas = "maelmc_aprils_fool",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.d_size
+    ease_discard(card.ability.extra.d_size)
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.d_size
+    ease_discard(-card.ability.extra.d_size)
+  end
+}
+
+local embaval = {
+  name = "embaval",
+  pos = {x = 1, y = 3},
+  config = {extra = {d_size = 1}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return {vars = {card.ability.extra.d_size}}
+  end,
+  rarity = "poke_safari",
+  cost = 8,
+  stage = "Basic",
+  ptype = "Water",
+  atlas = "maelmc_aprils_fool",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.d_size
+    ease_discard(card.ability.extra.d_size)
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.d_size
+    ease_discard(-card.ability.extra.d_size)
+  end
+}
+
+local volcadon = {
+  name = "volcadon",
+  pos = {x = 2, y = 3},
+  config = {extra = {d_size = 1}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+    return {vars = {card.ability.extra.d_size}}
+  end,
+  rarity = "poke_safari",
+  cost = 10,
+  stage = "Two",
+  ptype = "Water",
+  atlas = "maelmc_aprils_fool",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.d_size
+    ease_discard(card.ability.extra.d_size)
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.d_size
+    ease_discard(-card.ability.extra.d_size)
+  end
+}
+
+pokermon.add_family({"toruga","embaval","volcadon"})
+
 local nibblegar = {
   name = "nibblegar",
   pos = {x = 0, y = 2},
@@ -285,12 +474,95 @@ local megalobite = {
 
 pokermon.add_family({"nibblegar","sheartooth","megalobite"})
 
+local spectralwolf = {
+  name = "spectralwolf",
+  pos = {x = 2, y = 0},
+  config = {extra = {}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+  end,
+  rarity = 2,
+  cost = 6,
+  stage = "Basic",
+  ptype = "Water",
+  starter = true,
+  atlas = "maelmc_aprils_fool",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+}
+
+local spectraltoad = {
+  name = "spectraltoad",
+  pos = {x = 3, y = 0},
+  config = {extra = {}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+  end,
+  rarity = 2,
+  cost = 6,
+  stage = "Basic",
+  ptype = "Earth",
+  starter = true,
+  atlas = "maelmc_aprils_fool",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+}
+
+local spectraleagle = {
+  name = "spectraleagle",
+  pos = {x = 4, y = 0},
+  config = {extra = {}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+  end,
+  rarity = 2,
+  cost = 6,
+  stage = "Basic",
+  ptype = "Colorless",
+  starter = true,
+  atlas = "maelmc_aprils_fool",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+}
+
+local spectrallion = {
+  name = "spectrallion",
+  pos = {x = 5, y = 0},
+  config = {extra = {}},
+  loc_vars = function(self, info_queue, card)
+    type_tooltip(self, info_queue, card)
+  end,
+  rarity = 2,
+  cost = 6,
+  stage = "Basic",
+  ptype = "Fire",
+  starter = true,
+  atlas = "maelmc_aprils_fool",
+  perishable_compat = true,
+  eternal_compat = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+  end,
+}
+
 return {
   name = "Maelmc's April's Fools",
   list = {
     ludicolo,
     capture_disc,
     missmimic, fusionmimic,
+    cubzero,arora,bearealis,
+    toruga, embaval, volcadon,
     nibblegar, sheartooth, megalobite,
+    spectralwolf, spectraltoad, spectraleagle, spectrallion,
   },
 }

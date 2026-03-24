@@ -1167,6 +1167,54 @@ return {
                     "{s:0.8}Invader from {C:attention,s:0.8}Cassette Beasts"
                 },
             },
+            j_maelmc_cubzero = {
+                name = "Cubzero",
+                text = {
+                    "{C:chips}+#1#{} hand",
+                    "Bear",
+                    "{s:0.8}Invader from {C:attention,s:0.8}Coromon"
+                },
+            },
+            j_maelmc_arora = {
+                name = "Arora",
+                text = {
+                    "{C:chips}+#1#{} hand",
+                    "Bigger bear",
+                    "{s:0.8}Invader from {C:attention,s:0.8}Coromon"
+                },
+            },
+            j_maelmc_bearealis = {
+                name = "Bearealis",
+                text = {
+                    "{C:chips}+#1#{} hand",
+                    "Biggest bear",
+                    "{s:0.8}Invader from {C:attention,s:0.8}Coromon"
+                },
+            },
+            j_maelmc_toruga = {
+                name = "Toruga",
+                text = {
+                    "{C:red}+#1#{} discard",
+                    "Tutle",
+                    "{s:0.8}Invader from {C:attention,s:0.8}Coromon"
+                },
+            },
+            j_maelmc_embaval = {
+                name = "Embaval",
+                text = {
+                    "{C:red}+#1#{} discard",
+                    "Bigger tutle",
+                    "{s:0.8}Invader from {C:attention,s:0.8}Coromon"
+                },
+            },
+            j_maelmc_volcadon = {
+                name = "Volcadon",
+                text = {
+                    "{C:red}+#1#{} discard",
+                    "Biggest tutle",
+                    "{s:0.8}Invader from {C:attention,s:0.8}Coromon"
+                },
+            },
             j_maelmc_nibblegar = {
                 name = "Nibblegar",
                 text = {
@@ -1189,6 +1237,30 @@ return {
                     "{C:chips}+#1#{} hand",
                     "Biggest shark",
                     "{s:0.8}Invader from {C:attention,s:0.8}Coromon"
+                },
+            },
+            j_maelmc_spectralwolf = {
+                name = "Spectral Wolf",
+                text = {
+                    "{s:0.8}Invader from {C:attention,s:0.8}Monster Sanctuary"
+                },
+            },
+            j_maelmc_spectraltoad = {
+                name = "Spectral Toad",
+                text = {
+                    "{s:0.8}Invader from {C:attention,s:0.8}Monster Sanctuary"
+                },
+            },
+            j_maelmc_spectraleagle = {
+                name = "Spectral Eagle",
+                text = {
+                    "{s:0.8}Invader from {C:attention,s:0.8}Monster Sanctuary"
+                },
+            },
+            j_maelmc_spectrallion = {
+                name = "Spectral Lion",
+                text = {
+                    "{s:0.8}Invader from {C:attention,s:0.8}Monster Sanctuary"
                 },
             },
         },
