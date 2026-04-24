@@ -18,7 +18,8 @@ local function display_text()
     return {localize("maelmc_quest_mp_disabled")}
   end
   local display_text = {
-    localize("giants_chart")
+    localize("giants_chart"),
+    localize("giants_chart_2"),
   }
   return display_text
 end

@@ -1379,7 +1379,8 @@ return {
             kitikami_ogre_reward = "Challenge The Mask",
 
             giants_quest_name = "Giants of the Ages",
-            giants_chart = "Decipher the Grade 2 Braille", -- https://www.teachingvisuallyimpaired.com/uploads/1/4/1/2/14122361/ueb_braille_chart.pdf
+            giants_chart = 'Look up "Unified English Braille Chart"', -- https://www.teachingvisuallyimpaired.com/uploads/1/4/1/2/14122361/ueb_braille_chart.pdf
+            giants_chart_2 = "Good luck",
             giants_fishes = ". .- .-. - .... -....- .-. . ... - -....- .-- .- - . .-.",
             giants_fishes_translated = "EARTH - REST - WATER",
             giants_shake = "It sounded as if doors opened somewhere far away",
