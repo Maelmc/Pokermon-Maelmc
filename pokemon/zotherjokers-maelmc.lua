@@ -498,7 +498,7 @@ local photographer = {
   blueprint_compat = false,
   calculate = function(self, card, context)
 
-    if context.reroll_shop or context.starting_shop and (not context.blueprint) then
+    if (context.reroll_shop or context.starting_shop) and (not context.blueprint) then
       local temp_card = {set = "Joker", area = G.shop_jokers}
       local add_card = SMODS.create_card(temp_card)
       poke_add_shop_card(add_card, card)
