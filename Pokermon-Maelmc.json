@@ -9,11 +9,11 @@
 	"badge_colour": "EA6F22",
 	"badge_text_colour": "FFFFFF",
   "display_name": "Pokermon-Maelmc",
-	"version": "1.17.0-0009",
+	"version": "1.17.0-0010",
 	"dependencies": [
 		"Pokermon (>=3.6.1-0226a)"
 	],
   "conflicts": [],
 	"provides": [],
-	"dump_loc": false 
+	"dump_loc": false
 }

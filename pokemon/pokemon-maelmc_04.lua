@@ -26,7 +26,7 @@ local cherubi = {
           convertable[#convertable+1] = scored_card
         end
       end
-      if seed_count >= card.ability.extra.seed_req then
+      if seed_count >= card.ability.extra.seed_req and #convertable > 0 then
         local to_convert = pseudorandom_element(convertable,"cherubi")
         to_convert:set_ability("m_poke_seed",nil,true)
         G.E_MANAGER:add_event(Event({
@@ -35,6 +35,7 @@ local cherubi = {
             return true
           end
         }))
+        return nil, true
       end
     end
 
@@ -85,23 +86,25 @@ local cherrim = {
           convertable[#convertable+1] = scored_card
         end
       end
+      local converted = false
       for _ = 1, seed_count do
+        if #convertable == 0 then break end
         local to_convert = pseudorandom_element(convertable,"cherubi")
-        if to_convert then
-          for i, v in ipairs(convertable) do
-            if v == to_convert then table.remove(convertable,i)
-              break
-            end
+        for i, v in ipairs(convertable) do
+          if v == to_convert then table.remove(convertable,i)
+            break
           end
-          to_convert:set_ability("m_poke_seed",nil,true)
-          G.E_MANAGER:add_event(Event({
-            func = function()
-              to_convert:juice_up()
-              return true
-            end
-          }))
         end
+        to_convert:set_ability("m_poke_seed",nil,true)
+        converted = true
+        G.E_MANAGER:add_event(Event({
+          func = function()
+            to_convert:juice_up()
+            return true
+          end
+        }))
       end
+      return nil, converted
     end
 
     return scaling_evo(self, card, context, "j_maelmc_cherrim_sunshine", #find_pokemon_type("Fire"), 1)
@@ -466,7 +469,7 @@ local mega_garchomp={
           pair_of = v:get_id()
         end
       end
-      
+
       if context.other_card:get_id() == pair_of then
         return {
           colour = G.C.MULT,
