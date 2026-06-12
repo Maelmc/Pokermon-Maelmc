@@ -646,6 +646,95 @@ local safarizone = {
   end,
 }
 
+local cramomatic = {
+  name = "cramomatic",
+  poke_custom_prefix = "maelmc",
+  pos = {x = 3, y = 2},
+  config = {extra = { sold = {}}},
+  loc_vars = function(self, info_queue, card)
+    local one = card.ability.extra.sold[1] and localize({type = "name_text", set = card.ability.extra.sold[1].set, key = card.ability.extra.sold[1].key}) or ""
+    local two = card.ability.extra.sold[2] and localize({type = "name_text", set = card.ability.extra.sold[2].set, key = card.ability.extra.sold[2].key}) or ""
+    local three = card.ability.extra.sold[3] and localize({type = "name_text", set = card.ability.extra.sold[3].set, key = card.ability.extra.sold[3].key}) or ""
+    return {vars = {one, two, three}}
+  end,
+  rarity = 1,
+  cost = 4,
+  stage = "Other",
+  atlas = "maelmc_jokers",
+  perishable_compat = false,
+  eternal_compat = true,
+  blueprint_compat = true,
+  calculate = function(self, card, context)
+    if context.selling_card and context.card.ability.consumeable then
+      if not context.blueprint then
+        card.ability.extra.sold[#card.ability.extra.sold+1] = {key = context.card.config.center.key, set = context.card.ability.set}
+      end
+      if #card.ability.extra.sold <= 3 then
+        if not context.blueprint then
+          return {
+            message = localize("maelmc_stored")
+          }
+        end
+      else
+        table.sort(card.ability.extra.sold, function (a, b)
+          return a.key > b.key
+        end)
+        local seed = "maelmc_cramomatic_"
+        for _, v in ipairs(card.ability.extra.sold) do
+          seed = seed..v.key
+        end
+        seed = seed..context.card.config.center.key
+
+        local function string_to_seed(str)
+            local seed = 0
+            for i = 1, #str do
+                seed = (seed * 31 + str:byte(i)) % 2^31
+            end
+            return seed
+        end
+        local seed = string_to_seed(seed)
+        card.ability.extra.sold = {}
+
+        if #G.consumeables.cards - (context.card.area == G.consumeables and (not context.card.edition or not context.card.edition.negative) and 1 or 0) + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+          G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+
+          G.E_MANAGER:add_event(Event({
+            func = (function()
+              G.GAME.consumeable_buffer = 0
+              local pool = {}
+              for k, v in pairs(G.P_CENTERS) do
+                if v.set == "Item"
+                and k ~= "c_poke_berry_juice" -- dont want to generate an unusable item
+                and k ~= "c_poke_berry_juice_mega" -- too op
+                then pool[#pool+1] = k end
+              end
+              table.sort(pool)
+
+              math.randomseed(seed)
+              SMODS.add_card({set = "Item", area = G.consumeables, key = pool[math.random(1,#pool)]})
+
+              G.E_MANAGER:add_event(Event({
+                func = (function()
+                  G.GAME.consumeable_buffer = 0
+                  return true
+                end)
+              }))
+              return true
+            end)
+          }))
+          SMODS.calculate_effect({
+                message = localize('poke_plus_pokeitem'),
+                colour = G.ARGS.LOC_COLOURS.item,
+              }, card)
+        else
+          poke_nope(card)
+        end
+        return nil, true
+      end
+    end
+  end,
+}
+
 --[[
 
 local name = {
@@ -676,6 +765,7 @@ local list = {
   photographer,
   pokemoncenter,
   safarizone,
+  cramomatic,
 }
 
 if not maelmc_config.disable_spiritomb then table.insert(list,2,odd_keystone) end

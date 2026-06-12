@@ -1128,6 +1128,18 @@ return {
                     "give {C:attention}quadruple{} the {C:mult}Mult",
                 },
             },
+            j_maelmc_cramomatic = {
+                name = "Cram-o-matic",
+                text = {
+                    "Sell {C:attention}4{} consumables",
+                    "to create an {C:item}Item{} card",
+                    "{C:inactive}(Must have room)",
+                    "{br:3}ERROR - CONTACT STEAK",
+                    "The same 4 consumables will",
+                    "{C:attention}always{} create the {C:attention}same{} item",
+                    "{C:inactive}({C:attention}#1# #2# #3#{C:inactive})"
+                }
+            }
         },
         Voucher = {
             v_maelmc_pokemart = {
