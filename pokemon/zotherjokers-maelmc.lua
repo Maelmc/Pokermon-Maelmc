@@ -666,16 +666,17 @@ local cramomatic = {
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.selling_card and context.card.ability.consumeable then
-      if not context.blueprint then
-        card.ability.extra.sold[#card.ability.extra.sold+1] = {key = context.card.config.center.key, set = context.card.ability.set}
-      end
-      if #card.ability.extra.sold <= 3 then
+      if #card.ability.extra.sold < 3 then
         if not context.blueprint then
+          card.ability.extra.sold[#card.ability.extra.sold+1] = {key = context.card.config.center.key, set = context.card.ability.set}
           return {
             message = localize("maelmc_stored")
           }
         end
       else
+        if #card.ability.extra.sold < 4 then
+          card.ability.extra.sold[#card.ability.extra.sold+1] = {key = context.card.config.center.key, set = context.card.ability.set}
+        end
         table.sort(card.ability.extra.sold, function (a, b)
           return a.key > b.key
         end)
@@ -693,7 +694,18 @@ local cramomatic = {
             return seed
         end
         local seed = string_to_seed(seed)
-        card.ability.extra.sold = {}
+
+        G.E_MANAGER:add_event(Event({
+            func = (function()
+              G.E_MANAGER:add_event(Event({
+                func = (function()
+                  card.ability.extra.sold = {}
+                  return true
+                end)
+              }))
+              return true
+            end)
+          }))
 
         if #G.consumeables.cards - (context.card.area == G.consumeables and (not context.card.edition or not context.card.edition.negative) and 1 or 0) + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
           G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
@@ -725,9 +737,9 @@ local cramomatic = {
           SMODS.calculate_effect({
                 message = localize('poke_plus_pokeitem'),
                 colour = G.ARGS.LOC_COLOURS.item,
-              }, card)
+              }, context.blueprint_card or card)
         else
-          poke_nope(card)
+          poke_nope(context.blueprint_card or card)
         end
         return nil, true
       end
