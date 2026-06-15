@@ -51,7 +51,7 @@ end
   G.FUNCS.overlay_menu {
     definition = create_UIBox_generic_options {
       back_func = not (args and args.no_back) and 'options' or nil,
-      contents = poke_create_UIBox_your_collection {
+      contents = pokermon.ui.create_UIBox_your_collection {
         keys = quest_keys,
         create_card_func = PokeDisplayCard,
         cols = 1,

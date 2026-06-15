@@ -13,7 +13,7 @@ local wingull={
   cost = 4,
   config = { extra = { money = 4, rounds = 4 } },
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     return { vars = { card.ability.extra.money, localize((G.GAME.current_round.maelmc_wingull_card or {}).rank or 'Ace', 'ranks'), card.ability.extra.rounds } }
   end,
   calculate = function(self, card, context)
@@ -33,7 +33,7 @@ local wingull={
       }
     end
 
-    return level_evo(self, card, context, "j_maelmc_pelipper")
+    return pokermon.level_evo(self, card, context, "j_maelmc_pelipper")
   end
 }
 
@@ -51,7 +51,7 @@ local pelipper={
   cost = 7,
   config = { extra = { money = 4, money1 = 1 } },
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     return { vars = { card.ability.extra.money, localize((G.GAME.current_round.maelmc_pelipper_card or {}).rank or 'Ace', 'ranks'), card.ability.extra.money1 } }
   end,
   calculate = function(self, card, context)
@@ -80,7 +80,7 @@ local ralts={
   pos = {x = 18, y = 18},
   config = {extra = {mult_mod = 1, rounds = 4}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     --info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_high_priestess'}
     local mult = 0
     if (SMODS.Mods["Talisman"] or {}).can_load then
@@ -126,7 +126,7 @@ local ralts={
       end
     end
 
-    return level_evo(self, card, context, "j_maelmc_kirlia")
+    return pokermon.level_evo(self, card, context, "j_maelmc_kirlia")
   end,
 }
 
@@ -138,7 +138,7 @@ local kirlia={
   pos = {x = 20, y = 18},
   config = {extra = {mult_mod = 2, rounds = 5}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     --info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_black_hole'}
     local mult = 0
     if (SMODS.Mods["Talisman"] or {}).can_load then
@@ -184,7 +184,7 @@ local kirlia={
       end
     end
 
-    return level_evo(self, card, context, "j_maelmc_gardevoir")
+    return pokermon.level_evo(self, card, context, "j_maelmc_gardevoir")
   end,
 }
 
@@ -196,7 +196,7 @@ local gardevoir={
   pos = {x = 22, y = 18},
   config = {extra = {Xmult_mod = 0.1}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     --info_queue[#info_queue+1] = { set = 'Tarot', key = 'c_black_hole'}
     local Xmult = 1
     if (SMODS.Mods["Talisman"] or {}).can_load then
@@ -253,7 +253,7 @@ local mega_gardevoir={
   soul_pos = { x = 7, y = 4 },
   config = {extra = {blackhole_amount = 2}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Black Hole"}}
     return {vars = {card.ability.extra.blackhole_amount}}
   end,
@@ -268,7 +268,7 @@ local mega_gardevoir={
   calculate = function(self, card, context)
     --[[if context.setting_blind then
       return {
-        message = poke_evolve(card, "j_maelmc_gardevoir"),
+        message = pokermon.evolve(card, "j_maelmc_gardevoir"),
       }
     end]]
   end,
@@ -297,7 +297,7 @@ local gulpin={
     volatile = "left", volatile2 = "right",
     stockpile_count = 0}, evo_rqmt = 5},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'stockpile'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'volatile_both'}
     local abbr = card.ability.extra
@@ -322,7 +322,7 @@ local gulpin={
     end
 
     if context.cardarea == G.jokers and context.scoring_hand then
-      if context.joker_main and volatile_active(self, card, card.ability.extra.volatile2) then
+      if context.joker_main and pokermon.volatile_active(self, card, card.ability.extra.volatile2) then
         local Xmult = 0
         if card.ability.extra.stockpile == 0 then return nil
         elseif card.ability.extra.stockpile == 1 then Xmult = card.ability.extra.Xmult
@@ -338,17 +338,17 @@ local gulpin={
       end
     end
 
-    return scaling_evo(self, card, context, "j_maelmc_swalot", card.ability.extra.stockpile_count, self.config.evo_rqmt)
+    return pokermon.scaling_evo(self, card, context, "j_maelmc_swalot", card.ability.extra.stockpile_count, self.config.evo_rqmt)
   end,
   calc_dollar_bonus = function(self, card)
-    if volatile_active(self, card, card.ability.extra.volatile) then
+    if pokermon.volatile_active(self, card, card.ability.extra.volatile) then
       local money = 0
       if card.ability.extra.stockpile == 0 then return nil
       elseif card.ability.extra.stockpile == 1 then money = card.ability.extra.money
       elseif card.ability.extra.stockpile == 2 then money =  card.ability.extra.money1
       else money = card.ability.extra.money2 end
       card.ability.extra.stockpile = 0
-      return ease_poke_dollars(card, "gulpin", money, true)
+      return pokermon.ease_poke_dollars(card, "gulpin", money, true)
     end
   end
 }
@@ -363,7 +363,7 @@ local swalot={
     Xmult = 2, Xmult1 = 4, Xmult2 = 6,
     volatile = "left", volatile2 = "right"}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'stockpile'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'volatile_both'}
     local abbr = card.ability.extra
@@ -385,7 +385,7 @@ local swalot={
     end
 
     if context.cardarea == G.jokers and context.scoring_hand then
-      if context.joker_main and volatile_active(self, card, card.ability.extra.volatile2) then
+      if context.joker_main and pokermon.volatile_active(self, card, card.ability.extra.volatile2) then
         local Xmult = 0
         if card.ability.extra.stockpile == 0 then return nil
         elseif card.ability.extra.stockpile == 1 then Xmult = card.ability.extra.Xmult
@@ -402,14 +402,14 @@ local swalot={
     end
   end,
   calc_dollar_bonus = function(self, card)
-    if volatile_active(self, card, card.ability.extra.volatile) then
+    if pokermon.volatile_active(self, card, card.ability.extra.volatile) then
       local money = 0
       if card.ability.extra.stockpile == 0 then return nil
       elseif card.ability.extra.stockpile == 1 then money = card.ability.extra.money
       elseif card.ability.extra.stockpile == 2 then money =  card.ability.extra.money1
       else money = card.ability.extra.money2 end
       card.ability.extra.stockpile = 0
-      return ease_poke_dollars(card, "swalot", money, true)
+      return pokermon.ease_poke_dollars(card, "swalot", money, true)
     end
   end
 }
@@ -422,7 +422,7 @@ local lunatone={
   pos = {x = 12, y = 22},
   config = {extra = {num_clubs = 1, dem_clubs = 4, suit = "Clubs", level_amt = 1, num_level = 1, dem_level = 4}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     local num_clubs, dem_clubs = SMODS.get_probability_vars(card, card.ability.extra.num_clubs, card.ability.extra.dem_clubs, 'lunatone')
@@ -475,7 +475,7 @@ local solrock={
   pos = {x = 14, y = 22},
   config = {extra = {num_hearts = 1, dem_hearts = 4, suit = "Hearts", num_wild = 1, dem_wild = 4}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     info_queue[#info_queue+1] = G.P_CENTERS.m_wild
     local abbr = card.ability.extra
@@ -531,7 +531,7 @@ local kecleon={
   pos = {x = 12, y = 23},
   config = {extra = {mult = 0, mult_mod = 6, current_type = "Colorless"}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.mult_mod, abbr.mult}}
@@ -547,7 +547,7 @@ local kecleon={
 
     -- all context to be futureproof
     if not context.blueprint then
-      local type = get_type(card)
+      local type = pokermon.get_type(card)
       if type ~= card.ability.extra.current_type then
         card.ability.extra.current_type = type
         card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
@@ -581,7 +581,7 @@ local kecleon={
       Dragon = {x = 8, y = 0},
       Earth = {x = 10, y = 0},
     }
-    local type = get_type(card) or "Colorless"
+    local type = pokermon.get_type(card) or "Colorless"
     if not type_table[type] then type = "Colorless" end
     if type == "Colorless" then
       if card.edition and card.edition.poke_shiny and card.children.center.atlas.name ~= "poke_AtlasJokersBasicNatdexShiny" then
@@ -621,7 +621,7 @@ local shuppet={
   cost = 7,
   config = { extra = { Xmult_mod = 0.75, rounds = 5 } },
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     return { vars = { card.ability.extra.Xmult_mod,
             G.jokers and math.max(card.ability.extra.Xmult_mod, ((G.jokers.config.card_limit - #G.jokers.cards)
             + #SMODS.find_card("j_maelmc_shuppet", true)
@@ -642,7 +642,7 @@ local shuppet={
       }
     end
 
-    return level_evo(self, card, context, "j_maelmc_banette")
+    return pokermon.level_evo(self, card, context, "j_maelmc_banette")
   end
 }
 
@@ -659,7 +659,7 @@ local banette={
   cost = 10,
   config = { extra = { Xmult_mod = 1.25 } },
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     return { vars = { card.ability.extra.Xmult_mod,
             G.jokers and math.max(card.ability.extra.Xmult_mod, ((G.jokers.config.card_limit - #G.jokers.cards)
             + #SMODS.find_card("j_maelmc_shuppet", true)
@@ -694,7 +694,7 @@ local mega_banette={
   cost = 12,
   config = { extra = { Xmult = 2 } },
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     return { vars = { card.ability.extra.Xmult } }
   end,
   calculate = function(self, card, context)
@@ -702,8 +702,8 @@ local mega_banette={
       local empty_slots = G.jokers.config.card_limit - #G.jokers.cards
       for _ = 1, empty_slots do
         local _fmb = SMODS.add_card({key = "j_maelmc_fake_mega_banette", edition = card.edition or nil})
-        for _ = 1, get_total_energy(card) do
-          energize(_fmb,nil,nil,true)
+        for _ = 1, pokermon.energy.get_total_energy(card) do
+          pokermon.energy.energize(_fmb,nil,nil,true)
           if _fmb.ability.extra.c_energy_count then
               _fmb.ability.extra.c_energy_count = _fmb.ability.extra.c_energy_count + 1
           else
@@ -739,7 +739,7 @@ local fake_mega_banette={
   cost = 2,
   config = { extra = { Xmult = 1.5 } },
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     return { vars = { card.ability.extra.Xmult } }
   end,
   calculate = function(self, card, context)
@@ -808,7 +808,7 @@ local regirock = {
   cost = 20,
   config = { extra = { } },
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_stone
     return { vars = { } }
   end,
@@ -832,7 +832,7 @@ local regice = {
   cost = 20,
   config = { extra = { } },
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_glass
     return { vars = { } }
   end,
@@ -856,7 +856,7 @@ local registeel = {
   cost = 20,
   config = { extra = { } },
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_steel
     return { vars = { } }
   end,
@@ -875,7 +875,7 @@ local deoxys = {
   soul_pos = { x = 3, y = 3},
   config = {extra = {allow_dna = false, copy = 2 --[[hands = 1, d_size = 1, h_size = 1]]}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
 		return {vars = {card.ability.extra.copy}}
   end,
   rarity = 4,
@@ -952,7 +952,7 @@ local deoxys_attack = {
   soul_pos = { x = 5, y = 3},
   config = {extra = {hands = 3}},
   loc_vars = function(self, info_queue, center)
-    type_tooltip(self, info_queue, center)
+    pokermon.type_tooltip(self, info_queue, center)
 		return {vars = {center.ability.extra.hands}}
   end,
   rarity = 4,
@@ -981,7 +981,7 @@ local deoxys_defense = {
   soul_pos = { x = 7, y = 3},
   config = {extra = {d_size = 5}},
   loc_vars = function(self, info_queue, center)
-    type_tooltip(self, info_queue, center)
+    pokermon.type_tooltip(self, info_queue, center)
     return {vars = {center.ability.extra.d_size}}
   end,
   rarity = 4,
@@ -1010,7 +1010,7 @@ local deoxys_speed = {
   soul_pos = { x = 9, y = 3 },
   config = { extra = { h_size = 4} },
   loc_vars = function(self, info_queue, center)
-    type_tooltip(self, info_queue, center)
+    pokermon.type_tooltip(self, info_queue, center)
     return { vars = { center.ability.extra.h_size } }
   end,
   rarity = 4,
@@ -1059,7 +1059,7 @@ function G.FUNCS.deoxys_change_form(e)
       local next_form_idx = i + 1
       if next_form_idx > 4 then next_form_idx = 1 end
       local next_form = deoxys_forms[next_form_idx]
-      poke_evolve(card, next_form)
+      pokermon.evolve(card, next_form)
       return
     end
   end

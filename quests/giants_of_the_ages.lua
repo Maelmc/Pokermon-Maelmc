@@ -64,7 +64,7 @@ SMODS.current_mod.calculate = function(self, context)
       G.GAME.regice_id = (G.GAME.regice_id or 0) + 1
     end
     if not G.GAME.giants_start then
-      if (G.jokers.cards[1] and get_type(G.jokers.cards[1]) == "Earth") and (G.jokers.cards[#G.jokers.cards] and get_type(G.jokers.cards[#G.jokers.cards]) == "Water") then
+      if (G.jokers.cards[1] and pokermon.get_type(G.jokers.cards[1]) == "Earth") and (G.jokers.cards[#G.jokers.cards] and pokermon.get_type(G.jokers.cards[#G.jokers.cards]) == "Water") then
         G.GAME.giants_start = true
         play_sound('maelmc_door', 1, 1)
         attention_text({scale = 0.6, text = localize("giants_shake"), hold = 5*G.SETTINGS.GAMESPEED, align = 'cm', offset = { x = 0, y = -3.5 }, major = G.play})

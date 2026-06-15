@@ -11,7 +11,7 @@ local hazarddeck = {
 	atlas = "maelmc_pokedeck",
   --[[calculate = function(self, card, context)
     if context.setting_blind then
-      poke_set_hazards(self.config.extra.hazards)
+      pokermon.set_hazards(self.config.extra.hazards)
     end
 
     if context.end_of_round then
@@ -24,8 +24,8 @@ local hazarddeck = {
   end,]]
   apply = function(self)
     G.GAME.modifiers.hazard_deck = true
-    poke_change_hazard_max(self.config.extra.hazard_max)
-    poke_change_hazard_level(self.config.extra.hazard_level)
+    pokermon.change_hazard_max(self.config.extra.hazard_max)
+    pokermon.change_hazard_level(self.config.extra.hazard_level)
   end
 }
 

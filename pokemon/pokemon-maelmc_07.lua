@@ -6,15 +6,15 @@ local nihilego = {
   soul_pos = {x = PokemonSprites["nihilego"].base.pos.x + 1, y = PokemonSprites["nihilego"].base.pos.y},
   config = {extra = {h_size = 3, chips = 1, next_boost = 1, next_increase = 1, unscalable_chips = 7}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
     return {vars = {
               card.ability.extra.h_size,
-              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card),
               card.ability.extra.unscalable_chips,
               card.ability.extra.unscalable_chips * ((G.deck and G.deck.cards) and #G.deck.cards or 52),
-              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card) <= 1 and "" or "s",
             }}
   end,
   rarity = "maelmc_ultra_beast",
@@ -25,11 +25,11 @@ local nihilego = {
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.setting_blind and not context.blueprint then
-      local eval = function(c) return get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
+      local eval = function(c) return pokermon.energy.get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
+    if context.end_of_round and context.main_eval and not context.blueprint and pokermon.energy.get_total_energy(card) >= card.ability.extra.next_boost then
       G.hand:change_size(1)
       card.ability.extra.h_size = card.ability.extra.h_size + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
@@ -62,14 +62,14 @@ local buzzwole = {
   soul_pos = {x = PokemonSprites["buzzwole"].base.pos.x + 1, y = PokemonSprites["buzzwole"].base.pos.y},
   config = {extra = {hands = 2, chips = 1, next_boost = 1, next_increase = 1, unscalable_mult = 1}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
     return {vars = {
               card.ability.extra.hands,
-              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card),
               card.ability.extra.unscalable_mult,
-              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card) <= 1 and "" or "s",
             }}
   end,
   rarity = "maelmc_ultra_beast",
@@ -80,11 +80,11 @@ local buzzwole = {
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.setting_blind and not context.blueprint then
-      local eval = function(c) return (get_total_energy(c) >= card.ability.extra.next_boost or G.GAME.current_round.hands_played == 0) and not G.RESET_JIGGLES end
+      local eval = function(c) return (pokermon.energy.get_total_energy(c) >= card.ability.extra.next_boost or G.GAME.current_round.hands_played == 0) and not G.RESET_JIGGLES end
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
+    if context.end_of_round and context.main_eval and not context.blueprint and pokermon.energy.get_total_energy(card) >= card.ability.extra.next_boost then
       G.GAME.round_resets.hands = G.GAME.round_resets.hands + 1
       ease_hands_played(1)
       card.ability.extra.hands = card.ability.extra.hands + 1
@@ -125,14 +125,14 @@ local pheromosa = {
   soul_pos = {x = PokemonSprites["pheromosa"].base.pos.x + 1, y = PokemonSprites["pheromosa"].base.pos.y},
   config = {extra = {d_size = 4, chips = 1, next_boost = 1, next_increase = 1, unscalable_dollars = 2, poker_hands = {"Flush Five","Flush House","Five of a Kind","Straight Flush","Four of a Kind"}}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
     return {vars = {
               card.ability.extra.d_size,
-              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card),
               card.ability.extra.unscalable_dollars,
-              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card) <= 1 and "" or "s",
             }}
   end,
   rarity = "maelmc_ultra_beast",
@@ -143,7 +143,7 @@ local pheromosa = {
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.setting_blind and not context.blueprint then
-      local eval = function(c) return get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
+      local eval = function(c) return pokermon.energy.get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
       juice_card_until(card, eval, true)
     end
 
@@ -162,7 +162,7 @@ local pheromosa = {
       }
     end
 
-    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
+    if context.end_of_round and context.main_eval and not context.blueprint and pokermon.energy.get_total_energy(card) >= card.ability.extra.next_boost then
       G.GAME.round_resets.discards = G.GAME.round_resets.discards + 1
       ease_discard(1)
       card.ability.extra.d_size = card.ability.extra.d_size + 1
@@ -192,23 +192,23 @@ local xurkitree = {
   soul_pos = {x = PokemonSprites["xurkitree"].base.pos.x + 1, y = PokemonSprites["xurkitree"].base.pos.y},
   config = {extra = {energy_bonus = 2, chips = 1, next_boost = 1, next_increase = 1, unscalable_dollars = 1}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
     local energy_usable = 0
     if G.jokers and G.jokers.cards then
       for i = 1, #G.jokers.cards do
         if G.jokers.cards[i] ~= card then
-          energy_usable = energy_usable + energy_max + (G.GAME.energy_plus or 0) - math.min(get_total_energy(G.jokers.cards[i]), (G.GAME.energy_plus or 0))
+          energy_usable = energy_usable + pokermon.energy.max + (G.GAME.energy_plus or 0) - math.min(pokermon.energy.get_total_energy(G.jokers.cards[i]), (G.GAME.energy_plus or 0))
         end
       end
     end
     return {vars = {
               card.ability.extra.energy_bonus,
-              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card),
               card.ability.extra.unscalable_dollars,
               card.ability.extra.unscalable_dollars * energy_usable,
-              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card) <= 1 and "" or "s",
             }}
   end,
   rarity = "maelmc_ultra_beast",
@@ -219,11 +219,11 @@ local xurkitree = {
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.setting_blind and not context.blueprint then
-      local eval = function(c) return get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
+      local eval = function(c) return pokermon.energy.get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
+    if context.end_of_round and context.main_eval and not context.blueprint and pokermon.energy.get_total_energy(card) >= card.ability.extra.next_boost then
       G.GAME.energy_plus = G.GAME.energy_plus + 1
       card.ability.extra.energy_bonus = card.ability.extra.energy_bonus + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
@@ -251,7 +251,7 @@ local xurkitree = {
     local energy_usable = 0
     for i = 1, #G.jokers.cards do
       if G.jokers.cards[i] ~= card then
-        energy_usable = energy_usable + energy_max + (G.GAME.energy_plus or 0) - math.min(get_total_energy(G.jokers.cards[i]), (G.GAME.energy_plus or 0))
+        energy_usable = energy_usable + pokermon.energy.max + (G.GAME.energy_plus or 0) - math.min(pokermon.energy.get_total_energy(G.jokers.cards[i]), (G.GAME.energy_plus or 0))
       end
     end
     return card.ability.extra.unscalable_dollars * energy_usable
@@ -266,15 +266,15 @@ local celesteela = {
   soul_pos = {x = PokemonSprites["celesteela"].base.pos.x + 1, y = PokemonSprites["celesteela"].base.pos.y},
   config = {extra = {card_limit = 1, chips = 1, next_boost = 2, next_increase = 2, unscalable_mult = 1, unscalable_mult2 = 0.2}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
     return {vars = {
               card.ability.extra.card_limit,
-              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card),
               card.ability.extra.unscalable_mult2,
               card.ability.extra.unscalable_mult,
-              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card) <= 1 and "" or "s",
             }}
   end,
   rarity = "maelmc_ultra_beast",
@@ -285,11 +285,11 @@ local celesteela = {
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.setting_blind and not context.blueprint then
-      local eval = function(c) return get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
+      local eval = function(c) return pokermon.energy.get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
+    if context.end_of_round and context.main_eval and not context.blueprint and pokermon.energy.get_total_energy(card) >= card.ability.extra.next_boost then
       G.consumeables.config.card_limit = G.consumeables.config.card_limit + 1
       card.ability.extra.card_limit = card.ability.extra.card_limit + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
@@ -336,15 +336,15 @@ local kartana = {
   soul_pos = {x = PokemonSprites["kartana"].base.pos.x + 1, y = PokemonSprites["kartana"].base.pos.y},
   config = {extra = {booster_choice_mod = 1, chips = 1, next_boost = 3, next_increase = 3, unscalable_mult = 0, unscalable_mult2 = 5, size_of_booster = 0}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
     return {vars = {
               card.ability.extra.booster_choice_mod,
-              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card),
               card.ability.extra.unscalable_mult2,
               card.ability.extra.unscalable_mult,
-              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card) <= 1 and "" or "s",
             }}
   end,
   rarity = "maelmc_ultra_beast",
@@ -356,11 +356,11 @@ local kartana = {
   calculate = function(self, card, context)
 
     if context.setting_blind and not context.blueprint then
-      local eval = function(c) return get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
+      local eval = function(c) return pokermon.energy.get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
+    if context.end_of_round and context.main_eval and not context.blueprint and pokermon.energy.get_total_energy(card) >= card.ability.extra.next_boost then
       G.GAME.modifiers.booster_choice_mod = G.GAME.modifiers.booster_choice_mod + 1
       card.ability.extra.booster_choice_mod = card.ability.extra.booster_choice_mod + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
@@ -415,15 +415,15 @@ local stakataka = {
   soul_pos = {x = PokemonSprites["stakataka"].base.pos.x + 1, y = PokemonSprites["stakataka"].base.pos.y},
   config = {extra = {voucher_slots = 1, chips = 1, next_boost = 2, next_increase = 2, unscalable_dollars = 7, voucher_bought = 0, beat_boss = false}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
     return {vars = {
               card.ability.extra.voucher_slots,
-              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card),
               card.ability.extra.unscalable_dollars,
               card.ability.extra.unscalable_dollars * (1 + (G.GAME.modifiers.extra_vouchers or 0) - card.ability.extra.voucher_bought),
-              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card) <= 1 and "" or "s",
             }}
   end,
   rarity = "maelmc_ultra_beast",
@@ -434,11 +434,11 @@ local stakataka = {
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.setting_blind and not context.blueprint then
-      local eval = function(c) return get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
+      local eval = function(c) return pokermon.energy.get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
+    if context.end_of_round and context.main_eval and not context.blueprint and pokermon.energy.get_total_energy(card) >= card.ability.extra.next_boost then
       SMODS.change_voucher_limit(1)
       card.ability.extra.voucher_slots = card.ability.extra.voucher_slots + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
@@ -489,16 +489,16 @@ local blacephalon = {
   soul_pos = {x = PokemonSprites["blacephalon"].base.pos.x + 1, y = PokemonSprites["blacephalon"].base.pos.y},
   config = {extra = {card_slots = 1, chips = 1, next_boost = 2, next_increase = 2, unscalable_mult = 23, unscalable_negative_mult = 11, amount_bought = 0}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
     return {vars = {
               card.ability.extra.card_slots,
-              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card),
               card.ability.extra.unscalable_mult,
               card.ability.extra.unscalable_negative_mult,
               card.ability.extra.unscalable_mult * (G.GAME.shop.joker_max or 3) - card.ability.extra.unscalable_negative_mult * card.ability.extra.amount_bought,
-              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card) <= 1 and "" or "s",
             }}
   end,
   rarity = "maelmc_ultra_beast",
@@ -509,11 +509,11 @@ local blacephalon = {
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.setting_blind and not context.blueprint then
-      local eval = function(c) return get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
+      local eval = function(c) return pokermon.energy.get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
+    if context.end_of_round and context.main_eval and not context.blueprint and pokermon.energy.get_total_energy(card) >= card.ability.extra.next_boost then
       change_shop_size(1)
       card.ability.extra.card_slots = card.ability.extra.card_slots + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
@@ -562,16 +562,16 @@ local guzzlord = {
   soul_pos = {x = PokemonSprites["guzzlord"].base.pos.x + 1, y = PokemonSprites["guzzlord"].base.pos.y},
   config = {extra = {to_eat = 1, chips = 1, next_boost = 3, next_increase = 3, unscalable_mult = 1, unscalable_mult2 = 1}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'ultra_beast'}
     info_queue[#info_queue+1] = {set = 'Other', key = 'beast_boost'}
     return {vars = {
               card.ability.extra.to_eat,
               card.ability.extra.unscalable_mult2 * card.ability.extra.to_eat,
               card.ability.extra.unscalable_mult,
-              card.ability.extra.next_boost - get_total_energy(card),
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card),
               card.ability.extra.to_eat <= 1 and "" or "s",
-              card.ability.extra.next_boost - get_total_energy(card) <= 1 and "" or "s",
+              card.ability.extra.next_boost - pokermon.energy.get_total_energy(card) <= 1 and "" or "s",
             }}
   end,
   rarity = "maelmc_ultra_beast",
@@ -582,11 +582,11 @@ local guzzlord = {
   blueprint_compat = true,
   calculate = function(self, card, context)
     if context.setting_blind and not context.blueprint then
-      local eval = function(c) return get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
+      local eval = function(c) return pokermon.energy.get_total_energy(c) >= card.ability.extra.next_boost and not G.RESET_JIGGLES end
       juice_card_until(card, eval, true)
     end
 
-    if context.end_of_round and context.main_eval and not context.blueprint and get_total_energy(card) >= card.ability.extra.next_boost then
+    if context.end_of_round and context.main_eval and not context.blueprint and pokermon.energy.get_total_energy(card) >= card.ability.extra.next_boost then
       card.ability.extra.to_eat = card.ability.extra.to_eat + 1
       card.ability.extra.next_increase = card.ability.extra.next_increase + 1
       card.ability.extra.next_boost = card.ability.extra.next_boost + card.ability.extra.next_increase
@@ -622,7 +622,7 @@ local guzzlord = {
         if G.shop_jokers.config.card_limit > 1 then table.insert(pool,{weight = 50, name = "card slot"}) end
         if (G.GAME.modifiers.extra_boosters or 0) > -2 then table.insert(pool,{weight = 50, name = "booster slot"}) end
         if (G.GAME.modifiers.extra_vouchers or 0) > -1 then table.insert(pool,{weight = 50, name = "voucher slot"}) end
-        if (G.GAME.energy_plus or 0) > -energy_max then table.insert(pool,{weight = 50, name = "energy limit"}) end
+        if (G.GAME.energy_plus or 0) > -pokermon.energy.max then table.insert(pool,{weight = 50, name = "energy limit"}) end
         if (G.GAME.hazard_max or 3) > 0 then table.insert(pool,{weight = 50, name = "hazard limit"}) end
         if not G.GAME.modifiers.guzzlord_eat_shop_reroll then table.insert(pool,{weight = 1, name = "shop reroll"}) end
         if not G.GAME.modifiers.guzzlord_eat_shop_sign then table.insert(pool,{weight = 1, name = "shop sign"}) end

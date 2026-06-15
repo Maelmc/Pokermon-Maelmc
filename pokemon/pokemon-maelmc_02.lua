@@ -5,7 +5,7 @@ local galarian_corsola={
   pos = {x = 8, y = 4},
   config = {extra = {Xmult_multi = 1.5, volatile = 'left', perish_rounds = 3, currently_perished = 0}, evo_rqmt = 2},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     if pokermon_config.detailed_tooltips then
       info_queue[#info_queue+1] = {set = 'Other', key = 'poke_volatile_'..card.ability.extra.volatile}
     end
@@ -43,7 +43,7 @@ local galarian_corsola={
   calculate = function(self, card, context)
 
     -- add perish
-    if context.setting_blind and not context.blueprint and volatile_active(self, card, card.ability.extra.volatile) then
+    if context.setting_blind and not context.blueprint and pokermon.volatile_active(self, card, card.ability.extra.volatile) then
       local target = G.jokers.cards[#G.jokers.cards]
       if target ~= card and not (target.ability.eternal or target.ability.perishable) and target.config.center.perishable_compat then
         target:set_perishable(true)
@@ -76,7 +76,7 @@ local galarian_corsola={
             end
         end
     end
-    return scaling_evo(self, card, context, "j_maelmc_cursola", card.ability.extra.currently_perished, self.config.evo_rqmt)
+    return pokermon.scaling_evo(self, card, context, "j_maelmc_cursola", card.ability.extra.currently_perished, self.config.evo_rqmt)
   end,
 }
 

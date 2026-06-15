@@ -347,7 +347,7 @@ SMODS.Consumable:take_ownership('wraith', {
 SMODS.Consumable:take_ownership('poke_double_rainbow_energy', {
   use = function(self, card, area, copier)
     for i = 1, 2 do
-      energy_use(self, card, area, copier, true)
+      pokermon.energy.use(self, card, area, copier, true)
     end
     if (not G.GAME.modifiers.no_interest) and (not maelmc_should_cleanse_tag()) then
       G.GAME.modifiers.reset_no_interest = true

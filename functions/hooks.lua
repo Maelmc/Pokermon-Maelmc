@@ -49,8 +49,8 @@ function SMODS.destroy_cards(cards, bypass_eternal, immediate, skip_anim)
   return destr(cards2, bypass_eternal, immediate, skip_anim)
 end
 
-local prc = poke_remove_card
-poke_remove_card = function(target, card, trigger)
+local prc = pokermon.remove_card
+pokermon.remove_card = function(target, card, trigger)
   if SMODS.has_enhancement(target,"m_maelmc_trapped") then
     target.getting_sliced = nil
     target.shattered = nil
@@ -148,8 +148,8 @@ function Card:use_consumeable(area, copier)
 end
 
 -- Right-click on Photographer to see all Pokémon taken in photo
-local gfk = get_family_keys
-get_family_keys = function(card)
+local gfk = pokermon.get_family_keys
+pokermon.get_family_keys = function(card)
   local ret = gfk(card)
   if card.config.center.name == "photographer" then
     for _, v in ipairs(timeless_woods_keys) do
@@ -162,8 +162,8 @@ get_family_keys = function(card)
 end
 
 -- Photographer compatible with evolving pokemon
-local pbe = poke_backend_evolve
-poke_backend_evolve = function(card, to_key, energize_amount)
+local pbe = pokermon.backend_evolve
+pokermon.backend_evolve = function(card, to_key, energize_amount)
   local ret = pbe(card, to_key, energize_amount)
   maelmc_photographer_util(card)
   return ret
@@ -200,8 +200,8 @@ create_shop_card_ui = function(card, type, area)
 end
 
 -- Competitive Deck
-local gptcr = get_poke_target_card_ranks
-get_poke_target_card_ranks = function(seed, num, default, use_deck)
+local gptcr = pokermon.get_target_card_ranks
+pokermon.get_target_card_ranks = function(seed, num, default, use_deck)
   if G.GAME and G.GAME.modifiers.competitivedeck then
     -- thanks copilot for doing all that lol
     local id_counts = {}
@@ -282,8 +282,8 @@ get_poke_target_card_ranks = function(seed, num, default, use_deck)
   return gptcr(seed, num, default, use_deck)
 end
 
-local gptcs = get_poke_target_card_suit
-get_poke_target_card_suit = function(seed, use_deck, default, limit_suits)
+local gptcs = pokermon.get_target_card_suit
+pokermon.get_target_card_suit = function(seed, use_deck, default, limit_suits)
   if G.GAME and G.GAME.modifiers.competitivedeck then
     local suit_counts = {}
     local suit = default or 'Spades'
@@ -334,8 +334,8 @@ get_poke_target_card_suit = function(seed, use_deck, default, limit_suits)
   return gptcs(seed, use_deck, default, limit_suits)
 end
 
-local gptce = get_poke_target_card_enhancements
-get_poke_target_card_enhancements = function(seed, num, options)
+local gptce = pokermon.get_target_card_enhancements
+pokermon.get_target_card_enhancements = function(seed, num, options)
   if G.GAME and G.GAME.modifiers.competitivedeck then
     -- another copilot shenanigans, cant be bothered to code that
     local counts = {}

@@ -1,7 +1,7 @@
 local tealmask = {
   name = "tealmask",
   key = "tealmask",
-  set = "Item",
+  set = "poke_item",
   config = {max_highlighted = 3, min_highlighted = 1, enhancement = "m_lucky"},
   loc_vars = function(self, info_queue, center)
     info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
@@ -29,7 +29,7 @@ local tealmask = {
       end
     end
 
-    local target = poke_find_leftmost_or_highlighted(function(joker) 
+    local target = pokermon.find_leftmost_or_highlighted(function(joker) 
       return (
         string.find(joker.config.center.name,"ogerpon")
         and not (joker.config.center.name == "ogerpon")
@@ -40,7 +40,7 @@ local tealmask = {
     return false
   end,
   use = function(self, card, area, copier)
-    set_spoon_item(card)
+    pokermon.set_spoon_item(card)
     if #G.hand.highlighted >= self.config.min_highlighted then
       juice_flip(card)
       local enhance = self.config.enhancement
@@ -48,16 +48,16 @@ local tealmask = {
         G.hand.highlighted[i]:set_ability(enhance, nil, true)
       end
       juice_flip(card, true)
-      poke_unhighlight_cards()
+      pokermon.unhighlight_cards()
     end
 
-    local target = poke_find_leftmost_or_highlighted(function(joker) return (
+    local target = pokermon.find_leftmost_or_highlighted(function(joker) return (
       string.find(joker.config.center.name,"ogerpon")
       and not (joker.config.center.name == "ogerpon"))
       and not (joker.debuff) end
     )
     if target then
-      poke_evolve(target, "j_maelmc_ogerpon")
+      pokermon.evolve(target, "j_maelmc_ogerpon")
     end
   end,
   in_pool = function(self)
@@ -68,7 +68,7 @@ local tealmask = {
 local wellspringmask = {
   name = "wellspringmask",
   key = "wellspringmask",
-  set = "Item",
+  set = "poke_item",
   config = {max_highlighted = 3, min_highlighted = 1, enhancement = "m_bonus"},
   loc_vars = function(self, info_queue, center)
     info_queue[#info_queue+1] = G.P_CENTERS.m_bonus
@@ -96,7 +96,7 @@ local wellspringmask = {
       end
     end
 
-    local target = poke_find_leftmost_or_highlighted(function(joker) 
+    local target = pokermon.find_leftmost_or_highlighted(function(joker) 
       return (
         string.find(joker.config.center.name,"ogerpon")
         and not (joker.config.center.name == "ogerpon_wellspring")
@@ -107,7 +107,7 @@ local wellspringmask = {
     return false
   end,
   use = function(self, card, area, copier)
-    set_spoon_item(card)
+    pokermon.set_spoon_item(card)
     if #G.hand.highlighted >= self.config.min_highlighted then
       juice_flip(card)
       local enhance = self.config.enhancement
@@ -115,17 +115,17 @@ local wellspringmask = {
         G.hand.highlighted[i]:set_ability(enhance, nil, true)
       end
       juice_flip(card, true)
-      poke_unhighlight_cards()
+      pokermon.unhighlight_cards()
     end
 
-    local target = poke_find_leftmost_or_highlighted(function(joker) 
+    local target = pokermon.find_leftmost_or_highlighted(function(joker) 
       return (
         string.find(joker.config.center.name,"ogerpon")
         and not (joker.config.center.name == "ogerpon_wellspring")
       ) and not (joker.debuff) end
     )
     if target then
-      poke_evolve(target, "j_maelmc_ogerpon_wellspring")
+      pokermon.evolve(target, "j_maelmc_ogerpon_wellspring")
     end
   end,
   in_pool = function(self)
@@ -136,7 +136,7 @@ local wellspringmask = {
 local hearthflamemask = {
   name = "hearthflamemask",
   key = "hearthflamemask",
-  set = "Item",
+  set = "poke_item",
   config = {max_highlighted = 3, min_highlighted = 1, enhancement = "m_mult"},
   loc_vars = function(self, info_queue, center)
     info_queue[#info_queue+1] = G.P_CENTERS.m_mult
@@ -164,7 +164,7 @@ local hearthflamemask = {
       end
     end
 
-    local target = poke_find_leftmost_or_highlighted(function(joker) 
+    local target = pokermon.find_leftmost_or_highlighted(function(joker) 
       return (
         string.find(joker.config.center.name,"ogerpon")
         and not (joker.config.center.name == "ogerpon_hearthflame")
@@ -175,7 +175,7 @@ local hearthflamemask = {
     return false
   end,
   use = function(self, card, area, copier)
-    set_spoon_item(card)
+    pokermon.set_spoon_item(card)
     if #G.hand.highlighted >= self.config.min_highlighted then
       juice_flip(card)
       local enhance = self.config.enhancement
@@ -183,16 +183,16 @@ local hearthflamemask = {
         G.hand.highlighted[i]:set_ability(enhance, nil, true)
       end
       juice_flip(card, true)
-      poke_unhighlight_cards()
+      pokermon.unhighlight_cards()
     end
 
-    local target = poke_find_leftmost_or_highlighted(function(joker) return (
+    local target = pokermon.find_leftmost_or_highlighted(function(joker) return (
       string.find(joker.config.center.name,"ogerpon")
       and not (joker.config.center.name == "ogerpon_hearthflame"))
       and not (joker.debuff) end
     )
     if target then
-      poke_evolve(target, "j_maelmc_ogerpon_hearthflame")
+      pokermon.evolve(target, "j_maelmc_ogerpon_hearthflame")
     end
   end,
   in_pool = function(self)
@@ -203,7 +203,7 @@ local hearthflamemask = {
 local cornerstonemask = {
   name = "cornerstonemask",
   key = "cornerstonemask",
-  set = "Item",
+  set = "poke_item",
   config = {max_highlighted = 3, min_highlighted = 1, enhancement = "m_stone"},
   loc_vars = function(self, info_queue, center)
     info_queue[#info_queue+1] = G.P_CENTERS.m_stone
@@ -231,7 +231,7 @@ local cornerstonemask = {
       end
     end
 
-    local target = poke_find_leftmost_or_highlighted(function(joker) 
+    local target = pokermon.find_leftmost_or_highlighted(function(joker) 
       return (
         string.find(joker.config.center.name,"ogerpon")
         and not (joker.config.center.name == "ogerpon_cornerstone")
@@ -242,7 +242,7 @@ local cornerstonemask = {
     return false
   end,
   use = function(self, card, area, copier)
-    set_spoon_item(card)
+    pokermon.set_spoon_item(card)
     if #G.hand.highlighted >= self.config.min_highlighted then
       juice_flip(card)
       local enhance = self.config.enhancement
@@ -250,16 +250,16 @@ local cornerstonemask = {
         G.hand.highlighted[i]:set_ability(enhance, nil, true)
       end
       juice_flip(card, true)
-      poke_unhighlight_cards()
+      pokermon.unhighlight_cards()
     end
 
-    local target = poke_find_leftmost_or_highlighted(function(joker) return (
+    local target = pokermon.find_leftmost_or_highlighted(function(joker) return (
       string.find(joker.config.center.name,"ogerpon")
       and not (joker.config.center.name == "ogerpon_cornerstone"))
       and not (joker.debuff) end
     )
     if target then
-      poke_evolve(target, "j_maelmc_ogerpon_cornerstone")
+      pokermon.evolve(target, "j_maelmc_ogerpon_cornerstone")
     end
   end,
   in_pool = function(self)
@@ -270,7 +270,7 @@ local cornerstonemask = {
 local meteorite = {
   name = "meteorite",
   key = "meteorite",
-  set = "Item",
+  set = "poke_item",
   config = {extra = {usable = true}},
   loc_vars = function(self, info_queue, center)
     return {vars = {}}
@@ -309,19 +309,19 @@ local meteorite = {
     end
     if target then
       if target.config.center.name == "deoxys" then
-        poke_evolve(target, "j_maelmc_deoxys_attack")
+        pokermon.evolve(target, "j_maelmc_deoxys_attack")
         return
       end
       if target.config.center.name == "deoxys_attack" then
-        poke_evolve(target, "j_maelmc_deoxys_defense")
+        pokermon.evolve(target, "j_maelmc_deoxys_defense")
         return
       end
       if target.config.center.name == "deoxys_defense" then
-        poke_evolve(target, "j_maelmc_deoxys_speed")
+        pokermon.evolve(target, "j_maelmc_deoxys_speed")
         return
       end
       if target.config.center.name == "deoxys_speed" then
-        poke_evolve(target, "j_maelmc_deoxys")
+        pokermon.evolve(target, "j_maelmc_deoxys")
         return
       end
     end
@@ -363,7 +363,7 @@ local beastball = {
   use = function(self, card, area, copier)
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
         play_sound('timpani')
-        local _card = create_random_poke_joker("beastball", "Ultra Beast")
+        local _card = pokermon.create_random_poke_joker("beastball", "Ultra Beast")
         _card:add_to_deck()
         G.jokers:emplace(_card)
         return true end }))
@@ -374,7 +374,7 @@ local beastball = {
 local metronome = {
   name = "metronome",
   key = "metronome",
-  set = "Item",
+  set = "poke_item",
   config = {hand_played = nil, hand_times = 0, use_at = 5, level_by = 3},
   loc_vars = function(self, info_queue, card)
     return {vars = {card.ability.use_at, card.ability.level_by, (card.ability.hand_played and localize(card.ability.hand_played, 'poker_hands') or localize('poke_none')), card.ability.hand_times}}
@@ -388,7 +388,7 @@ local metronome = {
     return false
   end,
   use = function(self, card, area, copier)
-    set_spoon_item(card)
+    pokermon.set_spoon_item(card)
     SMODS.smart_level_up_hand(card, card.ability.hand_played, false, 3)
   end,
   calculate = function(self, card, context)
@@ -423,7 +423,7 @@ local metronome = {
 local mint = {
   name = "mint",
   key = "mint",
-  set = "Item",
+  set = "poke_item",
   config = {},
   loc_vars = function(self, info_queue, card)
     return {vars = {}}
@@ -433,17 +433,17 @@ local mint = {
   cost = 4,
   unlocked = true,
   hidden = true,
-  soul_set = "Item",
+  soul_set = "poke_item",
   soul_rate = .025,
   can_use = function(self, card)
-    local target = poke_find_leftmost_or_highlighted(function(joker) return joker.config.center.set_nature end)
+    local target = pokermon.find_leftmost_or_highlighted(function(joker) return joker.config.center.set_nature end)
     if target then return true end
     return false
   end,
   use = function(self, card, area, copier)
-    set_spoon_item(card)
+    pokermon.set_spoon_item(card)
     
-    local target = poke_find_leftmost_or_highlighted(function(joker) return joker.config.center.set_nature end)
+    local target = pokermon.find_leftmost_or_highlighted(function(joker) return joker.config.center.set_nature end)
     local prev_nature = target.ability.extra.targets
     local changed = false
     local spinda = target.config.center.key == "j_poke_spinda"
@@ -528,7 +528,7 @@ local mint = {
 local energy_reset = {
   name = "energy_reset",
   key = "energy_reset",
-  set = "Item",
+  set = "poke_item",
   config = {},
   loc_vars = function(self, info_queue, card)
     return {vars = {}}
@@ -540,22 +540,22 @@ local energy_reset = {
   hidden = true,
   can_use = function(self, card)
     if #G.consumeables.cards + G.GAME.consumeable_buffer >= G.consumeables.config.card_limit then return false end
-    local target = poke_find_leftmost_or_highlighted(function(joker) return get_total_energy(joker) > 0 end)
+    local target = pokermon.find_leftmost_or_highlighted(function(joker) return pokermon.energy.get_total_energy(joker) > 0 end)
     if target then return true end
     return false
   end,
   use = function(self, card, area, copier)
-    set_spoon_item(card)
+    pokermon.set_spoon_item(card)
 
-    local target = poke_find_leftmost_or_highlighted(function(joker) return get_total_energy(joker) > 0 end)
+    local target = pokermon.find_leftmost_or_highlighted(function(joker) return pokermon.energy.get_total_energy(joker) > 0 end)
     while true do
       if #G.consumeables.cards + G.GAME.consumeable_buffer >= G.consumeables.config.card_limit then return end
-      if get_total_energy(target) <= 0 then return end
+      if pokermon.energy.get_total_energy(target) <= 0 then return end
 
       local typed = target.ability.energy_count or target.ability.extra.energy_count or 0
       local colorless = target.ability.c_energy_count or target.ability.extra.c_energy_count or 0
       if colorless > 0 then
-        increment_energy(target, "Colorless", -1, true)
+        pokermon.energy.modify(target, "Colorless", -1, true)
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
         G.E_MANAGER:add_event(Event({
           func = function()
@@ -568,8 +568,8 @@ local energy_reset = {
           end
         }))
       elseif typed > 0 then
-        local _type = get_type(target)
-        increment_energy(target, _type, -1, true)
+        local _type = pokermon.get_type(target)
+        pokermon.energy.modify(target, _type, -1, true)
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
         G.E_MANAGER:add_event(Event({
           func = function()
@@ -587,7 +587,7 @@ local energy_reset = {
   end,
   in_pool = function(self)
     for _, v in pairs(G.jokers.cards) do
-      if get_total_energy(v) > 0 then
+      if pokermon.energy.get_total_energy(v) > 0 then
         return true
       end
     end

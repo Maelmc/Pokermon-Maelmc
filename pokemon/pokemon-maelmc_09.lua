@@ -6,10 +6,10 @@ local glimmet={
   pos = {x = 16, y = 64},
   config = {extra = {hazard_level = 1, chips = 40, hazard_triggered = 0}, evo_rqmt = 10},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = poke_get_hazard_level_vars()}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = pokermon.get_hazard_level_vars()}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
     return {vars = {abbr.hazard_level, abbr.chips, math.max(0, self.config.evo_rqmt - abbr.hazard_triggered)}}
   end,
@@ -38,13 +38,13 @@ local glimmet={
           }
       end
     end
-    return scaling_evo(self, card, context, "j_maelmc_glimmora", card.ability.extra.hazard_triggered, self.config.evo_rqmt)
+    return pokermon.scaling_evo(self, card, context, "j_maelmc_glimmora", card.ability.extra.hazard_triggered, self.config.evo_rqmt)
   end,
   add_to_deck = function(self, card, from_debuff)
-    poke_change_hazard_level(card.ability.extra.hazard_level)
+    pokermon.change_hazard_level(card.ability.extra.hazard_level)
   end,
   remove_from_deck = function(self, card, from_debuff)
-    poke_change_hazard_level(-card.ability.extra.hazard_level)
+    pokermon.change_hazard_level(-card.ability.extra.hazard_level)
   end,
 }
 
@@ -56,10 +56,10 @@ local glimmora={
   config = {extra = {hazard_level = 1, hazard_max = 1, chips = 50, base_increase = 20, increase_in = 20, increase_by = 1}},
   poke_custom_values_to_keep = {"hazard_level", "hazard_max", "chips", "base_increase", "increase_in", "increase_by"},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = poke_get_hazard_level_vars()}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = pokermon.get_hazard_level_vars()}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
     return {vars = {abbr.hazard_level, abbr.increase_by, abbr.increase_in, abbr.chips}}
   end,
@@ -86,8 +86,8 @@ local glimmora={
               card.ability.extra.increase_in = card.ability.extra.base_increase
               card.ability.extra.hazard_level = card.ability.extra.hazard_level + card.ability.extra.increase_by
               card.ability.extra.hazard_max = card.ability.extra.hazard_max + card.ability.extra.increase_by
-              poke_change_hazard_max(1)
-              poke_change_hazard_level(1)
+              pokermon.change_hazard_max(1)
+              pokermon.change_hazard_level(1)
             end
           end
           return {
@@ -100,15 +100,15 @@ local glimmora={
   add_to_deck = function(self, card, from_debuff)
     G.E_MANAGER:add_event(Event({
       func = (function()
-        poke_change_hazard_max(card.ability.extra.hazard_max)
-        poke_change_hazard_level(card.ability.extra.hazard_level)
+        pokermon.change_hazard_max(card.ability.extra.hazard_max)
+        pokermon.change_hazard_level(card.ability.extra.hazard_level)
         return true
       end)
     }))
   end,
   remove_from_deck = function(self, card, from_debuff)
-    poke_change_hazard_max(-card.ability.extra.hazard_max)
-    poke_change_hazard_level(-card.ability.extra.hazard_level)
+    pokermon.change_hazard_max(-card.ability.extra.hazard_max)
+    pokermon.change_hazard_level(-card.ability.extra.hazard_level)
   end,
   megas = {"mega_glimmora"},
 }
@@ -121,10 +121,10 @@ local mega_glimmora={
   config = {extra = {chips_mod = 50, hazard_level = 1, hazard_max = 1, chips = 0, base_increase = 0, increase_in = 0, increase_by = 0}},
   poke_custom_values_to_keep = {"hazard_level", "hazard_max", "chips", "base_increase", "increase_in", "increase_by"},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
-    info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = poke_get_hazard_level_vars()}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = pokermon.get_hazard_level_vars()}
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_hazard
     local hazard_count = 0
     if G.playing_cards then
@@ -173,15 +173,15 @@ local mega_glimmora={
   add_to_deck = function(self, card, from_debuff)
     G.E_MANAGER:add_event(Event({
       func = (function()
-        poke_change_hazard_max(card.ability.extra.hazard_max)
-        poke_change_hazard_level(card.ability.extra.hazard_level)
+        pokermon.change_hazard_max(card.ability.extra.hazard_max)
+        pokermon.change_hazard_level(card.ability.extra.hazard_level)
         return true
       end)
     }))
   end,
   remove_from_deck = function(self, card, from_debuff)
-    poke_change_hazard_max(-card.ability.extra.hazard_max)
-    poke_change_hazard_level(-card.ability.extra.hazard_level)
+    pokermon.change_hazard_max(-card.ability.extra.hazard_max)
+    pokermon.change_hazard_level(-card.ability.extra.hazard_level)
   end,
 }
 
@@ -191,7 +191,7 @@ local poltchageist = {
   gen = 9,
   config = { extra = { rounds = 4 } },
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_spell_tag', set = 'Tag' }
     return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_spell_tag" }, card.ability.extra.rounds}}
   end,
@@ -216,7 +216,7 @@ local poltchageist = {
       return nil, true -- This is for Joker retrigger purposes
     end
 
-    return level_evo(self, card, context, "j_maelmc_sinistcha")
+    return pokermon.level_evo(self, card, context, "j_maelmc_sinistcha")
   end,
 }
 
@@ -226,7 +226,7 @@ local sinistcha = {
   gen = 9,
   config = {extra = {}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_spell_tag', set = 'Tag' }
     info_queue[#info_queue + 1] = { key = 'tag_ethereal', set = 'Tag' }
     return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_spell_tag" },localize { type = 'name_text', set = 'Tag', key = "tag_ethereal" }}}
@@ -270,7 +270,7 @@ local ogerpon={
   soul_pos = {x = 5, y = 4},
   config = {extra = {money = 0, money_mod = 2, retriggers = 1, beat_boss = false}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Leaf Stone"}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
     return {vars = {card.ability.extra.money_mod, card.ability.extra.money, card.ability.extra.retriggers}}
@@ -285,9 +285,9 @@ local ogerpon={
   calculate = function(self, card, context)
     -- cannot change type
     --[[if not context.blueprint then
-      local type = get_type(card)
+      local type = pokermon.get_type(card)
       if type ~= self.ptype then
-        apply_type_sticker(card, card.ability.extra.type)
+        pokermon.apply_type_sticker(card, card.ability.extra.type)
       end
     end]]
 
@@ -325,10 +325,10 @@ local ogerpon={
 
   end,
   calc_dollar_bonus = function(self, card)
-    return ease_poke_dollars(card, "ogerpon", card.ability.extra.money, true)
+    return pokermon.ease_poke_dollars(card, "ogerpon", card.ability.extra.money, true)
 	end,
   set_ability = function(self, card, initial, delay_sprites)
-    apply_type_sticker(card, "Grass")
+    pokermon.apply_type_sticker(card, "Grass")
   end,
   add_to_deck = function(self, card, from_debuff)
     if not from_debuff then
@@ -349,7 +349,7 @@ local ogerpon_wellspring={
   soul_pos = {x = 3, y = 5},
   config = {extra = {Xchips_multi = 3}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Water Stone"}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_bonus
     return {vars = {card.ability.extra.Xchips_multi, card.ability.extra.chips}}
@@ -366,16 +366,16 @@ local ogerpon_wellspring={
   calculate = function(self, card, context)
     -- cannot change type
     --[[if not context.blueprint then
-      local type = get_type(card)
+      local type = pokermon.get_type(card)
       if type ~= self.ptype then
-        apply_type_sticker(card, card.ability.extra.type)
+        pokermon.apply_type_sticker(card, card.ability.extra.type)
       end
     end]]
 
     -- bonus cards give x3 their total chips on top of their chips, like Wigglytuff
     if context.individual and context.cardarea == G.play and SMODS.has_enhancement(context.other_card, "m_bonus") then
       if not context.end_of_round and not context.before and not context.after and not context.other_card.debuff then
-        local total_chips = poke_total_chips(context.other_card)
+        local total_chips = pokermon.total_chips(context.other_card)
         return {
           message = localize("maelmc_ivy_cudgle_ex"),
           colour = G.C.CHIPS,
@@ -432,7 +432,7 @@ local ogerpon_wellspring={
     return false
   end,
   set_ability = function(self, card, initial, delay_sprites)
-    apply_type_sticker(card, "Water")
+    pokermon.apply_type_sticker(card, "Water")
   end,
   add_to_deck = function(self, card, from_debuff)
     if not from_debuff then
@@ -453,7 +453,7 @@ local ogerpon_hearthflame={
   soul_pos = {x = 9, y = 4},
   config = {extra = {Xmult_multi = 3, delete = 1}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Fire Stone"}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_mult
     local hearthflame_card = G.GAME.current_round.maelmc_hearthflame_card or {rank = "Ace", suit = "Spades"}
@@ -472,9 +472,9 @@ local ogerpon_hearthflame={
   calculate = function(self, card, context)
     -- cannot change type
     --[[if not context.blueprint then
-      local type = get_type(card)
+      local type = pokermon.get_type(card)
       if type ~= self.ptype then
-        apply_type_sticker(card, card.ability.extra.type)
+        pokermon.apply_type_sticker(card, card.ability.extra.type)
       end
     end]]
 
@@ -491,7 +491,7 @@ local ogerpon_hearthflame={
         local to_delete = pseudorandom_element(non_mult_card, 'maelmc_ogerpon_hearthflame')
         if to_delete then
           deleted = true
-          poke_remove_card(to_delete, card)
+          pokermon.remove_card(to_delete, card)
         end
       end
       if deleted then
@@ -521,7 +521,7 @@ local ogerpon_hearthflame={
     return false
   end,
   set_ability = function(self, card, initial, delay_sprites)
-    apply_type_sticker(card, "Fire")
+    pokermon.apply_type_sticker(card, "Fire")
   end,
   add_to_deck = function(self, card, from_debuff)
     if not from_debuff then
@@ -542,7 +542,7 @@ local ogerpon_cornerstone={
   soul_pos = {x = 7, y = 5},
   config = {extra = {mult = 1, mult_divide = 10}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Hard Stone"}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_stone
     return {vars = {card.ability.extra.mult, card.ability.extra.mult_divide}}
@@ -562,9 +562,9 @@ local ogerpon_cornerstone={
 
     -- cannot change type
     --[[if not context.blueprint then
-      local type = get_type(card)
+      local type = pokermon.get_type(card)
       if type ~= self.ptype then
-        apply_type_sticker(card, card.ability.extra.type)
+        pokermon.apply_type_sticker(card, card.ability.extra.type)
       end
     end]]
 
@@ -585,7 +585,7 @@ local ogerpon_cornerstone={
 
     -- stones give n/10th of their chips as +mult
     if context.individual and context.cardarea == G.play and SMODS.has_enhancement(context.other_card,"m_stone") then
-      local total_chips = poke_total_chips(context.other_card)
+      local total_chips = pokermon.total_chips(context.other_card)
       return {
           colour = G.C.MULT,
           mult = total_chips * card.ability.extra.mult / card.ability.extra.mult_divide
@@ -597,7 +597,7 @@ local ogerpon_cornerstone={
     return false
   end,
   set_ability = function(self, card, initial, delay_sprites)
-    apply_type_sticker(card, "Earth")
+    pokermon.apply_type_sticker(card, "Earth")
   end,
   add_to_deck = function(self, card, from_debuff)
     if not from_debuff then

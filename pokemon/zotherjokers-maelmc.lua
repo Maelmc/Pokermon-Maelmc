@@ -4,7 +4,7 @@ local gym_leader={
   pos = {x = 1, y = 0},
   config = {extra = {form = "Earth", targets = {{type = "Earth"}}}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = {set = 'Other', key = 'nature', vars = {"Type"}}
@@ -42,10 +42,10 @@ local gym_leader={
     if G.GAME.modifiers.maelmc_gym_challenge and not context.blueprint then
       for _, v in ipairs(G.jokers.cards) do
         if not (v == card) then 
-          if not (v.ability.perishable) and not (get_type(v) == G.GAME.maelmc_gym_leader_type) then
+          if not (v.ability.perishable) and not (pokermon.get_type(v) == G.GAME.maelmc_gym_leader_type) then
             v:set_perishable(true) -- give perishable if not the type of the gym leader
           end
-          if (v.ability.perishable) and (get_type(v) == G.GAME.maelmc_gym_leader_type) then
+          if (v.ability.perishable) and (pokermon.get_type(v) == G.GAME.maelmc_gym_leader_type) then
             v.ability.perishable = nil -- remove perishable if it became the type of the gym leader
           end
         end
@@ -112,7 +112,7 @@ local gym_leader={
       local _types = {}
       local max = 0
       for _, v in pairs(G.jokers.cards) do
-        local _t = get_type(v)
+        local _t = pokermon.get_type(v)
         if _t then _types[_t] = (_types[_t] or 0) + 1 end
         if _types[_t] > max then max = _types[_t] end
       end
@@ -165,7 +165,7 @@ local odd_keystone={
   pos = {x = 0, y = 0},
   config = {extra = {evolve_progress = 0, evolve_after = 108, evolve_using = "The Soul"}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.evolve_progress, abbr.evolve_after, abbr.evolve_using}}
@@ -215,7 +215,7 @@ local odd_keystone={
         return true end})
       )
       return {
-        message = poke_evolve(card, "j_maelmc_spiritombl"),
+        message = pokermon.evolve(card, "j_maelmc_spiritombl"),
       }
     end]]
 
@@ -253,7 +253,7 @@ local odd_keystone={
       }))
     end
 
-    return scaling_evo(self, card, context, "j_maelmc_spiritomb", card.ability.extra.evolve_progress, card.ability.extra.evolve_after)
+    return pokermon.scaling_evo(self, card, context, "j_maelmc_spiritomb", card.ability.extra.evolve_progress, card.ability.extra.evolve_after)
   end,
 }
 
@@ -264,8 +264,8 @@ local pokewalker = {
   pos = {x = 8, y = 2},
   config = {extra = {walk_info = {name = nil, key = nil, edition = nil, seal = nil, type_sticker = nil, ability = {}}, walked_for = -2}}, -- -2 = free to walk smth, -1 = just took the joker sold, 0+ = walking
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
-    info_queue[#info_queue+1] = {set = 'Other', key = 'energize'}
+    pokermon.type_tooltip(self, info_queue, card)
+    info_queue[#info_queue+1] = {set = 'Other', key = 'pokermon.energy.energize'}
     if card.ability.extra.walk_info["name"] then
       local wfor = card.ability.extra.walked_for
       if wfor < 0 then wfor = 0 end
@@ -306,8 +306,8 @@ local pokewalker = {
 
           -- if it's a mega, devolve it
           if walking.config.center.rarity == "poke_mega" then
-            local forced_key = get_previous_evo(walking, true)
-            poke_backend_evolve(walking, forced_key)
+            local forced_key = pokermon.get_previous_evo(walking, true)
+            pokermon.backend_evolve(walking, forced_key)
           end
 
           -- get joker infos
@@ -315,7 +315,7 @@ local pokewalker = {
           card.ability.extra.walk_info["name"] = G.localization.descriptions["Joker"][walking.config.center_key]["name"]
           card.ability.extra.walk_info["edition"] = walking.edition
           card.ability.extra.walk_info["seal"] = walking.seal
-          card.ability.extra.walk_info["type_sticker"] = type_sticker_applied(walking)
+          card.ability.extra.walk_info["type_sticker"] = pokermon.type_sticker_applied(walking)
           for k, v in pairs(walking.ability) do
             card.ability.extra.walk_info["ability"][k] = v
           end
@@ -327,7 +327,7 @@ local pokewalker = {
       end
     end
 
-    -- when selling this, recreate the original joker and energize it
+    -- when selling this, recreate the original joker and pokermon.energy.energize it
     if card.ability.extra.walk_info["name"] and context.selling_self and not context.blueprint then
       local walked = card.ability.extra.walk_info
       local temp_card = {set = "Joker", area = G.jokers, key = walked["key"]}
@@ -340,14 +340,14 @@ local pokewalker = {
         reward_card:set_seal(walked["seal"],true)
       end
       if walked["type_sticker"] then
-        apply_type_sticker(reward_card,walked["type_sticker"])
+        pokermon.apply_type_sticker(reward_card,walked["type_sticker"])
       end
       for k, v in pairs(walked["ability"]) do
         reward_card.ability[k] = v
       end
 
-      if not get_type(reward_card) and card.ability.extra.walked_for >= 1 then
-        apply_type_sticker(reward_card,"Colorless")
+      if not pokermon.get_type(reward_card) and card.ability.extra.walked_for >= 1 then
+        pokermon.apply_type_sticker(reward_card,"Colorless")
       end
 
       reward_card:add_to_deck()
@@ -355,8 +355,8 @@ local pokewalker = {
       reward_card:start_materialize()
 
       for _ = 1, card.ability.extra.walked_for do
-        if can_increase_energy(reward_card) then
-          increment_energy(reward_card,get_type(reward_card))
+        if pokermon.energy.can_increase_energy(reward_card) then
+          pokermon.energy.modify(reward_card,pokermon.get_type(reward_card))
         end
       end
     end
@@ -385,7 +385,7 @@ local pc = {
                     joker_three_info = {name = nil, card = nil},
                     just_stored = false}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     local jname_one = card.ability.extra.joker_one_info.name or localize("maelmc_none")
     local jname_two = card.ability.extra.joker_two_info.name or localize("maelmc_none")
     local jname_three = card.ability.extra.joker_three_info.name or localize("maelmc_none")
@@ -411,12 +411,12 @@ local pc = {
         elseif not card.ability.extra.joker_two_info.name then slot = "joker_two_info"
         elseif not card.ability.extra.joker_three_info.name then slot = "joker_three_info" end
         if slot then
-          remove(self,stored,context)
+          SMODS.destroy_cards(stored, nil, nil, true)
 
           -- if it's a mega, devolve it
           if stored.config.center.rarity == "poke_mega" then
-            local forced_key = get_previous_evo(stored, true)
-            poke_backend_evolve(stored, forced_key)
+            local forced_key = pokermon.get_previous_evo(stored, true)
+            pokermon.backend_evolve(stored, forced_key)
           end
 
           card.ability.extra[slot].name = G.localization.descriptions["Joker"][stored.config.center_key]["name"]
@@ -476,7 +476,7 @@ local pc = {
     money = money + ((card.ability.extra.joker_one_info.card and card.ability.extra.joker_one_info.card.config and card.ability.extra.joker_one_info.card:calculate_dollar_bonus()) or 0)
     money = money + ((card.ability.extra.joker_two_info.card and card.ability.extra.joker_two_info.card.config and card.ability.extra.joker_two_info.card:calculate_dollar_bonus()) or 0)
     money = money + ((card.ability.extra.joker_three_info.card and card.ability.extra.joker_three_info.card.config and card.ability.extra.joker_three_info.card:calculate_dollar_bonus()) or 0)
-    return (money ~= 0 and ease_poke_dollars(card, "pc", money, true)) or nil
+    return (money ~= 0 and pokermon.ease_poke_dollars(card, "pc", money, true)) or nil
   end
 }
 
@@ -486,7 +486,7 @@ local photographer = {
   pos = {x = 4, y = 1},
   config = {extra = {found = {}, to_snap = 10, joker = 1}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     local count = 0
     for _ in pairs(card.ability.extra.found) do count = count + 1 end
     return {vars = {card.ability.extra.joker, card.ability.extra.to_snap, count}}
@@ -501,7 +501,7 @@ local photographer = {
     if (context.reroll_shop or context.starting_shop) and (not context.blueprint) then
       local temp_card = {set = "Joker", area = G.shop_jokers}
       local add_card = SMODS.create_card(temp_card)
-      poke_add_shop_card(add_card, card)
+      pokermon.add_shop_card(add_card, card)
     end
 
     if context.setting_blind and context.blind and context.blind.boss and not context.blueprint then
@@ -536,7 +536,7 @@ local photographer = {
     if G.shop_jokers then
       local temp_card = {set = "Joker", area = G.shop_jokers}
       local add_card = SMODS.create_card(temp_card)
-      poke_add_shop_card(add_card, card)
+      pokermon.add_shop_card(add_card, card)
     end
     maelmc_set_sepia_quest(self, card)
     if G.GAME and G.GAME.blind and G.GAME.blind.name == "The Mouth" then
@@ -562,7 +562,7 @@ local pokemoncenter = {
   pos = {x = 10, y = 1},
   config = {extra = {}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     return {vars = {}}
   end,
   rarity = 3,
@@ -584,7 +584,7 @@ local pokemoncenter = {
                 ab.eternal = false
                 ab.rental = false
                 if ab.sonfive_weakened then
-                  energy_increase(G.jokers.cards[i],get_type(G.jokers.cards[i]),1,true)
+                  pokermon.energy.increase(G.jokers.cards[i],pokermon.get_type(G.jokers.cards[i]),1,true)
                   ab.sonfive_weakened = false
                 end
                 ab.fainted = nil

@@ -33,9 +33,9 @@ local name_lists = {{"glimmet", "glimmora","mega_glimmora"},
   {"cherubi","cherrim","cherrim_sunshine"}
 }
 
-extended_family["shuppet"] = {"fake_mega_banette"}
-extended_family["banette"] = {"fake_mega_banette"}
-extended_family["mega_banette"] = {"fake_mega_banette"}
+pokermon.extended_family["shuppet"] = {"fake_mega_banette"}
+pokermon.extended_family["banette"] = {"fake_mega_banette"}
+pokermon.extended_family["mega_banette"] = {"fake_mega_banette"}
 
 for _, list in ipairs(name_lists) do
   pokermon.add_family(list)
@@ -192,8 +192,8 @@ for _, file in ipairs(pfiles) do
         if item.atlas and string.find(item.atlas, "maelmc") then
           pokermon.Pokemon(item,"maelmc",true)
         else
-          poke_load_atlas(item)
-          poke_load_sprites(item)
+          pokermon.sprites.load_sprites(item)
+          pokermon.sprites.load_atlas(item)
           pokermon.Pokemon(item,"maelmc",false)
         end
       end

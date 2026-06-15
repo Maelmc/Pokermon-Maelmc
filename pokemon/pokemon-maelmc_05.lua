@@ -5,7 +5,7 @@ local woobat = {
   pos = {x = 2, y = 35},
   config = {extra = {num = 1, dem = 2, heart_stamped_count = 0}, evo_rqmt = 4},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     local num, dem = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.dem, 'woobat')
     return {vars = {num, dem, self.config.evo_rqmt}}
   end,
@@ -44,10 +44,10 @@ local woobat = {
       end
     end
 
-    return scaling_evo(self, card, context, "j_maelmc_swoobat", card.ability.extra.heart_stamped_count, self.config.evo_rqmt)
+    return pokermon.scaling_evo(self, card, context, "j_maelmc_swoobat", card.ability.extra.heart_stamped_count, self.config.evo_rqmt)
   end,
   update = function(self, card, dt)
-    if not poke_is_in_collection(card) and G.playing_cards then
+    if not pokermon.is_in_collection(card) and G.playing_cards then
       local heart_stamped_count = 0
       for _, v in pairs(G.playing_cards) do
         if v:is_suit("Hearts") and v:get_seal() == "Red" then
@@ -65,7 +65,7 @@ local swoobat = {
   pos = {x = 4, y = 35},
   config = {extra = {num = 1, dem = 2}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     local num, dem = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.dem, 'swoobat')
     return {vars = {num, dem}}
   end,
@@ -111,7 +111,7 @@ local bouffalant = {
   pos = PokemonSprites["bouffalant"].base.pos,
   config = {extra = {money = 8, boss_trigger = 0, blind_buff = 1.5, boss_blind = nil}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = {set = 'Other', key = 'bouffalant_compat'}
     if (SMODS.Mods["Multiplayer"] or {}).can_load and MP.LOBBY and MP.LOBBY.code and MP.LOBBY.enemy_id then
       info_queue[#info_queue+1] = {set = 'Other', key = 'bouffalant_mp'}
@@ -176,7 +176,7 @@ local bouffalant = {
     local trigger = card.ability.extra.boss_trigger
     card.ability.extra.boss_trigger = 0
     card.ability.extra.boss_blind = nil
-    return G.GAME.blind.boss and ease_poke_dollars(card, "bouffalant", (trigger + 1) * card.ability.extra.money, true) or nil
+    return G.GAME.blind.boss and pokermon.ease_poke_dollars(card, "bouffalant", (trigger + 1) * card.ability.extra.money, true) or nil
   end
 }
 
@@ -196,7 +196,7 @@ local meloetta = {
   cost = 20,
   config = { extra = {money_mod = 3} },
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     if maelmc_config.meloetta_sings then
       info_queue[#info_queue+1] = {set = 'Other', key = 'meloetta_singing'}
     end
@@ -212,7 +212,7 @@ local meloetta = {
                 return true
             end
         }))
-        local earned = ease_poke_dollars(card, "meloetta", card.ability.extra.money_mod, true)
+        local earned = pokermon.ease_poke_dollars(card, "meloetta", card.ability.extra.money_mod, true)
         return {
           mult = card.ability.extra.mult,
           dollars = earned,
@@ -224,7 +224,7 @@ local meloetta = {
     if context.post_discard and not context.recursive and not context.blueprint then
       G.E_MANAGER:add_event(Event({
         func = function()
-          poke_evolve(card, "j_maelmc_meloetta_pirouette")
+          pokermon.evolve(card, "j_maelmc_meloetta_pirouette")
           return true
         end
       }))
@@ -250,7 +250,7 @@ local meloetta_pirouette = {
   no_collection = true,
   config = { extra = {Xmult_multi = 1.5} },
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     return { vars = {card.ability.extra.Xmult_multi} }
   end,
   calculate = function(self, card, context)
@@ -267,7 +267,7 @@ local meloetta_pirouette = {
     if context.post_discard and not context.recursive and not context.blueprint then
       G.E_MANAGER:add_event(Event({
         func = function()
-          poke_evolve(card, "j_maelmc_meloetta")
+          pokermon.evolve(card, "j_maelmc_meloetta")
           return true
         end
       }))

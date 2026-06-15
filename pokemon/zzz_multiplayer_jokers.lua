@@ -11,7 +11,7 @@ local wonder_trade = {
     else
       info_queue[#info_queue+1] = {set = 'Other', key = 'multiplayer_ex_jok'}
     end
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     return {vars = {}}
   end,
   unlocked = true,
@@ -82,7 +82,7 @@ local mean_look = {
     else
       info_queue[#info_queue+1] = {set = 'Other', key = 'multiplayer_ex_jok'}
     end
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_shadow_tag', set = 'Tag', specific_vars = {localize { type = 'name_text', set = 'Enhanced', key = "m_maelmc_trapped" }} }
     return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_shadow_tag" }}}
   end,

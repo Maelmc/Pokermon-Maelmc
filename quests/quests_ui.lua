@@ -120,7 +120,7 @@ end
 
 local function populate_quest(options)
   local page = options.page or 1
-  local create_card_func = options.create_card_func or poke_create_your_collection_card
+  local create_card_func = options.create_card_func or pokermon.ui.create_your_collection_card
   local offset = page - 1
   
   local cardarea = G.your_collection[1]
@@ -136,7 +136,7 @@ end
 
 local function populate_reward(options)
   local page = options.page or 1
-  local create_card_func = options.create_card_func or poke_create_your_collection_card
+  local create_card_func = options.create_card_func or pokermon.ui.create_your_collection_card
   local offset = page - 1
   
   local cardarea = G.your_collection[2]

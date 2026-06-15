@@ -566,7 +566,7 @@ return {
                     "Sell a {C:attention}Joker{} to take it for a walk",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Sell this card to retrieve",
-                    "the Joker sold and {C:pink}Energize{} it",
+                    "the Joker sold and {C:pink}pokermon.energy.energize{} it",
                     "by {C:attention}1{} for each round walked with",
                     "{C:inactive}(Currently walking {C:attention}#1#{C:inactive} for {C:attention}#2#{C:inactive} rounds)"
                 }
@@ -723,7 +723,7 @@ return {
                 name = "Nihilego",
                 text = {
                     "{C:attention}+#1#{} hand size",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}pokermon.energy.energized",
                     "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:chips}+#3#{} Chips for each",
@@ -735,7 +735,7 @@ return {
                 name = "Buzzwole",
                 text = {
                     "{C:chips}+#1#{} hands",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}pokermon.energy.energized",
                     "{C:attention}#2#{} more time#4#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{X:red,C:white}X#3#{} Mult per remaining hands",
@@ -746,7 +746,7 @@ return {
                 name = "Pheromosa",
                 text = {
                     "{C:red}+#1#{} discards",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}pokermon.energy.energized",
                     "{C:attention}#2#{} more time#4#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "Earn {C:money}$#3#{} per discard",
@@ -758,7 +758,7 @@ return {
                 name = "Xurkitree",
                 text = {
                     "{C:pink}+#1#{} Energy Limit",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}pokermon.energy.energized",
                     "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "Earn {C:money}$#3#{} at end of round per",
@@ -770,7 +770,7 @@ return {
                 name = "Celesteela",
                 text = {
                     "{C:attention}+#1#{} consumable slots",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}pokermon.energy.energized",
                     "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "When {C:attention}Blind{} is selected,",
@@ -783,7 +783,7 @@ return {
                 name = "Kartana",
                 text = {
                     "{C:attention}+#1#{} card selection in Boosters",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}pokermon.energy.energized",
                     "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "This Joker gains {C:mult}+#3#{} Mult per",
@@ -796,7 +796,7 @@ return {
                 name = "Stakataka",
                 text = {
                     "{C:attention}+#1#{} Voucher slot available in shop",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}pokermon.energy.energized",
                     "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "Earn {C:money}$#3#{} at end of round",
@@ -810,7 +810,7 @@ return {
                 name = "Blacephalon",
                 text = {
                     "{C:attention}+#1#{} card slot available in shop",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}pokermon.energy.energized",
                     "{C:attention}#2#{} more time#6#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:red}+#3#{} Mult per card slot in shop",
@@ -827,7 +827,7 @@ return {
                     "{C:attention}#1#{} thing#5# and gains",
                     "{X:red,C:white}X#2#{} Mult {C:inactive}(Currently {X:red,C:white}X#3#{C:inactive})",
                     "{br:2}ERROR - CONTACT STEAK",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:pink}pokermon.energy.energized",
                     "{C:attention}#4#{} more time#6#",
                 }
             },
@@ -1199,7 +1199,7 @@ return {
                 text = {
                     "Increases this Joker's effect",
                     "when {C:attention}Blind{} is defeated",
-                    "based on how energized it is",
+                    "based on how pokermon.energy.energized it is",
                     "{C:inactive,s:0.8}(Requirement increases after",
                     "{C:inactive,s:0.8}each Beast Boost)"
                 }
@@ -1250,7 +1250,7 @@ return {
                 name = "Pokérus",
                 text = {
                     "This Joker is always",
-                    "fully {C:pink}energized{}",
+                    "fully {C:pink}pokermon.energy.energized{}",
                     "{br:3}ERROR - CONTACT STEAK",
                     "{C:green}25%{} to spread",
                     "at end of round"

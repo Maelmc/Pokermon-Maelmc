@@ -5,7 +5,7 @@ local inkay={
   pos = {x = 20, y = 45},
   config = {extra = {mult = 8, num = 1, dem = 2, flipped_triggered = 0}, evo_rqmt = 20},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     local abbr = card.ability.extra
     local num, dem = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.dem, 'inkay')
     return {vars = {num, dem, abbr.mult, math.max(0, self.config.evo_rqmt - abbr.flipped_triggered)}}
@@ -63,7 +63,7 @@ local inkay={
         end
       end
     end
-    return scaling_evo(self, card, context, "j_maelmc_malamar", card.ability.extra.flipped_triggered, self.config.evo_rqmt)
+    return pokermon.scaling_evo(self, card, context, "j_maelmc_malamar", card.ability.extra.flipped_triggered, self.config.evo_rqmt)
   end,
   remove_from_deck = function(self, card, from_debuff)
     if #find_joker("inkay") + #find_joker("malamar") == 0 then
@@ -119,7 +119,7 @@ local malamar={
   pos = {x = 22, y = 45},
   config = {extra = {Xmult_multi = 1.5}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     local abbr = card.ability.extra
     return {vars = {abbr.Xmult_multi}}
   end,
@@ -199,7 +199,7 @@ local mega_malamar={
   artist = "KingOfThe-X-Roads",
   config = {extra = {Xmult_multi = 2}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     local abbr = card.ability.extra
     return {vars = {abbr.Xmult_multi}}
   end,
@@ -298,7 +298,7 @@ local binacle={
   pos = {x = 24, y = 45},
   config = {extra = {value = 7, retriggers = 1, retrigger_hand = 2, retrigger_held = 2, retriggered_hand = 0, retriggered_held = 0, retriggered_held_end = 0, rounds = 4}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     local abbr = card.ability.extra
     return {vars = {abbr.value, abbr.retrigger_hand, abbr.retrigger_held, abbr.retriggers, abbr.rounds}}
   end,
@@ -354,7 +354,7 @@ local binacle={
       end
     end
 
-    return level_evo(self, card, context, "j_maelmc_barbaracle")
+    return pokermon.level_evo(self, card, context, "j_maelmc_barbaracle")
   end,
 }
 
@@ -365,7 +365,7 @@ local barbaracle={
   pos = {x = 26, y = 45},
   config = {extra = {value = 7, retriggers = 1, retrigger_hand = 7, retrigger_held = 7, retriggered_hand = 0, retriggered_held = 0, retriggered_held_end = 0}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     local abbr = card.ability.extra
     return {vars = {abbr.value, abbr.retrigger_hand, abbr.retrigger_held, abbr.retriggers}}
   end,
@@ -436,7 +436,7 @@ local mega_barbaracle={
   artist = "KingOfThe-X-Roads",
   config = {extra = {value = 7, selection_limit_mod = 6, h_size = 3 --[[, retriggers = 11]]}},
   loc_vars = function(self, info_queue, card)
-    type_tooltip(self, info_queue, card)
+    pokermon.type_tooltip(self, info_queue, card)
     local abbr = card.ability.extra
     return {vars = {abbr.selection_limit_mod, abbr.h_size --[[, abbr.retriggers]], abbr.value}}
   end,
@@ -451,7 +451,7 @@ local mega_barbaracle={
       local add = function(v) return not v:get_id() == card.ability.extra.value end
       local modify = function(v) SMODS.debuff_card(v, true, card) end
       local args = {array = G.playing_cards, amt = #G.playing_cards, seed = 'mega_barbaracle', add_con = add, mod_func = modify}
-      pseudorandom_multi(args)
+      pokermon.pseudorandom_multi(args)
     end
 
     if context.end_of_round and not context.individual and not context.repetition then
@@ -518,7 +518,7 @@ local mega_barbaracle={
       local add = function(v) return not v:get_id() == card.ability.extra.value end
       local modify = function(v) SMODS.debuff_card(v, true, card) end
       local args = {array = G.playing_cards, amt = #G.playing_cards, seed = 'mega_barbaracle', add_con = add, mod_func = modify}
-      pseudorandom_multi(args)
+      pokermon.pseudorandom_multi(args)
     end]]
   end,
   remove_from_deck = function(self, card, from_debuff)
