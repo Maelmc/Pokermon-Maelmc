@@ -1,5 +1,5 @@
 -- the following were taken directly from Steamodded's ownerships
-local function juice_flip(used_tarot)
+local function pokermon.juice_flip(used_tarot)
     G.E_MANAGER:add_event(Event({
         trigger = 'after',
         delay = 0.4,
@@ -54,7 +54,7 @@ end
 SMODS.Consumable:take_ownership('ouija', {
     use = function(self, card, area, copier)
         local used_tarot = copier or card
-        juice_flip(used_tarot)
+        pokermon.juice_flip(used_tarot)
         local _rank = pseudorandom_element(SMODS.Ranks, pseudoseed('ouija'))
         for i = 1, #G.hand.cards do
             G.E_MANAGER:add_event(Event({

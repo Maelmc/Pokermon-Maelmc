@@ -42,12 +42,12 @@ local tealmask = {
   use = function(self, card, area, copier)
     pokermon.set_spoon_item(card)
     if #G.hand.highlighted >= self.config.min_highlighted then
-      juice_flip(card)
+      pokermon.juice_flip(card)
       local enhance = self.config.enhancement
       for i = 1, #G.hand.highlighted do
         G.hand.highlighted[i]:set_ability(enhance, nil, true)
       end
-      juice_flip(card, true)
+      pokermon.juice_flip(card, true)
       pokermon.unhighlight_cards()
     end
 
@@ -109,12 +109,12 @@ local wellspringmask = {
   use = function(self, card, area, copier)
     pokermon.set_spoon_item(card)
     if #G.hand.highlighted >= self.config.min_highlighted then
-      juice_flip(card)
+      pokermon.juice_flip(card)
       local enhance = self.config.enhancement
       for i = 1, #G.hand.highlighted do
         G.hand.highlighted[i]:set_ability(enhance, nil, true)
       end
-      juice_flip(card, true)
+      pokermon.juice_flip(card, true)
       pokermon.unhighlight_cards()
     end
 
@@ -177,12 +177,12 @@ local hearthflamemask = {
   use = function(self, card, area, copier)
     pokermon.set_spoon_item(card)
     if #G.hand.highlighted >= self.config.min_highlighted then
-      juice_flip(card)
+      pokermon.juice_flip(card)
       local enhance = self.config.enhancement
       for i = 1, #G.hand.highlighted do
         G.hand.highlighted[i]:set_ability(enhance, nil, true)
       end
-      juice_flip(card, true)
+      pokermon.juice_flip(card, true)
       pokermon.unhighlight_cards()
     end
 
@@ -244,12 +244,12 @@ local cornerstonemask = {
   use = function(self, card, area, copier)
     pokermon.set_spoon_item(card)
     if #G.hand.highlighted >= self.config.min_highlighted then
-      juice_flip(card)
+      pokermon.juice_flip(card)
       local enhance = self.config.enhancement
       for i = 1, #G.hand.highlighted do
         G.hand.highlighted[i]:set_ability(enhance, nil, true)
       end
-      juice_flip(card, true)
+      pokermon.juice_flip(card, true)
       pokermon.unhighlight_cards()
     end
 
