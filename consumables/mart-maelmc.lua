@@ -472,7 +472,7 @@ local mint = {
         changed = false
         change_count = #target.ability.extra.enhancements
         for _, v in pairs(target.ability.extra.enhancements) do
-          if table.contains(prev_h,v) then
+          if pokermon.has(prev_h,v) then
             change_count = change_count - 1
             break
           end

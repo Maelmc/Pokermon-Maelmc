@@ -147,7 +147,7 @@ local pheromosa = {
       juice_card_until(card, eval, true)
     end
 
-    if context.before and table.contains(card.ability.extra.poker_hands, context.scoring_name) then
+    if context.before and pokermon.has(card.ability.extra.poker_hands, context.scoring_name) then
       G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.unscalable_dollars * G.GAME.current_round.discards_left
       return {
         dollars = card.ability.extra.unscalable_dollars * G.GAME.current_round.discards_left,

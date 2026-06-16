@@ -301,7 +301,7 @@ local gible={
           table.insert(to_retrigger,v)
         end
       end
-      if table.contains(to_retrigger,context.other_card) then
+      if pokermon.has(to_retrigger,context.other_card) then
         return {
           colour = G.C.MULT,
           mult = card.ability.extra.mult,
@@ -317,7 +317,7 @@ local gible={
           table.insert(to_retrigger,v)
         end
       end
-      if table.contains(to_retrigger,context.other_card) then
+      if pokermon.has(to_retrigger,context.other_card) then
         if not context.blueprint then
           card.ability.extra.retriggered = card.ability.extra.retriggered + card.ability.extra.retriggers
         end
@@ -362,7 +362,7 @@ local gabite={
           table.insert(to_retrigger,v)
         end
       end
-      if table.contains(to_retrigger,context.other_card) then
+      if pokermon.has(to_retrigger,context.other_card) then
         return {
           colour = G.C.MULT,
           mult = card.ability.extra.mult,
@@ -378,7 +378,7 @@ local gabite={
           table.insert(to_retrigger,v)
         end
       end
-      if table.contains(to_retrigger,context.other_card) then
+      if pokermon.has(to_retrigger,context.other_card) then
         if not context.blueprint then
           card.ability.extra.retriggered = card.ability.extra.retriggered + card.ability.extra.retriggers
         end

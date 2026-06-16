@@ -101,7 +101,7 @@ end
 local discard_cards_from_highlighted = G.FUNCS.discard_cards_from_highlighted
 G.FUNCS.discard_cards_from_highlighted = function(e, hook)
   local targets = {}
-  table.append(targets,G.hand.highlighted)
+  pokermon.table_append(targets,G.hand.highlighted)
   for _, v in pairs(targets) do
     if SMODS.has_enhancement(v,"m_maelmc_trapped") then
       G.hand:remove_from_highlighted(v, true)

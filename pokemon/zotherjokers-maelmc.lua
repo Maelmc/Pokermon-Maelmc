@@ -453,7 +453,7 @@ local pc = {
           for k, w in pairs(v) do
             if final_ret[k] then
               final_ret[k] = final_ret[k] + w
-            elseif not (table.contains(scoring,k)) and k ~= "extra" and k ~= "message" and k ~= "colour" and k ~= "card" then
+            elseif not (pokermon.has(scoring,k)) and k ~= "extra" and k ~= "message" and k ~= "colour" and k ~= "card" then
               final_ret[k] = w
             end
           end
@@ -527,7 +527,7 @@ local photographer = {
       end)
     }))
     for _, v in pairs(G.jokers.cards) do
-      if table.contains(timeless_woods_available, v.config.center.name) then
+      if pokermon.has(timeless_woods_available, v.config.center.name) then
         v.ability.extra.found[v.config.center_key] = true
         card:juice_up()
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("maelmc_photo_ex")})

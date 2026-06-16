@@ -84,7 +84,7 @@ payload = '''
         local to_add = {}
         for _, v in ipairs(G.P_CENTER_POOLS.Joker) do
             if not v.perishable_compat then
-                if not table.contains(to_add, v.key) then
+                if not pokermon.has(to_add, v.key) then
                     to_add[#to_add+1] = v.key
                 end
             end
@@ -95,7 +95,7 @@ payload = '''
             banned[#banned+1] = curr
         end
         for _, v in ipairs(to_add) do
-            if not table.contains(banned,v) then
+            if not pokermon.has(banned,v) then
                 _ch.restrictions.banned_cards[#_ch.restrictions.banned_cards+1] = {id = v}
             end
         end
@@ -122,7 +122,7 @@ payload = '''
         local to_add = {}
         for _, v in ipairs(G.P_CENTER_POOLS.Joker) do
             if not v.perishable_compat then
-                if not table.contains(to_add, v.key) then
+                if not pokermon.has(to_add, v.key) then
                     to_add[#to_add+1] = v.key
                 end
             end
@@ -133,7 +133,7 @@ payload = '''
             banned[#banned+1] = curr
         end
         for _, v in ipairs(to_add) do
-            if not table.contains(banned,v) then
+            if not pokermon.has(banned,v) then
                 challenge.restrictions.banned_cards[#challenge.restrictions.banned_cards+1] = {id = v}
             end
         end

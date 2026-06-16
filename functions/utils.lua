@@ -211,7 +211,7 @@ function maelmc_blind_trigger(card, context, boss_name)
 
     local steel_held = false
     for i = 1, #G.hand.cards do
-      if SMODS.has_enhancement(G.hand.cards[i],"m_steel") and not table.contains(G.hand.highlighted,G.hand.cards[i]) then
+      if SMODS.has_enhancement(G.hand.cards[i],"m_steel") and not pokermon.has(G.hand.highlighted,G.hand.cards[i]) then
         steel_held = true
         break
       end
