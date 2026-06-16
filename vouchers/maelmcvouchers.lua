@@ -14,7 +14,7 @@ local pokemart = {
   redeem = function(self, card)
     G.E_MANAGER:add_event(Event({
       func = function()
-        G.GAME.item_rate = G.GAME.item_rate * card.ability.extra.rate
+        G.GAME.poke_item_rate = G.GAME.poke_item_rate * card.ability.extra.rate
         return true
       end
     }))
@@ -22,7 +22,7 @@ local pokemart = {
   unredeem = function(self, card)
     G.E_MANAGER:add_event(Event({
       func = function()
-        G.GAME.item_rate = G.GAME.item_rate / card.ability.extra.rate
+        G.GAME.poke_item_rate = G.GAME.poke_item_rate / card.ability.extra.rate
         return true
       end
     }))
@@ -46,7 +46,7 @@ local departmentstore = {
   redeem = function(self, card)
     G.E_MANAGER:add_event(Event({
       func = function()
-        G.GAME.item_rate = G.GAME.item_rate * card.ability.extra.rate
+        G.GAME.poke_item_rate = G.GAME.poke_item_rate * card.ability.extra.rate
         return true
       end
     }))
@@ -54,7 +54,7 @@ local departmentstore = {
   unredeem = function(self, card)
     G.E_MANAGER:add_event(Event({
       func = function()
-        G.GAME.item_rate = G.GAME.item_rate / card.ability.extra.rate
+        G.GAME.poke_item_rate = G.GAME.poke_item_rate / card.ability.extra.rate
         return true
       end
     }))
