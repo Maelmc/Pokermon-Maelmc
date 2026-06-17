@@ -332,7 +332,7 @@ local ogerpon={
   end,
   add_to_deck = function(self, card, from_debuff)
     if not from_debuff then
-      local _card = create_card("Item", G.consumeables, nil, nil, nil, nil, "c_poke_leafstone")
+      local _card = create_card("poke_item", G.consumeables, nil, nil, nil, nil, "c_poke_leafstone")
       local edition = {negative = true}
       _card:set_edition(edition, true)
       _card:add_to_deck()
@@ -402,7 +402,7 @@ local ogerpon_wellspring={
               trigger = 'before',
               delay = 0.0,
               func = function()
-                local _card = create_card('Item',G.consumeables, nil, nil, nil, nil, "c_poke_waterstone")
+                local _card = create_card('poke_item',G.consumeables, nil, nil, nil, nil, "c_poke_waterstone")
                 _card:add_to_deck()
                 G.consumeables:emplace(_card)
                 G.GAME.consumeable_buffer = 0
@@ -436,7 +436,7 @@ local ogerpon_wellspring={
   end,
   add_to_deck = function(self, card, from_debuff)
     if not from_debuff then
-      local _card = create_card("Item", G.consumeables, nil, nil, nil, nil, "c_poke_waterstone")
+      local _card = create_card("poke_item", G.consumeables, nil, nil, nil, nil, "c_poke_waterstone")
       local edition = {negative = true}
       _card:set_edition(edition, true)
       _card:add_to_deck()
@@ -525,7 +525,7 @@ local ogerpon_hearthflame={
   end,
   add_to_deck = function(self, card, from_debuff)
     if not from_debuff then
-      local _card = create_card("Item", G.consumeables, nil, nil, nil, nil, "c_poke_firestone")
+      local _card = create_card("poke_item", G.consumeables, nil, nil, nil, nil, "c_poke_firestone")
       local edition = {negative = true}
       _card:set_edition(edition, true)
       _card:add_to_deck()
@@ -601,7 +601,7 @@ local ogerpon_cornerstone={
   end,
   add_to_deck = function(self, card, from_debuff)
     if not from_debuff then
-      local _card = create_card("Item", G.consumeables, nil, nil, nil, nil, "c_poke_hardstone")
+      local _card = create_card("poke_item", G.consumeables, nil, nil, nil, nil, "c_poke_hardstone")
       local edition = {negative = true}
       _card:set_edition(edition, true)
       _card:add_to_deck()

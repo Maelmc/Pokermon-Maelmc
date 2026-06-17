@@ -715,7 +715,7 @@ local cramomatic = {
               G.GAME.consumeable_buffer = 0
               local pool = {}
               for k, v in pairs(G.P_CENTERS) do
-                if v.set == "Item"
+                if v.set == "poke_item"
                 and k ~= "c_poke_berry_juice" -- dont want to generate an unusable item
                 and k ~= "c_poke_berry_juice_mega" -- too op
                 then pool[#pool+1] = k end
@@ -723,7 +723,7 @@ local cramomatic = {
               table.sort(pool)
 
               math.randomseed(seed)
-              SMODS.add_card({set = "Item", area = G.consumeables, key = pool[math.random(1,#pool)]})
+              SMODS.add_card({set = "poke_item", area = G.consumeables, key = pool[math.random(1,#pool)]})
 
               G.E_MANAGER:add_event(Event({
                 func = (function()
