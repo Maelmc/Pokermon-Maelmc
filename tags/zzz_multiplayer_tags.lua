@@ -1,4 +1,4 @@
-local shadow_tag = {
+--[[local shadow_tag = {
 	object_type = "Tag",
 	atlas = "maelmc_tags",
 	name = "shadow_tag",
@@ -45,4 +45,6 @@ return {
   list = {
     shadow_tag,
   }
-}
+}]]
+
+return {list={}}

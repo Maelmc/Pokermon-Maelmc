@@ -1,4 +1,4 @@
-local trapped = {
+--[[local trapped = {
   key = "trapped",
   atlas = "maelmc_enhancements",
   pos = { x = 0, y = 0 },
@@ -25,4 +25,6 @@ return {
    list = {
     trapped
    }
-}
+}]]
+
+return {list={}}

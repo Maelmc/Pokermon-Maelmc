@@ -1,4 +1,4 @@
-local wonder_trade = {
+--[[local wonder_trade = {
   name = "wonder_trade",
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 1},
@@ -118,4 +118,6 @@ return {
     wonder_trade,
     mean_look
   },
-}
+}]]
+
+return {list={}}

@@ -71,9 +71,9 @@ local competitivedeck = {
 
 local list = { hazarddeck, competitivedeck }
 
-if next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer')) then
+--[[if next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer')) then
   table.insert(list, mysterydeck)
-end
+end]]
 
 return {name = "Back",
   init = init,

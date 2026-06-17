@@ -221,10 +221,15 @@ local meloetta = {
       end
     end
 
-    if context.post_discard and not context.recursive and not context.blueprint then
+    if context.discard and not context.blueprint then
       G.E_MANAGER:add_event(Event({
         func = function()
-          pokermon.evolve(card, "j_maelmc_meloetta_pirouette")
+          G.E_MANAGER:add_event(Event({
+            func = function()
+              pokermon.evolve(card, "j_maelmc_meloetta_pirouette")
+              return true
+            end
+          }))
           return true
         end
       }))
@@ -264,10 +269,15 @@ local meloetta_pirouette = {
       end
     end
 
-    if context.post_discard and not context.recursive and not context.blueprint then
+    if context.discard and not context.blueprint then
       G.E_MANAGER:add_event(Event({
         func = function()
-          pokermon.evolve(card, "j_maelmc_meloetta")
+          G.E_MANAGER:add_event(Event({
+            func = function()
+              pokermon.evolve(card, "j_maelmc_meloetta")
+              return true
+            end
+          }))
           return true
         end
       }))
