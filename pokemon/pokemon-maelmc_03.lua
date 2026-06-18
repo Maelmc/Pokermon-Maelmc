@@ -1088,7 +1088,7 @@ return {
     lunatone, solrock,
     kecleon,
     shuppet, banette, mega_banette, fake_mega_banette,
-    tropius,
+    --tropius,
     regirock,
     regice,
     registeel,
