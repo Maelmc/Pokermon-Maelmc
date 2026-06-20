@@ -566,7 +566,7 @@ return {
                     "Sell a {C:attention}Joker{} to take it for a walk",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Sell this card to retrieve",
-                    "the Joker sold and {C:pink}pokermon.energy.energize{} it",
+                    "the Joker sold and {C:pink}energize{} it",
                     "by {C:attention}1{} for each round walked with",
                     "{C:inactive}(Currently walking {C:attention}#1#{C:inactive} for {C:attention}#2#{C:inactive} rounds)"
                 }
