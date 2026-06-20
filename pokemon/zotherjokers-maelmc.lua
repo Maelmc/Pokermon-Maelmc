@@ -265,7 +265,7 @@ local pokewalker = {
   config = {extra = {walk_info = {name = nil, key = nil, edition = nil, seal = nil, type_sticker = nil, ability = {}}, walked_for = -2}}, -- -2 = free to walk smth, -1 = just took the joker sold, 0+ = walking
   loc_vars = function(self, info_queue, card)
     pokermon.type_tooltip(self, info_queue, card)
-    info_queue[#info_queue+1] = {set = 'Other', key = 'pokermon.energy.energize'}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'energize'}
     if card.ability.extra.walk_info["name"] then
       local wfor = card.ability.extra.walked_for
       if wfor < 0 then wfor = 0 end
@@ -327,7 +327,7 @@ local pokewalker = {
       end
     end
 
-    -- when selling this, recreate the original joker and pokermon.energy.energize it
+    -- when selling this, recreate the original joker and energize it
     if card.ability.extra.walk_info["name"] and context.selling_self and not context.blueprint then
       local walked = card.ability.extra.walk_info
       local temp_card = {set = "Joker", area = G.jokers, key = walked["key"]}
