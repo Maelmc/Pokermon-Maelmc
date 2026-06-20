@@ -159,7 +159,7 @@ return {
                 }
             },
         },
-        Item = {
+        poke_item = {
             c_maelmc_tealmask = {
                 name = "Teal Mask",
                 text = {
