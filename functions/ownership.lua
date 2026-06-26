@@ -350,7 +350,7 @@ SMODS.Consumable:take_ownership('poke_double_rainbow_energy', {
       pokermon.energy.use(self, card, area, copier, true)
     end
     if (not G.GAME.modifiers.no_interest) and (not maelmc_should_cleanse_tag()) then
-      G.GAME.modifiers.reset_no_interest = true
+      G.GAME.modifiers.poke_reset_no_interest = true
       G.GAME.modifiers.no_interest = true
     end
   end,
