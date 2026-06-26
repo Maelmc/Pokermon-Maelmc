@@ -4,7 +4,7 @@ return {
             b_maelmc_hazarddeck = {
                 name = "Hazard Deck",
                 text = {
-                    "{C:hazard}+#1#{} hazard layer and limit",
+                    "{C:poke_hazard}+#1#{} hazard layer and limit",
                     "Hazards held in hand",
                     "give {C:attention}+1{} hand size"
                 }
@@ -233,9 +233,9 @@ return {
                 text = {
                     "Remove all energies from",
                     "leftmost or selected {C:attention}Joker{} and",
-                    "create matching {C:pink}Energy{} cards",
+                    "create matching {C:poke_pink}Energy{} cards",
                     "until there's no room left or",
-                    "the {C:attention}Joker{} has no {C:pink}Energy{} left",
+                    "the {C:attention}Joker{} has no {C:poke_pink}Energy{} left",
                     "{C:inactive}(Prioritize Colorless Energy)"
                 },
             },
@@ -244,7 +244,7 @@ return {
             j_maelmc_glimmet = {
                 name = "Glimmet",
                 text = {
-                    "{C:hazard}+#1#{} hazard layer",
+                    "{C:poke_hazard}+#1#{} hazard layer",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each {C:attention}Hazard Card held{} in hand",
                     "gives {C:chips}+#2#{} Chips",
@@ -254,7 +254,7 @@ return {
             j_maelmc_glimmora = {
                 name = "Glimmora",
                 text = {
-                    "{C:hazard}+#1#{} hazard layer and limit",
+                    "{C:poke_hazard}+#1#{} hazard layer and limit",
                     "Increase hazard level and limit by {C:attention}#2#",
                     "after triggering {C:attention}#3#{} held {C:attention}Hazard Cards{}",
                     "{C:inactive,s:0.8}(Requirement {C:attention,s:0.8}doubles{C:inactive,s:0.8} after each increase)",
@@ -266,7 +266,7 @@ return {
             j_maelmc_cufant = {
                 name = "Cufant",
                 text = {
-                    "{C:hazard}+#1#{} hazard layer",
+                    "{C:poke_hazard}+#1#{} hazard layer",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Enhance {C:attention}#2# Hazard{} card in hand",
                     "into a {C:attention}Steel{} card",
@@ -277,7 +277,7 @@ return {
             j_maelmc_copperajah = {
                 name = "Copperajah",
                 text = {
-                    "{C:hazard}+#1#{} hazard layer",
+                    "{C:poke_hazard}+#1#{} hazard layer",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Enhance {C:attention}#2# Hazards{} cards in hand",
                     "into {C:attention}Steel{} cards",
@@ -332,7 +332,7 @@ return {
                 name = "#2#",
                 text = {
                     "{C:attention}Nature: #1#",
-                    "Creates a {C:attention}tag{} and an {C:pink}Energy{} card",
+                    "Creates a {C:attention}tag{} and an {C:poke_pink}Energy{} card",
                     "matching the {C:attention}Nature{}'s type",
                     "when {C:attention}Boss Blind{} is defeated",
                 } 
@@ -503,7 +503,7 @@ return {
                 name = "Ogerpon",
                 text = {
                     --"This Joker cannot change {C:attention}Type",
-                    "Holding {C:dark_edition}Negative {C:item}Leaf Stone",
+                    "Holding {C:dark_edition}Negative {C:poke_item}Leaf Stone",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Increases earned money at",
                     "end of round by {C:money}$#1#{} for each",
@@ -520,14 +520,14 @@ return {
                 name = "Ogerpon",
                 text = {
                     --"This Joker cannot change {C:attention}Type",
-                    "Holding {C:dark_edition}Negative {C:item}Water Stone",
+                    "Holding {C:dark_edition}Negative {C:poke_item}Water Stone",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Scored {C:attention}Bonus{} cards give",
                     "{X:chips,C:white}X#1#{} their total chips",
                     "{br:3}ERROR - CONTACT STEAK",
                     "If scoring hand contains",
                     "no {C:attention}Bonus{} card,",
-                    "create a {C:item}Water Stone",
+                    "create a {C:poke_item}Water Stone",
                     "{C:inactive}(Must have room)",
                     "{s:0.8}Changes form using a {C:attention,s:0.8}Mask",
                 }
@@ -536,7 +536,7 @@ return {
                 name = "Ogerpon",
                 text = {
                     --"This Joker cannot change {C:attention}Type",
-                    "Holding {C:dark_edition}Negative {C:item}Fire Stone",
+                    "Holding {C:dark_edition}Negative {C:poke_item}Fire Stone",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Each played {C:attention}Mult #1#{} of {V:1}#2#",
                     "gives {X:red,C:white}X#3#{} Mult when scored",
@@ -551,7 +551,7 @@ return {
                 name = "Ogerpon",
                 text = {
                     --"This Joker cannot change {C:attention}Type",
-                    "Holding {C:dark_edition}Negative {C:item}Hard Stone",
+                    "Holding {C:dark_edition}Negative {C:poke_item}Hard Stone",
                     "{br:3}ERROR - CONTACT STEAK",
                     "{C:attention}Stone{} cards count as their own rank",
                     "{br:3}ERROR - CONTACT STEAK",
@@ -566,7 +566,7 @@ return {
                     "Sell a {C:attention}Joker{} to take it for a walk",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Sell this card to retrieve",
-                    "the Joker sold and {C:pink}energize{} it",
+                    "the Joker sold and {C:poke_pink}energize{} it",
                     "by {C:attention}1{} for each round walked with",
                     "{C:inactive}(Currently walking {C:attention}#1#{C:inactive} for {C:attention}#2#{C:inactive} rounds)"
                 }
@@ -723,7 +723,7 @@ return {
                 name = "Nihilego",
                 text = {
                     "{C:attention}+#1#{} hand size",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:poke_pink}energized",
                     "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:chips}+#3#{} Chips for each",
@@ -735,7 +735,7 @@ return {
                 name = "Buzzwole",
                 text = {
                     "{C:chips}+#1#{} hands",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:poke_pink}energized",
                     "{C:attention}#2#{} more time#4#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{X:red,C:white}X#3#{} Mult per remaining hands",
@@ -746,7 +746,7 @@ return {
                 name = "Pheromosa",
                 text = {
                     "{C:red}+#1#{} discards",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:poke_pink}energized",
                     "{C:attention}#2#{} more time#4#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "Earn {C:money}$#3#{} per discard",
@@ -757,12 +757,12 @@ return {
             j_maelmc_xurkitree = {
                 name = "Xurkitree",
                 text = {
-                    "{C:pink}+#1#{} Energy Limit",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:poke_pink}+#1#{} Energy Limit",
+                    "{C:dark_edition}Beast Boost{} when {C:poke_pink}energized",
                     "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "Earn {C:money}$#3#{} at end of round per",
-                    "{C:pink}Energy{} usable on other Jokers",
+                    "{C:poke_pink}Energy{} usable on other Jokers",
                     "{C:inactive}(Currently {C:money}$#4#{C:inactive})",
                 }
             },
@@ -770,7 +770,7 @@ return {
                 name = "Celesteela",
                 text = {
                     "{C:attention}+#1#{} consumable slots",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:poke_pink}energized",
                     "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "When {C:attention}Blind{} is selected,",
@@ -783,7 +783,7 @@ return {
                 name = "Kartana",
                 text = {
                     "{C:attention}+#1#{} card selection in Boosters",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:poke_pink}energized",
                     "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "This Joker gains {C:mult}+#3#{} Mult per",
@@ -796,7 +796,7 @@ return {
                 name = "Stakataka",
                 text = {
                     "{C:attention}+#1#{} Voucher slot available in shop",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:poke_pink}energized",
                     "{C:attention}#2#{} more time#5#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "Earn {C:money}$#3#{} at end of round",
@@ -810,7 +810,7 @@ return {
                 name = "Blacephalon",
                 text = {
                     "{C:attention}+#1#{} card slot available in shop",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:poke_pink}energized",
                     "{C:attention}#2#{} more time#6#",
                     "{br:2}ERROR - CONTACT STEAK",
                     "{C:red}+#3#{} Mult per card slot in shop",
@@ -827,7 +827,7 @@ return {
                     "{C:attention}#1#{} thing#5# and gains",
                     "{X:red,C:white}X#2#{} Mult {C:inactive}(Currently {X:red,C:white}X#3#{C:inactive})",
                     "{br:2}ERROR - CONTACT STEAK",
-                    "{C:dark_edition}Beast Boost{} when {C:pink}energized",
+                    "{C:dark_edition}Beast Boost{} when {C:poke_pink}energized",
                     "{C:attention}#4#{} more time#6#",
                 }
             },
@@ -1039,7 +1039,7 @@ return {
             j_maelmc_mega_glimmora = {
                 name = "Mega Glimmora",
                 text = {
-                    "{C:hazard}+#1#{} hazard layer and limit",
+                    "{C:poke_hazard}+#1#{} hazard layer and limit",
                     "When round begins, draw",
                     "all your {C:attention}Hazard{} cards",
                     "{br:3}ERROR - CONTACT STEAK",
@@ -1077,7 +1077,7 @@ return {
                     "poker hand into a {C:attention}Seed{} card",
                     "for each {C:attention}Flower Card{} and",
                     "{C:attention}Seed Card{} in poker hand",
-                    "{s:0.8}Changes form with a {X:fire,C:white,s:0.8}Fire{s:0.8} Joker",
+                    "{s:0.8}Changes form with a {X:poke_fire,C:white,s:0.8}Fire{s:0.8} Joker",
                 },
             },
             j_maelmc_cherrim_sunshine = {
@@ -1087,7 +1087,7 @@ return {
                     "plus {X:mult,C:white}X#2#{} Mult for each",
                     "{C:attention}Flower Card{} in your {C:attention}full deck",
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive})",
-                    "{s:0.8}Changes form without a {X:fire,C:white,s:0.8}Fire{s:0.8} Joker",
+                    "{s:0.8}Changes form without a {X:poke_fire,C:white,s:0.8}Fire{s:0.8} Joker",
                 },
             },
             j_maelmc_regirock = {
@@ -1132,7 +1132,7 @@ return {
                 name = "Cram-o-matic",
                 text = {
                     "Sell {C:attention}4{} consumables",
-                    "to create an {C:item}Item{} card",
+                    "to create an {C:poke_item}Item{} card",
                     "{C:inactive}(Must have room)",
                     "{br:3}ERROR - CONTACT STEAK",
                     "The same 4 consumables will",
@@ -1145,7 +1145,7 @@ return {
             v_maelmc_pokemart = {
                 name = "Poké Mart",
                 text = {
-                    "{C:item}Item{} cards appear",
+                    "{C:poke_item}Item{} cards appear",
                     "{C:attention}#1#X{} more frequently",
                     "in the shop"
                 },
@@ -1153,7 +1153,7 @@ return {
             v_maelmc_departmentstore = {
                 name = "Department Store",
                 text = {
-                    "{C:item}Item{} cards appear",
+                    "{C:poke_item}Item{} cards appear",
                     "{C:attention}#1#X{} more frequently",
                     "in the shop"
                 },
@@ -1188,7 +1188,7 @@ return {
             ultra_beast = {
                 name = "Ultra Beast",
                 text = {
-                    "{C:pink}Energizing{} doesn't",
+                    "{C:poke_pink}Energizing{} doesn't",
                     "affect this Joker's",
                     "{C:mult}Mult{}, {C:chips}Chips{}, {C:money}${}",
                     "and {X:mult,C:white}X{} Mult values",
@@ -1250,7 +1250,7 @@ return {
                 name = "Pokérus",
                 text = {
                     "This Joker is always",
-                    "fully {C:pink}energized{}",
+                    "fully {C:poke_pink}energized{}",
                     "{br:3}ERROR - CONTACT STEAK",
                     "{C:green}25%{} to spread",
                     "at end of round"
