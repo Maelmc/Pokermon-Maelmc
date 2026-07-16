@@ -569,13 +569,14 @@ local energy_reset = {
         }))
       elseif typed > 0 then
         local _type = pokermon.get_type(target)
+        local _key = pokermon.energy.get_matching_energy(target, true)
         pokermon.energy.modify(target, _type, -1, true)
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
         G.E_MANAGER:add_event(Event({
           func = function()
               SMODS.add_card {
                   set = "Energy",
-                  key = string.lower("c_poke_"..(_type == "Dark" and "darkness" or _type).."_energy")
+                  key = _key
               }
               G.GAME.consumeable_buffer = 0
               return true
@@ -583,7 +584,6 @@ local energy_reset = {
         }))
       end
     end
-    
   end,
   in_pool = function(self)
     for _, v in pairs(G.jokers.cards) do
