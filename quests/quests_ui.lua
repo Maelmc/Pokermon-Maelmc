@@ -211,9 +211,9 @@ function G.FUNCS.maelmc_quest_menu(args)
   local rows = 1
   local cols = 1
   local keys = {}
-  if (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) and MP.LOBBY.code then
+  if (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) then
     -- do things for multiplayer
-    sendDebugMessage("[PokermonMaelmc] The Quests button is disabled during a Multiplayer game")
+    sendDebugMessage("[PokermonMaelmc] The Quests button is disabled when Multiplayer is enabled")
     return -- temporary solution to prevent crashes
   else
     for _, v in pairs(MAELMC_QUESTS) do
@@ -366,20 +366,22 @@ end
 local cuibhud = create_UIBox_HUD
 function create_UIBox_HUD()
   local root = cuibhud()
-  local quest_button = {n=G.UIT.R, config={align = "cm", minh = 1.75, minw = 1.5, padding = 0.05, r = 0.1, hover = true, colour = G.C.GREEN, button = "maelmc_quest_menu", shadow = true}, nodes={
-            {n=G.UIT.C, config={align = "cm", maxw = 1.4, focus_args = {button = 'leftstick', orientation = 'bm'}, func = 'set_button_pip'}, nodes={
-              {n=G.UIT.T, config={text = localize('maelmc_quests'), scale = 0.4, colour = G.C.UI.TEXT_LIGHT, shadow = true}}
-            }},
-          }}
-  local buttons = root.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1]
-  local minh = 0
-  for _, v in pairs(buttons.nodes) do
-    minh = minh + v.config.minh
-  end
-  table.insert(buttons.nodes,quest_button)
-  minh = minh/#buttons.nodes
-  for _, v in pairs(buttons.nodes) do
-    v.config.minh = minh
+  if not (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) then -- disable quests menu if multiplayer is installed
+    local quest_button = {n=G.UIT.R, config={align = "cm", minh = 1.75, minw = 1.5, padding = 0.05, r = 0.1, hover = true, colour = G.C.GREEN, button = "maelmc_quest_menu", shadow = true}, nodes={
+              {n=G.UIT.C, config={align = "cm", maxw = 1.4, focus_args = {button = 'leftstick', orientation = 'bm'}, func = 'set_button_pip'}, nodes={
+                {n=G.UIT.T, config={text = localize('maelmc_quests'), scale = 0.4, colour = G.C.UI.TEXT_LIGHT, shadow = true}}
+              }},
+            }}
+    local buttons = root.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1]
+    local minh = 0
+    for _, v in pairs(buttons.nodes) do
+      minh = minh + (v.config.minh or 0)
+    end
+    table.insert(buttons.nodes,quest_button)
+    minh = minh/#buttons.nodes
+    for _, v in pairs(buttons.nodes) do
+      v.config.minh = minh
+    end
   end
   return root
 end

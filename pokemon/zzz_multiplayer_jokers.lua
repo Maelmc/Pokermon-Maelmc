@@ -1,4 +1,4 @@
---[[local wonder_trade = {
+local wonder_trade = {
   name = "wonder_trade",
   poke_custom_prefix = "maelmc",
   pos = {x = 5, y = 1},
@@ -11,7 +11,6 @@
     else
       info_queue[#info_queue+1] = {set = 'Other', key = 'multiplayer_ex_jok'}
     end
-    pokermon.type_tooltip(self, info_queue, card)
     return {vars = {}}
   end,
   unlocked = true,
@@ -59,13 +58,18 @@
 }
 
 if (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) then
-  MP.ACTIONS.wonder_trade = function(msg)
-    Client.send("action:magnetResponse,key:reqType;WTREQUEST/"..msg)
-  end
+  G.E_MANAGER:add_event(Event({
+    func = function()
+      MP.ACTIONS.wonder_trade = function(msg)
+        Client.send("action:magnetResponse,key:reqType;WTREQUEST/"..msg)
+      end
 
-  MP.ACTIONS.wonder_trade_response = function(msg,sent)
-    Client.send("action:magnetResponse,key:reqType;WTANSWER/"..msg.."/sent;"..sent)
-  end
+      MP.ACTIONS.wonder_trade_response = function(msg,sent)
+        Client.send("action:magnetResponse,key:reqType;WTANSWER/"..msg.."/sent;"..sent)
+      end
+      return true
+    end
+  }))
 end
 
 
@@ -82,7 +86,6 @@ local mean_look = {
     else
       info_queue[#info_queue+1] = {set = 'Other', key = 'multiplayer_ex_jok'}
     end
-    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_shadow_tag', set = 'Tag', specific_vars = {localize { type = 'name_text', set = 'Enhanced', key = "m_maelmc_trapped" }} }
     return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_shadow_tag" }}}
   end,
@@ -107,9 +110,14 @@ local mean_look = {
 }
 
 if (next(SMODS.find_mod('Multiplayer')) or next(SMODS.find_mod('NanoMultiplayer'))) then
-  MP.ACTIONS.mean_look = function()
-    Client.send("action:magnetResponse,key:MEANLOOK")
-  end
+  G.E_MANAGER:add_event(Event({
+    func = function()
+      MP.ACTIONS.mean_look = function()
+        Client.send("action:magnetResponse,key:MEANLOOK")
+      end
+      return true
+    end
+  }))
 end
 
 return {
@@ -118,6 +126,4 @@ return {
     wonder_trade,
     mean_look
   },
-}]]
-
-return {list={}}
+}
