@@ -8,6 +8,15 @@ function Card:get_id()
   return gid(self)
 end
 
+local shnr = SMODS.has_no_rank
+function SMODS.has_no_rank(card)
+  local ogerpons_cornerstone = find_joker('ogerpon_cornerstone')
+  if #ogerpons_cornerstone > 0 and SMODS.has_enhancement(card, "m_stone") then
+      return false
+  end
+  return shnr(card)
+end
+
 -- Trapped cards cannot change enhancement
 -- also hazard deck effect
 -- also kitikami ogre quest
