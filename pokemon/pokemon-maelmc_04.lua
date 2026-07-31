@@ -3,7 +3,6 @@ local cherubi = {
   gen = 4,
   config = {extra = {seed_req = 2, rounds = 4}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_seed
     return {vars = {card.ability.extra.seed_req, card.ability.extra.rounds}}
   end,
@@ -50,12 +49,11 @@ local cherubi = {
 local cherrim = {
   name = "cherrim",
   gen = 4,
-  config = {extra = {}},
+  config = {extra = {growth = -1}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_seed
-    info_queue[#info_queue+1] = G.P_CENTERS.m_poke_flower
-    return {vars = {}}
+    info_queue[#info_queue+1] = {set = 'Other', key = 'growth_level'}
+    return {vars = {card.ability.extra.growth}}
   end,
   rarity = "poke_safari",
   cost = 6,
@@ -111,6 +109,12 @@ local cherrim = {
   end,
   in_pool = function(self)
     return #pokermon.find_pokemon_type("Fire") <= 0
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    pokermon.change_growth_level(card.ability.extra.growth)
+  end,
+  remove_from_deck = function(self, card, from_debuff)
+    pokermon.change_growth_level(-card.ability.extra.growth)
   end
 }
 
@@ -119,7 +123,6 @@ local cherrim_sunshine = {
   gen = 4,
   config = {extra = {Xmult_multi = 1.5, Xmult_mod = 0.05}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_poke_flower
     local flower_count = 0
     if G.playing_cards then
@@ -189,7 +192,6 @@ local spiritomb={
   pos = {x = 12, y = 29},
   config = {extra = {chips = 108, mult = 108, h_size = 3, to_negative = 108}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     if not card.edition or (card.edition and not card.edition.negative) then
@@ -280,7 +282,6 @@ local gible={
   pos = {x = 14, y = 29},
   config = {extra = {retriggers = 1, rightmost = 2, mult = 2, retriggered = 0}, evo_rqmt = 26},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.rightmost, abbr.retriggers, abbr.mult, math.max(0, self.config.evo_rqmt - abbr.retriggered)}}
@@ -341,7 +342,6 @@ local gabite={
   pos = {x = 16, y = 29},
   config = {extra = {retriggers = 1, rightmost = 4, mult = 3, retriggered = 0}, evo_rqmt = 64},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.rightmost, abbr.retriggers, abbr.mult, math.max(0, self.config.evo_rqmt - abbr.retriggered)}}
@@ -402,7 +402,6 @@ local garchomp={
   pos = {x = 18, y = 29},
   config = {extra = {retriggers = 1, mult = 4, h_size = 1}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.h_size, abbr.retriggers, abbr.mult}}
@@ -449,7 +448,6 @@ local mega_garchomp={
   soul_pos = {x = 3, y = 7},
   config = {extra = {Xmult_multi = 1.5, h_size = 2}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.h_size, abbr.Xmult_multi}}
@@ -495,7 +493,6 @@ local mega_garchomp_z={
   soul_pos = {x = 3, y = 7},
   config = {extra = {retriggers = 2, h_size = 2}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
     -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.h_size, abbr.retriggers}}

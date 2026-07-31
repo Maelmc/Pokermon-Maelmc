@@ -1069,7 +1069,7 @@ return {
             j_maelmc_cherrim = {
                 name = "Cherrim",
                 text = {
-                    "{C:attention}Seed{} cards can't grow",
+                    "{C:attention}#1#{} growth level",
                     "{C:attention}Flower{} cards in poker hand",
                     "become {C:attention}Seed{} cards with {C:attention}4 growths",
                     "{br:3}ERROR - CONTACT STEAK",
