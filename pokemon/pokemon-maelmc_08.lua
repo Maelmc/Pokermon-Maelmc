@@ -4,7 +4,7 @@ local sinistea={
   gen = 8,
   config = { extra = { rounds = 4 } },
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_cleanse_tag', set = 'Tag' }
     return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_cleanse_tag" }, card.ability.extra.rounds}}
   end,
@@ -39,7 +39,7 @@ local polteageist={
   gen = 8,
   config = {extra = {}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_cleanse_tag', set = 'Tag' }
     info_queue[#info_queue + 1] = { key = 'tag_ethereal', set = 'Tag' }
     return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_cleanse_tag" },localize { type = 'name_text', set = 'Tag', key = "tag_ethereal" }}}
@@ -83,7 +83,7 @@ local cursola={
   pos = {x = 16, y = 57},
   config = {extra = {Xmult_multi = 1.5, Xmult_multi1 = 2, volatile = 'left', perish_rounds = 3}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     if pokermon_config.detailed_tooltips then
       info_queue[#info_queue+1] = {set = 'Other', key = 'poke_volatile_'..card.ability.extra.volatile}
     end
@@ -149,7 +149,7 @@ local cufant = {
   pos = {x = 14, y = 58},
   config = {extra = {hazard_level = 1, done = false, to_steel = 1, rounds = 5}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = pokermon.get_hazard_level_vars()}
@@ -212,7 +212,7 @@ local copperajah = {
   pos = {x = 16, y = 58},
   config = {extra = {hazard_level = 1, done = false, to_steel = 3}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = pokermon.get_hazard_level_vars()}
@@ -275,7 +275,7 @@ local gmax_copperajah = {
   soul_pos = { x = 9, y = 13 },
   config = {extra = {Xmult_mod = 1}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = G.P_CENTERS.m_steel
@@ -327,7 +327,7 @@ local regieleki = {
   cost = 20,
   config = { extra = { } },
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     info_queue[#info_queue+1] = G.P_CENTERS.m_gold
     return { vars = { } }
   end,
@@ -351,7 +351,7 @@ local regidrago = {
   cost = 20,
   config = { extra = { } },
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     info_queue[#info_queue+1] = G.P_CENTERS.m_mult
     return { vars = {} }
   end,
@@ -368,7 +368,7 @@ local bloodmoon_ursaluna = {
   pos = {x = 0, y = 11},
   config = {extra = {Xmult = 1, Xmult2 = 1, Xmult_multi = 1.5, Xmult_mod = 0.1, suit = "Hearts"}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     local abbr = card.ability.extra
     return {vars = {abbr.suit, abbr.Xmult_multi, abbr.Xmult_mod, abbr.Xmult2}}
   end,

@@ -4,7 +4,7 @@ local gym_leader={
   pos = {x = 1, y = 0},
   config = {extra = {form = "Earth", targets = {{type = "Earth"}}}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = {set = 'Other', key = 'nature', vars = {"Type"}}
@@ -165,7 +165,7 @@ local odd_keystone={
   pos = {x = 0, y = 0},
   config = {extra = {evolve_progress = 0, evolve_after = 108, evolve_using = "The Soul"}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     -- just to shorten function
     local abbr = card.ability.extra
     return {vars = {abbr.evolve_progress, abbr.evolve_after, abbr.evolve_using}}
@@ -264,7 +264,7 @@ local pokewalker = {
   pos = {x = 8, y = 2},
   config = {extra = {walk_info = {name = nil, key = nil, edition = nil, seal = nil, type_sticker = nil, ability = {}}, walked_for = -2}}, -- -2 = free to walk smth, -1 = just took the joker sold, 0+ = walking
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     info_queue[#info_queue+1] = {set = 'Other', key = 'energize'}
     if card.ability.extra.walk_info["name"] then
       local wfor = card.ability.extra.walked_for
@@ -385,7 +385,7 @@ local pc = {
                     joker_three_info = {name = nil, card = nil},
                     just_stored = false}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     local jname_one = card.ability.extra.joker_one_info.name or localize("maelmc_none")
     local jname_two = card.ability.extra.joker_two_info.name or localize("maelmc_none")
     local jname_three = card.ability.extra.joker_three_info.name or localize("maelmc_none")
@@ -486,7 +486,7 @@ local photographer = {
   pos = {x = 4, y = 1},
   config = {extra = {found = {}, to_snap = 10, joker = 1}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     local count = 0
     for _ in pairs(card.ability.extra.found) do count = count + 1 end
     return {vars = {card.ability.extra.joker, card.ability.extra.to_snap, count}}
@@ -562,7 +562,7 @@ local pokemoncenter = {
   pos = {x = 10, y = 1},
   config = {extra = {}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     return {vars = {}}
   end,
   rarity = 3,

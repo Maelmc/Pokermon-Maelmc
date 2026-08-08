@@ -240,7 +240,7 @@ local spiritomb={
   soul_pos = { x = 11, y = 10 },
   config = {extra = {Xmult_mod = 1.08, to_negative = 108}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     -- just to shorten function
     local abbr = card.ability.extra
     if not card.edition or (card.edition and not card.edition.negative) then

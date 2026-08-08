@@ -6,7 +6,7 @@ local glimmet={
   pos = {x = 16, y = 64},
   config = {extra = {hazard_level = 1, chips = 40, hazard_triggered = 0}, evo_rqmt = 10},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = pokermon.get_hazard_level_vars()}
@@ -56,7 +56,7 @@ local glimmora={
   config = {extra = {hazard_level = 1, hazard_max = 1, chips = 50, base_increase = 20, increase_in = 20, increase_by = 1}},
   poke_custom_values_to_keep = {"hazard_level", "hazard_max", "chips", "base_increase", "increase_in", "increase_by"},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = pokermon.get_hazard_level_vars()}
@@ -121,7 +121,7 @@ local mega_glimmora={
   config = {extra = {chips_mod = 50, hazard_level = 1, hazard_max = 1, chips = 0, base_increase = 0, increase_in = 0, increase_by = 0}},
   poke_custom_values_to_keep = {"hazard_level", "hazard_max", "chips", "base_increase", "increase_in", "increase_by"},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     -- just to shorten function
     local abbr = card.ability.extra
     info_queue[#info_queue+1] = {set = 'Other', key = 'hazard_level', vars = pokermon.get_hazard_level_vars()}
@@ -191,7 +191,7 @@ local poltchageist = {
   gen = 9,
   config = { extra = { rounds = 4 } },
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_spell_tag', set = 'Tag' }
     return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_spell_tag" }, card.ability.extra.rounds}}
   end,
@@ -226,7 +226,7 @@ local sinistcha = {
   gen = 9,
   config = {extra = {}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     info_queue[#info_queue + 1] = { key = 'tag_maelmc_spell_tag', set = 'Tag' }
     info_queue[#info_queue + 1] = { key = 'tag_ethereal', set = 'Tag' }
     return {vars = {localize { type = 'name_text', set = 'Tag', key = "tag_maelmc_spell_tag" },localize { type = 'name_text', set = 'Tag', key = "tag_ethereal" }}}
@@ -270,7 +270,7 @@ local ogerpon={
   soul_pos = {x = 5, y = 4},
   config = {extra = {money = 0, money_mod = 2, retriggers = 1, beat_boss = false}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Leaf Stone"}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
     return {vars = {card.ability.extra.money_mod, card.ability.extra.money, card.ability.extra.retriggers}}
@@ -349,7 +349,7 @@ local ogerpon_wellspring={
   soul_pos = {x = 3, y = 5},
   config = {extra = {Xchips_multi = 3}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Water Stone"}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_bonus
     return {vars = {card.ability.extra.Xchips_multi, card.ability.extra.chips}}
@@ -453,7 +453,7 @@ local ogerpon_hearthflame={
   soul_pos = {x = 9, y = 4},
   config = {extra = {Xmult_multi = 3, delete = 1}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Fire Stone"}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_mult
     local hearthflame_card = G.GAME.current_round.maelmc_hearthflame_card or {rank = "Ace", suit = "Spades"}
@@ -542,7 +542,7 @@ local ogerpon_cornerstone={
   soul_pos = {x = 7, y = 5},
   config = {extra = {mult = 1, mult_divide = 10}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     info_queue[#info_queue+1] = {set = 'Other', key = 'holding', vars = {"Hard Stone"}}
     info_queue[#info_queue+1] = G.P_CENTERS.m_stone
     return {vars = {card.ability.extra.mult, card.ability.extra.mult_divide}}

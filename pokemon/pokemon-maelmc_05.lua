@@ -5,7 +5,7 @@ local woobat = {
   pos = {x = 2, y = 35},
   config = {extra = {num = 1, dem = 2, heart_stamped_count = 0}, evo_rqmt = 4},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     local num, dem = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.dem, 'woobat')
     return {vars = {num, dem, self.config.evo_rqmt}}
   end,
@@ -65,7 +65,7 @@ local swoobat = {
   pos = {x = 4, y = 35},
   config = {extra = {num = 1, dem = 2}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     local num, dem = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.dem, 'swoobat')
     return {vars = {num, dem}}
   end,
@@ -111,7 +111,7 @@ local bouffalant = {
   pos = PokemonSprites["bouffalant"].base.pos,
   config = {extra = {money = 8, boss_trigger = 0, blind_buff = 1.5, boss_blind = nil}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     info_queue[#info_queue+1] = {set = 'Other', key = 'bouffalant_compat'}
     if (SMODS.Mods["Multiplayer"] or {}).can_load and MP.LOBBY and MP.LOBBY.code and MP.LOBBY.enemy_id then
       info_queue[#info_queue+1] = {set = 'Other', key = 'bouffalant_mp'}
@@ -196,7 +196,7 @@ local meloetta = {
   cost = 20,
   config = { extra = {money_mod = 3} },
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     if maelmc_config.meloetta_sings then
       info_queue[#info_queue+1] = {set = 'Other', key = 'meloetta_singing'}
     end
@@ -255,7 +255,7 @@ local meloetta_pirouette = {
   no_collection = true,
   config = { extra = {Xmult_multi = 1.5} },
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     return { vars = {card.ability.extra.Xmult_multi} }
   end,
   calculate = function(self, card, context)

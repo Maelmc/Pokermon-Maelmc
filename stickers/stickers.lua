@@ -12,7 +12,7 @@ local pokerus =  {
             trigger = "after",
             time = 0.2,
             func = function()
-                pokermon.energy.increase(card, pokermon.get_type(card), (pokermon.energy.max + (G.GAME.energy_plus or 0) +
+                pokermon.energy.increase(card, pokermon.get_type(card), (pokermon.energy.max + (G.GAME.poke_energy_plus or 0) +
                     (type(card.ability.extra) == "table" and card.ability.extra.e_limit_up or 0)) - pokermon.energy.get_total_energy(card), true)
                 play_sound('maelmc_pokerus_sound', 1, 0.2)
                 card:juice_up(1, 0.5)
@@ -22,8 +22,8 @@ local pokerus =  {
     end,
     calculate = function(self, card, context)
         -- at any time, energize to max
-        if pokermon.energy.get_total_energy(card) < (pokermon.energy.max + (G.GAME.energy_plus or 0) + (type(card.ability.extra) == "table" and card.ability.extra.e_limit_up or 0)) then
-            pokermon.energy.increase(card, pokermon.get_type(card), pokermon.energy.max + (G.GAME.energy_plus or 0) +
+        if pokermon.energy.get_total_energy(card) < (pokermon.energy.max + (G.GAME.poke_energy_plus or 0) + (type(card.ability.extra) == "table" and card.ability.extra.e_limit_up or 0)) then
+            pokermon.energy.increase(card, pokermon.get_type(card), pokermon.energy.max + (G.GAME.poke_energy_plus or 0) +
                 (type(card.ability.extra) == "table" and card.ability.extra.e_limit_up or 0) - pokermon.energy.get_total_energy(card), true)
         end
 

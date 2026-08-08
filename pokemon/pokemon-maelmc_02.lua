@@ -5,7 +5,7 @@ local galarian_corsola={
   pos = {x = 8, y = 4},
   config = {extra = {Xmult_multi = 1.5, volatile = 'left', perish_rounds = 3, currently_perished = 0}, evo_rqmt = 2},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    
     if pokermon_config.detailed_tooltips then
       info_queue[#info_queue+1] = {set = 'Other', key = 'poke_volatile_'..card.ability.extra.volatile}
     end
