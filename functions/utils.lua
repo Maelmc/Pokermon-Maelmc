@@ -76,11 +76,14 @@ function maelmc_wonder_trade_joker_creation(key,ability,edition)
       else
         card:set_edition()
       end
+      if card.edition and card.edition.negative then
+        card.ability.card_limit = (card.ability.card_limit or 2) - 1
+      end
       card:add_to_deck()
       G.jokers:emplace(card)
       return true
     end
-  }))  
+  }))
 end
 
 function maelmc_should_cleanse_tag()
