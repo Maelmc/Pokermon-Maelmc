@@ -442,12 +442,12 @@ local mint = {
   end,
   use = function(self, card, area, copier)
     pokermon.set_spoon_item(card)
-    
+
     local target = pokermon.find_leftmost_or_highlighted(function(joker) return joker.config.center.set_nature end)
-    local prev_nature = target.ability.extra.targets
+    local prev_nature = copy_table(target.ability.extra.targets)
     local changed = false
     local spinda = target.config.center.key == "j_poke_spinda"
-    local prev_h = spinda and target.ability.extra.enhancements or nil
+    local prev_h = spinda and copy_table(target.ability.extra.enhancements) or nil
     while not changed do
       target.config.center:set_nature(target)
       local change_count = #target.ability.extra.targets
