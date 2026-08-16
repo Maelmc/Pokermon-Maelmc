@@ -113,8 +113,10 @@ local gym_leader={
       local max = 0
       for _, v in pairs(G.jokers.cards) do
         local _t = pokermon.get_type(v)
-        if _t then _types[_t] = (_types[_t] or 0) + 1 end
-        if _types[_t] > max then max = _types[_t] end
+        if _t then
+          _types[_t] = (_types[_t] or 0) + 1
+          if _types[_t] > max then max = _types[_t] end
+        end
       end
       if next(_types) then
         local pool = {}

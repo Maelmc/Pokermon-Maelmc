@@ -616,3 +616,27 @@ else
   challenge.restrictions = {banned_cards = {{id = "j_maelmc_pokemoncenter"}}}
 end
 '''
+
+# Axew line working with Competitive Deck
+# Prevent Sun Stone from rolling Ogerpon rank
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "pokemon/pokejokers_21.lua"]'
+pattern = '''set_nature = function(self,card)'''
+position = 'after'
+match_indent = true
+payload = '''
+if G.GAME and G.GAME.modifiers.competitivedeck then
+  -- randomize order in case of ties
+  local _hands = copy_table(G.GAME.hands)
+  local usable_hands = {}
+  for _, v in pairs(_hands) do
+    usable_hands[#usable_hands+1] = v
+  end
+  pseudoshuffle(usable_hands, pseudoseed('axew_line_competitive'))
+  table.sort(usable_hands, function(a,b) return a.played > b.played end)
+  if usable_hands[1] then card.ability.extra.targets[1][1] = usable_hands[1].key end
+  if usable_hands[2] then card.ability.extra.targets[2][1] = usable_hands[2].key end
+  return
+end
+'''
