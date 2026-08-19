@@ -1084,7 +1084,7 @@ return {
     gulpin, swalot,
     lunatone, solrock,
     --kecleon,
-    shuppet, banette, mega_banette, fake_mega_banette,
+    --shuppet, banette, mega_banette, fake_mega_banette,
     --tropius,
     regirock,
     regice,

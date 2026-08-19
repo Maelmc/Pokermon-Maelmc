@@ -27,15 +27,15 @@ local name_lists = {{"glimmet", "glimmora","mega_glimmora"},
   {"gulpin","swalot"},
   --{"wingull","pelipper"},
   {"sinistea","polteageist"},
-  {"shuppet","banette","mega_banette"},
+  --{"shuppet","banette","mega_banette"},
   {"meloetta","meloetta_pirouette"},
   {"poltchageist","sinistcha"},
   {"cherubi","cherrim","cherrim_sunshine"}
 }
 
-pokermon.extended_family["shuppet"] = {"fake_mega_banette"}
-pokermon.extended_family["banette"] = {"fake_mega_banette"}
-pokermon.extended_family["mega_banette"] = {"fake_mega_banette"}
+--pokermon.extended_family["shuppet"] = {"fake_mega_banette"}
+--pokermon.extended_family["banette"] = {"fake_mega_banette"}
+--pokermon.extended_family["mega_banette"] = {"fake_mega_banette"}
 
 for _, list in ipairs(name_lists) do
   pokermon.add_family(list)
