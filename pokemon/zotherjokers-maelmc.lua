@@ -741,7 +741,7 @@ local cramomatic = {
                 colour = G.ARGS.LOC_COLOURS.item,
               }, context.blueprint_card or card)
         else
-          poke_nope(context.blueprint_card or card)
+          pokermon.nope(context.blueprint_card or card)
         end
         return nil, true
       end
