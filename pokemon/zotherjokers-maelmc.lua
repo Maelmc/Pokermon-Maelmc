@@ -587,6 +587,7 @@ local pokemoncenter = {
                 ab.rental = false
                 if ab.sonfive_weakened then
                   pokermon.energy.increase(G.jokers.cards[i],pokermon.get_type(G.jokers.cards[i]),1,true)
+                  card.ability.extra.e_limit_up = (card.ability.extra.e_limit_up or -1) + 1
                   ab.sonfive_weakened = false
                 end
                 ab.fainted = nil
