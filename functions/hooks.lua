@@ -214,24 +214,24 @@ pokermon.get_target_card_ranks = function(seed, num, default, use_deck)
   if G.GAME and G.GAME.modifiers.competitivedeck then
     -- thanks copilot for doing all that lol
     local id_counts = {}
-  
+
     -- Count occurrences of each id
     for _, v in pairs(G.playing_cards) do
       local id = v.base.id
       id_counts[id] = (id_counts[id] or 0) + 1
     end
-    
+
     -- Convert to array of {id, count} for sorting
     local sorted_ids = {}
     for id, count in pairs(id_counts) do
       table.insert(sorted_ids, {id = id, count = count})
     end
-    
+
     -- Sort by count (descending)
     table.sort(sorted_ids, function(a, b)
       return a.count > b.count
     end)
-    
+
     -- Shuffle within groups of equal counts
     local i = 1
     while i <= #sorted_ids do
@@ -247,7 +247,7 @@ pokermon.get_target_card_ranks = function(seed, num, default, use_deck)
       end
       i = j + 1
     end
-    
+
     -- Helper function to convert id to value
     local function id_to_value(id)
       if id == 11 then return "Jack"
@@ -257,14 +257,14 @@ pokermon.get_target_card_ranks = function(seed, num, default, use_deck)
       else return tostring(id)
       end
     end
-    
+
     -- Pick the top num ids
     local result = {}
     for i = 1, math.min(num, #sorted_ids) do
       local id = sorted_ids[i].id
       table.insert(result, {value = id_to_value(id), id = id})
     end
-    
+
     -- Fill remaining with default table
     if #result < num and default then
       for _, default_item in ipairs(default) do
@@ -283,7 +283,13 @@ pokermon.get_target_card_ranks = function(seed, num, default, use_deck)
       end
     end
 
-    local sort_function = function(card1, card2) return card1.id < card2.id end
+    local sort_function = function(card1, card2)
+      local id1 = tonumber(card1.id)
+      if not id1 then return true end
+      local id2 = tonumber(card2.id)
+      if not id2 then return false end
+      return card1.id < card2.id
+    end
     table.sort(result, sort_function)
     return result
 
@@ -310,8 +316,8 @@ pokermon.get_target_card_suit = function(seed, use_deck, default, limit_suits)
     end
 
     local sorted_suits = {}
-    for suit, count in pairs(suit_counts) do
-      table.insert(sorted_suits, {suit = suit, count = count})
+    for _suit, count in pairs(suit_counts) do
+      table.insert(sorted_suits, {suit = _suit, count = count})
     end
 
     if #sorted_suits == 0 then
