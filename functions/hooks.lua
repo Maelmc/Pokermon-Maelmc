@@ -288,7 +288,7 @@ pokermon.get_target_card_ranks = function(seed, num, default, use_deck)
       if not id1 then return true end
       local id2 = tonumber(card2.id)
       if not id2 then return false end
-      return card1.id < card2.id
+      return id1 < id2
     end
     table.sort(result, sort_function)
     return result
