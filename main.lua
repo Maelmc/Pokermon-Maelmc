@@ -66,7 +66,7 @@ SMODS.Rarity{
     end,
 }
 
-poke_add_stage("Ultra Beast")
+pokermon.add_stage("Ultra Beast")
 
 maelmc_config = SMODS.current_mod.config
 -- Get mod path and load other files

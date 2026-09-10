@@ -339,10 +339,16 @@ local bloodmoon_beast={
   end,
   calculate = function(self, blind, context)
     if not self.config.disabled then
-      for i = 1, #G.consumeables.cards do
-        if not G.consumeables.cards[i].debuff then
-          G.consumeables.cards[i]:set_debuff(true)
+      if context.debuff_card then
+        if context.debuff_card.ability.consumeable then
+          return {
+            debuff = true
+          }
         end
+      end
+
+      if context.card_added then
+        SMODS.recalc_debuff(context.card)
       end
     end
   end,
