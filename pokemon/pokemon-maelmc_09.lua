@@ -146,14 +146,23 @@ local mega_glimmora={
     if context.first_hand_drawn then
       local to_draw = {}
       for _, v in pairs(G.deck.cards) do
-        if SMODS.has_enhancement(v, "m_poke_hazard") then
+        if SMODS.has_enhancement(v, "m_poke_hazard") and not v.maelmc_mega_glimmora_draw then
           to_draw[#to_draw+1] = v
+          v.maelmc_mega_glimmora_draw = true
         end
       end
       SMODS.calculate_context({drawing_cards = true, amount = #to_draw})
       for k, v in pairs(to_draw) do
         draw_card(G.deck,G.hand, k*100/#to_draw,'up', true, v)
       end
+      G.E_MANAGER:add_event(Event({
+        func = (function()
+          for k, v in pairs(to_draw) do
+            v.maelmc_mega_glimmora_draw = nil
+          end
+          return true
+        end)
+      }))
     end
     -- scoring hazards
     if context.cardarea == G.jokers and context.scoring_hand then
