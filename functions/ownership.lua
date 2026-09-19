@@ -376,7 +376,7 @@ SMODS.Consumable:take_ownership('poke_nightmare', {
         G.consumeables:emplace(_card)
       end
     end
-    if not maelmc_should_cleanse_tag() then remove(self, choice) end
+    if not maelmc_should_cleanse_tag() then SMODS.destroy_cards(choice) end
   end,
 }, true)
 
