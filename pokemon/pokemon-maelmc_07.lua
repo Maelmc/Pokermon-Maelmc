@@ -604,11 +604,7 @@ local guzzlord = {
       for _ = 1, card.ability.extra.to_eat do
         local pool = {}
         -- listing everything that guzzlord can eat
-        if (SMODS.Mods["Talisman"] or {}).can_load then
-          if to_big(G.GAME.dollars) > to_big(0) then table.insert(pool,{weight = 100, name = "money"}) end
-        else
-          if G.GAME.dollars > 0 then table.insert(pool,{weight = 100, name = "money"}) end
-        end
+        if (type(to_number) == "function" and to_number(G.GAME.dollars) or G.GAME.dollars) > 0 then table.insert(pool,{weight = 100, name = "money"}) end
         if #G.consumeables.cards > 0 then table.insert(pool,{weight = 100, name = "consumable"}) end
         if #G.jokers.cards > 1 then table.insert(pool,{weight = 100, name = "joker"}) end
         if #G.playing_cards > 1 then table.insert(pool,{weight = 100, name = "playing cards"}) end
@@ -635,12 +631,7 @@ local guzzlord = {
           local result = rng["name"]
 
           if result == "money" then
-            local lost = 0 
-            if (SMODS.Mods["Talisman"] or {}).can_load then
-              lost = math.random(1,math.ceil(to_number(to_big(G.GAME.dollars))/2))
-            else
-              lost = math.random(1,math.ceil(G.GAME.dollars)/2)
-            end
+            local lost = pseudorandom("guzzlord", 1, math.ceil((type(to_number) == "function" and to_number(G.GAME.dollars) or G.GAME.dollars))/2)
             SMODS.calculate_effect({dollars = -lost}, card)
 
           elseif result == "consumable" then
@@ -660,7 +651,7 @@ local guzzlord = {
             jok.getting_sliced = true
             jok:start_dissolve({ G.C.RED }, nil, 1.6)
             SMODS.calculate_effect({message = G.localization.descriptions["Joker"][jok.config.center_key]["name"]}, card)
-          
+
           elseif result == "playing cards" then
             local car = pseudorandom_element(G.playing_cards,pseudoseed("guzzlord"))
             car.getting_sliced = true

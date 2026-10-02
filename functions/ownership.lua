@@ -333,8 +333,8 @@ SMODS.Consumable:take_ownership('wraith', {
                 play_sound('timpani')
                 SMODS.add_card({ set = 'Joker', rarity = 'Rare' })
                 card:juice_up(0.3, 0.5)
-                if (not maelmc_should_cleanse_tag()) and G.GAME.dollars ~= 0 then
-                    ease_dollars(-G.GAME.dollars, true)
+                if (not maelmc_should_cleanse_tag()) and (type(to_number) == "function" and to_number(G.GAME.dollars) or G.GAME.dollars) ~= 0 then
+                    ease_dollars(-(type(to_number) == "function" and to_number(G.GAME.dollars) or G.GAME.dollars), true)
                 end
                 return true
             end
