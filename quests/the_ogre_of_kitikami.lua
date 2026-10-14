@@ -72,20 +72,21 @@ SMODS.current_mod.calculate = function(self, context)
           if v.config.center.key == "m_stone" then stone = stone + 1 end
           if v.config.center.key == "m_lucky" then lucky = lucky + 1 end
         end
-      end
-      if (bonus/#G.playing_cards >= percent) and (mult/#G.playing_cards >= percent) and (stone/#G.playing_cards >= percent) and (lucky/#G.playing_cards >= percent) then
-        G.GAME.kitikami_ogre_quest_completed = "set"
-        G.E_MANAGER:add_event(Event({
-          trigger = "condition",
-          blocking = false,
-          func = function()
-            if G.GAME.maelmc_quest_set then return false end
-            maelmc_set_next_boss("bl_maelmc_hearthflame_mask")
-            attention_text({scale = 0.8, text = localize("kitikami_ogre_next"), hold = 5*G.SETTINGS.GAMESPEED, align = 'cm', offset = { x = 0, y = -2.7 }, major = G.play})
-            G.GAME.maelmc_quest_set = true
-            return true
-          end
-        }))
+
+        if (bonus/#G.playing_cards >= percent) and (mult/#G.playing_cards >= percent) and (stone/#G.playing_cards >= percent) and (lucky/#G.playing_cards >= percent) then
+          G.GAME.kitikami_ogre_quest_completed = "set"
+          G.E_MANAGER:add_event(Event({
+            trigger = "condition",
+            blocking = false,
+            func = function()
+              if G.GAME.maelmc_quest_set then return false end
+              maelmc_set_next_boss("bl_maelmc_hearthflame_mask")
+              attention_text({scale = 0.8, text = localize("kitikami_ogre_next"), hold = 5*G.SETTINGS.GAMESPEED, align = 'cm', offset = { x = 0, y = -2.7 }, major = G.play})
+              G.GAME.maelmc_quest_set = true
+              return true
+            end
+          }))
+        end
       end
     end
   end
