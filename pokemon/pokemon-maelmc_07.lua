@@ -70,6 +70,7 @@ local buzzwole = {
               card.ability.extra.next_boost - pokermon.energy.get_total_energy(card),
               card.ability.extra.unscalable_mult,
               card.ability.extra.next_boost - pokermon.energy.get_total_energy(card) <= 1 and "" or "s",
+              G.GAME.current_round.hands_played == 0 and card.ability.extra.unscalable_mult * (G.GAME.current_round.hands_left-1) or 1
             }}
   end,
   rarity = "maelmc_ultra_beast",
