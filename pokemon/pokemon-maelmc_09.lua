@@ -151,10 +151,7 @@ local mega_glimmora={
           v.maelmc_mega_glimmora_draw = true
         end
       end
-      SMODS.calculate_context({drawing_cards = true, amount = #to_draw})
-      for k, v in pairs(to_draw) do
-        draw_card(G.deck,G.hand, k*100/#to_draw,'up', true, v)
-      end
+      pokermon.draw_cards(to_draw)
       G.E_MANAGER:add_event(Event({
         func = (function()
           for k, v in pairs(to_draw) do
