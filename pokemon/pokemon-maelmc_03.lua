@@ -1082,7 +1082,7 @@ return {
     --wingull, pelipper,
     --ralts, kirlia, gardevoir, mega_gardevoir,
     gulpin, swalot,
-    lunatone, solrock,
+    --lunatone, solrock,
     --kecleon,
     --shuppet, banette, mega_banette, fake_mega_banette,
     --tropius,
